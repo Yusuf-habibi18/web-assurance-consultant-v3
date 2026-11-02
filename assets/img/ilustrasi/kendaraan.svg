@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360">
+  <defs>
+    <linearGradient id="bg-kendaraan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3e0"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <clipPath id="kd-kiri"><rect x="0" y="0" width="240" height="360"/></clipPath>
+    <clipPath id="kd-badan"><rect x="112" y="228" width="258" height="58" rx="20"/></clipPath>
+    <path id="kd-perisai" d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+  </defs>
+  <rect x="0" y="0" width="480" height="360" fill="url(#bg-kendaraan)"/>
+  <circle cx="240" cy="172" r="130" fill="#ffe9cc"/>
+
+  <rect x="80" y="81" width="7.9" height="22" rx="2.6" fill="#f6b955"/>
+  <rect x="73" y="88" width="22" height="7.9" rx="2.6" fill="#f6b955"/>
+  <rect x="405.8" y="64" width="4.3" height="12" rx="1.4" fill="#8fb0ff"/>
+  <rect x="402" y="67.8" width="12" height="4.3" rx="1.4" fill="#8fb0ff"/>
+  <rect x="417.8" y="242" width="6.5" height="18" rx="2.2" fill="#f6b955"/>
+  <rect x="412" y="247.8" width="18" height="6.5" rx="2.2" fill="#f6b955"/>
+  <path d="M318 50Q318 58 326 58Q318 58 318 66Q318 58 310 58Q318 58 318 50Z" fill="#f2a53a"/>
+  <path d="M150 59Q150 64 155 64Q150 64 150 69Q150 64 145 64Q150 64 150 59Z" fill="#f59ab9"/>
+
+  <g fill="#c9d7ff">
+    <circle cx="372" cy="132" r="13"/><circle cx="390" cy="124" r="18"/><circle cx="409" cy="133" r="12"/>
+    <rect x="360" y="132" width="60" height="13" rx="6.5"/>
+  </g>
+  <g stroke="#8fb0ff" stroke-width="3.5" stroke-linecap="round">
+    <line x1="372" y1="156" x2="368" y2="168"/><line x1="390" y1="160" x2="386" y2="172"/><line x1="408" y1="156" x2="404" y2="168"/>
+  </g>
+
+  <g transform="translate(104 152) rotate(35)" fill="none" stroke="#14a38b" stroke-linecap="round">
+    <path d="M-6.5 -31.3A13 13 0 1 0 6.5 -31.3" stroke-width="11"/>
+    <line x1="0" y1="-7" x2="0" y2="46" stroke-width="12"/>
+  </g>
+
+  <use href="#kd-perisai" transform="translate(132 34) scale(9)" fill="#e38f1f"/>
+  <g clip-path="url(#kd-kiri)"><use href="#kd-perisai" transform="translate(132 34) scale(9)" fill="#f2a53a"/></g>
+  <path d="M214 112L232 130L266 96" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g stroke="#ffd28f" stroke-width="6" stroke-linecap="round">
+    <line x1="48" y1="240" x2="92" y2="240"/><line x1="30" y1="258" x2="88" y2="258"/><line x1="56" y1="276" x2="94" y2="276"/>
+  </g>
+
+  <path d="M0 312Q120 302 240 310T480 306V360H0Z" fill="#ffe1b8"/>
+  <g fill="#ffffff">
+    <rect x="34" y="333" width="36" height="6" rx="3"/><rect x="112" y="334" width="36" height="6" rx="3"/><rect x="190" y="335" width="36" height="6" rx="3"/>
+    <rect x="268" y="335" width="36" height="6" rx="3"/><rect x="346" y="334" width="36" height="6" rx="3"/><rect x="424" y="333" width="36" height="6" rx="3"/>
+  </g>
+  <ellipse cx="241" cy="313" rx="146" ry="8" fill="#0a1a2f" fill-opacity="0.12"/>
+
+  <path d="M146 236L176 192Q182 184 192 184H286Q296 184 303 192L340 236Z" fill="#3d66f2"/>
+  <path d="M170 230L189 201Q192 196 198 196H236V230Z" fill="#dbe7ff"/>
+  <path d="M248 196H283Q289 196 292 201L314 230H248Z" fill="#dbe7ff"/>
+  <path d="M211 196H222L203 230H192Z" fill="#ffffff" fill-opacity="0.75"/>
+  <path d="M268 196H276L262 230H254Z" fill="#ffffff" fill-opacity="0.75"/>
+  <rect x="112" y="228" width="258" height="58" rx="20" fill="#3d66f2"/>
+  <g clip-path="url(#kd-badan)">
+    <rect x="100" y="266" width="282" height="30" fill="#2447c4"/>
+    <circle cx="172" cy="288" r="31" fill="#1a318f"/>
+    <circle cx="312" cy="288" r="31" fill="#1a318f"/>
+  </g>
+  <line x1="242" y1="234" x2="242" y2="266" stroke="#2447c4" stroke-width="3" stroke-linecap="round"/>
+  <rect x="206" y="243" width="20" height="6" rx="3" fill="#c9d7ff"/>
+  <rect x="256" y="243" width="20" height="6" rx="3" fill="#c9d7ff"/>
+  <rect x="350" y="240" width="18" height="11" rx="5.5" fill="#ffd28f"/>
+  <rect x="116" y="240" width="11" height="13" rx="4" fill="#e0457b"/>
+  <circle cx="172" cy="288" r="25" fill="#1c2f5e"/><circle cx="172" cy="288" r="12" fill="#dbe7ff"/><circle cx="172" cy="288" r="5" fill="#1c2f5e"/>
+  <circle cx="312" cy="288" r="25" fill="#1c2f5e"/><circle cx="312" cy="288" r="12" fill="#dbe7ff"/><circle cx="312" cy="288" r="5" fill="#1c2f5e"/>
+</svg>

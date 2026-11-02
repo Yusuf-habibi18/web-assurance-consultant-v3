@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Konsultasi Asuransi Gratis | [Nama Usaha]</title>
+  <title>Konsultasi Asuransi Gratis | Arits Irham </title>
   <meta name="description" content="Konsultasi perlindungan asuransi yang personal dan mudah dipahami. Ceritakan kebutuhan Anda dan dapatkan penjelasan yang jelas, tanpa biaya konsultasi.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Konsultasi Asuransi Gratis | [Nama Usaha]">
+  <meta property="og:title" content="Konsultasi Asuransi Gratis bersama Arits Irham">
   <meta property="og:description" content="Konsultasi perlindungan asuransi yang personal dan mudah dipahami, tanpa biaya konsultasi.">
-  <meta name="theme-color" content="#0b1f2e">
+  <meta name="theme-color" content="#edf4fe">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/tema-asuransi.css">
 </head>
 <body>
 
@@ -40,13 +44,26 @@
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
 </svg>
 
 <a class="skip-link" href="#konten">Lompat ke konten</a>
 
+<!-- Bilah info atas (semua halaman). GANTI [Jam operasional], [nomor], dan [email] dengan data klien. -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Jam layanan: </span>[Jam operasional]</span></p>
+    <ul class="topbar__contact">
+      <li><a data-wa href="https://wa.me/6281200000000"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp [nomor]</a></li>
+      <li class="topbar__email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>[email]</li>
+    </ul>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</a>
+    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></a>
 
     <nav class="nav" id="site-nav" aria-label="Navigasi utama">
       <ul class="nav__list">
@@ -81,8 +98,8 @@
           <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
           Konsultasi perlindungan gratis
         </span>
-        <h1>Perlindungan yang Tepat, untuk Masa Depan yang Lebih Tenang.</h1>
-        <p class="hero__lead">Ceritakan kebutuhan Anda, lalu dapatkan penjelasan yang jelas mengenai pilihan perlindungan asuransi. Konsultasi dilakukan dengan bahasa sederhana dan tanpa paksaan.</p>
+        <h1>Bagaimana jika penghasilan keluarga <span class="text-gradient">terhenti tiba-tiba?</span></h1>
+        <p class="hero__lead">Biaya rumah sakit yang datang mendadak, pendidikan anak, atau cicilan yang masih berjalan. Ceritakan kondisi keluarga Anda, lalu kita bahas pilihan perlindungan yang sesuai, dengan bahasa sederhana dan tanpa paksaan.</p>
         <div class="hero__actions">
           <a class="btn btn--wa" data-wa href="https://wa.me/6281200000000">
             <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
@@ -93,17 +110,14 @@
             <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
         </div>
-        <ul class="hero__notes">
-          <li class="hero__note"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Tanpa biaya konsultasi</li>
-          <li class="hero__note"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Tanpa kewajiban membeli</li>
-        </ul>
       </div>
 
       <div class="hero__media">
-        <!-- Ilustrasi perlindungan tanpa latar (lihat README 5.3). Versi -diam dipakai bila pengunjung memilih "kurangi gerakan". -->
+        <!-- Ilustrasi keluarga bergerak (README 5.3); versi -diam dipakai bila pengunjung memilih "kurangi gerakan".
+             GANTI dengan foto asli klien atau keluarga yang hangat bila sudah ada. -->
         <picture>
-          <source srcset="assets/img/ilustrasi/perlindungan-diam.svg" media="(prefers-reduced-motion: reduce)">
-          <img class="hero__art" src="assets/img/ilustrasi/perlindungan.svg" alt="Ilustrasi perisai perlindungan dikelilingi ikon rumah, keluarga, kendaraan, kesehatan, polis, dan konsultan" width="520" height="520">
+          <source srcset="assets/img/ilustrasi/keluarga-diam.svg" media="(prefers-reduced-motion: reduce)">
+          <img class="hero__art" src="assets/img/ilustrasi/keluarga.svg" alt="Ilustrasi ayah dan ibu yang menggandeng anaknya sambil melambaikan tangan" width="520" height="520">
         </picture>
       </div>
     </div>
@@ -125,31 +139,27 @@
       <div class="grid-4">
         <article class="card card--link tone-rose">
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
-          <span class="card__go" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
           <h3><a class="card__link" href="solusi.html#kesehatan">Asuransi Kesehatan</a></h3>
           <p>Perlindungan terhadap risiko biaya perawatan medis agar tabungan keluarga lebih terjaga.</p>
-          <span class="tag">Proteksi medis</span>
+          <span class="card__more" aria-hidden="true">Pelajari<svg class="icon"><use href="#i-arrow"/></svg></span>
         </article>
         <article class="card card--link tone-blue">
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
-          <span class="card__go" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
           <h3><a class="card__link" href="solusi.html#jiwa">Asuransi Jiwa</a></h3>
           <p>Perlindungan finansial bagi keluarga bila terjadi risiko pada pencari nafkah.</p>
-          <span class="tag">Perlindungan keluarga</span>
+          <span class="card__more" aria-hidden="true">Pelajari<svg class="icon"><use href="#i-arrow"/></svg></span>
         </article>
         <article class="card card--link tone-amber">
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-car"/></svg></span>
-          <span class="card__go" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
           <h3><a class="card__link" href="solusi.html#kendaraan">Asuransi Kendaraan</a></h3>
           <p>Perlindungan atas risiko pada kendaraan, seperti kecelakaan atau kehilangan, sesuai ketentuan polis.</p>
-          <span class="tag">Aset bergerak</span>
+          <span class="card__more" aria-hidden="true">Pelajari<svg class="icon"><use href="#i-arrow"/></svg></span>
         </article>
         <article class="card card--link tone-teal">
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg></span>
-          <span class="card__go" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
           <h3><a class="card__link" href="solusi.html#usaha">Asuransi Properti &amp; Usaha</a></h3>
           <p>Perlindungan untuk rumah, tempat usaha, dan aset agar kegiatan tetap berjalan bila terjadi risiko.</p>
-          <span class="tag">Aset &amp; usaha</span>
+          <span class="card__more" aria-hidden="true">Pelajari<svg class="icon"><use href="#i-arrow"/></svg></span>
         </article>
       </div>
       <div class="calc-promo">
@@ -211,11 +221,21 @@
         <div class="profile__body">
           <span class="eyebrow">Pengalaman &amp; integritas</span>
           <h2 id="judul-profil">Mengenal Konsultan Anda</h2>
-          <p class="profile__role">[Nama Konsultan], [Jabatan]</p>
+          <p class="profile__role">Arits Irham, [Jabatan]</p>
+          <!-- GANTI: tampilkan tiap keterangan HANYA jika datanya dari klien dan terverifikasi; hapus yang tidak ada datanya (README bagian 8) -->
+          <ul class="profile__facts">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>[Sertifikasi]</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>[Lama pengalaman]</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>[Asosiasi / izin]</li>
+          </ul>
           <!-- GANTI: profil singkat, pengalaman, dan kredensial HANYA jika dari klien dan terverifikasi -->
           <p>[Ringkasan singkat profil dan pengalaman konsultan, diisi dari data klien.]</p>
           <p>[Pendekatan pelayanan: bagaimana konsultan membantu nasabah, diisi dari data klien.]</p>
           <div class="profile__actions">
+            <a class="btn btn--wa btn--sm" data-wa href="https://wa.me/6281200000000">
+              <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+              Tanya via WhatsApp
+            </a>
             <a class="link-arrow" href="tentang.html">Selengkapnya tentang saya
               <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
@@ -376,10 +396,11 @@
 </main>
 
 <footer class="site-footer">
+  <p class="site-footer__wordmark" aria-hidden="true">Perlindungan</p>
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</p>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></p>
         <p>[Deskripsi singkat usaha, diisi dari data klien.]</p>
       </div>
       <nav aria-label="Navigasi footer">
@@ -400,18 +421,20 @@
           <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><a data-wa href="https://wa.me/6281200000000">WhatsApp: [nomor]</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>[email]</span></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>[alamat kantor]</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>[Jam operasional]</span></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__bottom">
       <div class="site-footer__legal">
-        <p>&copy; <span data-year>2025</span> [Nama Usaha]. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
+        <p>&copy; <span data-year>2025</span> Arits Irham. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
         <!-- Disclaimer afiliasi: wajib menurut pedoman Manulife Agency, jangan dihapus (lihat README bagian 8) -->
-        <p>Website ini dikelola secara pribadi oleh [Nama Konsultan], Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
+        <p>Website ini dikelola secara pribadi oleh Arits Irham, Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
       </div>
       <ul>
         <li><a href="kebijakan-privasi.html">Kebijakan Privasi</a></li>
         <li><a href="kontak.html">Kontak</a></li>
+        <li><a class="to-top" href="#">Kembali ke atas<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
     </div>
   </div>

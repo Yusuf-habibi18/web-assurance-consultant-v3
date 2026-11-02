@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" width="520" height="520">
+  <style>
+    .latar { transform-box: fill-box; transform-origin: center; animation: napas 7s ease-in-out infinite; }
+    .hati { transform-box: fill-box; transform-origin: center; animation: denyut 2.6s ease-in-out infinite; }
+    .perisai { transform-box: fill-box; transform-origin: center; animation: ambang 4.5s ease-in-out infinite; }
+    .anak { animation: lompat 3.2s ease-in-out infinite; }
+    .lambai-ayah { transform-box: view-box; transform-origin: 141px 226px; animation: lambai-ayah 2.8s ease-in-out infinite; }
+    .lambai-ibu { transform-box: view-box; transform-origin: 373px 228px; animation: lambai-ibu 2.8s ease-in-out -1.4s infinite; }
+    @keyframes napas { 50% { transform: scale(1.03); } }
+    @keyframes denyut { 0%, 60%, 100% { transform: scale(1); } 15% { transform: scale(1.12); } 30% { transform: scale(0.98); } 45% { transform: scale(1.08); } }
+    @keyframes ambang { 50% { transform: translateY(-9px) rotate(-4deg); } }
+    @keyframes lompat { 50% { transform: translateY(-3px); } }
+    @keyframes lambai-ayah { 0%, 60%, 100% { transform: rotate(0deg); } 15% { transform: rotate(-12deg); } 30% { transform: rotate(8deg); } 45% { transform: rotate(-9deg); } }
+    @keyframes lambai-ibu { 0%, 60%, 100% { transform: rotate(0deg); } 15% { transform: rotate(12deg); } 30% { transform: rotate(-8deg); } 45% { transform: rotate(9deg); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <defs>
+    <path id="kl-perisai" d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+  </defs>
+  <g class="latar">
+    <circle cx="260" cy="272" r="214" fill="#e8f1ff"/>
+    <circle cx="260" cy="300" r="150" fill="#dbe8fd"/>
+  </g>
+
+  <!-- Pelengkap: kartu perisai dan kartu hati -->
+  <g class="perisai">
+    <rect x="400" y="236" width="104" height="104" rx="26" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect x="396" y="226" width="104" height="104" rx="26" fill="#ffffff"/>
+    <use href="#kl-perisai" transform="translate(412 242) scale(3)" fill="#2f62d8"/>
+    <path d="M435 279L444 288L462 270" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="hati">
+    <rect x="44" y="248" width="76" height="76" rx="22" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect x="40" y="240" width="76" height="76" rx="22" fill="#ffffff"/>
+    <path d="M78 296C58 283 58 266 67 264C72 263 76 266 78 269C80 266 84 263 89 264C98 266 98 283 78 296Z" fill="#e0457b"/>
+  </g>
+
+  <ellipse cx="260" cy="452" rx="175" ry="13" fill="#0a1a2f" fill-opacity="0.08"/>
+
+  <!-- Ayah: satu tangan melambai (diputar dari bahu), tangan lainnya menggandeng anak -->
+  <line x1="161" y1="330" x2="159" y2="444" stroke="#1c2f5e" stroke-width="20" stroke-linecap="round"/>
+  <line x1="189" y1="330" x2="191" y2="444" stroke="#1c2f5e" stroke-width="20" stroke-linecap="round"/>
+  <ellipse cx="157" cy="448" rx="15" ry="6.5" fill="#0a1a2f"/>
+  <ellipse cx="193" cy="448" rx="15" ry="6.5" fill="#0a1a2f"/>
+  <path d="M150 214Q139 214 137 226L133 336H217L213 226Q211 214 200 214Z" fill="#2f62d8"/>
+  <path d="M168 214L175 228L182 214Z" fill="#e8f1ff"/>
+  <rect x="168" y="192" width="14" height="26" rx="4" fill="#d99b74"/>
+  <g class="lambai-ayah">
+    <line x1="141" y1="226" x2="108" y2="169" stroke="#2f62d8" stroke-width="17" stroke-linecap="round"/>
+    <circle cx="105" cy="163.5" r="9" fill="#d99b74"/>
+  </g>
+  <line x1="209" y1="226" x2="229" y2="310" stroke="#2f62d8" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="175" cy="166" r="28" fill="#2a2438"/>
+  <circle cx="175" cy="173" r="25" fill="#d99b74"/>
+  <circle cx="166.5" cy="172" r="2.3" fill="#2a2438"/>
+  <circle cx="183.5" cy="172" r="2.3" fill="#2a2438"/>
+  <path d="M167 181Q175 187 183 181" fill="none" stroke="#7a3e2b" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- Ibu: satu tangan melambai (diputar dari bahu), tangan lainnya menggandeng anak -->
+  <rect x="319" y="166" width="52" height="68" rx="18" fill="#2a2438"/>
+  <line x1="333" y1="392" x2="333" y2="442" stroke="#f2c4a0" stroke-width="12" stroke-linecap="round"/>
+  <line x1="357" y1="392" x2="357" y2="442" stroke="#f2c4a0" stroke-width="12" stroke-linecap="round"/>
+  <ellipse cx="331" cy="446" rx="11" ry="5" fill="#0a1a2f"/>
+  <ellipse cx="359" cy="446" rx="11" ry="5" fill="#0a1a2f"/>
+  <path d="M325 216Q315 216 313 228L299 392Q345 404 391 392L377 228Q375 216 365 216Z" fill="#14a38b"/>
+  <rect x="339" y="194" width="12" height="24" rx="4" fill="#f2c4a0"/>
+  <line x1="317" y1="228" x2="293" y2="308" stroke="#14a38b" stroke-width="15" stroke-linecap="round"/>
+  <g class="lambai-ibu">
+    <line x1="373" y1="228" x2="404" y2="175" stroke="#14a38b" stroke-width="15" stroke-linecap="round"/>
+    <circle cx="407" cy="170" r="8.5" fill="#f2c4a0"/>
+  </g>
+  <circle cx="345" cy="168" r="27" fill="#2a2438"/>
+  <circle cx="345" cy="175" r="24" fill="#f2c4a0"/>
+  <circle cx="337" cy="174" r="2.2" fill="#2a2438"/>
+  <circle cx="353" cy="174" r="2.2" fill="#2a2438"/>
+  <path d="M337 182Q345 188 353 182" fill="none" stroke="#7a3e2b" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- Anak, bergandengan dengan ayah dan ibu -->
+  <g class="anak">
+    <line x1="251" y1="384" x2="250" y2="442" stroke="#f2c4a0" stroke-width="11" stroke-linecap="round"/>
+    <line x1="269" y1="384" x2="270" y2="442" stroke="#f2c4a0" stroke-width="11" stroke-linecap="round"/>
+    <ellipse cx="248" cy="446" rx="10.5" ry="5" fill="#0a1a2f"/>
+    <ellipse cx="272" cy="446" rx="10.5" ry="5" fill="#0a1a2f"/>
+    <rect x="236" y="352" width="48" height="40" rx="8" fill="#1c2f5e"/>
+    <line x1="241" y1="306" x2="234" y2="318" stroke="#f2c4a0" stroke-width="10" stroke-linecap="round"/>
+    <line x1="279" y1="306" x2="286" y2="318" stroke="#f2c4a0" stroke-width="10" stroke-linecap="round"/>
+    <path d="M244 296Q236 296 235 305L232 360H288L285 305Q284 296 276 296Z" fill="#f2a53a"/>
+    <rect x="255" y="284" width="10" height="16" rx="3" fill="#f2c4a0"/>
+    <circle cx="260" cy="262" r="21" fill="#4a3426"/>
+    <circle cx="260" cy="268" r="19" fill="#f2c4a0"/>
+    <circle cx="253.5" cy="267" r="1.9" fill="#2a2438"/>
+    <circle cx="266.5" cy="267" r="1.9" fill="#2a2438"/>
+    <path d="M254 274Q260 279 266 274" fill="none" stroke="#7a3e2b" stroke-width="2.1" stroke-linecap="round"/>
+  </g>
+  <circle cx="231" cy="316" r="9" fill="#d99b74"/>
+  <circle cx="289" cy="316" r="8.5" fill="#f2c4a0"/>
+</svg>

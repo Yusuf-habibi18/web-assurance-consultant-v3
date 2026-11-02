@@ -1,0 +1,552 @@
+/* STATUS: ALTERNATIF, TIDAK DIPASANG. Yang aktif sekarang tema-asuransi.css.
+   Untuk memakai versi ini: ganti link tema menjadi tema-gabungan.css dan pakai baris font Fraunces + Manrope
+   (README bagian 5.4).
+
+   Tema gabungan (2 November 2026).
+   Menggabungkan konsep "modern" (header kapsul kaca mengambang, cahaya hero, panel bersudut besar,
+   bingkai foto, tombol huruf biasa) dengan tema navy-emas sesuai referensi klien (judul serif Fraunces,
+   kata kunci miring emas, tombol emas, label bergaris, kartu bernomor, section gelap, footer berkartu).
+   Dimuat paling akhir di setiap halaman, setelah pages.css. Pasang SATU lapisan tema saja:
+   modern.css (tampilan lama), tema.css (navy-emas murni), atau file ini. Cara berpindah ada di README.
+   Navy dasar (#07142a), isi teks, dan tata letak HP tidak berubah. */
+
+/* ---------- Token ---------- */
+:root {
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-ink: #0b2147;          /* judul: navy kebiruan */
+  --color-text: #38445a;
+  --color-accent: #9a6b14;       /* emas tua: teks dan tautan di latar terang (kontras 4,7:1) */
+  --color-accent-soft: #f6eedd;
+
+  --gold: #e6b964;
+  --gold-deep: #c9922e;
+  --gold-light: #f3d493;
+  --gold-gradient: linear-gradient(110deg, #c9922e 0%, #e6b964 30%, #f3d493 50%, #e6b964 70%, #c9922e 100%);
+  --navy-deep: #06122b;
+
+  --radius: 22px;
+  --radius-lg: 32px;
+  --header-h: 84px; /* tinggi header: kapsul + jarak atas-bawah. Dipakai bilah kategori Solusi dan menu HP. */
+}
+@media (max-width: 599px) {
+  :root { --header-h: 74px; }
+}
+/* Area gelap: aksen memakai emas terang */
+.theme-dark,
+.topbar,
+.hero,
+.edu-hero,
+.about-hero,
+.site-footer {
+  --color-accent: var(--gold);
+  --color-accent-soft: rgba(230, 185, 100, 0.14);
+}
+/* Warna kategori diseragamkan menjadi emas */
+.tone-rose,
+.tone-blue,
+.tone-amber,
+.tone-teal {
+  --tone: var(--color-accent);
+  --tone-soft: var(--color-accent-soft);
+}
+
+/* ---------- Tipografi ---------- */
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; }
+h1 { font-weight: 600; letter-spacing: -0.03em; }
+::selection { background: #f3e2bd; color: #0b2147; }
+
+/* Kata kunci judul: miring, emas bergradasi */
+.text-gradient {
+  padding-right: 0.06em; /* ruang untuk ekor huruf miring agar tidak terpotong */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: linear-gradient(100deg, #c9922e 0%, #f3d493 38%, #e6b964 64%, #c9922e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
+  font-weight: 500;
+}
+@media (forced-colors: active) {
+  .text-gradient { background: none; color: CanvasText; }
+}
+
+/* Label kecil di atas judul section: huruf kapital emas berawalan garis */
+.eyebrow {
+  gap: 0.75rem;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--tone, var(--color-accent));
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+.eyebrow::before { width: 1.75rem; height: 1px; border-radius: 0; background: currentColor; }
+.section-head--center .eyebrow::after { content: ""; width: 1.75rem; height: 1px; background: currentColor; }
+.cta-band .eyebrow { background: none; color: var(--gold); }
+
+/* Lencana di hero: kapsul kaca bernuansa emas */
+.badge {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(230, 185, 100, 0.35);
+  background: rgba(230, 185, 100, 0.08);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* ---------- Tombol: emas, huruf biasa ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  transition: background-position 0.6s var(--ease), color 0.2s, border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.btn--primary,
+.btn--wa,
+.btn--light,
+.hero .btn--primary,
+.edu-hero .btn--primary,
+.about-hero .btn--primary {
+  border-color: transparent;
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  color: var(--navy-deep);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 10px 24px -12px rgba(201, 146, 46, 0.9);
+}
+.btn--primary:hover,
+.btn--wa:hover,
+.btn--light:hover,
+.hero .btn--primary:hover,
+.edu-hero .btn--primary:hover,
+.about-hero .btn--primary:hover {
+  background: var(--gold-gradient);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  color: var(--navy-deep);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 14px 30px -12px rgba(201, 146, 46, 1);
+}
+.btn--secondary,
+.hero .btn--secondary,
+.edu-hero .btn--secondary,
+.about-hero .btn--secondary {
+  border-color: color-mix(in srgb, var(--gold-deep) 70%, transparent);
+  background: transparent;
+  color: var(--color-ink);
+  box-shadow: none;
+}
+.btn--ghost-light { border-color: color-mix(in srgb, var(--gold) 60%, transparent); background: transparent; color: #fff; }
+.btn--secondary:hover,
+.hero .btn--secondary:hover,
+.edu-hero .btn--secondary:hover,
+.about-hero .btn--secondary:hover,
+.btn--ghost-light:hover { background: rgba(230, 185, 100, 0.12); }
+/* Panah di dalam tombol: lingkaran navy */
+.btn .icon-arrow {
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: -0.55rem;
+  padding: 0.36em;
+  border-radius: 50%;
+  background: var(--navy-deep);
+  color: #fff;
+  stroke-width: 2.5;
+}
+.btn--secondary .icon-arrow,
+.btn--ghost-light .icon-arrow { background: var(--gold); color: var(--navy-deep); }
+
+/* ---------- Bilah info atas ---------- */
+.topbar { background: var(--navy-deep); }
+.topbar .icon {
+  width: 1.75em;
+  height: 1.75em;
+  padding: 0.4em;
+  border-radius: 7px;
+  background: rgba(230, 185, 100, 0.12);
+  color: var(--gold);
+}
+
+/* ---------- Header kapsul kaca mengambang ----------
+   Di puncak halaman latar header menyatu dengan navy. Setelah di-scroll (kelas is-scrolled dari main.js)
+   latarnya transparan, jadi hanya kapsul yang terlihat melayang. */
+.site-header {
+  padding-block: 0.6rem;
+  border-bottom: 0;
+  background: var(--navy-deep);
+  pointer-events: none; /* area di luar kapsul tidak menghalangi klik ke konten di belakangnya */
+}
+.site-header.is-scrolled {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.site-header__inner {
+  position: relative; /* menu HP diposisikan terhadap kapsul */
+  width: calc(100% - 2 * max(0.6rem, var(--gutter) - 1.25rem));
+  max-width: calc(var(--container) - 2 * var(--gutter) + 5rem);
+  min-height: calc(var(--header-h) - 1.2rem);
+  padding-inline: clamp(0.9rem, 2vw, 1.25rem) 0.5rem;
+  border: 1px solid rgba(230, 185, 100, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  box-shadow: 0 1px 2px rgba(10, 26, 47, 0.06), 0 14px 34px -16px rgba(7, 20, 42, 0.45);
+  pointer-events: auto;
+  transition: background-color 0.3s;
+}
+.site-header.is-scrolled .site-header__inner { background: rgba(255, 255, 255, 0.84); }
+/* Garis emas di tepi atas layar yang memanjang sesuai posisi scroll (nilai --scroll dari main.js) */
+.site-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: calc(var(--scroll, 0) * 100%);
+  height: 3px;
+  background: var(--gold-gradient);
+}
+.nav__list { gap: 0.7rem; }
+.nav__link { font-size: 0.85rem; font-weight: 600; } /* Manrope lebih lebar dari Inter */
+.nav__link[aria-current="page"],
+.nav.is-open .nav__link[aria-current="page"] { color: var(--color-accent); }
+.nav__link::after { background: var(--gold-deep); }
+
+/* Menu HP: panel bersudut tepat di bawah kapsul */
+.nav.is-open {
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--header-h) - 3.5rem);
+  border: 1px solid var(--color-border);
+  border-radius: 28px;
+}
+
+/* Logo teks: serif, nama belakang miring emas, lambang navy dengan perisai emas */
+.brand__mark {
+  background: linear-gradient(145deg, #173a7a 0%, #0b2147 55%, var(--navy-deep) 100%);
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(230, 185, 100, 0.35), 0 6px 14px -6px rgba(6, 18, 43, 0.6);
+}
+.brand__name { font-size: 1.22rem; font-weight: 600; letter-spacing: -0.02em; }
+.brand__accent {
+  padding-right: 0.06em;
+  background: linear-gradient(100deg, #8a5d0f 0%, #b8862b 50%, #9a6b14 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
+}
+.site-footer .brand__accent { background-image: linear-gradient(100deg, #c9922e 0%, #f3d493 50%, #e6b964 100%); }
+
+/* Bilah kategori Solusi: satu kapsul kaca yang ikut melayang di bawah header */
+.cat-nav {
+  top: var(--header-h);
+  padding-block: 0.5rem;
+  border-bottom: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+.cat-nav ul {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0.35rem;
+  gap: 0.25rem;
+  border: 1px solid rgba(201, 146, 46, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  box-shadow: 0 1px 2px rgba(10, 26, 47, 0.05), 0 12px 30px -16px rgba(7, 20, 42, 0.4);
+  pointer-events: auto;
+}
+.cat-nav a { border-color: transparent; background: transparent; }
+
+/* ---------- Hero ---------- */
+/* Bagian paling atas navy polos lalu memudar ke cahaya biru dan emas: menyambung mulus dengan latar header */
+.hero,
+.edu-hero,
+.about-hero {
+  background:
+    linear-gradient(180deg, var(--navy-deep) 0, rgba(6, 18, 43, 0) 8rem),
+    radial-gradient(900px 480px at 85% 12%, rgba(56, 98, 255, 0.32), transparent 60%),
+    radial-gradient(640px 420px at -5% 110%, rgba(230, 185, 100, 0.12), transparent 62%),
+    var(--color-dark);
+}
+/* Dua garis emas tipis melengkung, memudar di bagian atas */
+.hero::before,
+.edu-hero::before,
+.about-hero::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 800' preserveAspectRatio='none' fill='none'%3E%3Cpath d='M640 -10C560 250 780 480 720 810' stroke='%23e6b964' stroke-opacity='.45' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M690 -10C620 270 840 510 780 810' stroke='%23e6b964' stroke-opacity='.22' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 8rem);
+  mask-image: linear-gradient(180deg, transparent 0, #000 8rem);
+}
+/* Cahaya lembut yang bergeser pelan (mati otomatis bila "kurangi gerakan" aktif) */
+.hero::after,
+.edu-hero::after,
+.about-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 -10% -25%;
+  background:
+    radial-gradient(38% 42% at 78% 22%, rgba(84, 120, 255, 0.28), transparent 70%),
+    radial-gradient(30% 36% at 12% 88%, rgba(230, 185, 100, 0.12), transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9rem);
+  mask-image: linear-gradient(180deg, transparent 0, #000 9rem);
+  animation: aurora 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes aurora {
+  to { transform: translate3d(-5%, 4%, 0) scale(1.06); }
+}
+/* Ilustrasi hero di dalam bingkai kaca (laptop) */
+@media (min-width: 900px) {
+  .hero__media:has(.hero__art) {
+    padding: 1.25rem;
+    border: 1px solid rgba(230, 185, 100, 0.28);
+    border-radius: 32px;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015));
+    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ---------- Panel dan bingkai ---------- */
+/* Section abu-abu menjadi panel bersudut besar (di HP tetap selebar layar) */
+.section--tint {
+  margin-inline: clamp(0px, 2vw - 8px, 16px);
+  border-radius: clamp(24px, 3.2vw, 44px);
+  background: linear-gradient(180deg, #f5f7fc 0%, #eff3fa 100%);
+}
+/* Gambar di dalam kartu diberi bingkai dalam */
+.profile { padding: clamp(6px, 0.8vw, 10px); }
+.profile__photo { border-radius: calc(var(--radius-lg) - clamp(6px, 0.8vw, 10px)); }
+.featured { padding: clamp(6px, 0.8vw, 10px); }
+.featured__img { border-radius: calc(var(--radius-lg) - clamp(6px, 0.8vw, 10px)); }
+.article-card { padding: clamp(5px, 0.6vw, 8px); }
+.article-card__img { border-radius: calc(var(--radius) - clamp(5px, 0.6vw, 8px)); }
+
+/* ---------- Kartu ---------- */
+.card {
+  border-color: #e6e9f1;
+  box-shadow: 0 1px 2px rgba(11, 33, 71, 0.04), 0 14px 34px -22px rgba(11, 33, 71, 0.3);
+}
+/* Ikon dalam lingkaran navy bercincin emas */
+.card__icon {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #1d3f80 0%, #0b2147 60%, var(--navy-deep) 100%);
+  color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(230, 185, 100, 0.28), 0 8px 16px -8px rgba(6, 18, 43, 0.55);
+}
+:is(.grid-4, .grid-3, .feature-grid) .card__icon,
+.why__item .card__icon,
+.pyramid-wrap .list-stack .card__icon { border-radius: 50%; }
+.grid-4 .card:hover .card__icon,
+.grid-3 .card:hover .card__icon,
+.feature-grid .card:hover .card__icon,
+.list-stack .card:hover .card__icon { background: var(--gold-gradient); color: var(--navy-deep); }
+.calc-promo .card__icon {
+  border-radius: 50%;
+  background: rgba(230, 185, 100, 0.14);
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(230, 185, 100, 0.4);
+}
+.channel .card__icon { background: radial-gradient(circle at 30% 25%, #1d3f80 0%, #0b2147 60%, var(--navy-deep) 100%); }
+
+/* Kartu bernomor: angka besar bergaris luar di kanan atas, aksen emas di kiri atas */
+.grid-4,
+.why__list,
+.feature-grid { counter-reset: nomor; }
+.grid-4 > .card,
+.why__item,
+.feature-grid > .card { position: relative; counter-increment: nomor; }
+.grid-4 > .card::after,
+.why__item::after,
+.feature-grid > .card::after {
+  content: counter(nomor, decimal-leading-zero);
+  position: absolute;
+  top: 0.9rem;
+  right: 1.1rem;
+  color: transparent;
+  font: 500 2.6rem/1 var(--font-heading);
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--gold-deep) 55%, transparent);
+  pointer-events: none;
+}
+.steps__body { position: relative; }
+.grid-4 > .card::before,
+.why__item::before,
+.feature-grid > .card::before,
+.steps__body::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 1.4rem;
+  width: 2.25rem;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--gold-gradient);
+}
+.why__item h3 { padding-right: 3rem; }
+.card--link .card__go { top: auto; bottom: 1.4rem; right: 1.4rem; } /* angka menempati kanan atas */
+
+/* ---------- Section ---------- */
+/* "Mengapa Berkonsultasi" menjadi panel gelap */
+.section:has(> .why) {
+  --color-ink: #ffffff;
+  --color-text: #dbe3ef;
+  --color-muted: #a3b1c6;
+  --color-accent: var(--gold);
+  --color-accent-soft: rgba(230, 185, 100, 0.14);
+  --color-tint: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-surface: rgba(255, 255, 255, 0.04);
+  color: var(--color-text);
+  background:
+    radial-gradient(700px 420px at 90% 0%, rgba(40, 78, 160, 0.35), transparent 62%),
+    radial-gradient(520px 360px at 0% 100%, rgba(230, 185, 100, 0.08), transparent 60%),
+    var(--color-dark);
+}
+.section:has(> .why) .why__item { box-shadow: none; }
+
+/* Langkah: nomor emas */
+.steps__num {
+  background: var(--gold-gradient);
+  color: var(--navy-deep);
+  font-family: var(--font-heading);
+  box-shadow: 0 0 0 6px rgba(230, 185, 100, 0.18);
+}
+
+/* Profil: kapsul kredensial emas, paragraf pembuka bergaris emas */
+.profile__facts li { border-color: rgba(201, 146, 46, 0.3); background: var(--color-accent-soft); }
+.profile__facts + p {
+  padding-left: 1rem;
+  border-left: 3px solid var(--gold);
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+/* Kotak catatan (Solusi) bergaris emas */
+.callout { border-left: 3px solid var(--gold); }
+
+/* Tentang Saya: label data emas */
+.stat__label { color: var(--gold); }
+
+/* Banner kalkulator dan band ajakan: navy dengan cahaya emas */
+.calc-promo {
+  border: 1px solid rgba(230, 185, 100, 0.18);
+  background:
+    radial-gradient(420px 260px at 100% 0%, rgba(230, 185, 100, 0.18), transparent 60%),
+    linear-gradient(135deg, #0f2a5c 0%, #0b2147 45%, var(--color-dark) 100%);
+  color: #cdd6e4;
+}
+.calc-promo::before { border-color: rgba(230, 185, 100, 0.08); }
+.calc-promo__text p { color: #cdd6e4; }
+.cta-band,
+.claim-band { border: 1px solid rgba(230, 185, 100, 0.16); }
+.cta-band {
+  background:
+    radial-gradient(520px 300px at 100% 0%, rgba(40, 78, 160, 0.45), transparent 65%),
+    radial-gradient(420px 260px at 0% 100%, rgba(230, 185, 100, 0.14), transparent 65%),
+    var(--color-dark);
+}
+
+/* Tanya jawab: penanda emas */
+.accordion__item:hover { border-color: rgba(201, 146, 46, 0.35); }
+.accordion__item:has([aria-expanded="true"]) { border-color: rgba(201, 146, 46, 0.5); }
+.accordion__trigger[aria-expanded="true"] .icon { background: var(--gold-gradient); color: var(--navy-deep); }
+
+/* ---------- Footer: bersudut atas, garis emas, kartu kontak ---------- */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(230, 185, 100, 0.45);
+  border-radius: clamp(24px, 3.2vw, 44px) clamp(24px, 3.2vw, 44px) 0 0;
+  background:
+    radial-gradient(700px 380px at 100% 0%, rgba(40, 78, 160, 0.25), transparent 60%),
+    var(--navy-deep);
+}
+.site-footer > .container { position: relative; z-index: 1; }
+.site-footer h3 { color: var(--gold); letter-spacing: 0.18em; }
+.site-footer nav li a::before { content: "\203A"; margin-right: 0.5rem; color: var(--gold); }
+.contact-list li {
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.contact-list .icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(230, 185, 100, 0.12);
+  color: var(--gold);
+}
+/* Tulisan besar samar di dasar footer (hiasan). Selektor dua kelas agar tidak tertimpa warna paragraf footer. */
+.site-footer .site-footer__wordmark {
+  display: block;
+  position: absolute;
+  bottom: -0.14em;
+  left: 50%;
+  translate: -50% 0;
+  margin: 0;
+  color: transparent;
+  font: 600 clamp(3.5rem, 12vw, 10.5rem)/1 var(--font-heading);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px rgba(230, 185, 100, 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+.site-footer__bottom ul { align-items: center; }
+.site-footer .to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid rgba(230, 185, 100, 0.5);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.site-footer .to-top:hover { background: rgba(230, 185, 100, 0.12); text-decoration: none; }
+.to-top .icon { width: 1em; height: 1em; rotate: -90deg; }
+
+/* Tombol WhatsApp mengambang: kapsul hijau bercincin tipis */
+.wa-float { box-shadow: 0 0 0 4px rgba(26, 127, 69, 0.16), 0 10px 26px -8px rgba(0, 0, 0, 0.45); }
+
+/* ---------- HP ---------- */
+@media (max-width: 599px) {
+  .grid-4 > .card::after,
+  .why__item::after,
+  .feature-grid > .card::after { top: 0.75rem; right: 0.8rem; font-size: 1.85rem; }
+  .grid-4 > .card::before,
+  .why__item::before,
+  .feature-grid > .card::before,
+  .steps__body::before { left: 0.95rem; width: 1.75rem; }
+  .card--link .card__go { bottom: 0.9rem; right: 0.9rem; }
+  .why__item h3 { padding-right: 0; }
+  .steps__num { box-shadow: 0 0 0 4px rgba(230, 185, 100, 0.18); }
+  /* "Kembali ke atas" di baris sendiri sebelah kiri, agar tidak tertutup tombol WhatsApp mengambang */
+  .site-footer__bottom ul { flex-wrap: wrap; row-gap: 0.9rem; }
+  .site-footer__bottom li:has(.to-top) { flex-basis: 100%; }
+  /* Kartu kontak footer lebih rapat supaya halaman tetap pendek */
+  .contact-list li { gap: 0.55rem; margin-bottom: 0.4rem; padding: 0.4rem 0.55rem; border-radius: 12px; line-height: 1.35; }
+  .contact-list .icon { width: 1.75rem; height: 1.75rem; padding: 0.4rem; }
+}

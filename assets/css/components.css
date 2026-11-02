@@ -16,7 +16,7 @@
 }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0) scale(0.98); }
-.btn--primary { background: var(--color-ink); color: #fff; }
+.btn--primary { background: var(--color-ink); color: #fff; box-shadow: 0 1px 2px rgba(10, 26, 47, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08); }
 .btn--primary:hover { background: var(--color-accent); box-shadow: 0 10px 24px -10px rgba(36, 71, 196, 0.6); }
 .btn--secondary { background: var(--color-accent-soft); color: var(--color-accent); }
 .btn--secondary:hover { background: #d9e2fb; }
@@ -40,7 +40,7 @@
 .btn--light { background: #fff; color: #0a1a2f; }
 .btn--light:hover { background: #e8edfb; }
 /* Tombol yang membuka WhatsApp: hijau yang cukup gelap agar teks putih tetap terbaca (kontras 5:1) */
-.btn--wa { background: var(--color-wa); color: #fff; }
+.btn--wa { background: var(--color-wa); color: #fff; box-shadow: 0 1px 2px rgba(10, 26, 47, 0.18), 0 8px 18px -10px rgba(26, 127, 69, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.16); }
 .btn--wa:hover { background: var(--color-wa-hover); box-shadow: 0 10px 24px -10px rgba(26, 127, 69, 0.6); }
 .btn--sm { padding: 0.6rem 1.1rem; font-size: 0.88rem; }
 
@@ -100,6 +100,38 @@
 .tone-amber { --tone: #a24e05; --tone-soft: #fff0d9; } /* kendaraan */
 .tone-teal  { --tone: #0b7268; --tone-soft: #daf3ee; } /* properti & usaha */
 
+/* ---------- Bilah info atas ----------
+   Jam layanan dan kontak di atas header, supaya pengunjung tahu ada orang yang bisa dihubungi.
+   Bilah ini ikut tergulung; header tetap menempel di atas layar. */
+.topbar {
+  background: var(--color-dark);
+  color: #b4c2d8;
+  font-size: 0.8rem;
+}
+.topbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.2rem 1.5rem;
+  min-height: 2.5rem;
+  padding-block: 0.35rem;
+}
+.topbar__hours,
+.topbar__contact li { display: flex; align-items: center; gap: 0.45rem; margin: 0; }
+.topbar__contact { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 1.5rem; }
+.topbar .icon { width: 1.05em; height: 1.05em; color: var(--color-accent); }
+.topbar a { display: inline-flex; align-items: center; gap: 0.45rem; color: inherit; text-decoration: none; transition: color 0.2s; }
+.topbar a:hover { color: #fff; text-decoration: underline; }
+@media (max-width: 759px) {
+  .topbar__contact .topbar__email { display: none; }
+}
+@media (max-width: 599px) {
+  .topbar { font-size: 0.74rem; }
+  .topbar__inner { min-height: 2.15rem; padding-block: 0.3rem; }
+  .topbar__label { display: none; } /* HP: cukup jamnya saja */
+}
+
 /* ---------- Header ---------- */
 .site-header {
   position: sticky;
@@ -141,11 +173,30 @@
   border-radius: 11px;
   background: linear-gradient(135deg, #3d66f2, #1c379f);
   color: #fff;
-  box-shadow: 0 6px 14px -6px rgba(36, 71, 196, 0.65);
+  box-shadow: 0 6px 14px -6px rgba(36, 71, 196, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.35s var(--ease);
 }
 .brand__mark .icon { width: 20px; height: 20px; }
+.brand:hover .brand__mark { transform: rotate(-8deg) scale(1.05); }
+/* Logo teks: nama dua warna dan tagline kecil. Dipakai bila nama dibungkus span brand__text,
+   contoh: <span class="brand__text"><span class="brand__name">Nama <span class="brand__accent">Belakang</span></span>
+   <span class="brand__tagline">Konsultan Perlindungan</span></span> */
+.brand__text { display: grid; gap: 0.22rem; }
+.brand__name { font: 700 1.14rem/1 var(--font-heading); letter-spacing: -0.03em; }
+.brand__accent {
+  background: linear-gradient(100deg, #2447c4 0%, #3d66f2 45%, #0b7268 115%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.site-footer .brand__accent { background-image: linear-gradient(100deg, #b4c8ff 0%, #8fb0ff 40%, #7fdcc8 100%); }
+.brand__tagline { font: 600 0.58rem/1 var(--font-body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); }
+.brand__tagline:empty { display: none; } /* tagline dikosongkan: nama tetap di tengah lambang */
+@media (forced-colors: active) {
+  .brand__accent { background: none; color: LinkText; }
+}
 .nav { display: none; }
-.nav__list { display: flex; align-items: center; gap: 0.875rem; }
+.nav__list { display: flex; align-items: center; gap: 0.8rem; }
 .nav__link {
   white-space: nowrap;
   font-size: 0.88rem;
@@ -202,7 +253,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  max-height: calc(100vh - 72px);
+  max-height: calc(100vh - 72px - 2.5rem); /* dikurangi tinggi bilah info atas */
   overflow-y: auto;
   background: #fff;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
@@ -249,6 +300,10 @@ body.nav-open::after {
   gap: 1rem;
 }
 .section-head--row > div { max-width: 40rem; }
+@media (max-width: 599px) {
+  .section-head { margin-bottom: 1.5rem; }
+  .eyebrow { margin-bottom: 0.75rem; }
+}
 
 /* ---------- Card ---------- */
 .card {
@@ -308,6 +363,13 @@ body.nav-open::after {
 }
 .card__go .icon { width: 16px; height: 16px; }
 .card--link:hover .card__go { background: var(--tone, var(--color-accent)); color: #fff; transform: translateX(3px); }
+/* Tautan "Pelajari" di dasar kartu kategori (seluruh kartu tetap bisa diklik lewat card__link) */
+.card__more { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: auto; font-size: 0.9rem; font-weight: 700; color: var(--color-accent); }
+.card__more .icon { width: 1em; height: 1em; transition: transform 0.2s var(--ease); }
+.card--link:hover .card__more .icon { transform: translateX(3px); }
+@media (max-width: 599px) {
+  .card__more { font-size: 0.8rem; }
+}
 
 /* ---------- Placeholder foto (diganti foto asli dari klien) ----------
    Foto asli: taruh <img> di dalam kotak ini; gambar otomatis memenuhi kotak dan dipotong rapi. */
@@ -388,6 +450,11 @@ body.nav-open::after {
 .accordion__trigger[aria-expanded="true"] .icon { transform: rotate(180deg); background: var(--color-accent); color: #fff; }
 .accordion__panel { padding: 0 1.25rem 1.2rem; color: var(--color-muted); font-size: 0.97rem; }
 .accordion__panel p:last-child { margin-bottom: 0; }
+@media (max-width: 599px) {
+  .accordion { gap: 0.6rem; }
+  .accordion__trigger { padding: 0.95rem 1.1rem; font-size: 0.97rem; }
+  .accordion__panel { padding: 0 1.1rem 1.1rem; }
+}
 
 /* ---------- Formulir ---------- */
 .form { display: grid; gap: 1.1rem; }
@@ -534,6 +601,20 @@ body.nav-open::after {
 @media (min-width: 820px) {
   .site-footer__grid { grid-template-columns: 1.6fr 1fr 1.2fr; }
 }
+/* HP: seperti laptop, nama usaha di atas lalu Navigasi dan Kontak berdampingan. Disclaimer tetap utuh. */
+@media (max-width: 599px) {
+  .site-footer { padding-top: 2.5rem; font-size: 0.85rem; }
+  .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; }
+  .site-footer__grid > :first-child { grid-column: 1 / -1; }
+  .site-footer__grid > :first-child p:last-child { margin-bottom: 0; }
+  .site-footer h3 { margin-bottom: 0.75rem; }
+  .site-footer li { margin-bottom: 0.5rem; line-height: 1.45; }
+  .site-footer__bottom { margin-top: 1.75rem; font-size: 0.74rem; }
+}
+
+/* Tulisan besar samar di dasar footer: hanya ditampilkan oleh lapisan tema yang memakainya
+   (tema.css dan tema-gabungan.css), tersembunyi di tampilan modern.css. */
+.site-footer__wordmark { display: none; }
 
 /* ---------- Tombol WhatsApp mengambang ---------- */
 .wa-float {

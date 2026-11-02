@@ -8,14 +8,18 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Edukasi Asuransi | [Nama Usaha]">
   <meta property="og:description" content="Artikel dan panduan dasar asuransi dengan bahasa yang mudah dipahami.">
-  <meta name="theme-color" content="#0b1f2e">
+  <meta name="theme-color" content="#edf4fe">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/pages.css">
+  <link rel="stylesheet" href="../assets/css/tema-asuransi.css">
 </head>
 <body>
 
@@ -35,9 +39,20 @@
 
 <a class="skip-link" href="#konten">Lompat ke konten</a>
 
+<!-- Bilah info atas (semua halaman). GANTI [Jam operasional], [nomor], dan [email] dengan data klien. -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Jam layanan: </span>[Jam operasional]</span></p>
+    <ul class="topbar__contact">
+      <li><a data-wa href="https://wa.me/6281200000000"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp [nomor]</a></li>
+      <li class="topbar__email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>[email]</li>
+    </ul>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</a>
+    <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></a>
 
     <nav class="nav" id="site-nav" aria-label="Navigasi utama">
       <ul class="nav__list">
@@ -71,9 +86,13 @@
         <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
         Literasi asuransi
       </span>
-      <h1>Pusat Wawasan &amp; Edukasi Asuransi</h1>
+      <h1>Pusat Wawasan &amp; <span class="text-gradient">Edukasi Asuransi</span></h1>
       <p>Panduan dasar untuk memahami cara kerja asuransi, membaca polis, dan mempersiapkan klaim, ditulis dengan bahasa yang mudah dipahami.</p>
-      <img class="edu-hero__art" src="../assets/img/ilustrasi/hero-edukasi.svg" alt="" width="360" height="260">
+      <!-- Ilustrasi buku dan lampu bergerak; versi -diam dipakai bila pengunjung memilih "kurangi gerakan" (README 5.3) -->
+      <picture class="edu-hero__art">
+        <source srcset="../assets/img/ilustrasi/hero-edukasi-diam.svg" media="(prefers-reduced-motion: reduce)">
+        <img src="../assets/img/ilustrasi/hero-edukasi.svg" alt="" width="360" height="260">
+      </picture>
     </div>
   </section>
 
@@ -167,10 +186,11 @@
 </main>
 
 <footer class="site-footer">
+  <p class="site-footer__wordmark" aria-hidden="true">Perlindungan</p>
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</p>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></p>
         <p>[Deskripsi singkat usaha, diisi dari data klien.]</p>
       </div>
       <nav aria-label="Navigasi footer">
@@ -191,18 +211,20 @@
           <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><a data-wa href="https://wa.me/6281200000000">WhatsApp: [nomor]</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>[email]</span></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>[alamat kantor]</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>[Jam operasional]</span></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__bottom">
       <div class="site-footer__legal">
-        <p>&copy; <span data-year>2025</span> [Nama Usaha]. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
+        <p>&copy; <span data-year>2025</span> Arits Irham. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
         <!-- Disclaimer afiliasi: wajib menurut pedoman Manulife Agency, jangan dihapus (lihat README bagian 8) -->
-        <p>Website ini dikelola secara pribadi oleh [Nama Konsultan], Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
+        <p>Website ini dikelola secara pribadi oleh Arits Irham, Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
       </div>
       <ul>
         <li><a href="../kebijakan-privasi.html">Kebijakan Privasi</a></li>
         <li><a href="../kontak.html">Kontak</a></li>
+        <li><a class="to-top" href="#">Kembali ke atas<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
     </div>
   </div>

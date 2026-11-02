@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" width="520" height="520">
+  <g class="latar">
+    <circle cx="260" cy="272" r="214" fill="#e8f1ff"/>
+    <circle cx="260" cy="300" r="150" fill="#dbe8fd"/>
+  </g>
+
+  <!-- Pelengkap: empat jenis perlindungan -->
+  <g class="kartu k1"><g transform="translate(58 112)">
+    <rect x="4" y="9" width="84" height="84" rx="22" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect width="84" height="84" rx="22" fill="#ffffff"/>
+    <path d="M42 62C22 49 22 32 31 30C36 29 40 32 42 35C44 32 48 29 53 30C62 32 62 49 42 62Z" fill="#e0457b"/>
+    <rect x="39.5" y="37" width="5" height="15" rx="1.5" fill="#ffffff"/>
+    <rect x="34.5" y="42" width="15" height="5" rx="1.5" fill="#ffffff"/>
+  </g></g>
+  <g class="kartu k2"><g transform="translate(378 108)">
+    <rect x="4" y="9" width="84" height="84" rx="22" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect width="84" height="84" rx="22" fill="#ffffff"/>
+    <circle cx="34" cy="34" r="7.5" fill="#2f62d8"/>
+    <circle cx="52" cy="31" r="8.5" fill="#6f93ec"/>
+    <path d="M40 62Q40 44 52 44Q64 44 64 62Z" fill="#6f93ec"/>
+    <path d="M21 62Q21 46 34 46Q47 46 47 62Z" fill="#2f62d8"/>
+  </g></g>
+  <g class="kartu k3"><g transform="translate(48 318)">
+    <rect x="4" y="9" width="84" height="84" rx="22" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect width="84" height="84" rx="22" fill="#ffffff"/>
+    <path d="M27 40L32.5 30Q34 28 36.5 28H48.5Q51 28 52.5 30L58 40Z" fill="#f2a53a"/>
+    <rect x="34" y="31" width="17" height="7" rx="2" fill="#fff3dc"/>
+    <rect x="19" y="38" width="46" height="17" rx="6" fill="#f2a53a"/>
+    <circle cx="31" cy="56" r="5.5" fill="#1c2f5e"/>
+    <circle cx="53" cy="56" r="5.5" fill="#1c2f5e"/>
+  </g></g>
+  <g class="kartu k4"><g transform="translate(390 318)">
+    <rect x="4" y="9" width="84" height="84" rx="22" fill="#0a1a2f" fill-opacity="0.06"/>
+    <rect width="84" height="84" rx="22" fill="#ffffff"/>
+    <path d="M19 43L42 24L65 43Z" fill="#14a38b" stroke="#14a38b" stroke-width="4" stroke-linejoin="round"/>
+    <rect x="26" y="41" width="32" height="22" rx="3" fill="#14a38b"/>
+    <rect x="38" y="48" width="8" height="15" rx="2" fill="#ffffff"/>
+  </g></g>
+
+  <ellipse cx="260" cy="452" rx="120" ry="12" fill="#0a1a2f" fill-opacity="0.08"/>
+
+  <!-- Konsultan -->
+  <line x1="248" y1="336" x2="246" y2="444" stroke="#1c2f5e" stroke-width="19" stroke-linecap="round"/>
+  <line x1="272" y1="336" x2="274" y2="444" stroke="#1c2f5e" stroke-width="19" stroke-linecap="round"/>
+  <ellipse cx="244" cy="448" rx="14" ry="6" fill="#0a1a2f"/>
+  <ellipse cx="276" cy="448" rx="14" ry="6" fill="#0a1a2f"/>
+  <path d="M232 212Q221 212 219 224L213 344H307L301 224Q299 212 288 212Z" fill="#1c2f5e"/>
+  <path d="M249 212L260 242L271 212Z" fill="#f7fbff"/>
+  <rect x="254" y="190" width="12" height="26" rx="4" fill="#f2c4a0"/>
+  <g class="lambai">
+    <line x1="295" y1="226" x2="332" y2="176" stroke="#1c2f5e" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="336" cy="171" r="8.5" fill="#f2c4a0"/>
+  </g>
+  <line x1="225" y1="226" x2="210" y2="316" stroke="#1c2f5e" stroke-width="16" stroke-linecap="round"/>
+  <rect x="172" y="268" width="68" height="50" rx="8" fill="#ffffff" stroke="#c9d7ff" stroke-width="2"/>
+  <rect class="batang" x="184" y="292" width="9" height="14" rx="2" fill="#2f62d8"/>
+  <rect class="batang b2" x="198" y="285" width="9" height="21" rx="2" fill="#14a38b"/>
+  <rect class="batang b3" x="212" y="278" width="9" height="28" rx="2" fill="#f2a53a"/>
+  <circle cx="208" cy="320" r="8.5" fill="#f2c4a0"/>
+  <circle cx="260" cy="134" r="13" fill="#2a2438"/>
+  <circle cx="260" cy="166" r="27" fill="#2a2438"/>
+  <circle cx="260" cy="173" r="24" fill="#f2c4a0"/>
+  <circle cx="252" cy="172" r="2.2" fill="#2a2438"/>
+  <circle cx="268" cy="172" r="2.2" fill="#2a2438"/>
+  <path d="M252 181Q260 187 268 181" fill="none" stroke="#7a3e2b" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

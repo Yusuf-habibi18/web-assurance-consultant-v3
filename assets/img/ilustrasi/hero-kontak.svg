@@ -1,1 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260"><circle cx="176" cy="130" r="118" fill="#ffffff" fill-opacity="0.07"/><path d="M84 168c-26-30-38-50-38-68a38 38 0 0 1 76 0c0 18-12 38-38 68z" fill="#e0457b"/><circle cx="84" cy="100" r="14" fill="#ffffff"/><rect x="134" y="24" width="112" height="212" rx="22" fill="#ffffff"/><rect x="146" y="46" width="88" height="168" rx="12" fill="#e8edfb"/><rect x="172" y="32" width="36" height="6" rx="3" fill="#c9d7ff"/><rect x="156" y="62" width="56" height="22" rx="10" fill="#ffffff"/><rect x="168" y="94" width="56" height="22" rx="10" fill="#8fb0ff"/><rect x="156" y="126" width="46" height="22" rx="10" fill="#ffffff"/><rect x="176" y="158" width="48" height="22" rx="10" fill="#8fb0ff"/><rect x="226" y="142" width="112" height="76" rx="12" fill="#ffffff"/><path d="M232 150l50 36 50-36" fill="none" stroke="#8fb0ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M310 56Q310 64 318 64Q310 64 310 72Q310 64 302 64Q310 64 310 56Z" fill="#ffd28f"/><path d="M50 210Q50 216 56 216Q50 216 50 222Q50 216 44 216Q50 216 50 210Z" fill="#8fb0ff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260">
+  <style>
+    /* Satu putaran 7 detik, mirip ilustrasi Tanya Jawab: pin lokasi muncul "pop" dari ujungnya, amplop keluar dari sisi ponsel,
+       empat pesan chat muncul satu per satu (pesan masuk dari kiri, pesan keluar dari kanan), lalu pin dan amplop
+       membesar-mengecil bergantian. Di akhir, semuanya kecuali ponsel mengecil hilang dan diulang. */
+    .pin { transform-box: view-box; transform-origin: 84px 168px; animation: muncul-pin 7s ease-out infinite; }
+    .surat { transform-box: view-box; transform-origin: 226px 180px; animation: muncul-surat 7s ease-out infinite; }
+    .pesan { transform-box: fill-box; animation: 7s ease-out infinite; }
+    .masuk { transform-origin: 0% 100%; }
+    .keluar { transform-origin: 100% 100%; }
+    .m1 { animation-name: pesan-1; }
+    .m2 { animation-name: pesan-2; }
+    .m3 { animation-name: pesan-3; }
+    .m4 { animation-name: pesan-4; }
+    @keyframes muncul-pin {
+      0% { opacity: 0; transform: scale(0); }
+      7% { opacity: 1; transform: scale(1.12); }
+      10% { transform: scale(0.95); }
+      13%, 56% { opacity: 1; transform: none; }
+      60% { transform: scale(1.1); }
+      63% { transform: scale(0.96); }
+      66%, 70% { transform: none; }
+      74% { transform: scale(1.1); }
+      77% { transform: scale(0.96); }
+      80%, 88% { opacity: 1; transform: none; }
+      95%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes muncul-surat {
+      0%, 6% { opacity: 0; transform: scale(0); }
+      13% { opacity: 1; transform: scale(1.1); }
+      16% { transform: scale(0.96); }
+      19%, 63% { opacity: 1; transform: none; }
+      67% { transform: scale(1.08); }
+      70% { transform: scale(0.97); }
+      73%, 77% { transform: none; }
+      81% { transform: scale(1.08); }
+      84% { transform: scale(0.97); }
+      87%, 88% { opacity: 1; transform: none; }
+      95%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes pesan-1 { 0%, 18% { opacity: 0; transform: scale(0); } 24% { opacity: 1; transform: scale(1.1); } 27% { transform: scale(0.96); } 30%, 88% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: scale(0); } }
+    @keyframes pesan-2 { 0%, 28% { opacity: 0; transform: scale(0); } 34% { opacity: 1; transform: scale(1.1); } 37% { transform: scale(0.96); } 40%, 88% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: scale(0); } }
+    @keyframes pesan-3 { 0%, 38% { opacity: 0; transform: scale(0); } 44% { opacity: 1; transform: scale(1.1); } 47% { transform: scale(0.96); } 50%, 88% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: scale(0); } }
+    @keyframes pesan-4 { 0%, 48% { opacity: 0; transform: scale(0); } 54% { opacity: 1; transform: scale(1.1); } 57% { transform: scale(0.96); } 60%, 88% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: scale(0); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+<circle cx="176" cy="130" r="118" fill="#ffffff" fill-opacity="0.07"/><g class="pin"><path d="M84 168c-26-30-38-50-38-68a38 38 0 0 1 76 0c0 18-12 38-38 68z" fill="#e0457b"/><circle cx="84" cy="100" r="14" fill="#ffffff"/></g><rect x="134" y="24" width="112" height="212" rx="22" fill="#ffffff"/><rect x="146" y="46" width="88" height="168" rx="12" fill="#e8edfb"/><rect x="172" y="32" width="36" height="6" rx="3" fill="#c9d7ff"/><rect class="pesan masuk m1" x="156" y="62" width="56" height="22" rx="10" fill="#ffffff"/><rect class="pesan keluar m2" x="168" y="94" width="56" height="22" rx="10" fill="#8fb0ff"/><rect class="pesan masuk m3" x="156" y="126" width="46" height="22" rx="10" fill="#ffffff"/><rect class="pesan keluar m4" x="176" y="158" width="48" height="22" rx="10" fill="#8fb0ff"/><g class="surat"><rect x="226" y="142" width="112" height="76" rx="12" fill="#ffffff"/><path d="M232 150l50 36 50-36" fill="none" stroke="#8fb0ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g><path d="M310 56Q310 64 318 64Q310 64 310 72Q310 64 302 64Q310 64 310 56Z" fill="#ffd28f"/><path d="M50 210Q50 216 56 216Q50 216 50 222Q50 216 44 216Q50 216 50 210Z" fill="#8fb0ff"/></svg>

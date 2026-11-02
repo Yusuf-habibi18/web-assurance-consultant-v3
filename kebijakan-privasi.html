@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kebijakan Privasi | [Nama Usaha]</title>
   <meta name="description" content="Penjelasan cara website [Nama Usaha] menggunakan data yang Anda isi pada formulir konsultasi.">
-  <meta name="theme-color" content="#0b1f2e">
+  <meta name="theme-color" content="#edf4fe">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/tema-asuransi.css">
 </head>
 <body>
 
@@ -24,13 +28,27 @@
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
 </svg>
 
 <a class="skip-link" href="#konten">Lompat ke konten</a>
 
+<!-- Bilah info atas (semua halaman). GANTI [Jam operasional], [nomor], dan [email] dengan data klien. -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Jam layanan: </span>[Jam operasional]</span></p>
+    <ul class="topbar__contact">
+      <li><a data-wa href="https://wa.me/6281200000000"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp [nomor]</a></li>
+      <li class="topbar__email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>[email]</li>
+    </ul>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</a>
+    <a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></a>
 
     <nav class="nav" id="site-nav" aria-label="Navigasi utama">
       <ul class="nav__list">
@@ -80,7 +98,7 @@
       </div>
 
       <h2>1. Siapa kami</h2>
-      <p>Website ini dikelola oleh [Nama Usaha / Nama Konsultan] ("kami"). [Nama Konsultan] adalah Tenaga Pemasar Manulife Indonesia. Website ini dikelola secara pribadi dan bukan website resmi Manulife. Untuk pertanyaan mengenai privasi, hubungi kami melalui kontak pada bagian 7.</p>
+      <p>Website ini dikelola oleh Arits Irham ("kami"). Arits Irham adalah Tenaga Pemasar Manulife Indonesia. Website ini dikelola secara pribadi dan bukan website resmi Manulife. Untuk pertanyaan mengenai privasi, hubungi kami melalui kontak pada bagian 7.</p>
 
       <h2>2. Data yang kami terima</h2>
       <p>Kami hanya menerima data yang Anda kirimkan sendiri melalui WhatsApp, yaitu:</p>
@@ -142,10 +160,11 @@
 </main>
 
 <footer class="site-footer">
+  <p class="site-footer__wordmark" aria-hidden="true">Perlindungan</p>
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>[Nama Usaha]</p>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline"></span></span></p>
         <p>[Deskripsi singkat usaha, diisi dari data klien.]</p>
       </div>
       <nav aria-label="Navigasi footer">
@@ -166,18 +185,20 @@
           <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><a data-wa href="https://wa.me/6281200000000">WhatsApp: [nomor]</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>[email]</span></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>[alamat kantor]</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>[Jam operasional]</span></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__bottom">
       <div class="site-footer__legal">
-        <p>&copy; <span data-year>2025</span> [Nama Usaha]. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
+        <p>&copy; <span data-year>2025</span> Arits Irham. Informasi di website ini bersifat umum dan bukan penawaran atau jaminan manfaat. Ketentuan lengkap mengikuti polis resmi perusahaan asuransi.</p>
         <!-- Disclaimer afiliasi: wajib menurut pedoman Manulife Agency, jangan dihapus (lihat README bagian 8) -->
-        <p>Website ini dikelola secara pribadi oleh [Nama Konsultan], Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
+        <p>Website ini dikelola secara pribadi oleh Arits Irham, Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
       </div>
       <ul>
         <li><a href="kebijakan-privasi.html" aria-current="page">Kebijakan Privasi</a></li>
         <li><a href="kontak.html">Kontak</a></li>
+        <li><a class="to-top" href="#">Kembali ke atas<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
     </div>
   </div>

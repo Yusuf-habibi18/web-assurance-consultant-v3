@@ -1,0 +1,475 @@
+/* Tema asuransi: terang, tenang, ramah (2 November 2026).
+   Mengikuti saran desain website asuransi: hero terang berisi ilustrasi manusia, satu warna aksen biru
+   untuk tombol dan tautan, satu keluarga huruf sans-serif (Plus Jakarta Sans), kartu datar tanpa kaca atau
+   cahaya, tanpa teks bergradasi, tanpa serif miring, dan tanpa partikel berkilau. Bagian gelap hanya
+   menjadi penyeimbang di band ajakan dan footer.
+   Dimuat paling akhir di setiap halaman, setelah pages.css. Pasang SATU lapisan tema saja
+   (lihat README bagian 5.4 untuk pilihan lain). Isi teks dan tata letak HP tidak berubah. */
+
+/* ---------- Token ---------- */
+:root {
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-ink: #0a1a2f;
+  --color-text: #24344a;
+  --color-muted: #5a6779;
+  --color-accent: #1d5fd0;        /* satu-satunya warna aksen: tombol dan tautan (kontras 5,8:1) */
+  --color-accent-hover: #164fb0;
+  --color-accent-soft: #e8f0fd;
+  --color-tint: #f4f7fc;
+  --color-border: #e1e7f0;
+
+  --radius: 18px;
+  --radius-lg: 24px;
+  --shadow: 0 1px 2px rgba(10, 26, 47, 0.05);
+  --shadow-lg: 0 12px 28px -20px rgba(10, 26, 47, 0.4);
+  --header-h: 84px; /* tinggi header: kapsul + jarak atas-bawah */
+}
+@media (max-width: 599px) {
+  :root { --header-h: 74px; }
+}
+::selection { background: #d6e4fb; color: #0a1a2f; }
+
+/* ---------- Elegan: tipografi lebih halus dan lega ---------- */
+:root { --section-space: clamp(2.5rem, 8vw, 6.5rem); }
+@media (min-width: 900px) {
+  body { line-height: 1.75; } /* di HP tetap 1.7 agar halaman tidak memanjang */
+}
+h1, h2 { font-weight: 600; }
+.btn { font-weight: 600; letter-spacing: 0.01em; }
+
+/* Hero terang: variabel area gelap dari base.css dikembalikan ke nilai terang */
+.hero,
+.edu-hero,
+.about-hero {
+  --color-ink: #0a1a2f;
+  --color-text: #24344a;
+  --color-muted: #5a6779;
+  --color-accent: #1d5fd0;
+  --color-accent-soft: #e8f0fd;
+  --color-tint: #f4f7fc;
+  --color-border: #e1e7f0;
+  --color-surface: #ffffff;
+  --color-success: #1f7a5a;
+  --color-success-soft: #dff3ea;
+  color: var(--color-text);
+  border-radius: 0;
+  background: linear-gradient(180deg, #edf4fe 0%, #f6f9ff 65%, #ffffff 100%);
+}
+.hero::before,
+.edu-hero::before,
+.about-hero::before { display: none; } /* tekstur grid untuk hero gelap tidak dipakai */
+
+/* Kata yang disorot di judul: warna aksen biasa, bukan gradasi */
+.text-gradient { color: var(--color-accent); }
+
+/* ---------- Bilah info atas dan header kapsul ----------
+   Header berupa kapsul putih yang mengambang (padat, tanpa efek kaca). Di puncak halaman latarnya sewarna
+   bagian atas hero sehingga menyatu; setelah di-scroll (kelas is-scrolled dari main.js) latarnya transparan. */
+.topbar {
+  --color-accent: #1d5fd0;
+  background: #edf4fe;
+  color: #3a4b63;
+}
+.topbar a:hover { color: #0a1a2f; }
+.site-header {
+  padding-block: 0.6rem;
+  border-bottom: 0;
+  background: #edf4fe;
+  box-shadow: none;
+  pointer-events: none; /* area di luar kapsul tidak menghalangi klik ke konten di belakangnya */
+}
+.site-header.is-scrolled {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.site-header__inner {
+  position: relative; /* menu HP diposisikan terhadap kapsul */
+  width: calc(100% - 2 * max(0.6rem, var(--gutter) - 1.25rem));
+  max-width: calc(var(--container) - 2 * var(--gutter) + 2.5rem);
+  min-height: calc(var(--header-h) - 1.2rem);
+  padding-inline: clamp(0.9rem, 2vw, 1.25rem) 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px -22px rgba(10, 26, 47, 0.4);
+  pointer-events: auto;
+  transition: box-shadow 0.3s;
+}
+.site-header.is-scrolled .site-header__inner { box-shadow: 0 16px 36px -20px rgba(10, 26, 47, 0.5); }
+.nav__list { gap: 0.75rem; }
+.nav__link { font-size: 0.86rem; } /* Plus Jakarta Sans sedikit lebih lebar: menu tetap muat satu baris di 1200 px */
+/* Menu HP: panel bersudut tepat di bawah kapsul */
+.nav.is-open {
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--header-h) - 3.5rem);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+}
+/* Bilah kategori Solusi: satu kapsul putih yang ikut menempel di bawah header */
+.cat-nav {
+  top: var(--header-h);
+  padding-block: 0.5rem;
+  border-bottom: 0;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+.cat-nav ul {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 0.35rem;
+  gap: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px -22px rgba(10, 26, 47, 0.4);
+  pointer-events: auto;
+}
+.cat-nav a { border-color: transparent; background: transparent; }
+.brand__accent {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  color: var(--color-accent);
+}
+/* Di footer navy: biru muda polos dari --color-accent footer, tanpa kotak gradasi bawaan components.css */
+.site-footer .brand__accent { background: none; }
+
+/* ---------- Tombol: satu warna aksen ---------- */
+.btn--primary,
+.btn--wa,
+.hero .btn--primary,
+.edu-hero .btn--primary,
+.about-hero .btn--primary {
+  background: var(--color-accent);
+  color: #ffffff;
+  box-shadow: none;
+}
+.btn--primary:hover,
+.btn--wa:hover,
+.hero .btn--primary:hover,
+.edu-hero .btn--primary:hover,
+.about-hero .btn--primary:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 8px 18px -12px rgba(29, 95, 208, 0.8);
+}
+.hero .btn--secondary,
+.edu-hero .btn--secondary,
+.about-hero .btn--secondary {
+  border-color: var(--color-border);
+  background: #ffffff;
+  color: var(--color-ink);
+}
+.hero .btn--secondary:hover,
+.edu-hero .btn--secondary:hover,
+.about-hero .btn--secondary:hover {
+  border-color: var(--color-accent);
+  background: #ffffff;
+  color: var(--color-accent);
+}
+/* Panah di dalam tombol: lingkaran kecil */
+.btn .icon-arrow {
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: -0.55rem;
+  padding: 0.36em;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  stroke-width: 2.5;
+}
+.btn--secondary .icon-arrow,
+.hero .btn--secondary .icon-arrow { background: var(--color-accent); color: #ffffff; }
+/* Di band gelap (ajakan konsultasi): tombol putih dengan teks biru */
+.cta-band .btn--wa { background: #ffffff; color: var(--color-accent); }
+.cta-band .btn--wa:hover { background: #e8f0fd; color: var(--color-accent-hover); }
+
+/* ---------- Hero ---------- */
+.badge { background: var(--color-accent-soft); color: var(--color-accent); }
+.hero__note { border-color: var(--color-border); background: #ffffff; }
+@media (min-width: 600px) {
+  .hero h1 { font-size: clamp(2.4rem, 4.8vw, 3.7rem); letter-spacing: -0.04em; line-height: 1.04; }
+}
+@media (min-width: 900px) {
+  body { font-size: 1.0625rem; } /* teks isi sedikit lebih besar di layar lebar */
+}
+/* Tempat foto di hero Tentang Saya: kotak terang */
+.hero .ph,
+.about-hero .ph {
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.85), transparent 60%),
+    linear-gradient(135deg, #dde6fb 0%, #eef2fb 55%, #e4f3ed 100%);
+  color: #3550b5;
+  box-shadow: none;
+}
+.hero .ph::before,
+.about-hero .ph::before {
+  background-color: rgba(255, 255, 255, 0.75);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233550b5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='3' rx='2'/%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Cpath d='m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/%3E%3C/svg%3E");
+  box-shadow: 0 8px 18px -10px rgba(36, 71, 196, 0.45);
+}
+.about-hero .about-hero__photo::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233550b5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'/%3E%3Cpath d='M20 21a8 8 0 0 0-16 0'/%3E%3C/svg%3E");
+}
+.stat__label { color: var(--color-accent); }
+
+/* ---------- Kartu datar ---------- */
+.card,
+.why__item,
+.steps__body,
+.profile { box-shadow: none; }
+.grid-4 .card:hover,
+.grid-3 .card:hover,
+.feature-grid .card:hover,
+.list-stack .card:hover,
+.why__item:hover,
+.steps__item:hover .steps__body {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -20px rgba(10, 26, 47, 0.45);
+}
+
+/* Nomor langkah: warna aksen polos */
+.steps__num { background: var(--color-accent); box-shadow: 0 0 0 6px var(--color-accent-soft); }
+
+/* Banner kalkulator: biru sangat muda, datar */
+.calc-promo {
+  border: 1px solid #d6e3fb;
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+}
+.calc-promo::before { display: none; }
+.calc-promo h3 { color: var(--color-ink); }
+.calc-promo__text p { color: var(--color-muted); }
+.calc-promo .card__icon { background: #ffffff; color: var(--color-accent); }
+.calc-promo .btn--light { background: var(--color-accent); color: #ffffff; }
+.calc-promo .btn--light:hover { background: var(--color-accent-hover); }
+.calc-promo__preview { border: 1px solid var(--color-border); box-shadow: 0 12px 26px -20px rgba(10, 26, 47, 0.45); rotate: 0deg; }
+.calc-promo.is-popped .calc-promo__preview { animation: promo-pop 0.9s var(--ease) 0.2s both; } /* tanpa melayang terus-menerus */
+
+/* Band ajakan dan kotak klaim: navy polos sebagai penyeimbang */
+.cta-band,
+.claim-band { background: var(--color-dark); }
+.cta-band::before { display: none; }
+
+/* ---------- Animasi ----------
+   Semua animasi di bawah otomatis mati bila pengunjung memilih "kurangi gerakan" (aturan di base.css),
+   dan tampilan akhirnya tetap utuh. */
+
+/* Kata yang disorot di judul hero: garis sorot biru muda yang tergambar pelan */
+.text-gradient {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: linear-gradient(#d6e4fb, #d6e4fb) no-repeat 0 88% / 100% 0.22em;
+  animation: sorot 1s var(--ease) 1.1s both; /* mulai setelah kata-kata judul muncul */
+}
+@keyframes sorot { from { background-size: 0% 0.22em; } }
+
+/* Ilustrasi hero melayang lembut, dengan cincin garis putus-putus yang berputar sangat pelan */
+.hero__art { animation: float-soft 7s ease-in-out 1.4s infinite; }
+.hero__media:has(.hero__art)::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 5%;
+  border: 1.5px dashed rgba(29, 95, 208, 0.22);
+  border-radius: 50%;
+  animation: putar 90s linear infinite;
+}
+@keyframes putar { to { rotate: 360deg; } }
+/* Browser yang mendukung animasi berbasis scroll: ilustrasi bergeser sedikit saat halaman digulir */
+@supports (animation-timeline: scroll()) {
+  .hero__art {
+    animation: float-soft 7s ease-in-out 1.4s infinite, hero-geser linear both;
+    animation-timeline: auto, scroll(root);
+    animation-range: normal, 0 80vh;
+  }
+  @keyframes hero-geser { to { transform: translateY(40px); } }
+}
+
+/* Konten muncul saat di-scroll dengan gerakan yang lebih halus */
+.reveal {
+  transform: translateY(24px) scale(0.985);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Langkah konsultasi: garis penghubung tergambar dan nomor muncul bergantian (kelas dari main.js) */
+.steps--animate::before { clip-path: inset(0 100% 0 0); transition: clip-path 1.4s var(--ease) 0.2s; }
+.steps--animate .steps__num { opacity: 0; transform: scale(0.6); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+.steps--animate .steps__item:nth-child(2) .steps__num { transition-delay: 0.45s; }
+.steps--animate .steps__item:nth-child(3) .steps__num { transition-delay: 0.9s; }
+.steps--animate.is-drawn::before { clip-path: inset(0 0 0 0); }
+.steps--animate.is-drawn .steps__num { opacity: 1; transform: none; }
+@media (min-width: 600px) and (max-width: 759px) {
+  .steps--animate::before { clip-path: inset(0 0 100% 0); } /* di tablet garisnya tegak */
+}
+
+/* Ikon kartu sedikit berputar saat disorot */
+.why__item:hover .card__icon,
+.grid-4 .card:hover .card__icon,
+.grid-3 .card:hover .card__icon,
+.feature-grid .card:hover .card__icon,
+.list-stack .card:hover .card__icon { transform: scale(1.06) rotate(-6deg); }
+
+/* Judul hero muncul kata demi kata (setiap kata dibungkus span oleh main.js); judulnya sendiri tidak ikut naik */
+.hero__grid > div:first-child > h1.judul-bertahap,
+.about-hero__grid > div:first-child > h1.judul-bertahap,
+.edu-hero .container > h1.judul-bertahap { animation: none; }
+.judul-bertahap .kata {
+  display: inline-block;
+  animation: kata-naik 0.7s var(--ease) both;
+  animation-delay: calc(0.15s + var(--i, 0) * 0.06s);
+}
+@keyframes kata-naik { from { opacity: 0; translate: 0 0.45em; } }
+
+/* Ikon lencana di hero berdenyut pelan */
+.badge .icon { animation: ikon-denyut 3s ease-in-out 1.6s infinite; }
+@keyframes ikon-denyut { 0%, 40%, 100% { scale: 1; } 20% { scale: 1.2; } }
+
+/* Tombol pertama di hero: cincin biru yang mengembang berkala */
+.hero__actions > .btn:first-child { position: relative; }
+.hero__actions > .btn:first-child::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: cincin 4.5s var(--ease) 2.6s infinite;
+}
+@keyframes cincin {
+  0% { box-shadow: 0 0 0 0 rgba(29, 95, 208, 0.4); }
+  35%, 100% { box-shadow: 0 0 0 12px rgba(29, 95, 208, 0); }
+}
+
+/* Lambang di header berputar masuk saat halaman dibuka. Fill "backwards" supaya efek sorot lambang tetap jalan sesudahnya. */
+.brand__mark { animation: lambang-masuk 0.9s var(--ease) 0.1s backwards; }
+@keyframes lambang-masuk { from { opacity: 0; rotate: -90deg; scale: 0.6; } }
+
+/* Garis progres scroll biru di tepi atas layar (nilai --scroll dari main.js) */
+.site-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: calc(var(--scroll, 0) * 100%);
+  height: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--color-accent);
+}
+
+/* Tombol WhatsApp mengambang: denyut lembut yang berulang setiap 5 detik */
+.wa-float::before { animation: wa-denyut 5s var(--ease) 2.2s infinite; }
+@keyframes wa-denyut {
+  0% { box-shadow: 0 0 0 0 rgba(26, 127, 69, 0.5); }
+  30%, 100% { box-shadow: 0 0 0 16px rgba(26, 127, 69, 0); }
+}
+
+/* Animasi di bawah ini mengikuti kelas reveal dari main.js. Semuanya selesai dalam 0,9 detik,
+   karena main.js melepas kelas reveal setelah itu. Kalau durasinya diperpanjang, ubah juga angka 900 di main.js. */
+/* Isi judul section muncul bergantian */
+.section-head.reveal.is-visible > * { animation: naik-halus 0.6s var(--ease) both; animation-delay: var(--reveal-delay, 0ms); }
+.section-head.reveal.is-visible > :nth-child(2) { animation-delay: calc(var(--reveal-delay, 0ms) + 0.1s); }
+.section-head.reveal.is-visible > :nth-child(n+3) { animation-delay: calc(var(--reveal-delay, 0ms) + 0.2s); }
+@keyframes naik-halus { from { opacity: 0; translate: 0 14px; } }
+
+/* Ikon kartu "meletup" masuk sesudah kartunya muncul (keyframe icon-pop dari pages.css) */
+.reveal.is-visible .card__icon {
+  animation: icon-pop 0.55s var(--ease) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 0.25s);
+}
+
+/* Profil konsultan: foto masuk dari kiri, teks dari kanan, lalu kapsul kredensial muncul satu per satu */
+.profile.reveal.is-visible .profile__photo { animation: dari-kiri 0.75s var(--ease) both; animation-delay: var(--reveal-delay, 0ms); }
+.profile.reveal.is-visible .profile__body { animation: dari-kanan 0.75s var(--ease) both; animation-delay: calc(var(--reveal-delay, 0ms) + 0.08s); }
+.profile.reveal.is-visible .profile__facts li { animation: kapsul-pop 0.4s var(--ease) both; animation-delay: calc(var(--reveal-delay, 0ms) + 0.3s); }
+.profile.reveal.is-visible .profile__facts li:nth-child(2) { animation-delay: calc(var(--reveal-delay, 0ms) + 0.36s); }
+.profile.reveal.is-visible .profile__facts li:nth-child(n+3) { animation-delay: calc(var(--reveal-delay, 0ms) + 0.42s); }
+@keyframes dari-kiri { from { opacity: 0; translate: -32px 0; } }
+@keyframes dari-kanan { from { opacity: 0; translate: 32px 0; } }
+@keyframes kapsul-pop { from { opacity: 0; scale: 0.7; } 60% { opacity: 1; scale: 1.06; } }
+
+/* Band ajakan membesar pelan saat muncul */
+.cta-band.reveal:not(.is-visible) { transform: translateY(24px) scale(0.94); }
+
+/* Lingkaran datar samar yang melayang pelan di latar band ajakan (bukan cahaya: tepinya tegas) */
+.cta-band::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -25%;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(143, 176, 255, 0.12) 0 8rem, transparent calc(8rem + 1px)),
+    radial-gradient(circle at 19% 83%, rgba(255, 255, 255, 0.06) 0 5rem, transparent calc(5rem + 1px)),
+    radial-gradient(circle at 57% 25%, rgba(255, 255, 255, 0.05) 0 1.5rem, transparent calc(1.5rem + 1px));
+  animation: hanyut 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes hanyut { to { translate: 4% -5%; } }
+
+/* Gambar artikel sedikit membesar saat kartunya disorot */
+.article-card__img > img,
+.featured__img > img { transition: scale 0.8s var(--ease); }
+.article-card:hover .article-card__img > img,
+.featured:hover .featured__img > img { scale: 1.06; }
+
+/* Gambar kategori di halaman Solusi "bernapas" pelan */
+.sol__img > img { animation: napas-gambar 9s ease-in-out infinite; }
+@keyframes napas-gambar { 50% { scale: 1.04; } }
+
+/* ---------- Panel dan bingkai ---------- */
+/* Section abu-abu menjadi panel bersudut besar (di HP tetap selebar layar) */
+.section--tint {
+  margin-inline: clamp(0px, 2vw - 8px, 16px);
+  border-radius: clamp(24px, 3.2vw, 40px);
+}
+/* Foto dan gambar di dalam kartu diberi bingkai dalam */
+.profile { padding: clamp(6px, 0.8vw, 10px); }
+.profile__photo { border-radius: calc(var(--radius-lg) - clamp(6px, 0.8vw, 10px)); }
+.featured { padding: clamp(6px, 0.8vw, 10px); }
+.featured__img { border-radius: calc(var(--radius-lg) - clamp(6px, 0.8vw, 10px)); }
+.article-card { padding: clamp(5px, 0.6vw, 8px); }
+.article-card__img { border-radius: calc(var(--radius) - clamp(5px, 0.6vw, 8px)); }
+
+/* "Mengapa Berkonsultasi" bergaya bento di laptop: judul menjadi kotak biru muda sejajar empat kotak alasan */
+@media (min-width: 1000px) {
+  .why { align-items: stretch; gap: 1rem; }
+  .why__list { gap: 1rem; }
+  .why .section-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.25rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-soft);
+  }
+  .why .section-head .eyebrow { background: #ffffff; }
+  .why__item { padding: 1.6rem; }
+}
+
+/* Tanya jawab dua kolom di laptop: judul di kiri, daftar pertanyaan di kanan */
+@media (min-width: 900px) {
+  .container:has(> .accordion) {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    column-gap: 3.5rem;
+    align-items: start;
+  }
+  .container:has(> .accordion) > .section-head { grid-column: 1; grid-row: 1; margin: 0; text-align: left; }
+  .container:has(> .accordion) > .accordion { grid-column: 2; grid-row: 1 / span 2; max-width: none; margin: 0; }
+  .container:has(> .accordion) > .faq__more { grid-column: 1; grid-row: 2; margin-top: 1.5rem; text-align: left; }
+}
+
+/* ---------- Footer ---------- */
+.site-footer { border-radius: clamp(24px, 3.2vw, 40px) clamp(24px, 3.2vw, 40px) 0 0; }
+.site-footer .to-top { display: inline-flex; align-items: center; gap: 0.35rem; }
+.to-top .icon { width: 1em; height: 1em; rotate: -90deg; }

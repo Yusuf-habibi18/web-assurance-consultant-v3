@@ -30,7 +30,7 @@ Per 1 November 2026:
 | `docs/checklist-qa.md` | Terisi: checklist dan hasil pengujian per 31 Oktober 2026 |
 | `docs/konten-dari-klien.md` | Kosong |
 | Konten asli dari klien (nama, foto, kontak, profil) | Belum ada. Semua ditandai `[...]`. |
-| Ilustrasi | 13 ilustrasi SVG terpasang di hero, halaman Solusi, dan gambar artikel (1 November 2026). Hero Beranda dan Solusi memakai ilustrasi perisai tanpa latar yang bergerak pelan. Foto konsultan masih menunggu klien. |
+| Ilustrasi | 17 ilustrasi SVG terpasang di hero, halaman Solusi, dan gambar artikel (1 November 2026, ditambah ilustrasi Kendaraan, Properti & Usaha, keluarga, dan konsultan pada 2 November 2026). Hero Beranda dan Solusi memakai ilustrasi manusia (keluarga dan konsultan) yang bergerak pelan. Foto konsultan masih menunggu klien. |
 | Kepatuhan pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)) | Isi website sudah diaudit: tidak ada logo atau nama Manulife selain di disclaimer afiliasi, dan tidak ada klaim berlebihan. Disclaimer afiliasi terpasang di footer semua halaman. **Kalimat disclaimer perlu dikonfirmasi klien.** |
 
 **Sudah diuji:**
@@ -40,6 +40,21 @@ Per 1 November 2026:
 - Kalkulator protection gap (1 November 2026, Edge headless): angka contoh klien (pengeluaran 5 juta, perlindungan 100 juta, 11 tahun) menghasilkan kebutuhan Rp 660.000.000 dan kesenjangan Rp 560.000.000, sama dengan contoh. Juga dicek: rincian tambahan, bagian hasil yang tersembunyi saat isiannya kosong, format ribuan, dan isi pesan WhatsApp. Tampilan dicek di 390 px dan 1366 px. Setelah halaman ini ditambahkan, `qa-check.js` memeriksa 240 tautan dan hanya menemukan masalah lama yang sama.
 - Upgrade tampilan (1 November 2026, Edge sungguhan lewat Playwright): tidak ada error JavaScript di 9 halaman, baik di lebar 1366 px maupun 390 px. Menu HP, titik slider, kartu kategori yang bisa diklik, dan penanda kategori di Solusi berfungsi. Kalkulator tetap menghasilkan angka contoh klien. `qa-check.js` memeriksa 246 tautan, dan masalahnya tetap hanya 3 halaman artikel yang kosong.
 - Penempatan foto asli di kotak placeholder, lewat halaman uji dengan foto contoh.
+- Tampilan HP "laptop mini" (2 November 2026, Edge headless di 390 px): Beranda turun dari 9,8 menjadi 6,7 tinggi layar, Solusi dari 12,8 menjadi 9,0, dan Tentang Saya dari 7,0 menjadi 5,0. Halaman lain turun 9 sampai 29 persen. Tidak ada halaman yang melebar ke samping dan tidak ada error JavaScript. Tinggi halaman di 768 px dan 1366 px sama persis dengan sebelumnya.
+- Upgrade elemen kepercayaan (2 November 2026, Edge headless): tidak ada halaman yang melebar ke samping di 390, 768, 1024, dan 1366 px, dan tidak ada error JavaScript di 9 halaman. `qa-check.js` memeriksa 288 tautan, dan masalahnya tetap hanya 3 halaman artikel yang kosong. Beranda di HP menjadi 7,2 tinggi layar (sebelumnya 6,7) karena ada kartu komitmen dan kredensial baru.
+- Ilustrasi Kendaraan dan Properti & Usaha (2 November 2026, Edge headless): halaman Solusi tidak melebar ke samping di 390, 640, 768, 860, 1024, dan 1366 px, dan tidak ada error JavaScript. Karena ilustrasi kategori di tablet kini berada di samping judul, halaman Solusi di tablet justru 600 sampai 930 px lebih pendek dari sebelumnya. Di HP bertambah sekitar 120 px, dan di laptop sekitar 260 px (termasuk bilah info atas).
+- Lapisan tampilan modern (2 November 2026, Edge headless): tidak ada halaman yang melebar ke samping di 390, 768, 1024, dan 1366 px, dan tidak ada error JavaScript di 9 halaman. Panjang halaman di HP praktis tidak berubah (paling banyak 38 px di Beranda). Header mengambang, menu HP, dan bilah kategori Solusi dicek dalam keadaan di-scroll dan saat menu dibuka.
+- Kartu komitmen layanan di bawah hero Beranda dihapus (2 November 2026). Hero kembali ke jarak bawah normal. Halaman diperiksa ulang di 390, 768, dan 1366 px.
+- Kartu "Konsultasi langsung bersama" di hero Beranda dihapus (2 November 2026). Diperiksa ulang di 390, 768, dan 1366 px.
+- Tema gabungan (2 November 2026, Edge headless): tidak ada halaman yang melebar ke samping di 390, 768, dan 1366 px, dan tidak ada error JavaScript di 9 halaman. Dibanding tampilan modern sebelumnya, halaman di HP bertambah 49 sampai 88 px (Beranda 6,9 menjadi 7,0 tinggi layar), terutama karena kartu kontak dan tombol "Kembali ke atas" di footer. Menu laptop tetap satu baris di 1200 px. `qa-check.js` tetap hanya menemukan 3 halaman artikel yang kosong.
+- Tema asuransi (2 November 2026, Edge headless): tidak ada halaman yang melebar ke samping di 390, 768, dan 1366 px, dan tidak ada error JavaScript di 9 halaman. Dibanding tampilan modern sebelumnya, halaman di HP berubah antara -43 dan +2 px. Menu laptop tetap satu baris di 1200 px (sisa 13 px di Beranda). `qa-check.js` tetap hanya menemukan 3 halaman artikel yang kosong.
+- Sentuhan modern tema asuransi (2 November 2026, Edge headless): tidak ada halaman yang melebar ke samping di 390, 768, dan 1366 px, dan tidak ada error JavaScript. Panjang halaman di HP berubah antara -18 dan +46 px. Menu laptop muat satu baris di 1200 px (sisa 23 px di Beranda).
+- Animasi tema asuransi (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa untuk garis sorot judul dan garis langkah konsultasi. Dalam mode "kurangi gerakan", garis sorot tampil penuh dan langkah konsultasi tampil utuh tanpa animasi. Tidak ada error JavaScript di 9 halaman, tidak ada halaman yang melebar ke samping, dan panjang halaman di HP tidak berubah.
+- Animasi tambahan (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa untuk judul hero kata demi kata, ilustrasi hero yang bergerak, isi judul section, ikon kartu, profil konsultan, band ajakan, dan kolom footer. Dalam mode "kurangi gerakan", yang dimuat adalah ilustrasi versi `-diam`, judul tidak dipecah per kata, dan semua animasi mati. Tidak ada error JavaScript di 9 halaman dan tidak ada halaman yang melebar ke samping di 390, 768, 1200, dan 1366 px. Panjang halaman di HP tidak berubah, dan menu laptop tetap satu baris di 1200 px.
+- Lambaian ayah dan ibu serta ilustrasi kalkulator (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa. Tangan yang melambai tidak menabrak kepala atau kartu, tombol kalkulator tertekan bergantian, hasilnya muncul, dan grafiknya naik turun. Dalam mode "kurangi gerakan", versi diamnya yang dimuat. Ukuran ilustrasi dan panjang halaman Kalkulator sama seperti sebelumnya di 390, 768, 1200, dan 1366 px, tanpa halaman yang melebar ke samping dan tanpa error JavaScript.
+- Ilustrasi Edukasi (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa. Kedua buku jatuh tanpa melewati lampu, lampunya berkedip lalu menyala, dan posisi akhirnya sama piksel demi piksel dengan versi diam. Ukuran ilustrasi dan panjang halaman Edukasi tidak berubah di 390, 768, 1200, dan 1366 px, tanpa halaman yang melebar dan tanpa error JavaScript.
+- Ilustrasi Tanya Jawab (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa di halaman aslinya, karena gelembung putihnya tidak terlihat di latar putih. Gelembung muncul "pop", membesar-mengecil bergantian, dan tanda tanya tetap di dalam gelembung. Ukuran ilustrasi dan panjang halaman Tanya Jawab tidak berubah di 390, 768, 1200, dan 1366 px, tanpa halaman yang melebar dan tanpa error JavaScript. Dalam mode "kurangi gerakan", versi diamnya yang dimuat.
+- Ilustrasi Hubungi Kami (2 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa di halaman aslinya. Pin, amplop, dan keempat pesan muncul sesuai urutan, pin dan amplop membesar-mengecil bergantian, dan ponsel tetap tampil di akhir putaran. Ukuran ilustrasi dan panjang halaman Hubungi Kami tidak berubah di 390, 768, 1200, dan 1366 px, tanpa halaman yang melebar dan tanpa error JavaScript. Dalam mode "kurangi gerakan", versi diamnya yang dimuat.
 
 **Belum diuji:** animasi dan klik di browser sungguhan, tampilan di HP asli, Firefox dan Safari, alur formulir ke WhatsApp dengan nomor klien, dan skor Lighthouse.
 
@@ -80,14 +95,18 @@ Web Assurance/
 │   ├── css/
 │   │   ├── base.css         Warna, font, dan ukuran dasar (ganti brand di sini)
 │   │   ├── components.css   Komponen bersama: tombol, header, kartu, formulir, footer, animasi
-│   │   └── pages.css        Gaya khusus tiap halaman
+│   │   ├── pages.css        Gaya khusus tiap halaman
+│   │   ├── tema-asuransi.css  Tema yang aktif: terang, tenang, ramah, dimuat paling akhir
+│   │   ├── tema-gabungan.css  Alternatif: konsep modern + navy-emas (tidak dipasang)
+│   │   ├── tema.css         Alternatif: navy-emas murni sesuai referensi klien (tidak dipasang)
+│   │   └── modern.css       Alternatif: tampilan modern sebelumnya (tidak dipasang)
 │   ├── js/
-│   │   ├── main.js          Nomor WhatsApp, menu HP, header, animasi scroll, titik slider, penanda kategori Solusi
+│   │   ├── main.js          Nomor WhatsApp, menu HP, header, judul hero kata demi kata, animasi scroll, titik slider, penanda kategori Solusi
 │   │   ├── form.js          Validasi formulir dan penyusunan pesan WhatsApp
 │   │   ├── kalkulator.js    Hitungan kalkulator protection gap dan pesan WhatsApp hasilnya
 │   │   └── faq.js           Accordion tanya jawab (Beranda, Solusi, Tanya Jawab)
-│   ├── img/                 Foto dan logo usaha dari klien
-│   │   └── ilustrasi/       13 ilustrasi SVG buatan sendiri + 2 versi diam (hero, Solusi, gambar artikel)
+│   ├── img/                 Foto dan logo usaha dari klien, favicon sementara (favicon.svg, favicon-32.png, apple-touch-icon.png)
+│   │   └── ilustrasi/       17 ilustrasi SVG buatan sendiri + 8 versi diam (hero, Solusi, gambar artikel)
 │   └── fonts/               Kosong (font dimuat dari Google Fonts)
 ├── docs/                    Catatan internal (jangan diunggah ke hosting)
 │   ├── checklist-qa.md      Checklist dan hasil pengujian
@@ -153,20 +172,39 @@ Satu tombol bisa diberi pesan awal sendiri dengan mengisi atributnya:
 
 - Isi hero tampil bertahap saat halaman dibuka. Diatur di `components.css`, bagian "Animasi".
 - Konten di bawah layar muncul saat di-scroll. `main.js` memasang kelas `reveal` pada kartu dan section.
+- Animasi tema asuransi (2 November 2026, gayanya di `tema-asuransi.css`):
+  - **Saat halaman dibuka:** judul hero muncul kata demi kata. `main.js` membungkus setiap kata dengan `span.kata`, dan judul tetap dibaca utuh oleh pembaca layar lewat `aria-label`. Sesudah itu kata yang disorot mendapat garis sorot biru muda. Ikon lencana berdenyut pelan, tombol pertama di hero punya cincin denyut berkala, dan lambang di header berputar masuk.
+  - **Ilustrasi hero:** gambarnya bergerak sendiri (lihat poin Ilustrasi), melayang lembut dengan cincin garis putus-putus yang berputar sangat pelan, dan di browser yang mendukung animasi berbasis scroll ikut bergeser sedikit saat halaman digulir. Ilustrasi kalkulator di hero halaman Kalkulator juga bergerak: tombolnya diketik, hasilnya muncul, lalu grafiknya naik turun. Di halaman Edukasi, dua buku jatuh ke tumpukan, lalu lampunya berkedip dan menyala. Di halaman Tanya Jawab, gelembung tanya dan jawab muncul "pop" lalu membesar-mengecil bergantian. Di halaman Hubungi Kami, pin lokasi dan amplop muncul "pop", pesan chat muncul satu per satu, lalu pin dan amplop membesar-mengecil bergantian.
+  - **Saat di-scroll:** konten muncul dengan gerakan halus, isi judul section muncul bergantian, dan ikon kartu "meletup" masuk. Foto profil masuk dari kiri dan teksnya dari kanan, lalu kapsul kredensial muncul satu per satu. Band ajakan membesar pelan, dan kolom footer muncul bergantian. Garis penghubung langkah konsultasi tergambar dan nomornya muncul bergantian (kelas `steps--animate` dan `is-drawn` dipasang `main.js`).
+  - **Sepanjang halaman:** garis progres scroll biru di tepi atas layar, gambar artikel sedikit membesar saat kartunya disorot, gambar kategori di Solusi "bernapas" pelan, lingkaran datar samar melayang di band ajakan, tombol WhatsApp mengambang berdenyut setiap 5 detik, dan ikon kartu sedikit berputar saat disorot.
+  - Animasi yang mengikuti kelas `reveal` selesai dalam 0,9 detik, karena `main.js` melepas kelas itu setelahnya. Kalau durasinya diperpanjang, ubah juga angka 900 di `main.js`.
+  - Tanya jawab membuka dan menutup dengan animasi tinggi (`faq.js`).
 - Semua animasi otomatis mati bila pengunjung mengaktifkan pengaturan "kurangi gerakan" (*reduce motion*) di perangkatnya. Konten tetap tampil normal walaupun JavaScript gagal dimuat.
 
 ### Tampilan dan interaksi
 
-- **Warna kategori.** Tiap jenis perlindungan punya warna sendiri lewat kelas `tone-*` di `components.css`: `tone-rose` (kesehatan), `tone-blue` (jiwa), `tone-amber` (kendaraan), dan `tone-teal` (properti & usaha). Ikon, eyebrow, tag, kotak catatan, dan meter di dalam elemen bertanda itu ikut berwarna. Warna ini dipakai di kartu kategori Beranda, di bilah kategori dan tiap bagian halaman Solusi, dan di hasil kalkulator. Kalau menambah warna baru, pastikan kontras teksnya minimal 4,5:1.
+- **Warna kategori.** Tiap jenis perlindungan punya warna sendiri lewat kelas `tone-*` di `components.css`: `tone-rose` (kesehatan), `tone-blue` (jiwa), `tone-amber` (kendaraan), dan `tone-teal` (properti & usaha). Ikon, eyebrow, tag, kotak catatan, dan meter di dalam elemen bertanda itu ikut berwarna. Warna ini dipakai di kartu kategori Beranda, di bilah kategori dan tiap bagian halaman Solusi, dan di hasil kalkulator. Kalau menambah warna baru, pastikan kontras teksnya minimal 4,5:1. Di tema asuransi keempat warna ini dipakai seperti aslinya. Di tema gabungan dan tema navy-emas, keempat warna ini diseragamkan menjadi emas lewat blok `.tone-rose, .tone-blue, ...` di file tema. Hapus blok itu kalau ingin warna per kategori kembali.
 - **Kartu kategori di Beranda** bisa diklik di seluruh permukaannya. Tautannya ada di judul (`card__link`) dan mengarah ke bagian yang sesuai di Solusi.
-- **Slider kartu di HP** diberi titik penanda posisi di bawahnya. Titik dibuat oleh `main.js` dan hanya tampil di layar di bawah 600 px.
+- **Slider kartu di HP** diberi titik penanda posisi di bawahnya. Titik dibuat oleh `main.js`, hanya tampil di layar di bawah 600 px, dan disembunyikan bila semua kartu sudah terlihat tanpa digeser.
+- **Tampilan HP "laptop mini"** (2 November 2026). Di layar di bawah 600 px tata letaknya meniru versi laptop, dengan huruf dan jarak yang lebih kecil supaya halaman tetap pendek. Hero memakai judul di kiri dan ilustrasi atau foto di kanan. Banner kalkulator menampilkan contoh hasil di kanan, profil konsultan memakai foto di kiri, langkah konsultasi tampil tiga kolom, dan footer memakai kolom Navigasi dan Kontak berdampingan. Ilustrasi kategori Solusi tampil di samping judul, kotak perbandingan berdampingan, dan piramida prioritas di samping daftarnya. Kumpulan kartu tetap digeser ke samping, dengan dua kartu terlihat sekaligus. Formulir, kalkulator, dan teks panjang tetap satu kolom. Tidak ada teks yang dihapus, dan disclaimer afiliasi tetap utuh. Aturannya ada di akhir `pages.css`, bagian "Mobile: tampilan laptop mini". Tampilan tablet dan desktop tidak berubah.
+- **Tema tampilan** (2 November 2026). Ada empat lapisan tema di `assets/css/`, dan setiap halaman memasang **satu** di antaranya paling akhir, setelah `pages.css`:
+  - `tema-asuransi.css` (**aktif**): mengikuti saran desain website asuransi agar terasa aman dan bersahabat. Hero terang (biru sangat muda ke putih) dengan ilustrasi manusia: keluarga di Beranda (`keluarga.svg`) dan konsultan di Solusi (`konsultasi.svg`); perisai dan ikon hanya pelengkap kecil. Satu warna aksen biru `#1d5fd0` untuk tombol dan tautan (tombol WhatsApp di halaman ikut biru; tombol WhatsApp mengambang tetap hijau). Satu keluarga huruf, Plus Jakarta Sans. Kartu datar tanpa kaca, cahaya, atau bayangan tebal; kartu kategori Beranda berisi ikon, judul, satu kalimat, dan "Pelajari". Tanpa teks bergradasi, serif miring, atau partikel berkilau. Navy hanya di band ajakan dan footer. Judul hero Beranda dan Solusi diganti agar bicara situasi nyata (penghasilan keluarga terhenti, biaya rumah sakit mendadak) tanpa janji manfaat. Sentuhan modern yang tetap datar: header kapsul putih yang mengambang (tanpa efek kaca), section abu-abu sebagai panel bersudut besar, footer bersudut atas, bingkai dalam untuk foto profil dan gambar artikel, panah tombol dalam lingkaran kecil, bilah kategori Solusi berbentuk kapsul, "Mengapa Berkonsultasi" bergaya bento (judul menjadi kotak biru muda) dan Tanya Jawab dua kolom di laptop, judul hero lebih besar, serta teks isi 17 px di layar lebar. Kesan elegan: judul semibold (600), tombol lebih ringan, jarak baris 1,75 dan jarak section sedikit lebih lapang di laptop (di HP tetap ringkas). Animasinya lebih ramai tetapi tetap tenang; daftarnya ada di bagian Animasi.
+  - `tema-gabungan.css`: konsep modern dipadukan dengan gaya referensi klien. Dari konsep modern: header kapsul kaca yang mengambang, cahaya hero yang bergeser pelan, section abu-abu sebagai panel bersudut besar, footer bersudut atas, bingkai dalam untuk foto, bilah kategori Solusi berbentuk kapsul, dan tombol berhuruf biasa. Dari gaya referensi (samudrasatriabarokah.com, juga lasains.com): judul serif Fraunces dengan kata kunci miring emas (`<span class="text-gradient">`), teks Manrope, tombol emas dengan panah dalam lingkaran navy, label berawalan garis emas, ikon dalam lingkaran navy bercincin emas, kartu bernomor besar bergaris luar (dibuat CSS counter), section "Mengapa Berkonsultasi" yang gelap, garis emas tipis di hero, garis progres scroll, serta footer dengan kartu kontak, tulisan besar samar "Perlindungan", dan tombol "Kembali ke atas".
+  - `tema.css`: navy-emas murni, paling mirip referensi (header bilah putih, tombol huruf kapital).
+  - `modern.css`: tampilan modern sebelumnya (judul sans dengan gradasi biru, font Inter + Plus Jakarta Sans).
+  Isi teks dan tata letak HP sama di keempatnya. Cara berpindah ada di [5.4](#54-warna-dan-font).
 - **Bilah kategori di Solusi** menandai kategori yang sedang dibaca saat halaman di-scroll. Di HP, kategori aktif digeser ke tengah bilah.
 - **Menu HP** menggelapkan halaman di belakangnya. Menu tertutup bila area gelap diklik, tombol Esc ditekan, atau salah satu tautan dipilih.
 - **Banner kalkulator** di Beranda dan Solusi menampilkan "Contoh hasil simulasi" dengan angka dari contoh klien (Rp 560.000.000). Bagian ini hanya hiasan dan disembunyikan dari pembaca layar. Kalau angkanya diganti, ubah di kedua halaman. Saat banner terlihat, kartu contoh muncul memantul, angkanya menghitung naik dari Rp 0 sampai angka di HTML, meternya terisi, lalu kartu melayang pelan. Animasinya diatur di `main.js` dan `pages.css` (bagian "Animasi pop banner kalkulator").
-- **Ilustrasi** ada di `assets/img/ilustrasi/`: 13 ilustrasi SVG bergaya flat dengan warna website, ditambah dua versi diam. Semuanya dibuat khusus untuk proyek ini dan tidak mengandung logo apa pun. Hero Beranda dan Solusi memakai ilustrasi tanpa latar (`hero__art`). Di Beranda, perisai dikelilingi delapan ikon perlindungan pada cincin yang berputar pelan (`perlindungan.svg`). Di Solusi, perisai terhubung ke empat ikon kategori bercahaya lewat garis yang mengalir (`solusi.svg`). Pengunjung yang memilih "kurangi gerakan" mendapat versi `-diam.svg` lewat `<picture>`, karena animasi di dalam file SVG tidak bisa dimatikan dari CSS halaman. Ilustrasi di hero halaman teks (`edu-hero__art`) tampil di kanan pada layar lebar dan di bawah teks pada HP, lalu melayang pelan (animasi `float-soft`). Kotak gambar berisi ilustrasi diberi kelas `ph--art`, supaya di HP tetap 4:3 dan tokohnya tidak terpotong.
-- **Langkah konsultasi** di Beranda dan Tentang Saya memakai komponen garis waktu `.steps`. Di HP tersusun ke bawah, di layar lebar menjadi tiga kolom.
+- **Ilustrasi** ada di `assets/img/ilustrasi/`: 17 ilustrasi SVG bergaya flat dengan warna website, ditambah delapan versi diam. Semuanya dibuat khusus untuk proyek ini dan tidak mengandung logo apa pun. Hero Beranda dan Solusi memakai ilustrasi manusia tanpa latar (`hero__art`) yang bergerak pelan. Di Beranda, keluarga bergandengan tangan (`keluarga.svg`): ayah dan ibu melambaikan tangan bergantian, kartu hati berdenyut, kartu perisai melayang, anak sedikit melompat, dan lingkaran latarnya "bernapas". Di Solusi, konsultan dengan empat ikon jenis perlindungan (`konsultasi.svg`): konsultan melambai, kartu ikon melayang bergantian, dan grafik di tabletnya tumbuh. Ganti dengan foto asli klien bila sudah ada. Pengunjung yang memilih "kurangi gerakan" mendapat versi `-diam.svg` lewat `<picture>`, karena animasi di dalam file SVG tidak bisa dimatikan dari CSS halaman. Sebagai cadangan, kedua file SVG itu juga mematikan animasinya sendiri bila "kurangi gerakan" aktif. Ilustrasi perisai sebelumnya tidak dipakai lagi tetapi masih disimpan: `perlindungan.svg` (perisai dengan delapan ikon pada cincin yang berputar), `solusi.svg` (perisai yang terhubung ke empat ikon kategori lewat garis yang mengalir), dan versi `-diam`-nya. Ilustrasi di hero halaman teks (`edu-hero__art`) tampil di kanan teks, di HP dalam ukuran kecil, lalu melayang pelan (animasi `float-soft`). Di halaman Kalkulator, ilustrasinya juga bergerak sendiri (`hero-kalkulator.svg`): tombol kalkulator tertekan satu per satu seperti sedang diketik, hasilnya muncul di layar, lalu grafik di sampingnya naik turun. Di halaman Edukasi (`hero-edukasi.svg`), buku oranye lalu buku hijau jatuh menyerong ke tumpukan dengan sedikit pantulan, lalu lampunya berkedip hidup-mati sebelum menyala terus. Di halaman Tanya Jawab (`hero-faq.svg`), gelembung pertanyaan muncul "pop" dari ujung ekornya, disusul gelembung jawaban. Keduanya lalu membesar-mengecil bergantian sementara tiga titiknya berdenyut, sebelum mengecil hilang dan diulang. Di halaman Hubungi Kami (`hero-kontak.svg`), pin lokasi muncul "pop" dari ujungnya dan amplop keluar dari sisi ponsel. Empat pesan chat di ponsel muncul satu per satu, pesan masuk dari kiri dan pesan keluar dari kanan. Pin dan amplop lalu membesar-mengecil bergantian, sebelum semuanya kecuali ponsel mengecil hilang dan diulang. Keempat ilustrasi ini dipasang lewat `<picture>` bersama versi diamnya (`hero-kalkulator-diam.svg`, `hero-edukasi-diam.svg`, `hero-faq-diam.svg`, dan `hero-kontak-diam.svg`), sehingga di keempat halaman itu kelas `edu-hero__art` ada di `<picture>`, bukan di `<img>`. Kotak gambar berisi ilustrasi diberi kelas `ph--art`, supaya gambarnya dipusatkan dan tokohnya tidak terpotong. Keempat kategori di Solusi punya ilustrasi sendiri (`sol__img`): `kesehatan.svg`, `jiwa.svg`, `kendaraan.svg`, dan `properti.svg`. Di laptop ilustrasi ada di bawah teks pembuka, dan posisi kolom berselang kiri-kanan antarkategori. Di tablet dan HP ilustrasi tampil di samping judul, juga bergantian kiri dan kanan.
+- **Kredensial di profil konsultan** (Beranda, 2 November 2026). Profil konsultan memuat kapsul kredensial (`profile__facts`) dan tombol WhatsApp. Tampilkan tiap kapsul **hanya** bila datanya dari klien dan terverifikasi, dan hapus yang tidak ada datanya. Kartu "Konsultasi langsung bersama" yang sempat ada di hero sudah dihapus, karena profil konsultan sudah ada di halaman Tentang Saya.
+- **Langkah konsultasi** di Beranda dan Tentang Saya memakai komponen garis waktu `.steps`. Di HP dan layar lebar tampil tiga kolom. Di tablet (600 sampai 759 px) tersusun ke bawah.
 
 ### Header dan footer
+
+Header berbentuk kapsul yang mengambang (tema asuransi, gabungan, dan modern). Di tema asuransi kapsulnya putih padat tanpa efek kaca; di puncak halaman latar header sewarna bagian atas hero (`#edf4fe`), dan setelah di-scroll latarnya transparan sehingga hanya kapsul yang terlihat. Bilah kategori Solusi menempel tepat di bawahnya. Tinggi header diatur `--header-h` di file tema. Kalau tinggi kapsul diubah, nilai ini ikut diubah. Garis progres scroll (`--scroll` dari `main.js`) tampil biru di tema asuransi dan emas di tema gabungan serta tema navy-emas. Tema modern tidak menampilkannya.
+
+Di atas header setiap halaman ada bilah info (`topbar`) berisi jam layanan, WhatsApp, dan email. Bilah ini ikut tergulung, sedangkan header tetap menempel. Di HP hanya jam dan WhatsApp yang tampil. Kolom Kontak di footer juga memuat jam layanan. Ganti `[Jam operasional]`, `[nomor]`, dan `[email]` di kedua tempat.
 
 Karena website ini statis, header dan footer **ditulis ulang di setiap file HTML**: 9 file saat ini, ditambah halaman artikel nanti. Perubahan menu atau footer harus dilakukan di semua file (lihat [5.6](#56-menu-navigasi-dan-footer)).
 
@@ -202,8 +240,8 @@ Semua teks yang menunggu data klien ditulis dalam kurung siku, misalnya `[Nama U
 
 | Placeholder | Tempat | Diisi dengan |
 |---|---|---|
-| `[Nama Usaha]` | Semua halaman: judul tab, header, footer | Nama usaha atau brand, **tanpa kata "Manulife"** (lihat [bagian 8](#8-ketentuan-konten-asuransi)). Ganti sekaligus dengan `Ctrl+Shift+H`. |
-| `[Nama Konsultan]`, `[Jabatan]` | Beranda, Tentang Saya, disclaimer afiliasi di footer semua halaman, Kebijakan Privasi | Nama dan jabatan konsultan |
+| `[Nama Usaha]` | Semua halaman: judul tab, serta deskripsi halaman Kebijakan Privasi. Header dan footer sudah memakai nama "Arits Irham" | Nama usaha atau brand, **tanpa kata "Manulife"** (lihat [bagian 8](#8-ketentuan-konten-asuransi)). Ganti sekaligus dengan `Ctrl+Shift+H`. |
+| `[Jabatan]` | Beranda | Jabatan konsultan. Nama konsultan sudah diisi "Arits Irham" di Beranda, Tentang Saya, disclaimer afiliasi di footer semua halaman, dan Kebijakan Privasi, karena website ini untuk usaha pribadi |
 | `[nomor]`, `[email]`, `[alamat kantor]` | Footer semua halaman, Kontak | Kontak klien |
 | `[Jam operasional]`, `[jam]` | Band ajakan konsultasi, Konsultasi, Kontak | Jam layanan |
 | `[Deskripsi singkat usaha, ...]` | Footer | Satu atau dua kalimat tentang usaha |
@@ -258,6 +296,31 @@ Warna khas tiap kategori perlindungan ada di `assets/css/components.css`, bagian
 
 Font diatur lewat `--font-heading` dan `--font-body`, dan dimuat oleh tag `<link href="https://fonts.googleapis.com/...">` di `<head>` setiap halaman. Kalau font diganti, ubah keduanya.
 
+File tema menimpa token di atas. Di `tema-asuransi.css`: satu keluarga huruf **Plus Jakarta Sans** untuk judul dan teks, warna aksen biru `#1d5fd0` (kontras 5,8:1). Di `tema-gabungan.css` dan `tema.css`: font judul **Fraunces** (serif), font teks **Manrope**, warna judul `#0b2147`, dan aksen emas tua `#9a6b14` untuk teks di latar terang (kontras 4,7:1). Di area gelap aksennya emas terang `#e6b964`.
+
+**Berpindah tema.** Ubah di **semua halaman** (`Ctrl+Shift+H` membantu; di `edukasi/` path diawali `../`):
+
+1. Baris link tema: `assets/css/tema-asuransi.css`, `assets/css/tema-gabungan.css`, `assets/css/tema.css`, atau `assets/css/modern.css`.
+2. Baris font. Untuk `tema-asuransi.css`:
+
+   ```html
+   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+   ```
+
+   Untuk `tema-gabungan.css` dan `tema.css`:
+
+   ```html
+   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   ```
+
+   Untuk `modern.css`:
+
+   ```html
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+   ```
+
+Markup footer (tulisan besar samar dan tombol "Kembali ke atas") tidak perlu diubah: tulisan besar hanya ditampilkan tema gabungan dan tema navy-emas. Favicon saat ini biru, sesuai tema asuransi dan modern. Untuk tema gabungan dan navy-emas, favicon navy-emas perlu dibuat ulang bila diinginkan. Ilustrasi hero Beranda dan Solusi (keluarga dan konsultan) dipakai di semua tema.
+
 ### 5.5 Logo dan favicon
 
 Saat ini header dan footer menampilkan lambang sementara (perisai biru, `<span class="brand__mark">`) diikuti nama usaha dalam bentuk teks. Untuk memakai logo, ganti **seluruh** isi tautan `brand` di header setiap halaman, termasuk span lambang itu:
@@ -268,11 +331,23 @@ Saat ini header dan footer menampilkan lambang sementara (perisai biru, `<span c
 
 Footer berlatar gelap, jadi siapkan versi logo berwarna terang jika logo juga dipasang di sana. Kalau logo belum ada, lambang sementara boleh tetap dipakai.
 
-Untuk ikon kecil di tab browser (favicon), tambahkan baris ini di `<head>` setiap halaman:
+Header semua halaman memakai **logo teks** "Arits Irham" (2 November 2026): nama dua warna, dengan tempat tagline kecil di bawahnya yang saat ini dikosongkan. Di tema asuransi, bagian `brand__accent` memakai warna aksen biru polos. Di tema gabungan, nama memakai Fraunces dan bagian itu tampil miring berwarna emas. Bagian nama yang bergradasi biru dibungkus `brand__accent`, dan tagline ada di `brand__tagline`:
 
 ```html
-<link rel="icon" href="assets/img/favicon.png">
+<span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span><span class="brand__tagline">Konsultan Perlindungan</span></span>
 ```
+
+Gayanya ada di `components.css`, bagian Header. Tagline sedang dikosongkan di semua halaman. Span `brand__tagline` yang kosong tidak memakan tempat (aturan `.brand__tagline:empty` di `components.css`), jadi nama tetap di tengah lambang. Isi span itu, misalnya dengan contoh di atas, bila tagline ingin ditampilkan. Logo ini ditulis di header dan footer kesembilan halaman, jadi perubahan nama atau tagline harus dilakukan di semua tempat itu (cari `brand__name`). Nama yang sama juga tertulis di baris hak cipta footer. Footer memakai logo teks yang sama. Di tema asuransi, bagian `brand__accent` di footer navy tampil biru muda polos supaya terbaca. Kapsul header di laptop disiapkan untuk logo teks selebar sekitar 210 px. Kalau nama atau tagline jauh lebih panjang, cek lagi di lebar 1200 px.
+
+Ikon kecil di tab browser (favicon) sudah terpasang di setiap halaman, memakai lambang perisai sementara yang sama dengan header (bukan logo Manulife): kotak biru dengan perisai putih. Filenya ada di `assets/img/`:
+
+| File | Dipakai untuk |
+|---|---|
+| `favicon.svg` | Tab browser modern |
+| `favicon-32.png` | Browser yang belum mendukung SVG |
+| `apple-touch-icon.png` (180 × 180 px, tanpa transparansi) | Ikon saat website disimpan ke layar utama iPhone |
+
+Bila logo klien sudah ada, timpa ketiga file itu dengan versi logo klien memakai nama file yang sama. Tag di `<head>` tidak perlu diubah. Warna bilah browser di HP diatur oleh `<meta name="theme-color" content="#07142a">`, yaitu navy situs.
 
 ### 5.6 Menu navigasi dan footer
 

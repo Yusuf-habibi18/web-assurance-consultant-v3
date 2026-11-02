@@ -50,10 +50,16 @@ document.querySelectorAll("[data-year]").forEach((el) => {
   el.textContent = new Date().getFullYear();
 });
 
-// Header berubah (blur + bayangan) setelah halaman di-scroll.
+// Header berubah (blur + bayangan) setelah halaman di-scroll, dan garis progres scroll ikut diperbarui.
 const header = document.querySelector(".site-header");
 if (header) {
-  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  const onScroll = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    // Garis tipis di tepi atas header memanjang sesuai posisi scroll
+    // (biru di tema-asuransi.css, emas di tema-gabungan.css dan tema.css).
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    header.style.setProperty("--scroll", max > 0 ? Math.min(1, window.scrollY / max).toFixed(3) : "0");
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 }
@@ -64,7 +70,7 @@ document.querySelectorAll('use[href="#i-arrow"]').forEach((use) => {
 });
 
 // Slider kartu di HP: titik penanda posisi di bawahnya (di layar lebar disembunyikan CSS).
-document.querySelectorAll(".grid-4, .grid-3, .feature-grid").forEach((slider) => {
+document.querySelectorAll(".grid-4, .grid-3, .feature-grid, .why__list").forEach((slider) => {
   const items = slider.children;
   if (items.length < 2) return;
   const dots = document.createElement("div");
@@ -74,6 +80,8 @@ document.querySelectorAll(".grid-4, .grid-3, .feature-grid").forEach((slider) =>
   slider.after(dots);
 
   const update = () => {
+    // Semua kartu sudah terlihat (tidak perlu digeser): titik tidak ditampilkan.
+    dots.style.display = slider.scrollWidth <= slider.clientWidth + 2 ? "none" : "";
     const step = items[0].offsetWidth + (parseFloat(getComputedStyle(slider).columnGap) || 0);
     const atEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 2;
     const active = atEnd ? items.length - 1 : Math.round(slider.scrollLeft / step);
@@ -89,6 +97,41 @@ document.querySelectorAll(".grid-4, .grid-3, .feature-grid").forEach((slider) =>
   update();
 });
 
+// Judul hero muncul kata demi kata: setiap kata dibungkus span (gayanya di file tema).
+// Pembaca layar tetap membaca judul utuh lewat aria-label. Dilewati bila pengunjung memilih "kurangi gerakan".
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.querySelectorAll(".hero h1, .edu-hero h1, .about-hero h1").forEach((h1) => {
+    let index = 0;
+    const wrap = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.ELEMENT_NODE) {
+          wrap(child);
+          return;
+        }
+        if (child.nodeType !== Node.TEXT_NODE) return;
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            frag.append(part);
+            return;
+          }
+          const word = document.createElement("span");
+          word.className = "kata";
+          word.setAttribute("aria-hidden", "true");
+          word.style.setProperty("--i", index++);
+          word.textContent = part;
+          frag.append(word);
+        });
+        child.replaceWith(frag);
+      });
+    };
+    h1.setAttribute("aria-label", h1.textContent.replace(/\s+/g, " ").trim());
+    wrap(h1);
+    h1.classList.add("judul-bertahap");
+  });
+}
+
 // Efek muncul saat di-scroll. Dilewati bila pengguna memilih "kurangi gerakan"
 // atau browser tidak mendukung IntersectionObserver; konten tetap tampil normal.
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -97,7 +140,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   const targets = document.querySelectorAll(
     ".section-head, .card, .profile, .cta-band, .featured, .ethics, .accordion__item, " +
     ".pyramid__layer, .callout, .claim-band, .channel, .consult-steps li, .consult-alt, .prose > *, " +
-    ".why__item, .steps__item, .calc-promo"
+    ".why__item, .steps__item, .calc-promo, .site-footer__grid > *"
   );
 
   const show = (el) => {
@@ -132,6 +175,23 @@ if (!reduceMotion && "IntersectionObserver" in window) {
     el.style.setProperty("--reveal-delay", Math.min(index, 4) * 90 + "ms");
     el.classList.add("reveal");
     observer.observe(el);
+  });
+}
+
+// Langkah konsultasi: garis penghubung tergambar dan nomor muncul bergantian saat bagian ini terlihat
+// (gayanya di file tema). Dilewati bila "kurangi gerakan" aktif atau bagian ini sudah terlihat saat dibuka.
+if (!reduceMotion && "IntersectionObserver" in window) {
+  const drawObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-drawn");
+      drawObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll(".steps").forEach((list) => {
+    if (list.getBoundingClientRect().top < window.innerHeight) return;
+    list.classList.add("steps--animate");
+    drawObserver.observe(list);
   });
 }
 

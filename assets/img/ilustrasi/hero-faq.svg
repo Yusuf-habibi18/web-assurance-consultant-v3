@@ -1,1 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260"><circle cx="180" cy="130" r="118" fill="#ffffff" fill-opacity="0.07"/><rect x="70" y="34" width="176" height="124" rx="30" fill="#ffffff"/><path d="M110 152l-14 34 42-34z" fill="#ffffff"/><path d="M131.1 65.6A28.2 28.2 0 1 1 169.5 91.2Q158 97 158 112.3" fill="none" stroke="#2447c4" stroke-width="12.8" stroke-linecap="round"/><circle cx="158" cy="134.1" r="7.7" fill="#2447c4"/><rect x="196" y="134" width="120" height="82" rx="26" fill="#8fb0ff"/><path d="M286 210l22 26-4-30z" fill="#8fb0ff"/><circle cx="228" cy="175" r="8" fill="#ffffff"/><circle cx="256" cy="175" r="8" fill="#ffffff"/><circle cx="284" cy="175" r="8" fill="#ffffff"/><path d="M52 188Q52 196 60 196Q52 196 52 204Q52 196 44 196Q52 196 52 188Z" fill="#ffd28f"/><path d="M318 59Q318 66 325 66Q318 66 318 73Q318 66 311 66Q318 66 318 59Z" fill="#ffd28f"/><path d="M276 29Q276 34 281 34Q276 34 276 39Q276 34 271 34Q276 34 276 29Z" fill="#ffffff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260">
+  <style>
+    /* Satu putaran 6 detik: gelembung pertanyaan muncul "pop" dari ujung ekornya, disusul gelembung jawaban.
+       Lalu kedua gelembung membesar-mengecil bergantian sementara tiga titik berdenyut seperti sedang mengetik.
+       Di akhir, keduanya mengecil hilang dan diulang. */
+    .tanya { transform-box: view-box; transform-origin: 96px 186px; animation: muncul-tanya 6s ease-out infinite; }
+    .jawab { transform-box: view-box; transform-origin: 308px 236px; animation: muncul-jawab 6s ease-out infinite; }
+    .titik { transform-box: fill-box; transform-origin: center; animation: titik 1.2s ease-in-out infinite; }
+    .t2 { animation-delay: 0.2s; }
+    .t3 { animation-delay: 0.4s; }
+    @keyframes muncul-tanya {
+      0% { opacity: 0; transform: scale(0); }
+      8% { opacity: 1; transform: scale(1.1); }
+      12% { transform: scale(0.96); }
+      15%, 36% { opacity: 1; transform: none; }
+      40% { transform: scale(1.08); }
+      44% { transform: scale(0.97); }
+      48%, 60% { transform: none; }
+      64% { transform: scale(1.08); }
+      68% { transform: scale(0.97); }
+      72%, 86% { opacity: 1; transform: none; }
+      93%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes muncul-jawab {
+      0%, 18% { opacity: 0; transform: scale(0); }
+      26% { opacity: 1; transform: scale(1.1); }
+      30% { transform: scale(0.96); }
+      33%, 48% { opacity: 1; transform: none; }
+      52% { transform: scale(1.08); }
+      56% { transform: scale(0.97); }
+      60%, 72% { transform: none; }
+      76% { transform: scale(1.08); }
+      80% { transform: scale(0.97); }
+      84%, 86% { opacity: 1; transform: none; }
+      93%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes titik { 0%, 60%, 100% { transform: none; } 30% { transform: scale(1.45); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+<circle cx="180" cy="130" r="118" fill="#ffffff" fill-opacity="0.07"/><g class="tanya"><rect x="70" y="34" width="176" height="124" rx="30" fill="#ffffff"/><path d="M110 152l-14 34 42-34z" fill="#ffffff"/><path d="M131.1 65.6A28.2 28.2 0 1 1 169.5 91.2Q158 97 158 112.3" fill="none" stroke="#2447c4" stroke-width="12.8" stroke-linecap="round"/><circle cx="158" cy="134.1" r="7.7" fill="#2447c4"/></g><g class="jawab"><rect x="196" y="134" width="120" height="82" rx="26" fill="#8fb0ff"/><path d="M286 210l22 26-4-30z" fill="#8fb0ff"/><circle class="titik" cx="228" cy="175" r="8" fill="#ffffff"/><circle class="titik t2" cx="256" cy="175" r="8" fill="#ffffff"/><circle class="titik t3" cx="284" cy="175" r="8" fill="#ffffff"/></g><path d="M52 188Q52 196 60 196Q52 196 52 204Q52 196 44 196Q52 196 52 188Z" fill="#ffd28f"/><path d="M318 59Q318 66 325 66Q318 66 318 73Q318 66 311 66Q318 66 318 59Z" fill="#ffd28f"/><path d="M276 29Q276 34 281 34Q276 34 276 39Q276 34 271 34Q276 34 276 29Z" fill="#ffffff"/></svg>
