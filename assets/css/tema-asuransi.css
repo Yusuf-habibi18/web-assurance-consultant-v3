@@ -252,7 +252,41 @@ h1, h2 { font-weight: 600; }
 .calc-promo .btn--light { background: var(--color-accent); color: #ffffff; }
 .calc-promo .btn--light:hover { background: var(--color-accent-hover); }
 .calc-promo__preview { border: 1px solid var(--color-border); box-shadow: 0 12px 26px -20px rgba(10, 26, 47, 0.45); rotate: 0deg; }
-.calc-promo.is-popped .calc-promo__preview { animation: promo-pop 0.9s var(--ease) 0.2s both; } /* tanpa melayang terus-menerus */
+/* Banner kalkulator bergaya "pop" (kelas is-armed/is-popped dari main.js; tanpa JavaScript atau dengan "kurangi gerakan" banner diam).
+   Saat terlihat: banner membesar pelan, ikon dan kartu contoh meletup masuk, lalu judul, teks, dan tombol menyusul.
+   Sesudahnya, setiap 6 detik bergantian: ikon "pop", kartu contoh bergoyang (shake) sambil meternya terisi ulang,
+   lalu tombol memancarkan cincin biru. */
+.calc-promo.is-popped { animation: promo-banner 0.7s var(--ease) both; }
+.calc-promo.is-armed:not(.is-popped) .calc-promo__text > :not(.card__icon) { opacity: 0; }
+.calc-promo.is-popped .calc-promo__text > h3 { animation: naik-halus 0.6s var(--ease) 0.15s both; }
+.calc-promo.is-popped .calc-promo__text > p { animation: naik-halus 0.6s var(--ease) 0.25s both; }
+.calc-promo.is-popped .calc-promo__text > .btn { animation: kapsul-pop 0.5s var(--ease) 0.4s both; }
+.calc-promo.is-popped .calc-promo__text .card__icon { animation: icon-pop 0.7s var(--ease) both, promo-ikon 6s var(--ease) 3s infinite; }
+.calc-promo.is-popped .calc-promo__preview { animation: promo-pop 0.9s var(--ease) 0.2s both, promo-goyang 6s ease-in-out 3s infinite; } /* tanpa melayang terus-menerus */
+.calc-promo.is-popped .meter__fill { transform-origin: left center; animation: promo-meter 6s var(--ease) 3s infinite; }
+.calc-promo .btn--light { position: relative; }
+.calc-promo.is-popped .btn--light::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: promo-cincin 6s var(--ease) 3s infinite;
+}
+@keyframes promo-banner { from { scale: 0.94; } 60% { scale: 1.015; } to { scale: none; } }
+@keyframes promo-ikon { 0%, 12%, 100% { scale: none; rotate: none; } 4% { scale: 1.18; rotate: -8deg; } 8% { scale: 0.95; rotate: 4deg; } }
+/* Goyangan cepat ke kiri-kanan dengan sedikit miring, makin lama makin kecil (sekitar 0,8 detik) */
+@keyframes promo-goyang {
+  0%, 24%, 38%, 100% { translate: none; rotate: none; }
+  26% { translate: -6px 0; rotate: -1.5deg; }
+  28% { translate: 6px 0; rotate: 1.5deg; }
+  30% { translate: -5px 0; rotate: -1deg; }
+  32% { translate: 4px 0; rotate: 0.8deg; }
+  34% { translate: -2px 0; rotate: -0.4deg; }
+  36% { translate: 1px 0; rotate: 0.2deg; }
+}
+@keyframes promo-meter { 0%, 24% { scale: none; } 26% { scale: 0 1; } 40%, 100% { scale: none; } }
+@keyframes promo-cincin { 0%, 48% { box-shadow: 0 0 0 0 rgba(29, 95, 208, 0.4); } 62%, 100% { box-shadow: 0 0 0 12px rgba(29, 95, 208, 0); } }
 
 /* Band ajakan dan kotak klaim: navy polos sebagai penyeimbang */
 .cta-band,
@@ -382,7 +416,7 @@ h1, h2 { font-weight: 600; }
 @keyframes naik-halus { from { opacity: 0; translate: 0 14px; } }
 
 /* Ikon kartu "meletup" masuk sesudah kartunya muncul (keyframe icon-pop dari pages.css) */
-.reveal.is-visible .card__icon {
+.reveal.is-visible:not(.calc-promo) .card__icon {
   animation: icon-pop 0.55s var(--ease) both;
   animation-delay: calc(var(--reveal-delay, 0ms) + 0.25s);
 }
