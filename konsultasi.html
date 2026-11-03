@@ -87,7 +87,11 @@
       </span>
       <h1>Konsultasi Asuransi Gratis</h1>
       <p>Ceritakan kebutuhan perlindungan Anda. Kami bantu menjelaskan pilihan yang tersedia dengan bahasa yang mudah dipahami.</p>
-      <img class="edu-hero__art" src="assets/img/ilustrasi/hero-konsultasi.svg" alt="" width="360" height="260">
+      <!-- Ilustrasi konsultasi bergerak; versi -diam dipakai bila pengunjung memilih "kurangi gerakan" (README 5.3) -->
+      <picture class="edu-hero__art">
+        <source srcset="assets/img/ilustrasi/hero-konsultasi-diam.svg" media="(prefers-reduced-motion: reduce)">
+        <img src="assets/img/ilustrasi/hero-konsultasi.svg" alt="" width="360" height="260">
+      </picture>
     </div>
   </section>
 

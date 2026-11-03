@@ -1,1 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260"><circle cx="190" cy="136" r="118" fill="#ffffff" fill-opacity="0.07"/><rect x="162" y="56" width="156" height="156" rx="20" fill="#ffffff"/><path d="M162 96V76a20 20 0 0 1 20-20h116a20 20 0 0 1 20 20v20z" fill="#2447c4"/><rect x="196" y="44" width="10" height="26" rx="5" fill="#c9d7ff"/><rect x="274" y="44" width="10" height="26" rx="5" fill="#c9d7ff"/><rect x="184" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="248" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="280" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="184" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><circle cx="258" cy="152" r="13" fill="#14a38b"/><path d="M251.7 152L256.3 156.5L264.7 147.8" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="280" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="184" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="248" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="280" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="44" y="52" width="132" height="72" rx="24" fill="#8fb0ff"/><path d="M70 118l-10 30 32-28z" fill="#8fb0ff"/><circle cx="84" cy="88" r="8" fill="#ffffff"/><circle cx="110" cy="88" r="8" fill="#ffffff"/><circle cx="136" cy="88" r="8" fill="#ffffff"/><rect x="60" y="158" width="92" height="48" rx="18" fill="#ffffff"/><rect x="76" y="174" width="56" height="6" rx="3" fill="#c9d7ff"/><rect x="76" y="186" width="36" height="6" rx="3" fill="#c9d7ff"/><path d="M332 27Q332 34 339 34Q332 34 332 41Q332 34 325 34Q332 34 332 27Z" fill="#ffd28f"/><path d="M40 190Q40 196 46 196Q40 196 40 202Q40 196 34 196Q40 196 40 190Z" fill="#ffd28f"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="360" height="260">
+  <style>
+    /* Satu putaran 7 detik, mirip ilustrasi Hubungi Kami: gelembung chat muncul "pop" dari ujung ekornya, kartu pesan
+       menyusul dari bawah, lalu tanda centang hijau muncul di kalender dan bergoyang (shake) dua kali sambil sedikit membesar,
+       supaya tetap terlihat di HP. Gelembung dan kartu membesar-mengecil bergantian. Di akhir, semuanya kecuali kalender
+       mengecil hilang dan diulang. Kotak tanggal di bawah centang tertutup penuh saat centang tampil. */
+    .gelembung { transform-box: view-box; transform-origin: 60px 148px; animation: muncul-gelembung 7s ease-out infinite; }
+    .kartu { transform-box: view-box; transform-origin: 106px 206px; animation: muncul-kartu 7s ease-out infinite; }
+    .centang { transform-box: view-box; transform-origin: 258px 152px; animation: centang 7s ease-out infinite; }
+    @keyframes muncul-gelembung {
+      0% { opacity: 0; transform: scale(0); }
+      7% { opacity: 1; transform: scale(1.1); }
+      10% { transform: scale(0.96); }
+      13%, 54% { opacity: 1; transform: none; }
+      58% { transform: scale(1.08); }
+      61% { transform: scale(0.97); }
+      64%, 88% { opacity: 1; transform: none; }
+      95%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes muncul-kartu {
+      0%, 9% { opacity: 0; transform: scale(0); }
+      16% { opacity: 1; transform: scale(1.1); }
+      19% { transform: scale(0.96); }
+      22%, 60% { opacity: 1; transform: none; }
+      64% { transform: scale(1.08); }
+      67% { transform: scale(0.97); }
+      70%, 88% { opacity: 1; transform: none; }
+      95%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @keyframes centang {
+      0%, 22% { opacity: 0; transform: scale(0); }
+      29% { opacity: 1; transform: scale(1.25); }
+      32% { transform: scale(0.94); }
+      35%, 40% { opacity: 1; transform: none; }
+      42% { transform: translateX(-4px) rotate(-18deg) scale(1.25); }
+      44% { transform: translateX(4px) rotate(16deg) scale(1.25); }
+      46% { transform: translateX(-3px) rotate(-12deg) scale(1.2); }
+      48% { transform: translateX(2px) rotate(8deg) scale(1.12); }
+      50% { transform: translateX(-1px) rotate(-4deg) scale(1.05); }
+      52%, 70% { transform: none; }
+      72% { transform: translateX(-4px) rotate(-18deg) scale(1.25); }
+      74% { transform: translateX(4px) rotate(16deg) scale(1.25); }
+      76% { transform: translateX(-3px) rotate(-12deg) scale(1.2); }
+      78% { transform: translateX(2px) rotate(8deg) scale(1.12); }
+      80% { transform: translateX(-1px) rotate(-4deg) scale(1.05); }
+      82%, 88% { opacity: 1; transform: none; }
+      95%, 100% { opacity: 0; transform: scale(0); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+<circle cx="190" cy="136" r="118" fill="#ffffff" fill-opacity="0.07"/><rect x="162" y="56" width="156" height="156" rx="20" fill="#ffffff"/><path d="M162 96V76a20 20 0 0 1 20-20h116a20 20 0 0 1 20 20v20z" fill="#2447c4"/><rect x="196" y="44" width="10" height="26" rx="5" fill="#c9d7ff"/><rect x="274" y="44" width="10" height="26" rx="5" fill="#c9d7ff"/><rect x="184" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="248" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="280" y="113" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="184" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="248" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="280" y="143" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="184" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="216" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="248" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><rect x="280" y="173" width="20" height="18" rx="5" fill="#e8edfb"/><g class="centang"><circle cx="258" cy="152" r="13" fill="#14a38b"/><path d="M251.7 152L256.3 156.5L264.7 147.8" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g><g class="gelembung"><rect x="44" y="52" width="132" height="72" rx="24" fill="#8fb0ff"/><path d="M70 118l-10 30 32-28z" fill="#8fb0ff"/><circle cx="84" cy="88" r="8" fill="#ffffff"/><circle cx="110" cy="88" r="8" fill="#ffffff"/><circle cx="136" cy="88" r="8" fill="#ffffff"/></g><g class="kartu"><rect x="60" y="158" width="92" height="48" rx="18" fill="#ffffff"/><rect x="76" y="174" width="56" height="6" rx="3" fill="#c9d7ff"/><rect x="76" y="186" width="36" height="6" rx="3" fill="#c9d7ff"/></g><path d="M332 27Q332 34 339 34Q332 34 332 41Q332 34 325 34Q332 34 332 27Z" fill="#ffd28f"/><path d="M40 190Q40 196 46 196Q40 196 40 202Q40 196 34 196Q40 196 40 190Z" fill="#ffd28f"/></svg>

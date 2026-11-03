@@ -237,7 +237,9 @@
 .cta-band--center { display: block; text-align: center; }
 .cta-band--center p { margin-inline: auto; }
 .cta-band__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-block: 0.5rem 1.25rem; }
-.cta-band--center .cta-band__meta { justify-content: center; }
+/* Ikon ikut mengalir di depan teks: kalau teks turun dua baris (HP), ikon tidak tertinggal di kiri */
+.cta-band--center .cta-band__meta { display: block; text-wrap: balance; }
+.cta-band--center .cta-band__meta .icon { display: inline-block; margin-right: 0.3rem; vertical-align: -0.25em; }
 .btn--ghost-light { background: rgba(255, 255, 255, 0.1); color: #fff; border-color: rgba(255, 255, 255, 0.25); }
 .btn--ghost-light:hover { background: rgba(255, 255, 255, 0.18); }
 
@@ -373,7 +375,7 @@
 .edu-hero p { color: var(--color-muted); max-width: 38rem; margin: 0; }
 /* Ilustrasi kecil di hero halaman teks: di HP di bawah teks, di layar lebar di kanan */
 .edu-hero__art { display: block; width: min(240px, 72%); height: auto; margin: 1.75rem auto 0; }
-/* Bila ilustrasinya bergerak dan dibungkus <picture> (Kalkulator, Edukasi, Tanya Jawab, dan Hubungi Kami), kelas edu-hero__art dipasang di <picture> */
+/* Bila ilustrasinya bergerak dan dibungkus <picture> (Kalkulator, Edukasi, Tanya Jawab, Hubungi Kami, dan Konsultasi), kelas edu-hero__art dipasang di <picture> */
 .edu-hero__art > img { display: block; width: 100%; height: auto; }
 .edu-hero .container > .edu-hero__art { animation: rise 0.9s var(--ease) 0.3s both, float-soft 6s ease-in-out 1.5s infinite; }
 @media (min-width: 900px) {
@@ -729,6 +731,7 @@
 @media (max-width: 599px) {
   .profile__facts { gap: 0.3rem; margin-bottom: 0.9rem; }
   .profile__facts li { padding: 0.25rem 0.55rem 0.25rem 0.45rem; font-size: 0.66rem; }
+  .profile__facts .icon { width: 1.35em; height: 1.35em; }
 }
 
 /* ---------- Mobile: tampilan "laptop mini" ----------
@@ -772,7 +775,8 @@
   :is(.grid-4, .grid-3, .feature-grid) > .card:not(.article-card),
   .why__item { padding: 1rem 0.95rem; }
   :is(.grid-4, .grid-3, .feature-grid) .card__icon,
-  .why__item .card__icon { width: 38px; height: 38px; margin-bottom: 0.7rem; border-radius: 12px; }
+  .why__item .card__icon { width: 44px; height: 44px; margin-bottom: 0.7rem; border-radius: 13px; }
+  .card__icon .icon { width: 22px; height: 22px; } /* gambar ikon di semua kotak ikon */
   :is(.grid-4, .grid-3, .feature-grid) .card h3,
   .why__item h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
   :is(.grid-4, .grid-3, .feature-grid) .card p,
@@ -803,7 +807,7 @@
 
   /* --- Hero Beranda & Solusi: judul di kiri, ilustrasi di kanan --- */
   .hero { padding-block: 2rem 2.25rem; }
-  .hero__grid { grid-template-columns: minmax(0, 1fr) 37%; column-gap: 0.75rem; row-gap: 0; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr) 46%; column-gap: 0.75rem; row-gap: 0; } /* ilustrasi bergerak dibuat besar */
   .hero__grid > div:first-child { display: contents; } /* isi teks ikut ditata di grid hero */
   .hero__grid > :where(div:first-child) > * { grid-column: 1 / -1; } /* :where agar mudah ditimpa aturan di bawahnya */
   .hero__grid .badge { grid-row: 1; justify-self: start; }
@@ -831,21 +835,25 @@
   .stat-row { grid-row: 5; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; }
   .stat { padding: 0.7rem 0.6rem; border-radius: var(--radius-sm); }
   .stat__label { gap: 0.25rem; font-size: 0.56rem; letter-spacing: 0.04em; }
+  .stat__label .icon { width: 1.5em; height: 1.5em; }
   .stat strong { font-size: 0.85rem; }
   .stat small { display: block; font-size: 0.68rem; line-height: 1.4; }
 
-  /* --- Hero halaman teks (Kalkulator, Tanya Jawab, Kontak, dst.): teks di kiri, ilustrasi di kanan --- */
+  /* --- Hero halaman teks (Kalkulator, Tanya Jawab, Kontak, dst.): seperti hero Beranda, label di atas, lalu judul di kiri
+     dan ilustrasi besar di kanan. Paragraf selebar layar di bawahnya, supaya ilustrasi yang bergerak bisa besar
+     tanpa memanjangkan hero. --- */
   .edu-hero { padding-block: 2rem 2.25rem; }
-  .edu-hero .container { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0.9rem; align-items: center; }
+  .edu-hero .container { display: grid; grid-template-columns: minmax(0, 1fr) min(165px, 50%); column-gap: 0.9rem; align-items: center; }
   .edu-hero .container > * { grid-column: 1; }
-  .edu-hero .container > .badge { justify-self: start; }
-  .edu-hero .container > .edu-hero__art { grid-column: 2; grid-row: 1 / span 3; width: 108px; margin: 0; }
+  .edu-hero .container > .badge { grid-column: 1 / -1; justify-self: start; }
+  .edu-hero .container > p { grid-column: 1 / -1; }
+  .edu-hero .container > .edu-hero__art { grid-column: 2; grid-row: 2; width: 100%; margin: 0; }
   .edu-hero h1 { font-size: 1.5rem; margin-block: 0.8rem 0.6rem; }
   .edu-hero p { font-size: 0.88rem; }
 
   /* --- Banner kalkulator: teks di kiri, contoh hasil (miring) di kanan --- */
   .calc-promo { grid-template-columns: 1fr 1.05fr; gap: 0.8rem; margin-top: 2rem; padding: 1.25rem 1.1rem; }
-  .calc-promo .card__icon { width: 38px; height: 38px; margin-bottom: 0.7rem; border-radius: 12px; }
+  .calc-promo .card__icon { width: 44px; height: 44px; margin-bottom: 0.7rem; border-radius: 13px; }
   .calc-promo h3 { font-size: 1.02rem; }
   .calc-promo__text p { margin-bottom: 0.9rem; font-size: 0.78rem; line-height: 1.55; }
   .calc-promo .btn { gap: 0.4rem; padding: 0.55rem 0.9rem; font-size: 0.78rem; white-space: nowrap; } /* "Coba Kalkulator" tetap satu baris */
@@ -855,16 +863,17 @@
   .calc-promo__preview .calc-promo__value { margin-bottom: 0.6rem; font-size: 0.9rem; white-space: nowrap; }
   .calc-promo__preview .calc-promo__caption { margin-top: 0.45rem; font-size: 0.66rem; line-height: 1.45; }
 
-  /* --- Profil konsultan: foto di kiri, teks di kanan --- */
-  .profile { grid-template-columns: 0.8fr 1.2fr; }
-  .profile__photo { min-height: 100%; font-size: 0.68rem; }
-  .profile__body { padding: 1.1rem 1rem; }
-  .profile__body .eyebrow { padding: 0.3rem 0.6rem; font-size: 0.56rem; letter-spacing: 0.05em; }
-  .profile__body h2 { font-size: 1.3rem; }
-  .profile__body p { font-size: 0.82rem; line-height: 1.55; }
+  /* --- Profil konsultan: label dan judul di atas, lalu foto, lalu nama dan teks lainnya ---
+     .profile__body dibuat display: contents supaya foto bisa diselipkan di antara judul dan isi.
+     Kartunya selebar layar, jadi ukuran huruf tidak diperkecil (sama seperti section lain). */
+  .profile { grid-template-columns: minmax(0, 1fr); }
+  .profile__body { display: contents; }
+  .profile__body > * { margin-inline: 0.9rem; }
+  .profile__body > .eyebrow { order: -2; justify-self: start; margin-top: 0.9rem; }
+  .profile__body > h2 { order: -1; margin-block: 0 0.8rem; }
+  .profile__body > :last-child { margin-bottom: 1.1rem; }
+  .profile__photo { min-height: 0; aspect-ratio: 4 / 3; margin-bottom: 0.9rem; font-size: 0.68rem; }
   .profile__actions { gap: 0.6rem 1rem; margin-top: 0.75rem; }
-  .profile__actions .btn { padding: 0.55rem 0.85rem; font-size: 0.76rem; }
-  .profile__actions .link-arrow { font-size: 0.82rem; }
 
   /* --- Langkah: tiga kolom dengan garis putus-putus mendatar --- */
   .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
@@ -878,7 +887,7 @@
   }
   .steps__item { padding: 3.1rem 0 0; text-align: center; }
   .steps__num { left: 50%; translate: -50% 0; width: 2.2rem; height: 2.2rem; font-size: 0.95rem; box-shadow: 0 0 0 4px var(--color-accent-soft); }
-  .steps__body { height: 100%; padding: 0.8rem 0.35rem; border-radius: var(--radius-sm); }
+  .steps__body { height: 100%; padding: 0.8rem 0.35rem; border-radius: var(--radius-sm); overflow-wrap: break-word; } /* kata yang terlalu panjang dipotong, tidak keluar kotak */
   .steps__body h3 { font-size: 0.78rem; margin-bottom: 0.35rem; }
   .steps__body p { font-size: 0.75rem; line-height: 1.5; }
   .steps__cta { margin-top: 1.5rem; }
@@ -887,8 +896,8 @@
   .sol { gap: 1.5rem; }
   /* Pembuka kategori: tata letaknya dari blok tablet + HP di bagian Solusi. Di HP kolom gambar sedikit lebih lebar,
      dan gambar hanya sejajar eyebrow dan judul; paragraf pertama selebar kartu. */
-  .sol__intro:has(.sol__img) { grid-template-columns: minmax(0, 1fr) 40%; column-gap: 0.9rem; }
-  .sol--rev .sol__intro:has(.sol__img) { grid-template-columns: 40% minmax(0, 1fr); }
+  .sol__intro:has(.sol__img) { grid-template-columns: minmax(0, 1fr) 45%; column-gap: 0.9rem; }
+  .sol--rev .sol__intro:has(.sol__img) { grid-template-columns: 45% minmax(0, 1fr); }
   .sol__intro:has(.sol__img) > p:first-of-type,
   .sol--rev .sol__intro:has(.sol__img) > p:first-of-type { grid-column: 1 / -1; grid-row: auto; }
   .sol__intro > .sol__img { grid-row: 1 / span 2; }
@@ -906,7 +915,7 @@
   .callout ul { gap: 0.5rem; }
   .list-stack { gap: 0.55rem; margin-top: 1.25rem; }
   .list-stack .card { gap: 0.75rem; padding: 0.85rem 0.95rem; }
-  .list-stack .card__icon { width: 34px; height: 34px; }
+  .list-stack .card__icon { width: 40px; height: 40px; }
   .list-stack h3 { font-size: 0.95rem; }
   .list-stack p { font-size: 0.85rem; line-height: 1.55; }
   /* Panduan prioritas: piramida di kiri, daftar di kanan */
@@ -916,9 +925,9 @@
   .pyramid__layer small { font-size: 0.52rem; letter-spacing: 0.04em; }
   .pyramid__layer strong { display: block; font-size: 0.7rem; line-height: 1.2; }
   .pyramid-wrap .list-stack { gap: 0.45rem; }
-  .pyramid-wrap .list-stack .card { gap: 0.5rem; padding: 0.7rem 0.75rem; }
-  .pyramid-wrap .list-stack .card__icon { width: 26px; height: 26px; border-radius: 8px; }
-  .pyramid-wrap .list-stack .card__icon .icon { width: 15px; height: 15px; }
+  .pyramid-wrap .list-stack .card { gap: 0.4rem; padding: 0.7rem 0.6rem; } /* rapat supaya ikon 30 px tidak mempersempit teks */
+  .pyramid-wrap .list-stack .card__icon { width: 30px; height: 30px; border-radius: 9px; }
+  .pyramid-wrap .list-stack .card__icon .icon { width: 17px; height: 17px; }
   .pyramid-wrap .list-stack h3 { font-size: 0.82rem; }
   .pyramid-wrap .list-stack p { font-size: 0.75rem; line-height: 1.5; }
 
@@ -930,7 +939,7 @@
   .ethics h2 { grid-column: 1; grid-row: 2; font-size: 1.4rem; }
   .ethics h2 + p { grid-column: 1; grid-row: 3; margin: 0; font-size: 0.88rem; }
   .ethics__card { grid-column: 2; grid-row: 1 / span 3; align-self: center; padding: 1rem 0.6rem; }
-  .ethics__card .card__icon { width: 38px; height: 38px; margin-bottom: 0.6rem; }
+  .ethics__card .card__icon { width: 44px; height: 44px; margin-bottom: 0.6rem; }
   .ethics__card p { font-size: 0.82rem; }
   .ethics__card .tag { font-size: 0.6rem; }
   .ethics__list { margin-top: 1.1rem; gap: 0.75rem; }
@@ -949,10 +958,10 @@
   /* --- Kontak --- */
   .channel-list { gap: 0.6rem; }
   .channel { gap: 0.8rem; padding: 0.8rem 0.95rem; }
-  .claim-band { grid-template-columns: minmax(0, 1fr) auto; gap: 0.8rem; padding: 1.1rem; }
-  .claim-band h2 { font-size: 1rem; }
-  .claim-band p { font-size: 0.8rem; }
-  .claim-band .btn { gap: 0.4rem; padding: 0.6rem 0.9rem; font-size: 0.8rem; }
+  .channel .card__icon { width: 44px; height: 44px; }
+  /* Klaim darurat: tombol di bawah teks, supaya teks tidak terjepit di kolom sempit */
+  .claim-band { gap: 0.8rem; padding: 1.1rem; }
+  .claim-band .btn { justify-self: start; gap: 0.4rem; padding: 0.6rem 0.9rem; font-size: 0.8rem; }
 }
 
 /* HP sempit: tombol banner kalkulator dirapatkan supaya "Coba Kalkulator" muat satu baris di kolom teks */
@@ -961,4 +970,19 @@
 }
 @media (max-width: 340px) {
   .calc-promo .btn { padding-inline: 0.6rem; font-size: 0.7rem; }
+}
+
+/* Kata terpanjang di kotak langkah ("membandingkan") tidak muat di bawah 390 px. Kotak dirapatkan dan huruf
+   sedikit diperkecil supaya muat sampai 360 px. Di bawah itu kata dipenggal di tanda &shy; pada HTML.
+   Di layar lain tanda itu dimatikan, karena text-wrap: balance pada judul ikut memenggal kata yang sebenarnya muat. */
+.steps__body { hyphens: none; }
+@media (max-width: 389px) {
+  .steps { gap: 0.3rem; }
+  .steps__body { padding-inline: 0.25rem; }
+  .steps__body h3 { font-size: 0.74rem; }
+  .steps__body p { font-size: 0.72rem; }
+}
+@media (max-width: 359px) {
+  .steps__body { hyphens: manual; }
+  .steps__body h3 { text-wrap: wrap; } /* balance menyisakan "&" sendirian di satu baris */
 }
