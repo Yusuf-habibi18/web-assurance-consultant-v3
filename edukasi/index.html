@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Edukasi Asuransi | [Nama Usaha]</title>
-  <meta name="description" content="Artikel dan panduan dasar asuransi dengan bahasa yang mudah dipahami: mengenal polis, masa tunggu, pengecualian, hingga persiapan klaim.">
+  <meta name="description" content="Rangkuman singkat seputar dasar asuransi, isi polis, dan persiapan klaim dari OJK, media, dan portal hukum, lengkap dengan tautan ke sumber aslinya.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Edukasi Asuransi | [Nama Usaha]">
-  <meta property="og:description" content="Artikel dan panduan dasar asuransi dengan bahasa yang mudah dipahami.">
+  <meta property="og:description" content="Rangkuman singkat dasar asuransi, isi polis, dan persiapan klaim, lengkap dengan tautan ke sumber aslinya.">
   <meta name="theme-color" content="#edf4fe">
   <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
@@ -35,6 +35,7 @@
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
 </svg>
 
 <a class="skip-link" href="#konten">Lompat ke konten</a>
@@ -87,7 +88,7 @@
         Literasi asuransi
       </span>
       <h1>Pusat Wawasan &amp; <span class="text-gradient">Edukasi Asuransi</span></h1>
-      <p>Panduan dasar untuk memahami cara kerja asuransi, membaca polis, dan mempersiapkan klaim, ditulis dengan bahasa yang mudah dipahami.</p>
+      <p>Rangkuman singkat dari sumber tepercaya seperti OJK, media, dan portal hukum tentang cara kerja asuransi, isi polis, dan persiapan klaim, lengkap dengan tautan ke artikel aslinya.</p>
       <!-- Ilustrasi buku dan lampu bergerak; versi -diam dipakai bila pengunjung memilih "kurangi gerakan" (README 5.3) -->
       <picture class="edu-hero__art">
         <source srcset="../assets/img/ilustrasi/hero-edukasi-diam.svg" media="(prefers-reduced-motion: reduce)">
@@ -96,62 +97,98 @@
     </div>
   </section>
 
-  <!-- Artikel unggulan -->
-  <section class="section" aria-labelledby="judul-unggulan">
-    <div class="container">
-      <span class="eyebrow">Artikel pilihan</span>
-      <article class="featured">
-        <div class="ph ph--art featured__img"><img src="../assets/img/ilustrasi/artikel-dasar.svg" alt="" width="480" height="270" loading="lazy"></div>
-        <div class="featured__body">
-          <div class="article-card__meta"><span>Dasar asuransi</span><span>[x] menit baca</span></div>
-          <h2 id="judul-unggulan"><a href="artikel-1.html">[Judul artikel 1]</a></h2>
-          <p>[Ringkasan singkat artikel 1, dua sampai tiga kalimat.]</p>
-          <div class="byline">
-            <div class="byline__author">
-              <span class="avatar" aria-hidden="true">[AB]</span>
-              <span><strong>[Nama Penulis]</strong>[Tanggal terbit]</span>
-            </div>
-            <a class="link-arrow" href="artikel-1.html">Baca selengkapnya
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-      </article>
+  <!-- Rangkuman sumber, dibagi tiga kategori. Tiap kartu: ringkasan 1-2 kalimat (ditulis ulang, bukan disalin),
+       sumber lengkap (penerbit, judul, tanggal), lalu tautan ke artikel asli. Cara menambah kartu: README 5.9. -->
+
+  <!-- 01 Dasar asuransi -->
+  <section class="section" aria-labelledby="judul-dasar">
+    <div class="container sol edu-cat" id="dasar-asuransi">
+      <div class="sol__intro">
+        <span class="eyebrow">01 &bull; Dasar asuransi</span>
+        <h2 id="judul-dasar">Mengenal Dasar Asuransi</h2>
+        <p>Apa itu asuransi, bagaimana cara kerjanya, dan apa bedanya dengan menabung.</p>
+        <div class="ph ph--art sol__img"><img src="../assets/img/ilustrasi/artikel-dasar.svg" alt="" width="480" height="270" loading="lazy"></div>
+      </div>
+      <div class="source-list">
+        <article class="card source-card">
+          <span class="tag">Regulator</span>
+          <p class="source-card__summary">OJK menjelaskan asuransi sebagai pengalihan risiko: nasabah membayar premi yang nilainya lebih kecil, dan perusahaan asuransi membayar santunan atau ganti rugi bila terjadi musibah yang dijamin polis. Materi ini juga memuat daftar periksa sederhana untuk menilai perlindungan diri dan keluarga.</p>
+          <p class="source-card__src">Sumber: <strong>OJK, Sikapi Uangmu</strong> &middot; Materi edukasi asuransi (PDF) &middot; 2014</p>
+          <a class="link-arrow" href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/19" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </article>
+        <article class="card source-card">
+          <span class="tag">Regulator</span>
+          <p class="source-card__summary">Asuransi berpegang pada prinsip itikad baik: perusahaan asuransi wajib menjelaskan risiko yang dijamin dan yang tidak dijamin polis, sedangkan tertanggung wajib menyampaikan fakta penting dengan jujur. Buku ini juga membahas hak dan kewajiban pemegang polis, dari penutupan asuransi sampai klaim.</p>
+          <p class="source-card__src">Sumber: <strong>OJK, Sikapi Uangmu</strong> &middot; <cite>&ldquo;Lindungi Risiko Anda dengan Asuransi&rdquo;</cite> (PDF) &middot; September 2016</p>
+          <a class="link-arrow" href="https://sikapiuangmu.ojk.go.id/FrontEnd/CMS/Download/331" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </article>
+        <article class="card source-card">
+          <span class="tag">Media</span>
+          <p class="source-card__summary">Bisnis.com memuat penjelasan OJK bahwa asuransi berbeda dengan tabungan: asuransi adalah proteksi atas risiko, sedangkan tabungan adalah persiapan dana jangka panjang.</p>
+          <p class="source-card__note">Sebagian isi artikel mungkin hanya terbuka untuk pelanggan.</p>
+          <p class="source-card__src">Sumber: <strong>Bisnis.com</strong> &middot; <cite>&ldquo;Masyarakat Perlu Tahu, Asuransi Beda dengan Tabungan&rdquo;</cite> &middot; 29 Juni 2023</p>
+          <a class="link-arrow" href="https://finansial.bisnis.com/read/20230629/55/1670216/masyarakat-perlu-tahu-asuransi-beda-dengan-tabungan" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- Daftar artikel -->
-  <section class="section section--tint" aria-labelledby="judul-koleksi">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Koleksi panduan</span>
-        <h2 id="judul-koleksi">Panduan &amp; Artikel Lainnya</h2>
+  <!-- 02 Panduan polis -->
+  <section class="section section--tint" aria-labelledby="judul-polis">
+    <div class="container sol sol--rev edu-cat" id="panduan-polis">
+      <div class="sol__intro">
+        <span class="eyebrow">02 &bull; Panduan polis</span>
+        <h2 id="judul-polis">Memahami Isi Polis</h2>
+        <p>Hak Anda sebagai pemegang polis, dan hal yang perlu diperiksa sebelum dan sesudah polis diterima.</p>
+        <div class="ph ph--art sol__img"><img src="../assets/img/ilustrasi/artikel-polis.svg" alt="" width="480" height="270" loading="lazy"></div>
       </div>
-      <div class="grid-3">
-        <article class="card article-card">
-          <div class="ph ph--art article-card__img">
-            <span class="article-card__chip">Panduan polis</span>
-            <img src="../assets/img/ilustrasi/artikel-polis.svg" alt="" width="480" height="270" loading="lazy">
-          </div>
-          <div class="article-card__body">
-            <div class="article-card__meta"><span>Panduan polis</span><span>[x] menit baca</span></div>
-            <h3><a href="artikel-2.html">[Judul artikel 2]</a></h3>
-            <p>[Ringkasan singkat artikel 2.]</p>
-            <a class="link-arrow" href="artikel-2.html">Baca selengkapnya
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
+      <div class="source-list">
+        <article class="card source-card">
+          <span class="tag">Hukum</span>
+          <p class="source-card__summary">Hak pemegang polis juga dilindungi UU Nomor 8 Tahun 1999 tentang Perlindungan Konsumen, termasuk hak atas informasi yang jelas dan benar tentang manfaat, premi, dan risiko yang ditanggung. Sebelum membeli, pemegang polis disarankan membaca ketentuannya dengan saksama dan memahami risiko yang ditanggung maupun yang tidak.</p>
+          <p class="source-card__src">Sumber: <strong>Hukumonline</strong> &middot; <cite>&ldquo;Memastikan Iklim Asuransi yang Aman bagi Penanggung dan Tertanggung&rdquo;</cite> &middot; 11 September 2023</p>
+          <a class="link-arrow" href="https://www.hukumonline.com/berita/a/memastikan-iklim-asuransi-yang-aman-bagi-penanggung-dan-tertanggung-lt64fe800ed5e43" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
         </article>
-        <article class="card article-card">
-          <div class="ph ph--art article-card__img">
-            <span class="article-card__chip">Tips klaim</span>
-            <img src="../assets/img/ilustrasi/artikel-klaim.svg" alt="" width="480" height="270" loading="lazy">
-          </div>
-          <div class="article-card__body">
-            <div class="article-card__meta"><span>Tips klaim</span><span>[x] menit baca</span></div>
-            <h3><a href="artikel-3.html">[Judul artikel 3]</a></h3>
-            <p>[Ringkasan singkat artikel 3.]</p>
-            <a class="link-arrow" href="artikel-3.html">Baca selengkapnya
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
+        <article class="card source-card">
+          <span class="tag">Hukum</span>
+          <p class="source-card__summary">Perusahaan asuransi wajib menyerahkan polis kepada pemegang polis, dan polis harus memuat syarat serta tata cara pengajuan klaim. Artikel ini juga menjelaskan cara mengadu ke OJK bila polis tidak kunjung diberikan.</p>
+          <p class="source-card__note">Artikel ini mengacu pada POJK 23/2015, yang sudah dicabut dan diganti POJK 8 Tahun 2024.</p>
+          <p class="source-card__src">Sumber: <strong>Klinik Hukumonline</strong> &middot; <cite>&ldquo;Sanksi Jika Polis Asuransi Tak Kunjung Diberikan&rdquo;</cite> &middot; 19 Agustus 2020</p>
+          <a class="link-arrow" href="https://www.hukumonline.com/klinik/a/sanksi-jika-polis-asuransi-tak-kunjung-diberikan-lt5f32a4a171ece/" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Tips klaim -->
+  <section class="section" aria-labelledby="judul-klaim">
+    <div class="container sol edu-cat" id="tips-klaim">
+      <div class="sol__intro">
+        <span class="eyebrow">03 &bull; Tips klaim</span>
+        <h2 id="judul-klaim">Persiapan Mengajukan Klaim</h2>
+        <p>Tahapan klaim, dokumen yang biasanya diminta, dan hal yang sering membuat klaim ditolak.</p>
+        <div class="ph ph--art sol__img"><img src="../assets/img/ilustrasi/artikel-klaim.svg" alt="" width="480" height="270" loading="lazy"></div>
+      </div>
+      <div class="source-list">
+        <article class="card source-card">
+          <span class="tag">Media</span>
+          <p class="source-card__summary">Kompas TV merangkum tahapan klaim dari laman OJK: kejadian dilaporkan lewat kanal resmi perusahaan asuransi, lalu perusahaan menilai klaim sesuai syarat dan ketentuan polis. Dokumen yang biasanya diminta antara lain polis, rincian kerugian, foto, dan bukti pendukung lain.</p>
+          <p class="source-card__src">Sumber: <strong>Kompas TV</strong> &middot; <cite>&ldquo;Pahami Tahapan Klaim Asuransi Agar Tak Gagal Saat Mengajukannya&rdquo;</cite> &middot; 10 Januari 2023</p>
+          <a class="link-arrow" href="https://www.kompas.tv/article/366625/pahami-tahapan-klaim-asuransi-agar-tak-gagal-saat-mengajukannya" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+        </article>
+        <article class="card source-card">
+          <span class="tag">Media</span>
+          <p class="source-card__summary">Bisnis.com membahas penyebab klaim asuransi jiwa dan kesehatan ditolak, misalnya pengajuan yang melewati batas waktu, serta dokumen yang perlu dilengkapi saat mengajukan klaim.</p>
+          <p class="source-card__note">Sebagian isi artikel mungkin hanya terbuka untuk pelanggan.</p>
+          <p class="source-card__src">Sumber: <strong>Bisnis.com</strong> &middot; <cite>&ldquo;Cara Klaim Asuransi Jiwa atau Kesehatan Anti Gagal dan Anti Ditolak&rdquo;</cite> &middot; 13 Juni 2024</p>
+          <a class="link-arrow" href="https://finansial.bisnis.com/read/20240613/215/1774028/cara-klaim-asuransi-jiwa-atau-kesehatan-anti-gagal-dan-anti-ditolak" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
         </article>
       </div>
     </div>
@@ -163,7 +200,7 @@
       <div class="cta-band">
         <div>
           <h2 id="judul-cta">Ada Pertanyaan tentang Polis Anda?</h2>
-          <p>Artikel hanya memberi gambaran umum. Untuk kondisi Anda sendiri, ceritakan kebutuhan atau polis yang dimiliki, dan kami bantu menjelaskan.</p>
+          <p>Rangkuman di atas hanya gambaran umum, dan aturan bisa berubah setelah artikel terbit. Untuk kondisi Anda sendiri, ceritakan kebutuhan atau polis yang dimiliki, dan kami bantu menjelaskan.</p>
           <p class="cta-band__meta">
             <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
             [Jam operasional] &bull; Tanpa biaya konsultasi

@@ -25,11 +25,11 @@ Per 1 November 2026:
 | Bagian | Status |
 |---|---|
 | 9 halaman utama: Beranda, Tentang Saya, Solusi, Kalkulator Protection Gap, Edukasi, Tanya Jawab, Kontak, Konsultasi Gratis, Kebijakan Privasi | Selesai dibuat, isi masih placeholder |
-| Halaman artikel `edukasi/artikel-1.html` sampai `artikel-3.html` | **Belum dibuat.** File masih kosong, jadi tautannya menampilkan halaman putih. |
+| Edukasi: 7 rangkuman sumber dalam 3 kategori (Dasar asuransi, Panduan polis, Tips klaim) | Terisi (4 November 2026). Formatnya kutip singkat + tautan ke artikel asli, jadi halaman artikel terpisah tidak dibuat (lihat [5.9](#59-artikel)). |
 | `robots.txt` dan `sitemap.xml` | **Kosong.** Diisi setelah domain ada (contoh isinya di [bagian 6](#6-deployment)). |
 | `docs/checklist-qa.md` | Terisi: checklist dan hasil pengujian per 31 Oktober 2026 |
 | `docs/konten-dari-klien.md` | Kosong |
-| Konten asli dari klien (nama, foto, kontak, profil) | Belum ada. Semua ditandai `[...]`. |
+| Konten asli dari klien (nama, foto, kontak, profil) | Nama dan foto konsultan sudah terpasang (foto: 4 November 2026). Sisanya masih ditandai `[...]`. |
 | Ilustrasi | 17 ilustrasi SVG terpasang di hero, halaman Solusi, dan gambar artikel (1 November 2026, ditambah ilustrasi Kendaraan, Properti & Usaha, keluarga, dan konsultan pada 2 November 2026). Hero Beranda dan Solusi memakai ilustrasi manusia (keluarga dan konsultan) yang bergerak pelan. Foto konsultan masih menunggu klien. |
 | Kepatuhan pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)) | Isi website sudah diaudit: tidak ada logo atau nama Manulife selain di disclaimer afiliasi, dan tidak ada klaim berlebihan. Disclaimer afiliasi terpasang di footer semua halaman. **Kalimat disclaimer perlu dikonfirmasi klien.** |
 
@@ -59,6 +59,10 @@ Per 1 November 2026:
 - Ilustrasi Konsultasi (3 November 2026, Edge headless dengan animasi aktif): frame demi frame diperiksa. Gelembung chat, kartu pesan, dan centang muncul sesuai urutan, centang bergoyang dua kali tanpa menabrak kotak tanggal di sebelahnya, dan kalender tetap tampil di akhir putaran. Saat semua elemen tampil, gambarnya sama piksel demi piksel dengan versi diam. Ukuran ilustrasi dan panjang halaman Konsultasi tidak berubah di 360, 390, 768, dan 1366 px, tanpa halaman yang melebar dan tanpa error JavaScript. Dalam mode "kurangi gerakan", versi diamnya yang dimuat.
 - Ilustrasi bergerak di HP diperbesar (3 November 2026, Edge headless dengan emulasi HP di 320, 360, 390, dan 412 px): ilustrasi hero halaman teks dari 108 px menjadi sampai 165 px, hero Beranda dan Solusi dari 37 menjadi 46 persen lebar, dan gambar kategori Solusi dari 40 menjadi 45 persen, semuanya tetap di samping judul. Tidak ada halaman yang melebar ke samping dan tidak ada teks yang keluar dari kotaknya (kecuali catatan 2 px di piramida Solusi di atas). Panjang halaman di HP berubah antara -24 dan +81 px (Solusi paling banyak, karena empat gambar kategori). Tinggi kesembilan halaman di 768 px dan 1366 px sama persis dengan sebelumnya.
 - Alur WhatsApp (3 November 2026, Edge headless di 390 dan 1366 px), memakai nomor uji coba yang dipasang sementara di `main.js` dan tidak ikut disimpan di repository (lihat [5.1](#51-nomor-whatsapp) langkah 4): ke-36 tautan WhatsApp di 9 halaman mengarah ke nomor itu, terbuka di tab baru, dan membawa pesan awal umum. Formulir Konsultasi dan Kontak membuka WhatsApp ke nomor itu dengan nama, nomor, keperluan, dan pesan yang diisi, dan tautan "WhatsApp tidak terbuka?" berisi alamat yang sama. Tombol hasil Kalkulator membawa ringkasan contoh klien (kebutuhan Rp 660.000.000, kesenjangan Rp 560.000.000). Tidak ada error JavaScript. Pengiriman pesan di aplikasi WhatsApp belum dicoba.
+
+- Rangkuman sumber Edukasi (4 November 2026, Edge headless di 390, 768, dan 1366 px): tidak ada error JavaScript dan tidak ada halaman yang melebar ke samping. Tujuh tautan sumber dicek isinya sebelum dirangkum: kedua PDF OJK, kedua artikel Hukumonline, dan artikel Kompas TV terbuka. Kedua artikel Bisnis.com menolak pembaca otomatis, jadi judul dan tanggalnya diambil dari hasil pencarian dan isinya belum dibaca langsung. Halaman Edukasi di HP menjadi 5,5 tinggi layar (sebelumnya 2,9, waktu isinya masih contoh); di laptop 4,8 (sebelumnya 3,3). Kartu artikel di Beranda kini menuju ketiga kategori itu. `qa-check.js` memeriksa 293 tautan internal tanpa masalah, karena tautan ke tiga halaman artikel kosong sudah tidak ada.
+
+- Foto konsultan (4 November 2026, Edge headless di 390, 768, dan 1366 px): wajah dan rambut tidak terpotong di profil Beranda maupun hero Tentang Saya, tidak ada halaman yang melebar ke samping, dan tidak ada error JavaScript. Tinggi halaman tidak berubah, karena kotak fotonya sudah berukuran tetap sebelum foto dipasang. `qa-check.js` memeriksa 295 tautan tanpa masalah.
 
 **Belum diuji:** animasi dan klik di browser sungguhan, tampilan di HP asli, Firefox dan Safari, alur formulir ke WhatsApp dengan nomor klien, dan skor Lighthouse.
 
@@ -93,8 +97,7 @@ Web Assurance/
 ├── kontak.html              Hubungi Kami (kanal kontak + formulir)
 ├── kebijakan-privasi.html   Kebijakan Privasi
 ├── edukasi/
-│   ├── index.html           Daftar artikel
-│   └── artikel-1..3.html    Halaman artikel (belum dibuat)
+│   └── index.html           Rangkuman sumber edukasi (kutip singkat + tautan)
 ├── assets/
 │   ├── css/
 │   │   ├── base.css         Warna, font, dan ukuran dasar (ganti brand di sini)
@@ -109,7 +112,7 @@ Web Assurance/
 │   │   ├── form.js          Validasi formulir dan penyusunan pesan WhatsApp
 │   │   ├── kalkulator.js    Hitungan kalkulator protection gap dan pesan WhatsApp hasilnya
 │   │   └── faq.js           Accordion tanya jawab (Beranda, Solusi, Tanya Jawab)
-│   ├── img/                 Foto dan logo usaha dari klien, favicon sementara (favicon.svg, favicon-32.png, apple-touch-icon.png)
+│   ├── img/                 Foto dari klien (foto-konsultan.webp), favicon sementara (favicon.svg, favicon-32.png, apple-touch-icon.png)
 │   │   └── ilustrasi/       17 ilustrasi SVG buatan sendiri + 9 versi diam (hero, Solusi, gambar artikel)
 │   └── fonts/               Kosong (font dimuat dari Google Fonts)
 ├── docs/                    Catatan internal (jangan diunggah ke hosting)
@@ -210,7 +213,7 @@ Header berbentuk kapsul yang mengambang (tema asuransi, gabungan, dan modern). D
 
 Di atas header setiap halaman ada bilah info (`topbar`) berisi jam layanan, WhatsApp, dan email. Bilah ini ikut tergulung, sedangkan header tetap menempel. Di HP hanya jam dan WhatsApp yang tampil. Kolom Kontak di footer juga memuat jam layanan. Ganti `[Jam operasional]`, `[nomor]`, dan `[email]` di kedua tempat.
 
-Karena website ini statis, header dan footer **ditulis ulang di setiap file HTML**: 9 file saat ini, ditambah halaman artikel nanti. Perubahan menu atau footer harus dilakukan di semua file (lihat [5.6](#56-menu-navigasi-dan-footer)).
+Karena website ini statis, header dan footer **ditulis ulang di setiap file HTML**: 9 file saat ini. Perubahan menu atau footer harus dilakukan di semua file (lihat [5.6](#56-menu-navigasi-dan-footer)).
 
 ---
 
@@ -251,14 +254,13 @@ Semua teks yang menunggu data klien ditulis dalam kurung siku, misalnya `[Nama U
 | `[Deskripsi singkat usaha, ...]` | Footer | Satu atau dua kalimat tentang usaha |
 | `[Sertifikasi]`, `[Asosiasi / izin]`, `[Nomor izin / kredensial]` | Tentang Saya | **Hanya jika benar dan terverifikasi.** Jika tidak ada, hapus kotaknya. |
 | `[Jawaban dikonfirmasi klien.]` | FAQ singkat di Beranda | Jawaban dari klien |
-| `[Judul artikel ...]`, `[Ringkasan ...]` | Beranda, Edukasi | Judul dan ringkasan artikel |
 | `[tanggal]`, `[nama penyedia]` | Kebijakan Privasi | Tanggal terbit dan nama hosting |
 
 Bagian yang datanya tidak tersedia **dihapus**. Jangan dibiarkan berisi `[...]`, dan jangan diisi karangan. Komentar `<!-- GANTI: ... -->` di HTML menunjukkan bagian yang perlu diperiksa.
 
 ### 5.3 Foto
 
-Sebagian tempat gambar sekarang berisi **ilustrasi**: hero Beranda, hero Solusi, dua gambar di bagian Kesehatan dan Jiwa (Solusi), gambar artikel (Beranda dan Edukasi), dan ilustrasi kecil di hero halaman Kalkulator, Edukasi, Tanya Jawab, Kontak, Konsultasi, dan Kebijakan Privasi. Ilustrasi itu boleh tetap dipakai. Kalau ingin diganti foto, ganti alamat `src` pada `<img>` dan hapus kelas `ph--art` dari kotaknya, supaya fokus foto kembali agak ke atas. Khusus hero Beranda dan Solusi, ilustrasinya tidak berada di dalam kotak. Untuk memakai foto di sana, ganti seluruh `<picture>` dengan kotak `<div class="ph hero__photo">` berisi `<img>` seperti contoh di bawah. Tempat foto konsultan (profil di Beranda dan hero Tentang Saya) masih menunggu foto asli dari klien.
+Sebagian tempat gambar sekarang berisi **ilustrasi**: hero Beranda, hero Solusi, dua gambar di bagian Kesehatan dan Jiwa (Solusi), gambar artikel (Beranda dan Edukasi), dan ilustrasi kecil di hero halaman Kalkulator, Edukasi, Tanya Jawab, Kontak, Konsultasi, dan Kebijakan Privasi. Ilustrasi itu boleh tetap dipakai. Kalau ingin diganti foto, ganti alamat `src` pada `<img>` dan hapus kelas `ph--art` dari kotaknya, supaya fokus foto kembali agak ke atas. Khusus hero Beranda dan Solusi, ilustrasinya tidak berada di dalam kotak. Untuk memakai foto di sana, ganti seluruh `<picture>` dengan kotak `<div class="ph hero__photo">` berisi `<img>` seperti contoh di bawah. Tempat foto konsultan (profil di Beranda dan hero Tentang Saya) sudah berisi foto klien, `assets/img/foto-konsultan.webp`. File ini berukuran 1080 x 1350 px (4:5, 50 KB), dipotong rapat dari foto asli 3072 x 4096 px supaya wajah lebih besar, dan tanpa data kamera atau lokasi. Kedua tempat masih memakai foto yang sama. Kalau klien mengirim foto kedua (sebaiknya siang hari, wajah terlihat, ekspresi ramah), pasang di profil Beranda. Foto di Beranda memakai titik fokus `object-position: 50% 12%`, supaya rambut tidak terpotong saat kotaknya melebar di tablet. Foto berkuda hitam-putih yang juga dikirim klien tidak dipakai, karena wajahnya tidak terlihat.
 
 1. **Siapkan foto.** Gunakan format WebP atau JPG. Lebar sekitar 1600 px untuk foto besar (hero, profil) dan 800 px untuk gambar kartu artikel. Kompres dulu, misalnya di [squoosh.app](https://squoosh.app), sampai ukurannya kira-kira di bawah 300 KB.
 2. **Simpan** di `assets/img/`, dengan nama file huruf kecil tanpa spasi, misalnya `foto-konsultan.webp`.
@@ -279,7 +281,6 @@ Sebagian tempat gambar sekarang berisi **ilustrasi**: hero Beranda, hero Solusi,
    - Hapus `role`, `aria-label`, dan teks placeholder. Deskripsi foto pindah ke `alt`.
    - Ikon gambar (atau ikon orang di tempat foto konsultan) di tengah kotak placeholder otomatis tertutup foto, jadi tidak perlu dihapus.
    - Foto otomatis memenuhi kotak dan dipotong rapi, dengan fokus agak ke atas agar wajah tidak terpotong. Kalau bagian penting foto tetap terpotong, atur titik fokusnya, misalnya `<img ... style="object-position: 50% 10%">`.
-   - Kalau di dalam kotak ada label kategori (`article-card__chip`, di halaman Edukasi), biarkan label itu. Cukup hapus teks placeholder dan tambahkan `<img>`.
    - Di file dalam folder `edukasi/`, alamat foto diawali `../`, contoh `../assets/img/artikel-1.webp`.
    - Untuk foto yang tidak terlihat di layar pertama (semua selain foto hero), tambahkan `loading="lazy"` agar halaman lebih cepat dibuka.
    - Jangan memakai foto yang memperlihatkan logo Manulife. Pakai hanya foto milik sendiri atau yang berlisensi (lihat [bagian 8](#8-ketentuan-konten-asuransi)).
@@ -384,7 +385,31 @@ Setiap halaman punya `<title>` dan `<meta name="description">` di `<head>`. Kedu
 
 ### 5.9 Artikel
 
-Template halaman artikel belum dibuat. Bagian ini dilengkapi setelah template tersedia.
+Halaman Edukasi tidak memakai halaman artikel sendiri. Isinya rangkuman singkat dari sumber luar dengan format **kutip singkat + tautan**: satu atau dua kalimat, sumber lengkap, lalu tautan ke artikel aslinya yang terbuka di tab baru. Rangkuman dibagi tiga kategori yang memakai tata letak kategori halaman Solusi (`sol`, ditambah kelas `edu-cat`): `#dasar-asuransi`, `#panduan-polis`, dan `#tips-klaim`. Ketiga kartu artikel di Beranda menautkan ke kategori itu, dan jumlah sumbernya tertulis di kartu (misalnya "3 sumber").
+
+**Menambah sumber.** Salin satu `<article class="card source-card">` di `edukasi/index.html` ke kategori yang sesuai, lalu ganti isinya:
+
+```html
+<article class="card source-card">
+  <span class="tag">Media</span>                         <!-- Regulator, Media, atau Hukum -->
+  <p class="source-card__summary">Satu atau dua kalimat rangkuman.</p>
+  <p class="source-card__note">Catatan bila perlu, misalnya aturan yang sudah diganti.</p>  <!-- boleh dihapus -->
+  <p class="source-card__src">Sumber: <strong>Nama Penerbit</strong> &middot; <cite>&ldquo;Judul Artikel&rdquo;</cite> &middot; 1 Januari 2026</p>
+  <a class="link-arrow" href="https://alamat-artikel" target="_blank" rel="noopener">Buka sumber asli<span class="visually-hidden"> (tab baru)</span>
+    <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></a>
+</article>
+```
+
+Kalau jumlah sumber berubah, perbarui juga angka "... sumber" di kartu Beranda.
+
+Ketentuan isi (lihat juga [bagian 8](#8-ketentuan-konten-asuransi)):
+
+- **Tulis rangkuman dengan kata-kata sendiri.** Jangan menyalin paragraf dari artikelnya. Isinya harus sesuai artikel, tanpa menambah janji manfaat atau klaim.
+- **Sumber lengkap:** nama penerbit, judul persis, dan tanggal terbit. Tanggal penting karena aturan asuransi bisa berubah.
+- **Utamakan sumber resmi:** OJK (ojk.go.id, sikapiuangmu.ojk.go.id), media berita, dan portal hukum. Website perusahaan asuransi lain dan situs pembanding atau penjual asuransi (misalnya Chubb dan Cermati) tidak dipakai. Selain mengarahkan pengunjung ke pesaing, sumbernya juga tidak netral. Kalau klien tetap ingin memakainya, tanyakan dulu ke BDM atau TH-nya.
+- **Cek aturan yang dikutip.** Bila artikel menyebut POJK lama, beri catatan (`source-card__note`). Contohnya artikel Klinik Hukumonline tahun 2020 yang mengacu POJK 23/2015, yang sudah dicabut dan diganti POJK 8 Tahun 2024. Nomor aturan baru hanya ditulis setelah dicek langsung di [ojk.go.id](https://ojk.go.id/id/regulasi/).
+- Artikel yang mungkin hanya terbuka sebagian untuk pelanggan (misalnya Bisnis.com) diberi catatan.
+- Buka setiap tautan sesekali. Bila artikelnya hilang atau pindah alamat, ganti atau hapus kartunya.
 
 ---
 
@@ -428,7 +453,7 @@ Allow: /
 Sitemap: https://domainanda.com/sitemap.xml
 ```
 
-`sitemap.xml` (tambahkan halaman artikel setelah terbit):
+`sitemap.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -465,7 +490,7 @@ Checklist pengujian yang lebih rinci, beserta hasilnya, ada di `docs/checklist-q
 - [ ] Tidak ada lagi teks `[...]` di halaman (cari `[` di semua file).
 - [ ] Nomor WhatsApp asli sudah dipasang di `main.js` dan di semua HTML. Tombol WhatsApp dan formulir sudah dicoba, dan chat terbuka ke nomor yang benar.
 - [ ] Bagian yang tidak punya data (sertifikasi, media sosial, tonggak karier, dan sebagainya) sudah dihapus.
-- [ ] Semua tautan berfungsi dan tidak ada halaman putih (halaman artikel sudah dibuat).
+- [ ] Semua tautan berfungsi dan tidak ada halaman putih, termasuk tautan sumber di Edukasi (dibuka satu per satu).
 - [ ] Foto asli terpasang, sudah dikompres, dan punya teks `alt`.
 - [ ] Diuji di HP asli (Android, dan iPhone bila ada), serta di Chrome dan minimal satu browser lain.
 - [ ] Skor Lighthouse sudah dicek (Chrome: `F12` → tab Lighthouse) untuk Performance, Accessibility, Best Practices, dan SEO.

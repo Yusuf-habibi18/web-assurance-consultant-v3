@@ -424,6 +424,19 @@
 }
 
 .article-card__img { position: relative; }
+
+/* Edukasi: rangkuman sumber per kategori. Tata letaknya memakai .sol dari Solusi
+   (pembuka + ilustrasi di satu sisi, daftar kartu sumber di sisi lain, berselang kiri-kanan). */
+.edu-cat .sol__img { aspect-ratio: 16 / 9; } /* ilustrasi artikel berformat lebar */
+.source-list { display: grid; gap: 0.85rem; }
+.source-card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; padding: 1.35rem 1.5rem; }
+.source-card p { margin: 0; }
+.source-card .source-card__summary { color: var(--color-text); font-size: 0.98rem; }
+.source-card .source-card__note { padding-left: 0.75rem; border-left: 2px solid var(--color-border); font-size: 0.84rem; }
+.source-card .source-card__src { font-size: 0.84rem; }
+.source-card__src strong { color: var(--color-ink); font-weight: 600; }
+.source-card__src cite { font-style: normal; }
+
 /* ---------- Tanya Jawab ---------- */
 .faq-jump { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-bottom: 1.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--color-border); }
 .faq-jump a {
@@ -903,6 +916,10 @@
   .sol__intro > .sol__img { grid-row: 1 / span 2; }
   .sol__intro h2 { font-size: 1.45rem; }
   .sol__intro p { font-size: 0.92rem; }
+  /* Edukasi: labelnya lebih panjang, jadi dibuat selebar kartu di atas dan ilustrasi hanya sejajar judul
+     (seperti hero halaman teks), supaya label tidak terpotong dua baris */
+  .edu-cat.sol .sol__intro:has(.sol__img) > .eyebrow { grid-column: 1 / -1; }
+  .edu-cat .sol__intro > .sol__img { grid-row: 2; }
   .compare-card { padding: 1rem; }
   .compare-card > h3 { font-size: 1rem; }
   /* Perbandingan dua jenis: tetap berdampingan seperti di laptop */
@@ -944,6 +961,14 @@
   .ethics__card .tag { font-size: 0.6rem; }
   .ethics__list { margin-top: 1.1rem; gap: 0.75rem; }
   .ethics__list li { font-size: 0.88rem; }
+
+  /* --- Edukasi: kartu sumber tetap satu kolom (teksnya cukup panjang), hanya diperkecil --- */
+  .source-list { gap: 0.55rem; }
+  .source-card { gap: 0.45rem; padding: 0.9rem 1rem; }
+  .source-card .source-card__summary { font-size: 0.86rem; line-height: 1.6; }
+  .source-card .source-card__note,
+  .source-card .source-card__src { font-size: 0.76rem; line-height: 1.5; }
+  .source-card .link-arrow { font-size: 0.8rem; }
 
   /* --- Edukasi: artikel unggulan, gambar di kiri dan teks di kanan --- */
   .featured { grid-template-columns: 0.85fr 1fr; }
