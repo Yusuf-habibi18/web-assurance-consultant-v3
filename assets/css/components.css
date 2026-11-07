@@ -67,6 +67,11 @@
   font-size: 0.78rem;
   font-weight: 600;
 }
+/* Badge berhuruf kapital, untuk label jabatan di hero Beranda ("Personal Insurance Consultant") */
+.badge--caps { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+@media (max-width: 359px) {
+  .badge--caps { font-size: 0.66rem; letter-spacing: 0.05em; } /* HP sangat kecil: label tetap satu baris */
+}
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -97,8 +102,9 @@
    di dalamnya ikut berwarna. Semua pasangan warna lolos kontras teks 4,5:1. */
 .tone-rose  { --tone: #c2255c; --tone-soft: #fde7ef; } /* kesehatan */
 .tone-blue  { --tone: #2447c4; --tone-soft: #e8edfb; } /* jiwa */
-.tone-amber { --tone: #a24e05; --tone-soft: #fff0d9; } /* kendaraan */
+.tone-amber { --tone: #a24e05; --tone-soft: #fff0d9; } /* kendaraan; di Beranda: perencanaan keuangan */
 .tone-teal  { --tone: #0b7268; --tone-soft: #daf3ee; } /* properti & usaha */
+.tone-violet { --tone: #6a3fb8; --tone-soft: #efe8fb; } /* penyakit kritis (kontras 6,9:1 di putih) */
 
 /* ---------- Bilah info atas ----------
    Jam layanan dan kontak di atas header, supaya pengunjung tahu ada orang yang bisa dihubungi.
@@ -190,7 +196,9 @@
   color: transparent;
 }
 .site-footer .brand__accent { background-image: linear-gradient(100deg, #b4c8ff 0%, #8fb0ff 40%, #7fdcc8 100%); }
-.brand__tagline { font: 600 0.58rem/1 var(--font-body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); }
+/* Tagline (jabatan) di bawah nama. Boleh dua baris (dipisah <br> di HTML); di layar yang sangat sempit
+   turun baris lagi sendiri, karena logo boleh menyempit sampai selebar kata terpanjang tagline. */
+.brand__tagline { font: 600 0.58rem/1.4 var(--font-body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); white-space: normal; }
 .brand__tagline:empty { display: none; } /* tagline dikosongkan: nama tetap di tengah lambang */
 @media (forced-colors: active) {
   .brand__accent { background: none; color: LinkText; }
@@ -222,8 +230,8 @@
 }
 .nav__link:hover { color: var(--color-accent); }
 .nav__link:hover::after,
-.nav__link[aria-current="page"]::after { transform: scaleX(1); }
-.nav__link[aria-current="page"] { color: var(--color-ink); font-weight: 600; }
+.nav__link[aria-current]::after { transform: scaleX(1); }
+.nav__link[aria-current] { color: var(--color-ink); font-weight: 600; }
 
 .site-header__actions { display: flex; align-items: center; gap: 0.6rem; }
 .site-header__cta { display: none; }
@@ -263,7 +271,7 @@
 }
 .nav.is-open .nav__list { flex-direction: column; align-items: stretch; gap: 0; }
 .nav.is-open .nav__link { display: block; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--color-border); font-size: 1.05rem; font-weight: 600; }
-.nav.is-open .nav__link[aria-current="page"] { color: var(--color-accent); }
+.nav.is-open .nav__link[aria-current] { color: var(--color-accent); }
 .nav.is-open .nav__link::after { display: none; }
 @keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 .nav.is-open .nav__cta { display: flex; margin-top: 1.25rem; }
@@ -300,6 +308,11 @@ body.nav-open::after {
   gap: 1rem;
 }
 .section-head--row > div { max-width: 40rem; }
+/* Pindah baris yang hanya berlaku di tablet dan laptop (contoh: judul hero Beranda); di HP judul mengalir biasa
+   supaya tidak menambah baris */
+@media (max-width: 599px) {
+  .br-lebar { display: none; }
+}
 @media (max-width: 599px) {
   .section-head { margin-bottom: 1.5rem; }
   .eyebrow { margin-bottom: 0.75rem; }

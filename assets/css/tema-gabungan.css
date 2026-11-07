@@ -47,7 +47,8 @@
 .tone-rose,
 .tone-blue,
 .tone-amber,
-.tone-teal {
+.tone-teal,
+.tone-violet {
   --tone: var(--color-accent);
   --tone-soft: var(--color-accent-soft);
 }
@@ -212,8 +213,8 @@ h1 { font-weight: 600; letter-spacing: -0.03em; }
 }
 .nav__list { gap: 0.7rem; }
 .nav__link { font-size: 0.85rem; font-weight: 600; } /* Manrope lebih lebar dari Inter */
-.nav__link[aria-current="page"],
-.nav.is-open .nav__link[aria-current="page"] { color: var(--color-accent); }
+.nav__link[aria-current],
+.nav.is-open .nav__link[aria-current] { color: var(--color-accent); }
 .nav__link::after { background: var(--gold-deep); }
 
 /* Menu HP: panel bersudut tepat di bawah kapsul */

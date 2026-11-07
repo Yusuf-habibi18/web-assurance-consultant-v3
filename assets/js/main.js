@@ -5,7 +5,7 @@
 const SITE = {
   // Placeholder: ganti dengan nomor WhatsApp klien (format internasional, tanpa + atau 0 di depan).
   whatsapp: "6281200000000",
-  waMessage: "Halo, saya ingin konsultasi gratis mengenai perlindungan asuransi.",
+  waMessage: "Hello, I’d like a free consultation about insurance protection.",
 };
 
 function buildWaUrl(message) {
@@ -24,7 +24,7 @@ const nav = document.querySelector("#site-nav");
 if (navToggle && nav) {
   const setOpen = (open) => {
     navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     nav.classList.toggle("is-open", open);
     document.body.classList.toggle("nav-open", open); // menggelapkan halaman di belakang menu
   };
@@ -70,7 +70,7 @@ document.querySelectorAll('use[href="#i-arrow"]').forEach((use) => {
 });
 
 // Slider kartu di HP: titik penanda posisi di bawahnya (di layar lebar disembunyikan CSS).
-document.querySelectorAll(".grid-4, .grid-3, .feature-grid, .why__list").forEach((slider) => {
+document.querySelectorAll(".grid-4, .grid-3, .feature-grid, .why__list, .journey__gallery").forEach((slider) => {
   const items = slider.children;
   if (items.length < 2) return;
   const dots = document.createElement("div");
@@ -140,7 +140,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   const targets = document.querySelectorAll(
     ".section-head, .card, .profile, .cta-band, .featured, .ethics, .accordion__item, " +
     ".pyramid__layer, .callout, .claim-band, .channel, .consult-steps li, .consult-alt, .prose > *, " +
-    ".why__item, .steps__item, .calc-promo, .site-footer__grid > *"
+    ".why__item, .steps__item, .approach__item, .calc-promo, .timeline li, .journey__photo, .site-footer__grid > *"
   );
 
   const show = (el) => {
@@ -221,6 +221,25 @@ if (!reduceMotion && "IntersectionObserver" in window) {
       requestAnimationFrame(tick);
     }, { threshold: 0.35 });
     popObserver.observe(promo);
+  });
+}
+
+// Beranda: item menu bagian yang sedang dibaca ditandai (aria-current="true", gayanya sama dengan halaman aktif).
+// Hanya berlaku untuk tautan menu yang menuju bagian di halaman yang sama (href diawali #).
+const navSpyLinks = document.querySelectorAll('#site-nav .nav__link[href^="#"]');
+if (navSpyLinks.length && "IntersectionObserver" in window) {
+  const navSpy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navSpyLinks.forEach((a) => {
+        if (a.hash === "#" + entry.target.id) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  navSpyLinks.forEach((a) => {
+    const section = document.getElementById(a.hash.slice(1));
+    if (section) navSpy.observe(section);
   });
 }
 

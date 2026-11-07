@@ -43,7 +43,8 @@
 .tone-rose,
 .tone-blue,
 .tone-amber,
-.tone-teal {
+.tone-teal,
+.tone-violet {
   --tone: var(--color-accent);
   --tone-soft: var(--color-accent-soft);
 }
@@ -191,9 +192,9 @@ h1 { font-weight: 600; letter-spacing: -0.03em; }
 .nav__list { gap: 0.7rem; }
 .nav__link { font-size: 0.85rem; font-weight: 600; } /* Manrope lebih lebar dari Inter: menu tetap muat satu baris di 1200 px */
 .site-header__cta { padding-inline: 1rem; letter-spacing: 0.08em; }
-.nav__link[aria-current="page"] { color: var(--color-accent); }
+.nav__link[aria-current] { color: var(--color-accent); }
 .nav__link::after { background: var(--gold-deep); }
-.nav.is-open .nav__link[aria-current="page"] { color: var(--color-accent); }
+.nav.is-open .nav__link[aria-current] { color: var(--color-accent); }
 
 /* Logo teks: serif, nama belakang miring emas, lambang navy dengan perisai emas */
 .brand__mark {

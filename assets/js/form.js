@@ -3,18 +3,18 @@
 
 const RULES = {
   nama: (v) => {
-    if (!v) return "Nama wajib diisi.";
-    if (v.length < 2) return "Nama minimal 2 karakter.";
+    if (!v) return "Please enter your name.";
+    if (v.length < 2) return "Your name must be at least 2 characters.";
     return "";
   },
   whatsapp: (v) => {
-    if (!v) return "Nomor WhatsApp wajib diisi.";
+    if (!v) return "Please enter your WhatsApp number.";
     const digits = v.replace(/[\s.-]/g, "");
-    if (!/^(\+62|62|0)8\d{7,11}$/.test(digits)) return "Gunakan nomor Indonesia yang valid, contoh 0812 3456 7890.";
+    if (!/^(\+62|62|0)8\d{7,11}$/.test(digits)) return "Please use a valid Indonesian number, e.g. 0812 3456 7890.";
     return "";
   },
-  keperluan: (v) => (v ? "" : "Pilih salah satu keperluan."),
-  pesan: (v) => (v.length > 1000 ? "Pesan maksimal 1000 karakter." : ""),
+  keperluan: (v) => (v ? "" : "Please choose a topic."),
+  pesan: (v) => (v.length > 1000 ? "Your message can be up to 1,000 characters." : ""),
 };
 
 function setError(field, message) {
@@ -59,26 +59,26 @@ document.querySelectorAll("[data-wa-form]").forEach((form) => {
     const data = new FormData(form);
     const keperluan = form.querySelector("[name=keperluan]");
     const lines = [
-      "Halo, saya ingin berkonsultasi.",
+      "Hello, I’d like to arrange a consultation.",
       "",
-      "Nama: " + data.get("nama").trim(),
-      "No. WhatsApp: " + data.get("whatsapp").trim(),
-      "Keperluan: " + keperluan.options[keperluan.selectedIndex].text,
+      "Name: " + data.get("nama").trim(),
+      "WhatsApp number: " + data.get("whatsapp").trim(),
+      "Topic: " + keperluan.options[keperluan.selectedIndex].text,
     ];
     const pesan = (data.get("pesan") || "").trim();
-    if (pesan) lines.push("Pesan: " + pesan);
+    if (pesan) lines.push("Message: " + pesan);
 
     const url = buildWaUrl(lines.join("\n"));
     window.open(url, "_blank", "noopener");
 
     status.innerHTML = "";
     const text = document.createElement("p");
-    text.innerHTML = "<strong>Terima kasih.</strong> WhatsApp sudah dibuka di tab baru dengan pesan Anda. Tekan kirim di WhatsApp untuk menyelesaikan.";
+    text.innerHTML = "<strong>Thank you.</strong> WhatsApp has opened in a new tab with your message. Press send in WhatsApp to finish.";
     const fallback = document.createElement("a");
     fallback.href = url;
     fallback.target = "_blank";
     fallback.rel = "noopener noreferrer";
-    fallback.textContent = "WhatsApp tidak terbuka? Klik di sini.";
+    fallback.textContent = "WhatsApp didn’t open? Click here.";
     status.append(text, fallback);
     status.hidden = false;
     form.reset();

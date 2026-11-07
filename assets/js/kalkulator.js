@@ -52,21 +52,21 @@ function renderBlock(block, r) {
   block.querySelector("[data-out=punya]").textContent = formatRp(r.punya);
   block.querySelector("[data-out=meter]").style.width = persen + "%";
   block.querySelector("[data-out=caption]").textContent = covered
-    ? "Perlindungan yang ada sudah menutup estimasi kebutuhan ini."
-    : "Yang sudah dimiliki baru menutup " + persen + "% dari estimasi kebutuhan.";
+    ? "Your existing coverage already meets this estimated need."
+    : "Your existing coverage meets only " + persen + "% of the estimated need.";
 }
 
 function buildCalcMessage(hasil, pemulihan) {
-  const lines = ["Halo, saya sudah mencoba kalkulator protection gap di website dan ingin mendiskusikan hasilnya."];
+  const lines = ["Hello, I tried the protection gap calculator on your website and would like to discuss the results."];
   const bagian = (judul, r) => lines.push(
     "",
     judul,
-    "- Estimasi kebutuhan: " + formatRp(r.butuh),
-    "- Sudah dimiliki: " + formatRp(r.punya),
-    "- Kesenjangan: " + formatRp(r.gap)
+    "- Estimated needs: " + formatRp(r.butuh),
+    "- Existing coverage: " + formatRp(r.punya),
+    "- Gap: " + formatRp(r.gap)
   );
-  if (hasil.jiwa) bagian("Asuransi jiwa", hasil.jiwa);
-  if (hasil.kritis) bagian("Penyakit kritis (" + pemulihan + " tahun penghasilan)", hasil.kritis);
+  if (hasil.jiwa) bagian("Life insurance", hasil.jiwa);
+  if (hasil.kritis) bagian("Critical illness (" + pemulihan + " years of income)", hasil.kritis);
   return lines.join("\n");
 }
 
@@ -83,7 +83,7 @@ document.querySelectorAll("[data-calc]").forEach((form) => {
   const checkPeriode = () => {
     const ok = periodeValid(Number(periode.value));
     periode.setAttribute("aria-invalid", ok ? "false" : "true");
-    periodeError.textContent = ok ? "" : "Isi angka 1 sampai 40 tahun.";
+    periodeError.textContent = ok ? "" : "Enter a number from 1 to 40 years.";
     periodeError.hidden = ok;
   };
   periode.addEventListener("input", () => {
@@ -109,8 +109,8 @@ document.querySelectorAll("[data-calc]").forEach((form) => {
     clearTimeout(announceTimer);
     announceTimer = setTimeout(() => {
       const teks = [];
-      if (hasil.jiwa) teks.push("Kesenjangan asuransi jiwa " + formatRp(hasil.jiwa.gap) + ".");
-      if (hasil.kritis) teks.push("Kesenjangan penyakit kritis " + formatRp(hasil.kritis.gap) + ".");
+      if (hasil.jiwa) teks.push("Life insurance gap " + formatRp(hasil.jiwa.gap) + ".");
+      if (hasil.kritis) teks.push("Critical illness gap " + formatRp(hasil.kritis.gap) + ".");
       status.textContent = teks.join(" ");
     }, 1000);
   };
