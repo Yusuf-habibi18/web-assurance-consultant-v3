@@ -136,11 +136,48 @@
 .why__item .card__icon { margin: 0; }
 .why__item h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
 .why__item p { margin: 0; font-size: 0.95rem; color: var(--color-muted); }
+/* Beranda: Why Work With Me berada di dalam bagian About Me, di bawah kartu profil (digabung 8 November 2026) */
+/* Beranda: Client Testimonials di bawah kartu profil, sebelum Why Work With Me (8 November 2026) */
+.about-testi { margin-top: clamp(2rem, 5vw, 4rem); }
+.about-why { margin-top: clamp(2rem, 5vw, 4rem); }
 @media (min-width: 700px) {
   .why__list { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 1000px) {
   .why { grid-template-columns: 0.8fr 1.45fr; gap: 3.5rem; }
+}
+
+/* ---------- Foto di kartu (pengganti ikon topik, 8 November 2026) ----------
+   Atas permintaan klien, kotak ikon di kartu topik diganti foto asli (CC0 dari StockSnap, daftar sumber di README).
+   Foto ada di atas isi kartu dengan sudut membulat, seperti gambar kartu artikel. Dipakai di Area of Expertise dan
+   Why Work With Me (Beranda), alasan di Tentang Saya, kartu fitur Solusi, dan banner kalkulator.
+   Di daftar kendaraan Solusi (.list-stack) foto menjadi gambar kecil di kiri. File foto 720 x 480 (3:2);
+   bingkainya 16:10, jadi tepi atas-bawah sedikit terpotong. */
+.card__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  margin-bottom: 1.1rem;
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--color-accent-soft); /* warna sementara sebelum foto selesai dimuat */
+}
+.why__item:has(> .card__photo) { grid-template-columns: none; gap: 0; align-content: start; }
+.list-stack .card__photo { width: 112px; aspect-ratio: 4 / 3; margin: 0; }
+.calc-promo .card__photo { width: min(240px, 100%); border-radius: calc(var(--radius) - 4px); }
+/* Nomor kartu Expertise (01-05) jatuh di atas foto: diberi kapsul putih supaya tetap terbaca */
+.card:has(> .card__photo) .card__num {
+  top: 2.2rem;
+  right: 2.2rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  background: #fff;
+}
+@media (max-width: 599px) {
+  .card__photo { margin-bottom: 0.7rem; border-radius: calc(var(--radius) - 8px); }
+  .list-stack .card__photo { width: 84px; margin: 0; }
+  .card:has(> .card__photo) .card__num { top: 1.45rem; right: 1.35rem; padding: 0.25rem 0.4rem; }
 }
 
 /* ---------- Artikel ---------- */
@@ -377,12 +414,16 @@
 .edu-hero__art { display: block; width: min(240px, 72%); height: auto; margin: 1.75rem auto 0; }
 /* Bila ilustrasinya bergerak dan dibungkus <picture> (Kalkulator, Edukasi, Tanya Jawab, Hubungi Kami, dan Konsultasi), kelas edu-hero__art dipasang di <picture> */
 .edu-hero__art > img { display: block; width: 100%; height: auto; }
+/* Halaman Professional Journey memakai foto bersama tim (melebar, 4:3) sebagai pengganti ilustrasi hero.
+   Lebih lebar dari ilustrasi supaya wajah di foto rombongan tetap terlihat. */
+.edu-hero__photo { width: min(440px, 100%); aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: 0 18px 40px -26px rgba(10, 26, 47, 0.5); }
 .edu-hero .container > .edu-hero__art { animation: rise 0.9s var(--ease) 0.3s both, float-soft 6s ease-in-out 1.5s infinite; }
 @media (min-width: 900px) {
   .edu-hero .container { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 3rem; align-items: center; }
   .edu-hero .container > * { grid-column: 1; }
   .edu-hero .container > .badge { justify-self: start; }
   .edu-hero .container > .edu-hero__art { grid-column: 2; grid-row: 1 / span 3; width: 300px; margin: -1rem 0; }
+  .edu-hero .container > .edu-hero__photo { width: clamp(320px, 36vw, 440px); margin: 0; }
 }
 
 /* Kotak foto berisi ilustrasi: dipusatkan, dan di HP tetap 4:3 supaya kaki/kepala tokoh tidak terpotong */
@@ -428,6 +469,18 @@
 /* Edukasi: rangkuman sumber per kategori. Tata letaknya memakai .sol dari Solusi
    (pembuka + ilustrasi di satu sisi, daftar kartu sumber di sisi lain, berselang kiri-kanan). */
 .edu-cat .sol__img { aspect-ratio: 16 / 9; } /* ilustrasi artikel berformat lebar */
+/* Laptop: kolom pembuka + gambar ikut turun (sticky) selama kartu sumber di sebelahnya dibaca, supaya tidak ada
+   ruang kosong panjang di bawah gambar bila daftar sumbernya lebih panjang (8 November 2026; Insurance Basics berisi
+   3 sumber: kolom kiri sekitar 440 px, kolom kanan sekitar 850 px di 1366 px). Kolom kiri tertinggi sekitar 485 px,
+   jadi efek ini hanya aktif bila tinggi layar minimal 620 px; di layar pendek atau saat browser di-zoom, kolom kiri
+   kembali diam supaya gambar tidak terpotong. Tablet dan HP tidak berubah (tata letaknya satu kolom). */
+@media (min-width: 900px) and (min-height: 620px) {
+  .edu-cat > .sol__intro {
+    position: sticky;
+    top: calc(var(--header-h, 84px) + 0.5rem); /* tepat di bawah header yang menempel */
+    align-self: start;
+  }
+}
 .source-list { display: grid; gap: 0.85rem; }
 .source-card { display: flex; flex-direction: column; align-items: flex-start; gap: 0.65rem; padding: 1.35rem 1.5rem; }
 .source-card p { margin: 0; }
@@ -747,9 +800,12 @@
   .profile__facts .icon { width: 1.35em; height: 1.35em; }
 }
 
-/* ---------- Beranda: bagian yang dituju menu ----------
-   Menu atas loncat ke bagian Beranda (#about, #expertise, dst.); header yang menempel tidak menutupi awal bagiannya. */
+/* ---------- Beranda: bagian yang dituju tautan ----------
+   Menu Journey dan tautan lain ke bagian Beranda (#expertise, #why, #testimonials, dst.); header yang menempel
+   tidak menutupi awal bagiannya. */
 main > section[id],
+#why,
+#testimonials,
 #formulir { scroll-margin-top: var(--header-h, 84px); }
 
 /* ---------- Hero profil (Beranda) ----------
@@ -840,8 +896,10 @@ main > section[id],
 }
 
 /* ---------- Perjalanan profesional (Beranda) ----------
-   Judul di kiri dan garis waktu di kanan, lalu deretan empat foto kegiatan yang tingginya sama: lebar kolom
-   5 : 3 : 5 : 3 mengikuti rasio fotonya (4:3, 4:5, 4:3, 4:5). Di HP deretan foto digeser ke samping (aturan di bawah). */
+   Judul di kiri dan garis waktu di kanan, lalu tujuh foto kegiatan dalam dua baris (4 + 3). Lebar tiap foto
+   sebanding rasionya (flex-grow = lebar : tinggi), jadi foto sebaris tingginya sama. Baris dipisah ::after
+   selebar penuh yang diletakkan (order) di antara foto ke-4 dan ke-5. Di HP semua foto digeser ke samping
+   dalam satu deret (aturan di bawah). */
 .journey { display: grid; gap: 1.5rem 3rem; align-items: start; }
 .journey .section-head { margin-bottom: 0; }
 .journey .section-head .link-arrow { margin-top: 1.1rem; }
@@ -856,11 +914,28 @@ main > section[id],
   left: calc(1.125rem - 1px);
   border-left: 2px dashed color-mix(in srgb, var(--color-accent) 30%, transparent);
 }
-.journey__gallery { display: grid; grid-template-columns: 5fr 3fr 5fr 3fr; gap: clamp(0.75rem, 1.5vw, 1.25rem); margin-top: clamp(2rem, 4vw, 3rem); }
-.journey__photo { border-radius: var(--radius-lg); }
+.journey__gallery {
+  --journey-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--journey-gap);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.journey__gallery::after { content: ""; flex-basis: 100%; height: var(--journey-gap); order: 2; }
+/* padding 0: padding .ph akan menambah lebar yang sama ke tiap foto sehingga tingginya tidak lagi sama */
+.journey__photo { flex: 1 1 0; min-width: 0; padding: 0; order: 1; border-radius: var(--radius-lg); }
+.journey__photo:nth-child(n + 5) { order: 3; }
+/* Galeri enam foto (halaman Professional Journey): dua baris 3 + 3 */
+.journey__gallery--3-3 .journey__photo:nth-child(n + 4) { order: 3; }
 .journey__photo > img { object-position: center; }
-.journey__photo--wide { aspect-ratio: 4 / 3; }
-.journey__photo--tall { aspect-ratio: 4 / 5; }
+.journey__photo--wide { flex-grow: 1.3333; aspect-ratio: 4 / 3; }
+.journey__photo--tall { flex-grow: 0.8; aspect-ratio: 4 / 5; }
+.journey__photo--pano { flex-grow: 1.7778; aspect-ratio: 16 / 9; }
+/* Client Testimonials berada di dalam Professional Journey, di bawah foto (digabung 8 November 2026) */
+.journey__testi { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+/* Di halaman Professional Journey galeri langsung di bawah judul section */
+.section-head + .journey__gallery { margin-top: 0; }
 @media (min-width: 760px) {
   .journey { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
@@ -971,6 +1046,8 @@ main > section[id],
   .hero__intro { grid-column: 1; grid-row: 3; align-self: start; font-size: 0.82rem; line-height: 1.55; }
   .hero--profile .hero__grid > .hero__media { grid-column: 2; grid-row: 2 / span 2; align-self: stretch; margin-top: 0.9rem; }
   .hero__portrait { height: 100%; min-height: 170px; max-width: none; aspect-ratio: auto; }
+  /* Hero Solusi: foto potret tetap 4:5 di samping judul (tidak direntangkan seperti hero profil Beranda) */
+  .hero:not(.hero--profile) .hero__portrait { height: auto; min-height: 0; aspect-ratio: 4 / 5; }
   .hero--profile .hero__grid h1 { grid-column: 1 / -1; grid-row: 4; margin: 1.2rem 0 0.6rem; padding-top: 1.1rem; border-top: 1px solid var(--color-border); font-size: 1.55rem; }
   .hero__sub { grid-row: 5; margin-bottom: 0.45rem; font-size: 0.98rem; }
   .hero--profile .hero__lead { grid-row: 6; }
@@ -1038,12 +1115,13 @@ main > section[id],
   .approach__item h3 { font-size: 0.98rem; margin-bottom: 0.25rem; }
   .approach__item p { font-size: 0.86rem; line-height: 1.55; }
 
-  /* --- Perjalanan profesional: garis waktu diperkecil, tiga foto digeser ke samping dengan tinggi sama --- */
+  /* --- Perjalanan profesional: garis waktu diperkecil, semua foto digeser ke samping dengan tinggi sama --- */
   .journey .timeline { gap: 1rem; }
   .journey .timeline h3 { font-size: 0.92rem; }
   .journey .timeline p { font-size: 0.82rem; }
   .journey .timeline li:not(:last-child)::before { bottom: -0.85rem; }
   .journey__gallery {
+    display: grid;
     grid-template-columns: none;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
@@ -1057,9 +1135,11 @@ main > section[id],
     padding-inline: var(--gutter);
   }
   .journey__gallery::-webkit-scrollbar { display: none; }
+  .journey__gallery::after { display: none; }
   .journey__photo { height: 180px; border-radius: var(--radius); scroll-snap-align: start; }
   .journey__photo--wide { width: 240px; }
   .journey__photo--tall { width: 144px; }
+  .journey__photo--pano { width: 320px; }
 
   /* --- Langkah: tiga kolom dengan garis putus-putus mendatar --- */
   .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }

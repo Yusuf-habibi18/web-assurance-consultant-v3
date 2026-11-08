@@ -15,11 +15,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,100&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/pages.css">
   <link rel="stylesheet" href="assets/css/tema-asuransi.css">
+  <link rel="stylesheet" href="assets/css/tema-premium.css">
 </head>
 <body>
 
@@ -31,6 +32,7 @@
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-wa" viewBox="-1.5 -1.5 27 27"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
   <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
   <symbol id="i-lifebuoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></symbol>
@@ -46,13 +48,13 @@
 
 <a class="skip-link" href="#konten">Skip to content</a>
 
-<!-- Bilah info atas (semua halaman). GANTI [Jam operasional], [nomor], dan [email] dengan data klien. -->
+<!-- Bilah info atas (semua halaman). Jam layanan dan email dari klien (8 November 2026). GANTI [nomor] dengan nomor WhatsApp klien. -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Service hours: </span>[Jam operasional]</span></p>
+    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Service hours: </span>08:00&ndash;17:00 WIB</span></p>
     <ul class="topbar__contact">
-      <li><a data-wa href="https://wa.me/6281200000000"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp [nomor]</a></li>
-      <li class="topbar__email"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>[email]</li>
+      <li><a data-wa href="https://wa.me/6281200000000"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp [nomor]</a></li>
+      <li class="topbar__email"><a href="mailto:aritsfauzii@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>aritsfauzii@gmail.com</a></li>
     </ul>
   </div>
 </div>
@@ -64,14 +66,12 @@
     <nav class="nav" id="site-nav" aria-label="Main navigation">
       <ul class="nav__list">
         <li><a class="nav__link" href="index.html">Home</a></li>
-        <li><a class="nav__link" href="index.html#about" aria-current="true">About</a></li>
-        <li><a class="nav__link" href="index.html#expertise">Expertise</a></li>
-        <li><a class="nav__link" href="index.html#approach">Approach</a></li>
-        <li><a class="nav__link" href="index.html#why">Why Me</a></li>
-        <li><a class="nav__link" href="index.html#journey">Journey</a></li>
-        <li><a class="nav__link" href="index.html#insight">Insight</a></li>
-        <li><a class="nav__link" href="index.html#testimonials">Testimonials</a></li>
-        <li><a class="nav__link" href="index.html#contact">Contact</a></li>
+        <li><a class="nav__link" href="tentang.html" aria-current="page">About</a></li>
+        <li><a class="nav__link" href="solusi.html">Expertise</a></li>
+        <li><a class="nav__link" href="perjalanan.html">Journey</a></li>
+        <li><a class="nav__link" href="kalkulator.html">Calculator</a></li>
+        <li><a class="nav__link" href="edukasi/index.html">Insight</a></li>
+        <li><a class="nav__link" href="kontak.html">Contact</a></li>
       </ul>
       <a class="btn btn--primary nav__cta" data-wa href="https://wa.me/6281200000000">Free Consultation</a>
     </nav>
@@ -100,12 +100,13 @@
         <h1>Dedicated to Helping You <span class="text-gradient">Understand Your Protection Options.</span></h1>
         <p class="about-hero__lead">Get to know my background, how I work, and my service commitments before you decide to consult with me.</p>
 
-        <!-- GANTI: tampilkan tiap kotak HANYA jika datanya dari klien dan terverifikasi; hapus kotak yang tidak ada datanya -->
+        <!-- Kotak Certification dan License dari kartu lisensi AAJI klien (8 November 2026; berlaku s.d. 1 Juli 2028).
+             GANTI: kotak Experience HANYA jika datanya dari klien dan terverifikasi; hapus kotaknya bila tidak ada data -->
         <div class="stat-row">
           <div class="stat">
             <span class="stat__label"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Certi&shy;fication</span>
-            <strong>[Sertifikasi]</strong>
-            <small>[Keterangan]</small>
+            <strong>Life Insurance Agent</strong>
+            <small>Also certified for unit link products</small>
           </div>
           <div class="stat">
             <span class="stat__label"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>Experi&shy;ence</span>
@@ -113,9 +114,9 @@
             <small>[Bidang pengalaman]</small>
           </div>
           <div class="stat">
-            <span class="stat__label"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>Member&shy;ship</span>
-            <strong>[Asosiasi / izin]</strong>
-            <small>[Keterangan]</small>
+            <span class="stat__label"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>License</span>
+            <strong>No. 16429501</strong>
+            <small>Agent license from <abbr title="Asosiasi Asuransi Jiwa Indonesia" lang="id">AAJI</abbr></small>
           </div>
         </div>
       </div>
@@ -165,35 +166,35 @@
     </div>
   </section>
 
-  <!-- Nilai -->
-  <section class="section" aria-labelledby="judul-nilai">
+  <!-- Why Work With Me: teks dari klien (7 November 2026), sama dengan Beranda. Menggantikan "Four Values in Every
+       Consultation" (usulan awal yang belum dikonfirmasi klien) saat Why Me digabung ke About (8 November 2026). -->
+  <section class="section" id="why" aria-labelledby="judul-nilai">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Core values</span>
-        <h2 id="judul-nilai">Four Values in Every Consultation</h2>
-        <p>The principles I follow when helping you choose protection.</p>
+        <span class="eyebrow">Why Work With Me</span>
+        <h2 id="judul-nilai">A Different Approach to Financial Protection</h2>
+        <p>I believe every protection decision should begin with understanding, not pressure.</p>
       </div>
-      <!-- Teks di bawah usulan awal; konfirmasi dengan klien -->
       <div class="grid-4">
         <article class="card">
-          <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-scale"/></svg></span>
-          <h3>Needs Before Products</h3>
-          <p>Advice starts from your circumstances, dependents, and goals, not from a product to sell.</p>
+          <img class="card__photo" src="assets/img/foto/why-personal.webp" alt="" width="720" height="480" loading="lazy" decoding="async">
+          <h3>Person&shy;alized Consul&shy;tation</h3>
+          <p>Every individual has different needs. I focus on solutions that take each person&rsquo;s circumstances and priorities into account.</p>
         </article>
         <article class="card">
-          <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></span>
-          <h3>Transparent Explanations</h3>
-          <p>Benefits, exclusions, and key terms are explained before you decide.</p>
+          <img class="card__photo" src="assets/img/foto/why-santai.webp" alt="" width="720" height="480" loading="lazy" decoding="async">
+          <h3>No Pressure, Just Under&shy;standing</h3>
+          <p>You deserve a clear explanation and the time to consider every option, without any pressure to make a decision.</p>
         </article>
         <article class="card">
-          <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
-          <h3>Within Your Budget</h3>
-          <p>Protection is structured to stay affordable without straining your family’s finances.</p>
+          <img class="card__photo" src="assets/img/foto/why-jangka-panjang.webp" alt="" width="720" height="480" loading="lazy" decoding="async">
+          <h3>Long-Term Relation&shy;ship</h3>
+          <p>My commitment doesn&rsquo;t end with your application. It also includes ongoing service support for as long as you are a policyholder, in accordance with the applicable terms.</p>
         </article>
         <article class="card">
-          <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-lifebuoy"/></svg></span>
-          <h3>Ongoing Support</h3>
-          <p>You can still reach me whenever you need information after the consultation.</p>
+          <img class="card__photo" src="assets/img/foto/why-transparan.webp" alt="" width="720" height="480" loading="lazy" decoding="async">
+          <h3>Trans&shy;parency &amp; Trust</h3>
+          <p>Information on benefits, costs, risks, and terms is shared openly, so every decision is made with a clear understanding.</p>
         </article>
       </div>
     </div>
@@ -211,7 +212,7 @@
         <li class="steps__item">
           <span class="steps__num" aria-hidden="true">1</span>
           <div class="steps__body">
-            <h3>Understanding Your Situation</h3>
+            <h3>Under&shy;standing Your Situation</h3>
             <p>Listening to your family or business situation, your existing coverage, and what you want to protect.</p>
           </div>
         </li>
@@ -256,11 +257,11 @@
             </li>
           </ul>
         </div>
-        <!-- GANTI: tampilkan nomor izin/kredensial HANYA jika dari klien dan terverifikasi; jika tidak ada, hapus kartu ini -->
+        <!-- Nomor lisensi dari kartu lisensi AAJI klien (8 November 2026; berlaku s.d. 1 Juli 2028, perbarui bila diperpanjang) -->
         <div class="ethics__card">
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
           <p><strong>Arits Irham</strong></p>
-          <p class="tag">[Nomor izin / kredensial]</p>
+          <p class="tag">AAJI license no. 16429501</p>
         </div>
       </div>
     </div>
@@ -270,12 +271,12 @@
   <section class="section" aria-labelledby="judul-cta" style="padding-top:0">
     <div class="container">
       <div class="cta-band cta-band--center">
-        <span class="eyebrow" style="color:#7fd6c0">First step</span>
+        <span class="eyebrow">First step</span>
         <h2 id="judul-cta">Ready to Discuss Your Protection Plan?</h2>
         <p>There’s no obligation to buy. Tell me about your needs, and I’ll help explain the options available.</p>
         <div class="cta-band__actions">
           <a class="btn btn--wa" data-wa href="https://wa.me/6281200000000">
-            <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+            <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
             Contact via WhatsApp
           </a>
           <a class="btn btn--ghost-light" href="solusi.html">
@@ -285,7 +286,7 @@
         </div>
         <p class="cta-band__meta">
           <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
-          [Jam operasional] &bull; No consultation fee
+          08:00&ndash;17:00 WIB &bull; No consultation fee
         </p>
       </div>
     </div>
@@ -307,6 +308,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="tentang.html">About Me</a></li>
           <li><a href="solusi.html">Area of Expertise</a></li>
+          <li><a href="perjalanan.html">Professional Journey</a></li>
           <li><a href="kalkulator.html">Protection Gap Calculator</a></li>
           <li><a href="edukasi/index.html">Financial Insight</a></li>
           <li><a href="kontak.html">Contact Me</a></li>
@@ -315,10 +317,10 @@
       <div>
         <h3>Contact</h3>
         <ul class="contact-list">
-          <li><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><a data-wa href="https://wa.me/6281200000000">WhatsApp: [nomor]</a></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>[email]</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>[alamat kantor]</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>[Jam operasional]</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg><a data-wa href="https://wa.me/6281200000000">WhatsApp: [nomor]</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:aritsfauzii@gmail.com">aritsfauzii@gmail.com</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Jl. Jenderal Sudirman No. 45&ndash;46, Karet Semanggi, Setiabudi, Jakarta Selatan 12930</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>08:00&ndash;17:00 WIB</span></li>
         </ul>
       </div>
     </div>
@@ -340,7 +342,7 @@
 </footer>
 
 <a class="wa-float" data-wa href="https://wa.me/6281200000000" aria-label="Chat WhatsApp">
-  <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span>Chat WhatsApp</span>
+  <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg><span>Chat WhatsApp</span>
 </a>
 
 <script src="assets/js/main.js"></script>

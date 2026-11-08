@@ -1,0 +1,822 @@
+/* Tema premium: navy gelap + champagne (8 November 2026).
+   Atas permintaan klien, website dibuat lebih profesional dan "business" mengikuti referensi bergaya
+   luxury & elegant: hampir semua bagian navy gelap, aksen emas champagne, garis tipis dan lingkaran outline
+   sebagai hiasan. Huruf: "serif lembut + sans" atas permintaan, yaitu judul Fraunces dengan sumbu SOFT 100
+   (ujung huruf membulat) dan teks isi Inter. Riwayat font, 8 November 2026: Cinzel + Inter (huruf kapital
+   seperti referensi) -> kembali ke Plus Jakarta Sans -> Cinzel + Inter lagi -> Fraunces lembut + Inter.
+   Dimuat PALING AKHIR, sesudah tema-asuransi.css: tata letak, animasi, dan versi HP tetap dari tema-asuransi,
+   file ini mengganti warna, huruf, dan hiasan. Untuk kembali ke tema terang, hapus baris tema-premium.css
+   di setiap halaman dan kembalikan baris font Plus Jakarta Sans (README bagian 5.4). */
+
+/* ---------- Token ---------- */
+:root,
+.theme-dark,
+.topbar,
+.hero,
+.edu-hero,
+.about-hero,
+.site-footer {
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --navy-950: #07142a;            /* navy asli website: band ajakan, footer, bilah atas */
+  --navy-900: #0b1b3a;            /* latar halaman */
+  --navy-850: #0f2147;            /* panel selang-seling */
+  --navy-800: #13295a;            /* kartu */
+  --gold: #e9c98b;                /* champagne: tombol utama, kata sorotan, garis */
+  --gold-hover: #f4dcaa;
+  --gold-soft: rgba(233, 201, 139, 0.12);
+  --gold-line: rgba(233, 201, 139, 0.22);
+
+  --color-ink: #ffffff;
+  --color-text: #d9e0ee;
+  --color-muted: #a3afc7;
+  --color-accent: var(--gold);
+  --color-accent-hover: var(--gold-hover);
+  --color-accent-soft: var(--gold-soft);
+  --color-tint: var(--navy-850);
+  --color-surface: var(--navy-800);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-dark: var(--navy-950);
+  --color-success: #7fdcb6;
+  --color-success-soft: rgba(127, 220, 182, 0.14);
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow: none;
+  --shadow-lg: 0 24px 48px -28px rgba(0, 0, 0, 0.7);
+  color: var(--color-text);
+}
+/* Semua kategori memakai emas: satu aksen, bukan lima warna */
+.tone-rose, .tone-blue, .tone-amber, .tone-teal, .tone-violet { --tone: var(--gold); --tone-soft: var(--gold-soft); }
+
+html { background: var(--navy-900); color-scheme: dark; }
+body { background: transparent; } /* latar navy ada di html, supaya lapisan latar bergerak (di bawah) terlihat */
+::selection { background: var(--gold); color: var(--navy-950); }
+.section--tint { background: var(--navy-850); }
+
+/* ---------- Huruf ----------
+   Serif lembut + sans: judul Fraunces (sumbu SOFT dikunci 100 lewat baris font Google di setiap halaman),
+   teks Inter. Judul besar ketebalan 500 (dibandingkan 400, 500, dan 600 di latar navy: 500 paling seimbang),
+   judul kartu 600 supaya tetap terbaca di ukuran kecil. Ukuran judul tetap dari base.css dan tema-asuransi;
+   hanya spasi hurufnya dilonggarkan, karena nilai bawaan (-0,03 sampai -0,04em) dibuat untuk Plus Jakarta Sans. */
+h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-ink); }
+h1, h2 { font-weight: 500; letter-spacing: -0.015em; }
+h3, h4 { font-weight: 600; letter-spacing: -0.005em; }
+.hero--profile .hero__grid h1 { letter-spacing: -0.015em; }
+@media (min-width: 600px) {
+  .hero h1 { letter-spacing: -0.015em; line-height: 1.08; }
+}
+/* Teks kecil (menu, tombol, label, nomor kartu) tetap Inter supaya terbaca, seperti menu dan tombol di referensi */
+.nav__link, .btn, .eyebrow, .badge, .tag, .card__num, .article-card__meta { font-family: var(--font-body); }
+
+/* Kata sorotan di judul: emas polos, tanpa garis sorot biru */
+.text-gradient {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: var(--gold);
+  animation: none;
+}
+
+/* Label di atas judul: huruf kapital renggang, tanpa kapsul (seperti "LUXURY & ELEGANT" di referensi) */
+.eyebrow,
+.cta-band .eyebrow,
+.why .section-head .eyebrow {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+}
+.eyebrow::before { background: var(--gold); }
+.badge {
+  border: 1px solid var(--gold-line);
+  background: transparent;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+.tag { border-color: var(--gold-line); background: var(--gold-soft); color: var(--gold); }
+
+/* ---------- Bilah info atas dan header ----------
+   Seperti referensi: header selebar layar berwarna navy, dengan garis bawah tipis, bukan kapsul putih. */
+.topbar { background: var(--navy-950); color: var(--color-muted); border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+.topbar a { color: var(--color-muted); }
+.topbar a:hover { color: var(--gold); }
+.site-header,
+.site-header.is-scrolled {
+  padding-block: 0;
+  background: rgba(16, 32, 70, 0.94);
+  border-bottom: 1px solid var(--gold-line);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+.site-header__inner,
+.site-header.is-scrolled .site-header__inner {
+  width: auto;
+  max-width: var(--container);
+  min-height: calc(var(--header-h) - 1.2rem);
+  padding-inline: var(--gutter);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.brand__name { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; color: #ffffff; }
+.brand__accent { color: var(--gold); }
+.brand__tagline { font-family: var(--font-body); color: var(--color-muted); }
+.brand__mark { background: transparent; border: 1px solid var(--gold-line); color: var(--gold); box-shadow: none; }
+.nav__link { color: #e6ebf5; }
+.nav__link:hover, .nav__link[aria-current] { color: var(--gold); }
+.nav__link[aria-current]::after { background: var(--gold); }
+.nav-toggle { border-color: var(--gold-line); background: transparent; color: #ffffff; }
+.nav.is-open { border-color: var(--gold-line); background: var(--navy-850); }
+.cat-nav ul { border-color: var(--gold-line); background: rgba(16, 32, 70, 0.94); box-shadow: none; }
+.cat-nav a { color: var(--color-text); }
+.cat-nav a[aria-current], .cat-nav a.is-active { background: var(--gold-soft); color: var(--gold); }
+
+/* ---------- Tombol ----------
+   Tombol utama dan tombol WhatsApp: champagne dengan teks navy. Tombol kedua: garis tipis putih.
+   Tombol WhatsApp mengambang tetap hijau supaya langsung dikenali. */
+.btn { border-radius: 10px; font-weight: 600; letter-spacing: 0.01em; }
+.btn--primary,
+.btn--wa,
+.btn--light,
+.hero .btn--primary,
+.edu-hero .btn--primary,
+.about-hero .btn--primary,
+.cta-band .btn--wa,
+.calc-promo .btn--light {
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: var(--navy-950);
+  box-shadow: none;
+}
+.btn--primary:hover,
+.btn--wa:hover,
+.btn--light:hover,
+.hero .btn--primary:hover,
+.edu-hero .btn--primary:hover,
+.about-hero .btn--primary:hover,
+.cta-band .btn--wa:hover,
+.calc-promo .btn--light:hover {
+  border-color: var(--gold-hover);
+  background: var(--gold-hover);
+  color: var(--navy-950);
+  box-shadow: 0 12px 26px -16px rgba(233, 201, 139, 0.55);
+}
+.btn--secondary,
+.hero .btn--secondary,
+.edu-hero .btn--secondary,
+.about-hero .btn--secondary {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: #ffffff;
+}
+.btn--secondary:hover,
+.hero .btn--secondary:hover,
+.edu-hero .btn--secondary:hover,
+.about-hero .btn--secondary:hover {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+.btn .icon-arrow { background: rgba(7, 20, 42, 0.14); }
+.btn--secondary .icon-arrow,
+.hero .btn--secondary .icon-arrow { background: var(--gold); color: var(--navy-950); }
+.link-arrow, a.card__more, .card__more { color: var(--gold); }
+
+/* ---------- Hero ----------
+   Gradasi navy seperti referensi, dengan dua lingkaran garis tipis keemasan sebagai hiasan. */
+.hero,
+.edu-hero,
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 82% 26%, transparent 0 169px, var(--gold-line) 170px 171px, transparent 172px),
+    radial-gradient(circle at 16% 88%, transparent 0 69px, rgba(255, 255, 255, 0.12) 70px 71px, transparent 72px),
+    linear-gradient(160deg, #22356b 0%, #1a2b5a 45%, #142450 100%);
+  border-bottom: 1px solid var(--gold-line);
+}
+.hero__note { border-color: var(--gold-line); background: rgba(255, 255, 255, 0.04); }
+.hero__media:has(.hero__art)::after { border-color: var(--gold-line); }
+.hero__portrait,
+.hero__photo,
+.edu-hero__photo { box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8); }
+.hero__portrait,
+.hero__photo { outline: 1px solid var(--gold-line); outline-offset: 10px; }
+.hero__media::before { opacity: 0.35; } /* pola titik di belakang foto dibuat samar */
+.hero .ph,
+.about-hero .ph {
+  border-color: var(--gold-line);
+  background: var(--navy-800);
+  color: var(--gold);
+}
+
+/* ---------- Kartu dan panel ---------- */
+.card,
+.why__item,
+.steps__body,
+.profile,
+.testi,
+.accordion__item,
+.source-list > *,
+.compare-card,
+.timeline,
+.journey__card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--navy-800);
+}
+.grid-4 .card:hover,
+.grid-3 .card:hover,
+.feature-grid .card:hover,
+.list-stack .card:hover,
+.why__item:hover,
+.steps__item:hover .steps__body {
+  border-color: var(--gold-line);
+  box-shadow: 0 24px 40px -28px rgba(0, 0, 0, 0.8);
+}
+.card p, .why__item p { color: var(--color-muted); }
+.card__icon,
+.calc-promo .card__icon,
+.channel .card__icon { border: 1px solid var(--gold-line); background: var(--gold-soft); color: var(--gold); }
+.grid-4 .card:hover .card__icon,
+.grid-3 .card:hover .card__icon,
+.feature-grid .card:hover .card__icon,
+.list-stack .card:hover .card__icon { background: var(--gold); color: var(--navy-950); }
+.card__photo { background: var(--navy-850); }
+.card:has(> .card__photo) .card__num { border: 1px solid var(--gold-line); background: rgba(7, 20, 42, 0.82); color: var(--gold); }
+.card__num { color: var(--gold); }
+.card p.card__note { border-left-color: var(--gold-line); }
+/* Kotak judul bento Why Work With Me: navy lebih terang dengan garis emas */
+@media (min-width: 1000px) {
+  .why .section-head { border: 1px solid var(--gold-line); background: var(--navy-850); }
+}
+.steps__num { background: var(--gold); color: var(--navy-950); box-shadow: 0 0 0 6px var(--gold-soft); }
+.approach__num { color: var(--gold); }
+.ph {
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-850));
+  color: var(--gold);
+}
+.ph::before { background-color: rgba(255, 255, 255, 0.06); box-shadow: none; filter: invert(1) brightness(1.4); }
+.avatar, .testi .avatar { background: var(--gold-soft); color: var(--gold); }
+.callout { border-color: var(--gold-line); background: rgba(233, 201, 139, 0.06); color: var(--color-text); }
+.callout h3 { color: var(--gold); }
+.compare > * { background: var(--navy-850); }
+
+/* Kapsul dan pilihan */
+.chip,
+.faq-jump a,
+.sol-chip,
+.cat-nav a,
+.pill { border-color: rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.03); color: var(--color-text); }
+
+/* ---------- Banner kalkulator ---------- */
+.calc-promo {
+  border: 1px solid var(--gold-line);
+  background:
+    radial-gradient(circle at 92% 12%, transparent 0 119px, var(--gold-line) 120px 121px, transparent 122px),
+    linear-gradient(135deg, #1c2f62 0%, #13295a 100%);
+  color: var(--color-text);
+}
+.calc-promo h3 { color: #ffffff; }
+.calc-promo__text p { color: var(--color-muted); }
+.calc-promo__preview { border: 1px solid var(--gold-line); background: var(--navy-950); color: var(--color-text); }
+.calc-promo__preview .calc-promo__value { color: var(--gold); }
+.meter { background: rgba(255, 255, 255, 0.1); }
+
+/* ---------- Formulir dan kalkulator ---------- */
+.field input,
+.field select,
+.field textarea {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--gold); background: rgba(255, 255, 255, 0.06); box-shadow: 0 0 0 4px var(--gold-soft); }
+.field select option { background: var(--navy-850); color: #ffffff; }
+.field input::placeholder, .field textarea::placeholder { color: #7f8ba5; }
+.field [aria-invalid="true"] { border-color: #ff8a7a; background: rgba(255, 138, 122, 0.08); }
+
+/* ---------- Band ajakan dan footer ---------- */
+.cta-band {
+  border: 1px solid var(--gold-line);
+  background:
+    radial-gradient(circle at 88% 20%, transparent 0 139px, var(--gold-line) 140px 141px, transparent 142px),
+    var(--navy-950);
+}
+.cta-band::after { display: none; }
+.cta-band__meta { color: var(--color-muted); }
+.site-footer { background: var(--navy-950); border-top: 1px solid var(--gold-line); }
+.site-footer a:hover { color: var(--gold); }
+.site-footer h3, .site-footer h4 { color: var(--gold); }
+.to-top { color: var(--gold); }
+
+/* ---------- Lain-lain ---------- */
+.source-list a, .prose a, .text-link { color: var(--gold); }
+.scroll-progress, .progress-bar { background: var(--gold); }
+
+/* Piramida prioritas (Solusi): dua lapisan atas navy, dua lapisan bawah champagne dengan teks navy.
+   Lapisan dasar bawaan memakai --color-ink, yang di tema ini putih, jadi warnanya ditetapkan di sini. */
+.pyramid__layer:nth-child(1) { background: #22397a; color: #ffffff; }
+.pyramid__layer:nth-child(2) { background: #2d4a94; color: #ffffff; }
+.pyramid__layer:nth-child(3) { background: #c9ab72; color: var(--navy-950); }
+.pyramid__layer:nth-child(4) { background: var(--gold); color: var(--navy-950); }
+
+/* HP: lingkaran hiasan hero lebih kecil dan di pojok, supaya garisnya tidak memotong judul */
+@media (max-width: 599px) {
+  .hero,
+  .edu-hero,
+  .about-hero {
+    background:
+      radial-gradient(circle at 100% 0%, transparent 0 89px, var(--gold-line) 90px 91px, transparent 92px),
+      linear-gradient(160deg, #22356b 0%, #1a2b5a 45%, #142450 100%);
+  }
+}
+
+/* HP sempit (< 380 px: Android 360 px, iPhone mini/SE 375 px, iPhone SE lama 320 px): Fraunces sedikit lebih
+   lebar daripada Plus Jakarta Sans, jadi kata Inggris panjang ("Conversation", "Understanding") bisa lebih
+   lebar dari kolomnya. Judul hero dan judul section kolom sempit dikecilkan sedikit. Judul kartu di slider
+   dipenggal lewat titik pemenggalan &shy; yang ditulis di HTML (misalnya Under&shy;standing, Trans&shy;parency),
+   karena hyphens: auto tidak tersedia di semua browser (di Edge Windows kata malah terpotong tanpa tanda hubung).
+   overflow-wrap di bawah hanya cadangan untuk kata panjang yang belum diberi &shy;. Di 380 px ke atas tidak
+   berubah. Dicek otomatis di 320, 360, 375, 390, dan 414 px (README bagian 1). */
+@media (max-width: 379px) {
+  .edu-hero h1 { font-size: 1.4rem; }
+  .sol__intro h2 { font-size: 1.38rem; }
+  :is(.grid-4, .grid-3, .feature-grid, .why__list) h3,
+  .calc-promo h3 { overflow-wrap: break-word; }
+}
+@media (max-width: 359px) {
+  .edu-hero h1 { font-size: 1.22rem; }
+  .sol__intro h2 { font-size: 1.2rem; }
+}
+
+/* ---------- Latar bergerak (8 November 2026) ----------
+   Supaya latar navy tidak terlihat polos, ada tiga lapisan tipis yang menempel di layar (fixed) di belakang
+   semua isi. Klien memilih "cahaya aurora" sebagai efek utama, digabung dengan cincin orbit (dipilih dari varian
+   yang dibandingkan berdampingan: kisi garis, titik, titik + cincin). Lapisan titik-titik keemasan (main::before)
+   sempat dipasang, lalu dihapus atas permintaan karena terasa mengganggu (8 November 2026):
+   1. body::before: bidang cahaya biru lembut dan sedikit champagne yang bergeser dan berputar sangat pelan
+      (40 detik, bolak-balik), seperti aurora.
+   2. html::before: lapisan aurora kedua berupa pita cahaya miring yang bergerak ke arah berlawanan (28 detik),
+      sehingga alirannya terasa seperti aurora sungguhan, bukan satu bidang yang bergeser.
+   3. main::after: cincin garis putus-putus keemasan dengan cincin kedua (outline) di luarnya, berputar sangat
+      pelan (180 detik per putaran), senada dengan lingkaran di hero dan band ajakan.
+   Hero dan panel dibuat sedikit tembus pandang supaya gerak aurora juga terasa di sana; kartu tetap padat
+   supaya teks mudah dibaca. Animasi hanya memakai transform/rotate (ringan untuk HP) dan otomatis mati bila
+   pengunjung memilih "kurangi gerakan" (aturan di base.css), tampilan diamnya tetap utuh. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -25%; /* lebih besar dari layar, supaya tepinya tidak terlihat saat bergeser */
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 24% 30%, rgba(64, 108, 222, 0.34), transparent 72%),
+    radial-gradient(30% 28% at 76% 66%, rgba(233, 201, 139, 0.13), transparent 72%),
+    radial-gradient(42% 36% at 70% 22%, rgba(38, 66, 150, 0.45), transparent 72%),
+    radial-gradient(36% 32% at 30% 78%, rgba(28, 58, 150, 0.32), transparent 72%);
+  animation: latar-aurora 40s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes latar-aurora {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(4%, -3%, 0) rotate(10deg) scale(1.1); }
+  100% { transform: translate3d(-3%, 4%, 0) rotate(-8deg) scale(1.05); }
+}
+html::before {
+  content: "";
+  position: fixed;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 16% at 45% 38%, rgba(96, 146, 255, 0.2), transparent 70%),
+    radial-gradient(40% 12% at 60% 58%, rgba(233, 201, 139, 0.12), transparent 70%),
+    radial-gradient(45% 14% at 35% 70%, rgba(70, 120, 235, 0.16), transparent 70%);
+  transform: rotate(-10deg); /* posisi diam (mode "kurangi gerakan"): pita tetap miring */
+  animation: latar-aurora-2 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes latar-aurora-2 {
+  0% { transform: translate3d(-5%, 3%, 0) rotate(-14deg); }
+  100% { transform: translate3d(5%, -3%, 0) rotate(-4deg) scale(1.12); }
+}
+main::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  top: 12vh;
+  right: -18vw;
+  width: min(66vw, 740px);
+  aspect-ratio: 1;
+  border: 1px dashed rgba(233, 201, 139, 0.16);
+  border-radius: 50%;
+  outline: 1px solid rgba(233, 201, 139, 0.07);
+  outline-offset: 56px;
+  pointer-events: none;
+  animation: latar-orbit 180s linear infinite;
+  will-change: transform;
+}
+@keyframes latar-orbit { to { transform: rotate(360deg); } }
+/* HP: cincin lebih besar dan jauh ke kanan, sehingga hanya lengkungnya yang terlihat di tepi layar, tidak di belakang teks */
+@media (max-width: 599px) {
+  main::after { top: 18vh; right: -78vw; width: 110vw; outline-offset: 36px; }
+}
+/* Panel sedikit tembus pandang, supaya cahaya aurora yang bergerak ikut terlihat */
+.section--tint { background: rgba(15, 33, 71, 0.78); }
+/* Bagian paling atas setiap halaman (bilah info, header, hero) dibuat jauh lebih tembus pandang, supaya latar
+   bergerak terlihat sampai ke atas layar. Sebelumnya hero 86% padat dan header 94% padat, sehingga aurora baru
+   terlihat setelah halaman di-scroll (keluhan 8 November 2026). Hero tetap sedikit lebih terang daripada bagian
+   di bawahnya (gradasi navy 42% sampai 24%), dan header memakai kaca buram supaya menu tetap terbaca. */
+.hero,
+.edu-hero,
+.about-hero {
+  background:
+    radial-gradient(circle at 82% 26%, transparent 0 169px, var(--gold-line) 170px 171px, transparent 172px),
+    radial-gradient(circle at 16% 88%, transparent 0 69px, rgba(255, 255, 255, 0.12) 70px 71px, transparent 72px),
+    linear-gradient(160deg, rgba(34, 53, 107, 0.42) 0%, rgba(26, 43, 90, 0.32) 45%, rgba(20, 36, 80, 0.24) 100%);
+}
+@media (max-width: 599px) {
+  .hero,
+  .edu-hero,
+  .about-hero {
+    background:
+      radial-gradient(circle at 100% 0%, transparent 0 89px, var(--gold-line) 90px 91px, transparent 92px),
+      linear-gradient(160deg, rgba(34, 53, 107, 0.42) 0%, rgba(26, 43, 90, 0.32) 45%, rgba(20, 36, 80, 0.24) 100%);
+  }
+}
+.topbar { background: rgba(7, 20, 42, 0.55); }
+.site-header {
+  background: rgba(11, 27, 58, 0.5);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+/* Setelah di-scroll (kelas is-scrolled dari main.js) header sedikit lebih padat, supaya foto dan kartu yang lewat
+   di belakangnya tidak mengganggu tulisan menu */
+.site-header.is-scrolled { background: rgba(11, 27, 58, 0.78); }
+
+/* ---------- Lighting masuk-keluar (8 November 2026) ----------
+   Atas usulan "animasi lighting masuk keluar":
+   1. Sorot cahaya di latar (main::before, lapisan yang sebelumnya dipakai titik-titik): pita cahaya lembut,
+      miring, masuk dari kiri, menyapu ke kanan lalu keluar dan menghilang. Berulang tiap 5 detik (permintaan
+      klien; sebelumnya tiap 12 detik): satu sapuan sekitar 3,5 detik, lalu jeda 1,5 detik. Letaknya di belakang
+      isi halaman (seperti aurora), jadi terlihat di hero, header, dan sela-sela bagian tanpa menutupi teks.
+   2. Kilau emas di tombol utama (tombol header, tombol di hero, tombol band ajakan): kilatan cahaya tipis yang
+      melintas dari kiri ke kanan tiap 7 detik, seperti pantulan cahaya di permukaan emas. Dibuat lewat lapisan
+      gambar latar tombol (bukan ::before/::after), supaya tidak bentrok dengan cincin yang sudah ada.
+   3. Cincin yang mengembang di tombol pertama hero dan tombol banner kalkulator diganti dari biru (sisa tema
+      asuransi) menjadi champagne.
+   Semuanya berhenti bila pengunjung memilih "kurangi gerakan"; posisi diamnya di luar layar/tombol (tidak terlihat). */
+main::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  top: -25vh;
+  left: 0;
+  width: 38vw;
+  height: 150vh;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(150, 185, 255, 0.07) 30%, rgba(255, 238, 205, 0.12) 50%, rgba(150, 185, 255, 0.07) 70%, transparent);
+  transform: translateX(-60vw) rotate(14deg);
+  opacity: 0;
+  animation: sorot-cahaya 5s ease-in-out 1s infinite;
+  will-change: transform, opacity;
+}
+@keyframes sorot-cahaya {
+  0% { transform: translateX(-60vw) rotate(14deg); opacity: 0; }
+  12% { opacity: 1; }
+  58% { opacity: 1; }
+  70% { transform: translateX(130vw) rotate(14deg); opacity: 0; } /* 70% dari 5 detik = sapuan 3,5 detik */
+  100% { transform: translateX(130vw) rotate(14deg); opacity: 0; } /* jeda 1,5 detik sebelum sapuan berikutnya */
+}
+.site-header__cta,
+:is(.hero, .edu-hero, .about-hero) :is(.btn--wa, .btn--primary),
+.cta-band .btn--wa {
+  background-image: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: 100% 0; /* kilatan di luar tombol, sebelah kiri */
+  animation: kilau-emas 7s ease-in-out 1.5s infinite;
+}
+@keyframes kilau-emas {
+  0%, 72% { background-position: 100% 0; }
+  92%, 100% { background-position: 0% 0; } /* melintas dari kiri ke kanan, lalu keluar */
+}
+.hero__actions > .btn:first-child::after { animation-name: cincin-emas; }
+.calc-promo.is-popped .btn--light::after { animation-name: promo-cincin-emas; }
+@keyframes cincin-emas {
+  0% { box-shadow: 0 0 0 0 rgba(233, 201, 139, 0.45); }
+  35%, 100% { box-shadow: 0 0 0 12px rgba(233, 201, 139, 0); }
+}
+@keyframes promo-cincin-emas {
+  0%, 48% { box-shadow: 0 0 0 0 rgba(233, 201, 139, 0.45); }
+  62%, 100% { box-shadow: 0 0 0 12px rgba(233, 201, 139, 0); }
+}
+
+/* ---------- Tombol lebih interaktif dan animasi scroll lebih dinamis (8 November 2026) ----------
+   Atas permintaan "tombol serta animasi waktu scrolling lebih interaktif dan dinamis supaya user tidak bosan".
+   Tombol (perilakunya di main.js, bagian terakhir):
+   - Magnet (hanya mouse/laptop): tombol tertarik sedikit ke arah kursor (maks. 6 px ke samping, 4 px ke atas-bawah)
+     dan memantul kembali saat kursor pergi. Memakai properti translate, jadi tidak bentrok dengan efek angkat
+     (transform) maupun kilau emas (background).
+   - Riak cahaya saat diklik/disentuh (laptop dan HP), lingkaran yang mengembang dari titik sentuh.
+   - Tombol mengecil sedikit saat ditekan; ikon selain panah (misalnya WhatsApp) bergoyang kecil saat disorot.
+   Saat scroll (memakai kelas reveal dari main.js; semuanya selesai dalam 0,85 detik karena main.js melepas
+   kelas itu setelah 0,9 detik):
+   - Kartu dan judul section muncul dari bawah sambil membesar; di laptop juga dari buram ke tajam.
+   - Label kecil di atas judul (eyebrow) masuk dari kiri sambil merapatkan spasi hurufnya.
+   - Foto di kartu terbuka seperti tirai dari atas; gambar kategori, gambar artikel, dan foto kegiatan juga
+     terbuka seperti tirai sambil zoom-out (bingkainya memotong bagian yang berlebih).
+   - Paralaks: gambar kategori, gambar artikel, dan foto profil bergeser pelan di dalam bingkainya selama
+     di-scroll; panel (section--tint) membesar dari 95% ke ukuran penuh saat masuk layar. Keduanya memakai
+     animasi berbasis scroll (animation-timeline), hanya di browser yang mendukung; di browser lain diam.
+   - Sorotan kursor (hanya mouse): cahaya champagne lembut mengikuti kursor di atas kartu.
+   Semua berhenti bila pengunjung memilih "kurangi gerakan". */
+
+/* Tombol */
+.btn {
+  position: relative;
+  isolation: isolate;
+  translate: var(--mx, 0px) var(--my, 0px);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.25s var(--ease), box-shadow 0.25s,
+    translate 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* memantul saat kembali ke tempatnya */
+}
+.btn.is-magnet { transition-duration: 0.2s, 0.2s, 0.2s, 0.25s, 0.25s, 0.12s; } /* mengikuti kursor dengan cepat */
+.btn:active { transform: translateY(0) scale(0.96); }
+.wa-float { isolation: isolate; }
+.riak-wadah {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* di atas warna tombol, di bawah tulisan */
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.riak {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  animation: riak 0.65s var(--ease) forwards;
+}
+:is(.btn--secondary, .btn--ghost-light) .riak { background: rgba(233, 201, 139, 0.35); }
+@keyframes riak { to { transform: scale(1); opacity: 0; } }
+.btn:hover .icon:not(.icon-arrow) { animation: ikon-goyang 0.6s var(--ease); }
+@keyframes ikon-goyang { 25% { rotate: -14deg; } 50% { rotate: 10deg; } 75% { rotate: -5deg; } }
+
+/* Muncul saat scroll: dari bawah sambil membesar; di laptop juga dari buram ke tajam */
+.reveal {
+  transform: translateY(36px) scale(0.95);
+  transition: opacity 0.85s var(--ease), transform 0.85s var(--ease), filter 0.85s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+@media (min-width: 900px) {
+  .reveal { filter: blur(6px); }
+}
+.reveal.is-visible { opacity: 1; transform: none; filter: none; }
+.section-head.reveal.is-visible > .eyebrow { animation: label-masuk 0.7s var(--ease) both; animation-delay: var(--reveal-delay, 0ms); }
+@keyframes label-masuk { from { opacity: 0; translate: -28px 0; letter-spacing: 0.5em; } }
+.reveal.is-visible .card__photo {
+  animation: tirai-buka 0.8s var(--ease) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 0.05s);
+}
+.reveal.is-visible .article-card__img > img,
+.sol__img.reveal.is-visible > img,
+.journey__photo.reveal.is-visible > img {
+  animation: tirai-zoom 0.8s var(--ease) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 0.05s);
+}
+@keyframes tirai-buka { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+@keyframes tirai-zoom { from { clip-path: inset(0 0 100% 0); scale: 1.14; } to { clip-path: inset(0); scale: 1; } }
+
+/* Paralaks dan panel yang membesar, berbasis posisi scroll (browser yang mendukung saja) */
+@supports (animation-timeline: view()) {
+  .article-card__img > img,
+  .featured__img > img {
+    animation: paralaks linear both;
+    animation-timeline: view();
+  }
+  .sol__img > img {
+    animation: napas-gambar 9s ease-in-out infinite, paralaks linear both;
+    animation-timeline: auto, view();
+  }
+  .profile__photo > img {
+    animation: napas-gambar 10s ease-in-out infinite, paralaks linear both;
+    animation-timeline: auto, view();
+  }
+  @keyframes paralaks {
+    from { transform: translateY(-6%) scale(1.14); }
+    to { transform: translateY(6%) scale(1.14); }
+  }
+  .section--tint {
+    animation: panel-masuk linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  @keyframes panel-masuk { from { scale: 0.95; } to { scale: 1; } }
+}
+
+/* Sorotan kursor di atas kartu (hanya mouse); posisinya (--sx, --sy) diisi main.js */
+@media (hover: hover) and (pointer: fine) {
+  /* :where() membuat aturan ini paling lemah, supaya kartu yang sudah punya posisi sendiri tidak berubah
+     (misalnya hasil kalkulator .calc__result yang menempel/sticky di laptop) */
+  :where(.card, .why__item) { position: relative; isolation: isolate; }
+  .card::before,
+  .why__item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* di atas warna kartu, di bawah isi kartu */
+    border-radius: inherit;
+    background: radial-gradient(380px circle at var(--sx, 50%) var(--sy, 0%), rgba(233, 201, 139, 0.13), transparent 62%);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+    pointer-events: none;
+  }
+  .card:hover::before,
+  .why__item:hover::before { opacity: 1; }
+}
+
+/* ---------- Header lebih mewah (8 November 2026) ----------
+   Header terasa datar dibanding bagian lain (lambang kotak transparan, nama emas polos, tombol menu transparan).
+   Sekarang: lambang menjadi lencana emas dengan perisai navy, bingkai tipis di luarnya, dan kilau yang lewat
+   sesekali; nama belakang emas bergradasi dengan garis emas tipis di atas jabatan seperti kop surat; header diberi
+   kedalaman (cahaya halus di atas, bayangan di bawah) dan garis bawah emas yang memudar ke tepi dengan kilatan
+   cahaya yang berjalan di sepanjang garis; tombol menu HP bergaya kaca dengan ikon emas, berubah emas saat dibuka;
+   bilah info atas dan garis progres scroll ikut dipercantik. Semua animasi berhenti bila "kurangi gerakan". */
+
+/* Bilah info atas: gradasi navy dengan garis emas tipis di bawahnya */
+.topbar {
+  position: relative;
+  background: linear-gradient(90deg, rgba(7, 20, 42, 0.8), rgba(20, 38, 82, 0.6) 50%, rgba(7, 20, 42, 0.8));
+  border-bottom: 0;
+  letter-spacing: 0.02em;
+}
+.topbar::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.3), transparent);
+}
+
+/* Header: kedalaman dan garis emas berkilau di bawahnya */
+.site-header {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 70%),
+    rgba(11, 27, 58, 0.55);
+  border-bottom: 0;
+  box-shadow: 0 16px 30px -26px rgba(0, 0, 0, 0.9);
+}
+.site-header.is-scrolled {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 70%),
+    rgba(11, 27, 58, 0.8);
+}
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 240, 210, 0.95), transparent) -40% 0 / 30% 100% no-repeat,
+    linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.55) 50%, transparent);
+  animation: garis-kilau 6s ease-in-out 1.5s infinite;
+}
+@keyframes garis-kilau {
+  0%, 55% { background-position: -40% 0, 0 0; }
+  100% { background-position: 140% 0, 0 0; } /* kilatan berjalan dari kiri ke kanan di sepanjang garis */
+}
+/* Garis progres scroll di tepi atas: gradasi emas dengan sedikit cahaya */
+.site-header::before {
+  background: linear-gradient(90deg, #b98f4c, #f4dcaa);
+  box-shadow: 0 0 10px rgba(233, 201, 139, 0.55);
+}
+
+/* Lambang: lencana emas dengan perisai navy, bingkai tipis di luar, dan kilau yang lewat sesekali */
+.brand { gap: 0.75rem; }
+.brand__mark {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 13px;
+  background:
+    linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.6) 50%, transparent 62%) 100% 0 / 260% 100% no-repeat,
+    linear-gradient(145deg, #f8e6bf 0%, #e9c98b 45%, #b98f4c 100%);
+  color: var(--navy-950);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 8px rgba(120, 80, 20, 0.35),
+    0 8px 22px -10px rgba(233, 201, 139, 0.75);
+  animation: lambang-masuk 0.9s var(--ease) 0.1s backwards, kilau-lambang 7s ease-in-out 3s infinite;
+}
+.brand__mark::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(233, 201, 139, 0.35);
+  border-radius: 17px;
+  pointer-events: none;
+}
+.brand__mark .icon { width: 22px; height: 22px; stroke-width: 2.2; }
+@keyframes kilau-lambang {
+  0%, 75% { background-position: 100% 0, 0 0; }
+  92%, 100% { background-position: 0% 0, 0 0; }
+}
+/* Nama: nama belakang emas bergradasi; garis emas tipis memisahkan nama dan jabatan */
+.brand__name { font-size: 1.2rem; }
+.brand__accent {
+  background: linear-gradient(100deg, #f8e3b5 0%, #e9c98b 45%, #c69b5c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand__text { gap: 0.3rem; }
+.brand__tagline {
+  padding-top: 0.3rem;
+  border-top: 1px solid rgba(233, 201, 139, 0.28);
+  color: #b9c3d8;
+  letter-spacing: 0.18em;
+}
+@media (forced-colors: active) {
+  .brand__accent { background: none; color: LinkText; }
+}
+
+/* Tombol menu (HP): kaca bulat dengan ikon emas; berubah emas saat menu dibuka, ikon X berputar masuk */
+.nav-toggle {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(233, 201, 139, 0.45);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.14), transparent 60%),
+    rgba(19, 41, 90, 0.6);
+  color: var(--gold);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 20px -12px rgba(0, 0, 0, 0.9);
+  transition: background-color 0.25s, border-color 0.25s, box-shadow 0.25s, color 0.25s;
+}
+.nav-toggle:hover { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(233, 201, 139, 0.12), 0 8px 20px -12px rgba(0, 0, 0, 0.9); }
+.nav-toggle[aria-expanded="true"] {
+  border-color: var(--gold);
+  background: linear-gradient(145deg, #f8e6bf, #e9c98b 50%, #c69b5c);
+  color: var(--navy-950);
+}
+.nav-toggle[aria-expanded="true"] .icon-close { animation: ikon-putar-masuk 0.35s var(--ease); }
+@keyframes ikon-putar-masuk { from { opacity: 0; rotate: -90deg; scale: 0.6; } }
+/* Ruang napas atas-bawah, karena blok nama + garis + jabatan sekarang lebih tinggi. Tinggi header tetap di bawah
+   --header-h (84 px laptop, 74 px HP) yang dipakai elemen yang menempel di bawah header. */
+.site-header__inner { padding-block: 0.45rem; }
+
+/* ---------- Header lebih lega (8 November 2026) ----------
+   Header masih terasa sempit di laptop dan HP. Sekarang lebih tinggi (sekitar 88 px di laptop, 76 px di HP),
+   jarak antarmenu menyesuaikan lebar layar, lambang dan nama sedikit lebih besar, bilah info atas lebih lega, dan
+   di HP jarak huruf jabatan dirapatkan sedikit supaya ada ruang kosong antara nama dan tombol menu.
+   --header-h dinaikkan (laptop 96 px, HP 84 px) supaya semua yang menempel di bawah header (bilah kategori Solusi,
+   kolom Edukasi, kartu hasil kalkulator, daftar FAQ) dan lompatan ke bagian (#why, #formulir, kategori Solusi)
+   tetap tepat di bawah header. Angka 96 px dan 140 px yang dulu ditulis langsung kini mengikuti --header-h. */
+:root { --header-h: 96px; }
+.topbar__inner { min-height: 2.6rem; padding-block: 0.4rem; }
+.topbar__contact { column-gap: 1.75rem; }
+.site-header__inner { padding-block: 0.85rem; }
+.brand { gap: 0.85rem; }
+.brand__mark { width: 44px; height: 44px; border-radius: 14px; }
+.brand__mark::after { border-radius: 18px; }
+.brand__name { font-size: 1.32rem; }
+.brand__tagline { font-size: 0.6rem; line-height: 1.5; }
+.site-header__actions { gap: 0.9rem; }
+.site-header__cta { padding: 0.72rem 1.35rem; }
+@media (min-width: 1200px) {
+  .nav__list { gap: clamp(1rem, 1.6vw, 1.6rem); }
+}
+@media (max-width: 599px) {
+  :root { --header-h: 84px; }
+  .topbar__inner { min-height: 2.35rem; }
+  .site-header__inner { padding-block: 0.7rem; }
+  .brand { gap: 0.75rem; }
+  .brand__mark { width: 40px; height: 40px; border-radius: 13px; }
+  .brand__mark::after { border-radius: 17px; }
+  .brand__name { font-size: 1.12rem; }
+  .brand__tagline { font-size: 0.55rem; letter-spacing: 0.14em; }
+}
+.calc__result,
+.faq-aside { top: calc(var(--header-h) + 0.75rem); }
+.faq-group { scroll-margin-top: calc(var(--header-h) + 0.75rem); }
+.sol { scroll-margin-top: calc(var(--header-h) + 5.5rem); } /* header + bilah kategori Solusi + jarak */
+/* Kata "Protection" (10 huruf) tidak diberi &shy; lagi, karena browser memakainya walaupun kata itu muat di baris
+   berikutnya ("Is Your Protec- tion Enough?" di HP 390 px). Satu-satunya tempat kata itu kepanjangan adalah judul
+   banner kalkulator di HP 320 px, jadi hurufnya di sana dikecilkan sedikit. &shy; hanya untuk kata 12 huruf ke atas. */
+@media (max-width: 339px) {
+  .calc-promo h3 { font-size: 0.95rem; }
+}

@@ -140,7 +140,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   const targets = document.querySelectorAll(
     ".section-head, .card, .profile, .cta-band, .featured, .ethics, .accordion__item, " +
     ".pyramid__layer, .callout, .claim-band, .channel, .consult-steps li, .consult-alt, .prose > *, " +
-    ".why__item, .steps__item, .approach__item, .calc-promo, .timeline li, .journey__photo, .site-footer__grid > *"
+    ".why__item, .steps__item, .approach__item, .calc-promo, .timeline li, .journey__photo, .sol__img, .site-footer__grid > *"
   );
 
   const show = (el) => {
@@ -224,25 +224,6 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   });
 }
 
-// Beranda: item menu bagian yang sedang dibaca ditandai (aria-current="true", gayanya sama dengan halaman aktif).
-// Hanya berlaku untuk tautan menu yang menuju bagian di halaman yang sama (href diawali #).
-const navSpyLinks = document.querySelectorAll('#site-nav .nav__link[href^="#"]');
-if (navSpyLinks.length && "IntersectionObserver" in window) {
-  const navSpy = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navSpyLinks.forEach((a) => {
-        if (a.hash === "#" + entry.target.id) a.setAttribute("aria-current", "true");
-        else a.removeAttribute("aria-current");
-      });
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  navSpyLinks.forEach((a) => {
-    const section = document.getElementById(a.hash.slice(1));
-    if (section) navSpy.observe(section);
-  });
-}
-
 // Solusi: kategori yang sedang dibaca ditandai di bilah kategori (dan digeser ke tengah di HP).
 const catNav = document.querySelector(".cat-nav");
 if (catNav && "IntersectionObserver" in window) {
@@ -266,4 +247,72 @@ if (catNav && "IntersectionObserver" in window) {
     const section = document.getElementById(a.hash.slice(1));
     if (section) spy.observe(section);
   });
+}
+
+// Tombol dan kartu lebih interaktif (8 November 2026; gayanya di tema-premium.css, bagian "Tombol lebih interaktif").
+// Semua dilewati bila pengunjung memilih "kurangi gerakan".
+if (!reduceMotion) {
+  // Riak cahaya saat tombol diklik atau disentuh (laptop dan HP): lingkaran mengembang dari titik sentuh,
+  // di dalam wadah yang memotongnya sesuai bentuk tombol, lalu dihapus sendiri.
+  document.addEventListener("pointerdown", (e) => {
+    const btn = e.target.closest && e.target.closest(".btn, .wa-float");
+    if (!btn || e.button > 0) return;
+    const r = btn.getBoundingClientRect();
+    const size = Math.max(r.width, r.height) * 2.2;
+    let wadah = btn.querySelector(":scope > .riak-wadah");
+    if (!wadah) {
+      wadah = document.createElement("span");
+      wadah.className = "riak-wadah";
+      wadah.setAttribute("aria-hidden", "true");
+      btn.append(wadah);
+    }
+    const riak = document.createElement("span");
+    riak.className = "riak";
+    riak.style.width = riak.style.height = size + "px";
+    riak.style.left = (e.clientX - r.left - size / 2).toFixed(0) + "px";
+    riak.style.top = (e.clientY - r.top - size / 2).toFixed(0) + "px";
+    wadah.append(riak);
+    setTimeout(() => riak.remove(), 700);
+  });
+
+  // Hanya untuk mouse (laptop): tombol tertarik sedikit ke arah kursor seperti magnet, dan cahaya lembut
+  // mengikuti kursor di atas kartu.
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.querySelectorAll(".btn").forEach((btn) => {
+      let pusat = null; // titik tengah tombol sebelum bergeser, supaya gerakannya tidak saling memantul
+      btn.addEventListener("pointerenter", () => {
+        const r = btn.getBoundingClientRect();
+        pusat = { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width / 2, h: r.height / 2 };
+        btn.classList.add("is-magnet");
+      });
+      btn.addEventListener("pointermove", (e) => {
+        if (!pusat) return;
+        const x = Math.max(-1, Math.min(1, (e.clientX - pusat.x) / pusat.w));
+        const y = Math.max(-1, Math.min(1, (e.clientY - pusat.y) / pusat.h));
+        btn.style.setProperty("--mx", (x * 6).toFixed(1) + "px");
+        btn.style.setProperty("--my", (y * 4).toFixed(1) + "px");
+      });
+      btn.addEventListener("pointerleave", () => {
+        pusat = null;
+        btn.classList.remove("is-magnet");
+        btn.style.removeProperty("--mx");
+        btn.style.removeProperty("--my");
+      });
+    });
+
+    let sorotFrame = 0;
+    let sorotEvent = null;
+    document.addEventListener("pointermove", (e) => {
+      sorotEvent = e;
+      if (sorotFrame) return;
+      sorotFrame = requestAnimationFrame(() => {
+        sorotFrame = 0;
+        const card = sorotEvent.target.closest && sorotEvent.target.closest(".card, .why__item");
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--sx", (sorotEvent.clientX - r.left).toFixed(0) + "px");
+        card.style.setProperty("--sy", (sorotEvent.clientY - r.top).toFixed(0) + "px");
+      });
+    }, { passive: true });
+  }
 }
