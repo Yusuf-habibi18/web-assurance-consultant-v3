@@ -141,8 +141,8 @@ h3, h4 { font-weight: 600; letter-spacing: -0.005em; }
 .cat-nav a[aria-current], .cat-nav a.is-active { background: var(--gold-soft); color: var(--gold); }
 
 /* ---------- Tombol ----------
-   Tombol utama dan tombol WhatsApp: champagne dengan teks navy. Tombol kedua: garis tipis putih.
-   Tombol WhatsApp mengambang tetap hijau supaya langsung dikenali. */
+   Tombol utama: champagne dengan teks navy. Tombol kedua: garis tipis putih. Tombol WhatsApp (btn--wa) sejak
+   9 November 2026 hijau zamrud cyber, lihat bagian "Tombol WhatsApp hijau zamrud cyber" di bawah. */
 .btn { border-radius: 10px; font-weight: 600; letter-spacing: 0.01em; }
 .btn--primary,
 .btn--wa,
@@ -553,6 +553,62 @@ main::before {
 @keyframes promo-cincin-emas {
   0%, 48% { box-shadow: 0 0 0 0 rgba(233, 201, 139, 0.45); }
   62%, 100% { box-shadow: 0 0 0 12px rgba(233, 201, 139, 0); }
+}
+
+/* ---------- Tombol WhatsApp hijau zamrud cyber (9 November 2026) ----------
+   Atas permintaan klien: tombol yang membuka WhatsApp (kelas btn--wa, semuanya berikon WhatsApp) dibuat hijau
+   "cyber", senada dengan nuansa AI di latar dan langsung dikenali sebagai WhatsApp. Sengaja zamrud yang agak kalem,
+   bukan neon (neon terasa seperti website gaming dan berebut perhatian dengan emas): gradasi #3fe7a7 ke #17b37a,
+   teks navy (kontras di atas 7:1), cahaya hijau tipis, dan kilauan putih yang sama seperti tombol emas. Tombol utama
+   lain, termasuk "Free Consultation" di header, tetap emas. Tombol WhatsApp mengambang ikut zamrud. */
+:root {
+  --wa-1: #3fe7a7;
+  --wa-2: #17b37a;
+  --wa-glow: rgba(46, 229, 157, 0.55);
+  --wa-isi: linear-gradient(135deg, var(--wa-1) 0%, var(--wa-2) 100%);
+  --wa-isi-hover: linear-gradient(135deg, #5af0b6 0%, #1fc488 100%);
+  --kilau-putih: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
+}
+.btn--wa,
+.cta-band .btn--wa {
+  border: 1px solid rgba(120, 255, 200, 0.55);
+  background-color: var(--wa-2);
+  background-image: var(--wa-isi);
+  color: var(--navy-950);
+  box-shadow: 0 0 0 1px rgba(46, 229, 157, 0.12), 0 10px 26px -16px var(--wa-glow);
+}
+.btn--wa:hover,
+.cta-band .btn--wa:hover {
+  border-color: rgba(150, 255, 214, 0.8);
+  background-color: var(--wa-1);
+  background-image: var(--wa-isi-hover);
+  color: var(--navy-950);
+  box-shadow: 0 0 0 1px rgba(46, 229, 157, 0.3), 0 0 22px -4px var(--wa-glow), 0 14px 30px -16px var(--wa-glow);
+}
+/* Hero dan band ajakan: kilauan putih berjalan di atas isi hijau (dua lapisan latar; animasi kilau-emas di atas
+   menggeser lapisan pertama, lapisan kedua selebar tombol jadi tidak ikut bergeser) */
+:is(.hero, .edu-hero, .about-hero) .btn--wa,
+.cta-band .btn--wa {
+  background-image: var(--kilau-putih), var(--wa-isi);
+  background-size: 260% 100%, 100% 100%;
+}
+:is(.hero, .edu-hero, .about-hero) .btn--wa:hover,
+.cta-band .btn--wa:hover { background-image: var(--kilau-putih), var(--wa-isi-hover); }
+.hero__actions > .btn--wa:first-child::after { animation-name: cincin-hijau; }
+@keyframes cincin-hijau {
+  0% { box-shadow: 0 0 0 0 rgba(46, 229, 157, 0.5); }
+  35%, 100% { box-shadow: 0 0 0 12px rgba(46, 229, 157, 0); }
+}
+.wa-float {
+  border: 1px solid rgba(120, 255, 200, 0.55);
+  background: var(--wa-isi);
+  color: var(--navy-950);
+  box-shadow: 0 0 22px -6px var(--wa-glow), 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+.wa-float:hover { background: var(--wa-isi-hover); }
+@keyframes wa-denyut {
+  0% { box-shadow: 0 0 0 0 rgba(46, 229, 157, 0.5); }
+  30%, 100% { box-shadow: 0 0 0 16px rgba(46, 229, 157, 0); }
 }
 
 /* ---------- Tombol lebih interaktif dan animasi scroll lebih dinamis (8 November 2026) ----------
