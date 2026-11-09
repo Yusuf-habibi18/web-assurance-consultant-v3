@@ -131,7 +131,6 @@ h3, h4 { font-weight: 600; letter-spacing: -0.005em; }
 .brand__name { font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.01em; color: #ffffff; }
 .brand__accent { color: var(--gold); }
 .brand__tagline { font-family: var(--font-body); color: var(--color-muted); }
-.brand__mark { background: transparent; border: 1px solid var(--gold-line); color: var(--gold); box-shadow: none; }
 .nav__link { color: #e6ebf5; }
 .nav__link:hover, .nav__link[aria-current] { color: var(--gold); }
 .nav__link[aria-current]::after { background: var(--gold); }
@@ -433,6 +432,38 @@ main::after {
 @media (max-width: 599px) {
   main::after { top: 18vh; right: -78vw; width: 110vw; outline-offset: 36px; }
 }
+/* ---------- Nuansa AI/cyber (9 November 2026, permintaan klien: "sedikit modern ala AI cyber") ----------
+   Dua lapisan tambahan yang sangat tipis, tanpa titik atau kelap-kelip (keduanya pernah ditolak):
+   4. html::after: kisi garis biru tipis seperti layar teknologi. Memudar ke tengah layar supaya area teks tetap
+      bersih. Diam (tidak dianimasikan), jadi ringan.
+   5. body::after: jalur sirkuit di tepi kiri dan kanan layar (assets/img/latar-sirkuit.svg) dengan denyut cahaya
+      biru yang sesekali mengalir di sepanjang jalurnya, seperti aliran data. Animasinya ada di dalam file SVG dan
+      berhenti sendiri bila pengunjung memilih "kurangi gerakan". */
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(120, 170, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 170, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, transparent 30%, #000 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, transparent 30%, #000 100%);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("../img/latar-sirkuit.svg") center / 100% 100% no-repeat;
+}
+@media (max-width: 599px) {
+  html::after { background-size: 40px 40px; }
+}
 /* Panel sedikit tembus pandang, supaya cahaya aurora yang bergerak ikut terlihat */
 .section--tint { background: rgba(15, 33, 71, 0.78); }
 /* Bagian paling atas setiap halaman (bilah info, header, hero) dibuat jauh lebih tembus pandang, supaya latar
@@ -705,37 +736,8 @@ main::before {
   box-shadow: 0 0 10px rgba(233, 201, 139, 0.55);
 }
 
-/* Lambang: lencana emas dengan perisai navy, bingkai tipis di luar, dan kilau yang lewat sesekali */
-.brand { gap: 0.75rem; }
-.brand__mark {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 13px;
-  background:
-    linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.6) 50%, transparent 62%) 100% 0 / 260% 100% no-repeat,
-    linear-gradient(145deg, #f8e6bf 0%, #e9c98b 45%, #b98f4c 100%);
-  color: var(--navy-950);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -3px 8px rgba(120, 80, 20, 0.35),
-    0 8px 22px -10px rgba(233, 201, 139, 0.75);
-  animation: lambang-masuk 0.9s var(--ease) 0.1s backwards, kilau-lambang 7s ease-in-out 3s infinite;
-}
-.brand__mark::after {
-  content: "";
-  position: absolute;
-  inset: -5px;
-  border: 1px solid rgba(233, 201, 139, 0.35);
-  border-radius: 17px;
-  pointer-events: none;
-}
-.brand__mark .icon { width: 22px; height: 22px; stroke-width: 2.2; }
-@keyframes kilau-lambang {
-  0%, 75% { background-position: 100% 0, 0 0; }
-  92%, 100% { background-position: 0% 0, 0 0; }
-}
+/* Lambang (lencana emas berperisai di header dan footer) dihapus atas permintaan klien (8 November 2026):
+   identitas website cukup nama + jabatan dalam bentuk teks. Gayanya ikut dibuang dari file ini. */
 /* Nama: nama belakang emas bergradasi; garis emas tipis memisahkan nama dan jabatan */
 .brand__name { font-size: 1.2rem; }
 .brand__accent {
@@ -786,29 +788,24 @@ main::before {
    --header-h dinaikkan (laptop 96 px, HP 84 px) supaya semua yang menempel di bawah header (bilah kategori Solusi,
    kolom Edukasi, kartu hasil kalkulator, daftar FAQ) dan lompatan ke bagian (#why, #formulir, kategori Solusi)
    tetap tepat di bawah header. Angka 96 px dan 140 px yang dulu ditulis langsung kini mengikuti --header-h. */
-:root { --header-h: 96px; }
+:root { --header-h: 86px; } /* header 77 px tanpa tulisan jabatan (8 November 2026); sebelumnya 96 px */
 .topbar__inner { min-height: 2.6rem; padding-block: 0.4rem; }
 .topbar__contact { column-gap: 1.75rem; }
 .site-header__inner { padding-block: 0.85rem; }
-.brand { gap: 0.85rem; }
-.brand__mark { width: 44px; height: 44px; border-radius: 14px; }
-.brand__mark::after { border-radius: 18px; }
-.brand__name { font-size: 1.32rem; }
-.brand__tagline { font-size: 0.6rem; line-height: 1.5; }
+/* Tanpa lambang, nama sedikit lebih besar supaya blok nama tetap jadi titik fokus header */
+.brand__name { font-size: 1.45rem; }
+.brand__tagline { font-size: 0.62rem; line-height: 1.5; }
 .site-header__actions { gap: 0.9rem; }
 .site-header__cta { padding: 0.72rem 1.35rem; }
 @media (min-width: 1200px) {
   .nav__list { gap: clamp(1rem, 1.6vw, 1.6rem); }
 }
 @media (max-width: 599px) {
-  :root { --header-h: 84px; }
+  :root { --header-h: 76px; } /* header HP 68 px; sebelumnya 84 px */
   .topbar__inner { min-height: 2.35rem; }
   .site-header__inner { padding-block: 0.7rem; }
-  .brand { gap: 0.75rem; }
-  .brand__mark { width: 40px; height: 40px; border-radius: 13px; }
-  .brand__mark::after { border-radius: 17px; }
-  .brand__name { font-size: 1.12rem; }
-  .brand__tagline { font-size: 0.55rem; letter-spacing: 0.14em; }
+  .brand__name { font-size: 1.22rem; }
+  .brand__tagline { font-size: 0.56rem; letter-spacing: 0.14em; }
 }
 .calc__result,
 .faq-aside { top: calc(var(--header-h) + 0.75rem); }
@@ -819,4 +816,70 @@ main::before {
    banner kalkulator di HP 320 px, jadi hurufnya di sana dikecilkan sedikit. &shy; hanya untuk kata 12 huruf ke atas. */
 @media (max-width: 339px) {
   .calc-promo h3 { font-size: 0.95rem; }
+}
+
+/* ---------- Foto konsultan tanpa latar (8 November 2026) ----------
+   Seperti contoh dari klien: foto konsultan di hero Home dan About tanpa latar dan tanpa kotak, orangnya langsung
+   di atas latar hero. File foto-konsultan-jas-potong.webp (902 x 1300, transparan) dibuat dari foto asli
+   IMG_8787.JPG dengan skrip numpy/scipy: dinding polos dihapus (termasuk bayangannya), tepi rambut dibuat halus,
+   dan warna dinding di tepi dibuang supaya tidak ada garis terang di latar navy. Bagian bawah badan memudar ke
+   latar, dan pola titik di belakang foto diganti cahaya lembut champagne-biru. */
+.ph.foto-potong {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  outline: 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+}
+@media (min-width: 600px) {
+  .ph.foto-potong { max-width: 400px; aspect-ratio: 902 / 1300; }
+}
+.ph.foto-potong::before { display: none; } /* ikon tempat foto tidak tampil di balik foto transparan */
+.ph.foto-potong > img {
+  object-fit: contain;
+  object-position: 50% 100%;
+  transform-origin: 50% 100%; /* efek mengecil/"bernapas" berpusat di bawah, jadi badan tidak bergeser */
+}
+.hero__media:has(.foto-potong)::before {
+  inset: 6% 0 4%;
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(233, 201, 139, 0.24), rgba(64, 108, 222, 0.18) 55%, transparent 100%);
+  opacity: 1;
+}
+/* HP: kotak fotonya kecil, jadi foto memenuhi lebar kotak (kepala di atas, bagian bawah yang terpotong
+   tersembunyi oleh efek memudar) supaya wajah tidak terlalu kecil */
+@media (max-width: 599px) {
+  .ph.foto-potong > img { object-fit: cover; object-position: 50% 0; }
+}
+/* Kartu About Me di Beranda (9 November 2026): foto pertama dari klien juga tanpa latar (foto-konsultan-potong.webp,
+   798 x 1180, dibuat dari foto-konsultan.webp dengan skrip numpy/scipy/scikit-learn; README 5.3). Orangnya berdiri di dasar
+   kolom foto dengan cahaya lembut di belakangnya, seperti di hero. Atasnya diberi ruang 4% supaya rambut tidak terpotong
+   saat foto "bernapas", dan paralaks dimatikan (paralaks memperbesar foto 14%). */
+.profile__photo.foto-potong {
+  max-width: none;
+  background: radial-gradient(closest-side at 50% 55%, rgba(233, 201, 139, 0.2), rgba(64, 108, 222, 0.16) 60%, transparent 100%);
+}
+.profile__photo.foto-potong > img { top: 4%; height: 96%; animation: napas-gambar 10s ease-in-out infinite; animation-timeline: auto; }
+@media (min-width: 600px) {
+  .profile__photo.foto-potong { aspect-ratio: 4 / 5; }
+}
+/* HP: foto di kiri judul (seperti laptop), utuh dan berdiri di dasar kolomnya, bukan dipotong setengah badan seperti hero */
+@media (max-width: 599px) {
+  .profile__photo.foto-potong { aspect-ratio: 798 / 1180; }
+  .profile__photo.foto-potong > img { object-fit: contain; object-position: 50% 100%; }
+}
+/* Footer: "Irham" sempat tidak terlihat karena tema-asuransi.css melepas gradasi (.site-footer .brand__accent
+   { background: none }) sementara warna hurufnya transparan. Gradasi emasnya dipasang lagi untuk footer. */
+.site-footer .brand__accent {
+  background: linear-gradient(100deg, #f8e3b5 0%, #e9c98b 45%, #c69b5c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (forced-colors: active) {
+  .site-footer .brand__accent { background: none; color: LinkText; }
 }

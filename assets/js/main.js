@@ -3,8 +3,9 @@
    Data kontak diubah di SITE di bawah, bukan di tiap halaman. */
 
 const SITE = {
-  // Placeholder: ganti dengan nomor WhatsApp klien (format internasional, tanpa + atau 0 di depan).
-  whatsapp: "6281200000000",
+  // Nomor WhatsApp klien (dipasang 9 November 2026; ditulis 0877-7771-0002).
+  // Format internasional, tanpa + atau 0 di depan.
+  whatsapp: "6287777710002",
   waMessage: "Hello, I’d like a free consultation about insurance protection.",
 };
 

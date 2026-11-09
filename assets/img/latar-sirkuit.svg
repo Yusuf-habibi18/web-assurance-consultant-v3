@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+  <!-- Latar nuansa AI/cyber (9 November 2026): jalur sirkuit tipis di tepi kiri dan kanan layar, dengan denyut cahaya
+       yang sesekali mengalir di sepanjang jalur seperti aliran data. Dipakai sebagai latar body::after di
+       tema-premium.css dan direntangkan ke ukuran layar (preserveAspectRatio="none"); vector-effect membuat garis
+       tetap 1 px di semua ukuran. Tanpa titik atau kelap-kelip (keduanya pernah ditolak klien). -->
+  <style>
+    path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+    .j { stroke: rgba(124, 182, 255, 0.17); stroke-width: 1; }
+    .g, .p { stroke-dasharray: 5 200; stroke-dashoffset: 5; animation: alir 9s linear infinite; }
+    .g { stroke: rgba(110, 190, 255, 0.22); stroke-width: 5; }
+    .p { stroke: rgba(168, 222, 255, 0.85); stroke-width: 1.6; }
+    .d1 { animation-delay: 0s; } .d2 { animation-delay: -2.2s; } .d3 { animation-delay: -4.6s; }
+    .d4 { animation-delay: -6.1s; } .d5 { animation-delay: -1.3s; } .d6 { animation-delay: -7.4s; }
+    .d7 { animation-delay: -3.5s; } .d8 { animation-delay: -5.4s; }
+    .s1 { animation-duration: 8s; } .s2 { animation-duration: 11s; } .s3 { animation-duration: 13s; }
+    @keyframes alir { 0% { stroke-dashoffset: 5; } 55%, 100% { stroke-dashoffset: -100; } }
+    @media (prefers-reduced-motion: reduce) { .g, .p { animation: none; opacity: 0; } }
+  </style>
+  <defs>
+    <!-- Kiri -->
+    <path id="a" pathLength="100" d="M0 118 H62 V206 H128 V292"/>
+    <path id="b" pathLength="100" d="M0 262 H38 V418 H104 V470 H152"/>
+    <path id="c" pathLength="100" d="M0 606 H74 V540 H138"/>
+    <path id="d" pathLength="100" d="M0 758 H54 V858 H118 V942"/>
+    <path id="e" pathLength="100" d="M92 0 V58 H162 V96"/>
+    <!-- Kanan -->
+    <path id="f" pathLength="100" d="M1000 176 H930 V278 H862 V332"/>
+    <path id="g" pathLength="100" d="M1000 402 H956 V520 H880"/>
+    <path id="h" pathLength="100" d="M1000 688 H922 V760 H852 V820 H818"/>
+    <path id="i" pathLength="100" d="M912 1000 V930 H850 V880"/>
+    <path id="k" pathLength="100" d="M1000 878 H962 V818"/>
+  </defs>
+  <g class="j">
+    <use href="#a"/><use href="#b"/><use href="#c"/><use href="#d"/><use href="#e"/>
+    <use href="#f"/><use href="#g"/><use href="#h"/><use href="#i"/><use href="#k"/>
+  </g>
+  <!-- Denyut: garis lebar redup (cahaya) + garis tipis terang, berjalan bersama -->
+  <path class="g d1 s1" pathLength="100" d="M0 118 H62 V206 H128 V292"/>
+  <path class="p d1 s1" pathLength="100" d="M0 118 H62 V206 H128 V292"/>
+  <path class="g d3 s2" pathLength="100" d="M0 606 H74 V540 H138"/>
+  <path class="p d3 s2" pathLength="100" d="M0 606 H74 V540 H138"/>
+  <path class="g d6 s3" pathLength="100" d="M0 758 H54 V858 H118 V942"/>
+  <path class="p d6 s3" pathLength="100" d="M0 758 H54 V858 H118 V942"/>
+  <path class="g d2 s2" pathLength="100" d="M1000 176 H930 V278 H862 V332"/>
+  <path class="p d2 s2" pathLength="100" d="M1000 176 H930 V278 H862 V332"/>
+  <path class="g d5 s1" pathLength="100" d="M1000 688 H922 V760 H852 V820 H818"/>
+  <path class="p d5 s1" pathLength="100" d="M1000 688 H922 V760 H852 V820 H818"/>
+  <path class="g d8 s3" pathLength="100" d="M1000 402 H956 V520 H880"/>
+  <path class="p d8 s3" pathLength="100" d="M1000 402 H956 V520 H880"/>
+</svg>

@@ -62,12 +62,20 @@
 }
 .profile__photo { min-height: 320px; border-radius: 0; }
 .profile__body { padding: clamp(1.5rem, 4vw, 3rem); }
-.profile__role { color: var(--color-muted); font-weight: 500; margin-top: -0.3rem; }
+/* Nama dan jabatan di kartu About Me (dipindah dari pembukaan hero Beranda, 8 November 2026) */
+.profile__body .profile__name { margin-block: 0.2rem 0.25rem; /* .profile__body: lebih kuat dari ".profile__body p" yang meredupkan paragraf */ font: 600 1.35rem/1.2 var(--font-heading); letter-spacing: -0.01em; color: var(--color-ink); }
+.profile__role { margin: 0 0 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); }
 .profile__body p { color: var(--color-muted); }
 .profile__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; margin-top: 1.5rem; }
-@media (min-width: 820px) {
-  .profile { grid-template-columns: 0.8fr 1.2fr; }
-  .profile__photo { min-height: 100%; }
+/* Tablet dan laptop: foto di kiri, teks di kanan (sejak 9 November 2026 mulai 600 px, sebelumnya 820 px) */
+@media (min-width: 600px) {
+  .profile { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } /* minmax: rasio foto tidak boleh melebarkan kolomnya */
+  /* Foto minimal setinggi rasio aslinya (4:5) dan ikut memanjang bila teks di sampingnya lebih tinggi; teksnya di
+     tengah secara vertikal. Sejak dua paragraf isian dihapus (9 November 2026) teksnya lebih pendek daripada foto
+     di laptop lebar; tanpa aturan ini foto ikut memendek dan terpotong hampir persegi. */
+  /* width: 100%: tanpa ini kotak berasio menghitung lebarnya dari tinggi baris dan meluber ke kolom teks */
+  .profile__photo { width: 100%; min-height: 100%; aspect-ratio: 4 / 5; }
+  .profile__body { align-self: center; }
 }
 
 /* ---------- Langkah (garis waktu) ----------
@@ -197,8 +205,7 @@
 /* ---------- Tentang Saya ---------- */
 .about-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 .about-hero__grid { display: grid; gap: 2.5rem; align-items: center; }
-.about-hero__name { display: flex; width: fit-content; margin-block: 1.25rem 0.6rem; }
-.about-hero h1 { margin-bottom: 1rem; }
+.about-hero h1 { margin: 1.2rem 0 1rem; } /* jarak dari label di atasnya (label nama di antaranya dihapus 8 November 2026) */
 .about-hero__lead { font-size: 1.05rem; color: var(--color-muted); max-width: 36rem; margin-bottom: 1.75rem; }
 .about-hero__photo { aspect-ratio: 4 / 5; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
 @media (min-width: 900px) {
@@ -809,12 +816,10 @@ main > section[id],
 #formulir { scroll-margin-top: var(--header-h, 84px); }
 
 /* ---------- Hero profil (Beranda) ----------
-   Mengikuti dokumen "Isi Website" dari klien: identitas singkat di pembukaan (label jabatan, nama, kalimat
-   pengantar), dipisah garis tipis dari judul utama, lalu subjudul, paragraf, dan tombol. Foto konsultan di kanan. */
-.hero__id { margin-bottom: 1.6rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
-.hero__name { margin: 0.85rem 0 0.3rem; font: 600 1.55rem/1.2 var(--font-heading); letter-spacing: -0.02em; color: var(--color-ink); }
-.hero__intro { margin: 0; max-width: 34rem; font-size: 1rem; color: var(--color-muted); }
-.hero--profile .hero__grid h1 { margin: 0 0 0.9rem; font-size: clamp(2rem, 3.4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.03em; }
+   Mengikuti dokumen "Isi Website" dari klien: judul utama, subjudul, paragraf, dan tombol; foto konsultan di kanan.
+   Identitas singkat (label jabatan, nama, jabatan) yang dulu ada di pembukaan, dipisah garis tipis dari judul,
+   dipindah ke kartu About Me (8 November 2026, atas permintaan). Judul sekarang jadi pembuka, jadi sedikit lebih besar. */
+.hero--profile .hero__grid h1 { margin: 0 0 1rem; font-size: clamp(2.3rem, 4.1vw, 3.25rem); line-height: 1.08; letter-spacing: -0.03em; }
 .hero__sub { margin: 0 0 0.6rem; font-size: 1.15rem; font-weight: 600; line-height: 1.5; color: var(--color-ink); }
 .hero--profile .hero__lead { max-width: 36rem; }
 /* Foto konsultan (potret 4:5) di kanan, dengan pola titik di belakangnya (.hero__media::before) */
@@ -1037,34 +1042,30 @@ main > section[id],
   .hero__art { width: 100%; max-width: none; }
   .hero__media::before { top: -0.75rem; right: -0.5rem; width: 5rem; height: 5rem; }
   .hero__photo { aspect-ratio: 16 / 10; }
-  /* Hero profil Beranda: label selebar layar; nama dan kalimat pengantar di kiri, foto konsultan di kanan;
-     lalu garis tipis, judul utama, subjudul, paragraf, dan tombol selebar layar */
-  .hero--profile .hero__grid { grid-template-columns: minmax(0, 1fr) 38%; column-gap: 0.9rem; }
-  .hero__id { display: contents; }
-  .hero--profile .hero__grid .badge { grid-column: 1 / -1; grid-row: 1; }
-  .hero__name { grid-column: 1; grid-row: 2; align-self: end; margin: 0.9rem 0 0.3rem; font-size: 1.2rem; }
-  .hero__intro { grid-column: 1; grid-row: 3; align-self: start; font-size: 0.82rem; line-height: 1.55; }
-  .hero--profile .hero__grid > .hero__media { grid-column: 2; grid-row: 2 / span 2; align-self: stretch; margin-top: 0.9rem; }
-  .hero__portrait { height: 100%; min-height: 170px; max-width: none; aspect-ratio: auto; }
+  /* Hero profil Beranda (sejak 8 November 2026 tanpa blok identitas): judul utama di kiri, foto konsultan di kanan,
+     lalu subjudul, paragraf, dan tombol selebar layar */
+  .hero--profile .hero__grid { grid-template-columns: minmax(0, 1fr) 40%; column-gap: 0.9rem; }
+  .hero--profile .hero__grid > .hero__media { grid-column: 2; grid-row: 1; align-self: stretch; }
+  .hero__portrait { height: 100%; min-height: 190px; max-width: none; aspect-ratio: auto; }
   /* Hero Solusi: foto potret tetap 4:5 di samping judul (tidak direntangkan seperti hero profil Beranda) */
   .hero:not(.hero--profile) .hero__portrait { height: auto; min-height: 0; aspect-ratio: 4 / 5; }
-  .hero--profile .hero__grid h1 { grid-column: 1 / -1; grid-row: 4; margin: 1.2rem 0 0.6rem; padding-top: 1.1rem; border-top: 1px solid var(--color-border); font-size: 1.55rem; }
-  .hero__sub { grid-row: 5; margin-bottom: 0.45rem; font-size: 0.98rem; }
-  .hero--profile .hero__lead { grid-row: 6; }
-  .hero--profile .hero__actions { grid-row: 7; }
+  .hero--profile .hero__grid h1 { grid-column: 1; grid-row: 1; align-self: center; margin: 0; font-size: 1.55rem; }
+  .hero__sub { grid-row: 2; margin: 1.1rem 0 0.45rem; font-size: 0.98rem; }
+  .hero--profile .hero__lead { grid-row: 3; }
+  .hero--profile .hero__actions { grid-row: 4; }
 
-  /* --- Hero Tentang Saya: nama dan judul di kiri, foto di kanan, tiga kotak data berjajar --- */
+  /* --- Hero Tentang Saya: nama dan judul di kiri, foto di kanan, dua kotak data berjajar (Experience dihapus 9 November 2026) --- */
   .about-hero { padding-block: 2rem 2.25rem; }
   .about-hero__grid { grid-template-columns: minmax(0, 1fr) 36%; column-gap: 0.9rem; row-gap: 0; }
   .about-hero__grid > div:first-child { display: contents; }
   .about-hero__grid > :where(div:first-child) > * { grid-column: 1 / -1; }
   .about-hero__grid .badge { grid-column: 1; grid-row: 1; justify-self: start; }
-  .about-hero__name { grid-column: 1; grid-row: 2; margin-block: 0.75rem 0.5rem; }
-  .about-hero h1 { grid-column: 1; grid-row: 3; margin-bottom: 0; font-size: 1.5rem; }
+  .about-hero h1 { grid-column: 1; grid-row: 2; align-self: start; margin: 0.9rem 0 0; font-size: 1.5rem; }
   .about-hero__grid > .hero__media { grid-column: 2; grid-row: 1 / span 3; align-self: stretch; }
   .about-hero__photo { height: 100%; min-height: 170px; aspect-ratio: auto; font-size: 0.68rem; }
-  .about-hero__lead { grid-row: 4; margin-block: 1rem 1.1rem; font-size: 0.95rem; }
-  .stat-row { grid-row: 5; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; }
+  /* Jabatan di kolom kiri tepat di bawah nama, di samping foto (tidak menyisakan ruang kosong di samping foto) */
+  .about-hero__lead { grid-column: 1; grid-row: 3; align-self: start; margin-block: 0.6rem 0; font-size: 0.85rem; line-height: 1.5; }
+  .stat-row { grid-row: 4; margin-top: 1.1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; }
   .stat { padding: 0.7rem 0.6rem; border-radius: var(--radius-sm); }
   .stat__label { gap: 0.25rem; font-size: 0.56rem; letter-spacing: 0.04em; }
   .stat__label .icon { width: 1.5em; height: 1.5em; }
@@ -1095,17 +1096,23 @@ main > section[id],
   .calc-promo__preview .calc-promo__value { margin-bottom: 0.6rem; font-size: 0.9rem; white-space: nowrap; }
   .calc-promo__preview .calc-promo__caption { margin-top: 0.45rem; font-size: 0.66rem; line-height: 1.45; }
 
-  /* --- Profil konsultan: label dan judul di atas, lalu foto, lalu nama dan teks lainnya ---
-     .profile__body dibuat display: contents supaya foto bisa diselipkan di antara judul dan isi.
-     Kartunya selebar layar, jadi ukuran huruf tidak diperkecil (sama seperti section lain). */
-  .profile { grid-template-columns: minmax(0, 1fr); }
+  /* --- Profil konsultan (9 November 2026, permintaan klien: "seperti website"): susunannya mengikuti laptop.
+     Foto di kiri, label/judul/nama/jabatan (profile__head) di kanan, lalu kapsul kredensial dan tombol selebar
+     kartu di bawahnya; huruf diperkecil. .profile__body dibuat display: contents supaya isinya jadi sel grid kartu.
+     Sebelumnya bertumpuk: judul, foto 4:3, lalu teks (kartu 705 px di HP 390 px). */
+  .profile { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); column-gap: 0.5rem; }
   .profile__body { display: contents; }
-  .profile__body > * { margin-inline: 0.9rem; }
-  .profile__body > .eyebrow { order: -2; justify-self: start; margin-top: 0.9rem; }
-  .profile__body > h2 { order: -1; margin-block: 0 0.8rem; }
-  .profile__body > :last-child { margin-bottom: 1.1rem; }
-  .profile__photo { min-height: 0; aspect-ratio: 4 / 3; margin-bottom: 0.9rem; font-size: 0.68rem; }
-  .profile__actions { gap: 0.6rem 1rem; margin-top: 0.75rem; }
+  .profile__photo { grid-column: 1; grid-row: 1; align-self: end; min-height: 0; aspect-ratio: 4 / 5; font-size: 0.68rem; }
+  .profile__head { grid-column: 2; grid-row: 1; align-self: center; padding: 1rem 0.8rem 0.5rem 0; }
+  .profile__head .eyebrow { margin-bottom: 0.5rem; font-size: 0.62rem; }
+  .profile__head h2 { margin: 0 0 0.55rem; font-size: 1.25rem; }
+  .profile__body .profile__name { font-size: 1.02rem; }
+  .profile__role { margin: 0; font-size: 0.58rem; letter-spacing: 0.1em; line-height: 1.5; }
+  .profile__facts { grid-column: 1 / -1; margin: 0.85rem 0.8rem 0; }
+  .profile__actions { grid-column: 1 / -1; gap: 0.6rem 0.7rem; margin: 0.8rem 0.8rem 1rem; }
+  /* tombol dan tautan diperkecil supaya sebaris seperti di laptop (muat sampai 360 px) */
+  .profile__actions .btn { gap: 0.4rem; padding: 0.55rem 0.85rem; font-size: 0.78rem; }
+  .profile__actions .link-arrow { font-size: 0.78rem; }
 
   /* --- Pendekatan: nomor tetap di kiri seperti di laptop, huruf dan jarak diperkecil --- */
   .approach { gap: 1.25rem; }
@@ -1252,6 +1259,7 @@ main > section[id],
   /* Kata Inggris panjang di judul kolom sempit ("Commitment", "Understanding") tidak keluar dari kolomnya */
   .ethics h2 { font-size: 1.28rem; }
   .sol__intro h2 { font-size: 1.3rem; }
+  .profile__head h2 { font-size: 1.1rem; } /* kartu About Me Beranda: judul tetap dua baris di kolom sempit */
 }
 
 /* HP sempit: tombol banner kalkulator dirapatkan supaya "Try the Calculator" muat satu baris di kolom teks */
