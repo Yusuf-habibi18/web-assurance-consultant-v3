@@ -502,9 +502,9 @@ Ketentuan isi (lihat juga [bagian 8](#8-ketentuan-konten-asuransi)):
 
 ### 5.10 Penanda versi CSS dan JS
 
-Sejak 9 November 2026 setiap halaman memuat CSS dan JS dengan penanda versi, misalnya `assets/css/tema-premium.css?v=20261109`. GitHub Pages mengizinkan browser menyimpan file itu sampai 10 menit, dan browser HP sering lebih lama, sehingga setelah website diperbarui tampilan lama (misalnya tombol yang warnanya sudah diganti) masih bisa terlihat. Dengan penanda versi, browser langsung mengambil file baru begitu halamannya dimuat ulang.
+Sejak 9 November 2026 setiap halaman memuat CSS, JS, dan ikon tab (favicon) dengan penanda versi, misalnya `assets/css/tema-premium.css?v=20261109`. Favicon paling lama tersimpan: browser menyimpannya terpisah dan bisa tetap memakai ikon lama berhari-hari, bahkan setelah halaman dimuat ulang. GitHub Pages mengizinkan browser menyimpan file itu sampai 10 menit, dan browser HP sering lebih lama, sehingga setelah website diperbarui tampilan lama (misalnya tombol yang warnanya sudah diganti) masih bisa terlihat. Dengan penanda versi, browser langsung mengambil file baru begitu halamannya dimuat ulang.
 
-**Setiap kali mengubah file CSS atau JS**, naikkan angkanya di kedelapan halaman: tekan `Ctrl+Shift+H`, cari `?v=20261109`, ganti dengan tanggal baru (misalnya `?v=20261110`, atau `?v=20261109b` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
+**Setiap kali mengubah file CSS, JS, atau ikon**, naikkan angkanya di kedelapan halaman: tekan `Ctrl+Shift+H`, cari `?v=20261109`, ganti dengan tanggal baru (misalnya `?v=20261110`, atau `?v=20261109b` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
 
 ## 6. Deployment
 
