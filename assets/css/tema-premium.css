@@ -71,7 +71,8 @@ h3, h4 { font-weight: 600; letter-spacing: -0.005em; }
 /* Teks kecil (menu, tombol, label, nomor kartu) tetap Inter supaya terbaca, seperti menu dan tombol di referensi */
 .nav__link, .btn, .eyebrow, .badge, .tag, .card__num, .article-card__meta { font-family: var(--font-body); }
 
-/* Kata sorotan di judul: emas polos, tanpa garis sorot biru */
+/* Kata sorotan di judul: emas polos, tanpa garis sorot biru. Sejak 11 November 2026 setiap judul halaman dan section
+   (h1, h2) dua warna seperti logo "Arits Irham": awal judul putih, kata kuncinya emas (span text-gradient). */
 .text-gradient {
   background: none;
   -webkit-background-clip: border-box;
@@ -796,6 +797,10 @@ main::before {
 .brand__name { font-size: 1.45rem; }
 .brand__tagline { font-size: 0.62rem; line-height: 1.5; }
 .site-header__actions { gap: 0.9rem; }
+/* Pilihan bahasa: kapsul bergaris emas, bahasa aktif berlatar emas */
+.lang-switch { border-color: var(--gold-line); background: rgba(255, 255, 255, 0.03); }
+a.lang-switch__item:hover { color: var(--gold); background: var(--gold-soft); }
+.lang-switch__item.is-current { background: var(--gold); color: var(--navy-950); }
 .site-header__cta { padding: 0.72rem 1.35rem; }
 @media (min-width: 1200px) {
   .nav__list { gap: clamp(1rem, 1.6vw, 1.6rem); }
@@ -883,3 +888,9 @@ main::before {
 @media (forced-colors: active) {
   .site-footer .brand__accent { background: none; color: LinkText; }
 }
+
+/* Halaman topik dan artikel (10 November 2026): aksen emas */
+.breadcrumb a:hover, .prose thead th, .terkait__jenis { color: var(--gold); }
+.prose th, .prose td { border-bottom-color: var(--gold-line); }
+.penulis { border-color: var(--gold-line); background: rgba(255, 255, 255, 0.03); }
+.penulis img { background: var(--navy-850); }

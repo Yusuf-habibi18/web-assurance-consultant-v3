@@ -972,6 +972,56 @@ main > section[id],
 .testi__who strong { display: block; font-size: 0.95rem; color: var(--color-ink); }
 .testi__who small { display: block; font-size: 0.82rem; color: var(--color-muted); }
 .testi .avatar { flex: none; background: var(--color-accent-soft); color: var(--color-accent); }
+/* Foto klien di atas kutipan (10 November 2026). Bingkai 3:2 untuk semua foto supaya kartu sejajar. Swafoto (16:9)
+   digeser ke kiri supaya wajah orang di tepi kiri dan kanan tetap utuh; foto potret (4:5, orang berdiri) digeser ke atas.
+   Keterangan di bawah kutipan setinggi dua baris supaya garisnya sejajar walaupun sebagian label hanya satu baris. */
+.testi .testi__foto { aspect-ratio: 3 / 2; margin-bottom: 1.1rem; }
+.testi .testi__foto--kiri { object-position: 35% 50%; }
+.testi .testi__foto--atas { object-position: 50% 18%; }
+.testi .avatar .icon { width: 18px; height: 18px; }
+.testi .testi__who { min-height: 5.7rem; }
+/* Pita testimoni yang berjalan ke kanan tanpa henti seperti eskalator (11 November 2026). main.js menyalin kartunya,
+   mengisi --testi-set (lebar satu set kartu) dan --testi-durasi, lalu memberi kelas is-jalan. Jarak antarkartu memakai
+   margin, bukan gap, supaya satu putaran tepat selebar satu set dan sambungannya tidak terlihat.
+   Tanpa JavaScript atau dengan "kurangi gerakan", pita diam dan bisa digeser manual. */
+.testi-marquee {
+  --testi-w: clamp(210px, 36vw, 300px); /* HP 210 px, tablet 768 px sekitar 276 px, laptop 300 px */
+  --testi-jarak: 1.25rem;
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 0.5rem var(--gutter) 1.5rem; /* ruang untuk bayangan kartu */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.testi-marquee::-webkit-scrollbar { display: none; }
+.testi-track { display: flex; width: max-content; }
+.testi-track > .testi { flex: none; width: var(--testi-w); margin: 0 var(--testi-jarak) 0 0; }
+.testi-marquee.is-jalan {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.testi-marquee.is-jalan .testi-track { animation: testi-eskalator var(--testi-durasi, 45s) linear infinite; }
+/* Tidak berhenti saat disorot atau disentuh, dan tanpa tombol Jeda (keduanya dihapus 11 November 2026 atas permintaan
+   klien). Hanya ditahan saat pita di luar layar, supaya hemat baterai. */
+.testi-marquee.is-luar .testi-track { animation-play-state: paused; }
+@keyframes testi-eskalator {
+  from { transform: translateX(calc(-1 * var(--testi-set, 0px))); }
+  to { transform: translateX(0); }
+}
+@media (max-width: 599px) {
+  .testi-marquee { --testi-jarak: 0.65rem; }
+  .testi-track > .card { padding: 1rem 0.95rem; }
+  .testi blockquote p { font-size: 0.8rem; line-height: 1.55; }
+  .testi .testi__foto { margin-bottom: 0.7rem; }
+  .testi blockquote { margin-bottom: 0.8rem; }
+  /* Kartu di HP sempit: ikon kutip di keterangan disembunyikan supaya label cukup dua baris */
+  .testi .testi__who .avatar { display: none; }
+  .testi .testi__who { min-height: 4.5rem; }
+  .testi__who { gap: 0.5rem; padding-top: 0.7rem; }
+  .testi__who strong { font-size: 0.8rem; }
+  .testi__who small { font-size: 0.7rem; }
+  .testi .avatar .icon { width: 14px; height: 14px; }
+}
 
 /* ---------- Mobile: tampilan "laptop mini" ----------
    Di HP (< 600 px) tata letak meniru versi laptop: teks dan gambar berdampingan, langkah tiga kolom,
@@ -1310,3 +1360,44 @@ main > section[id],
   .steps__body { hyphens: manual; }
   .steps__body h3 { text-wrap: wrap; } /* balance menyisakan "&" sendirian di satu baris */
 }
+
+/* ---------- Halaman topik dan artikel (10 November 2026) ----------
+   Dipakai halaman asuransi-*.html dan edukasi/*.html selain index: jejak navigasi, info penulis, tabel di .prose,
+   kotak penulis, daftar sumber, dan kartu "Topik Terkait". */
+.edu-hero .breadcrumb { margin-bottom: 1.1rem; font-size: 0.82rem; color: var(--color-muted); }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 0.3rem 0.45rem; margin: 0; padding: 0; list-style: none; }
+.breadcrumb li + li::before { content: "›"; margin-right: 0.45rem; opacity: 0.7; }
+.breadcrumb a { color: inherit; text-decoration: none; }
+.breadcrumb a:hover { color: var(--color-accent); text-decoration: underline; }
+.edu-hero .artikel-meta { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; margin-top: 1rem; font-size: 0.85rem; }
+.artikel-meta a { color: inherit; }
+.tabel-geser { overflow-x: auto; margin: 1rem 0 1.5rem; }
+.prose table { width: 100%; min-width: 30rem; border-collapse: collapse; font-size: 0.92rem; line-height: 1.55; }
+.prose th, .prose td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+.prose thead th { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-accent); }
+.prose tbody th { font-weight: 700; color: var(--color-ink); }
+.prose__catatan { margin-top: 2rem; font-size: 0.85rem; color: var(--color-muted); }
+.sumber-artikel { padding-left: 1.2rem; font-size: 0.9rem; }
+.sumber-artikel li { color: var(--color-muted); }
+.penulis { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; padding: 1.1rem 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius); }
+.penulis img { flex: none; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: 50% 8%; background: var(--color-tint); }
+.penulis p { margin: 0; font-size: 0.9rem; }
+.penulis .penulis__nama { margin-bottom: 0.3rem; font-weight: 700; color: var(--color-ink); }
+.terkait { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.terkait__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.15rem 1.25rem; text-decoration: none; }
+.terkait__jenis { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
+.terkait__judul { font-weight: 600; line-height: 1.45; color: var(--color-ink); }
+.terkait__item:hover .terkait__judul { text-decoration: underline; }
+@media (max-width: 599px) {
+  /* Di HP tabel dibuat muat selebar layar (tanpa geser ke samping), huruf dan jarak diperkecil */
+  .prose table { min-width: 0; font-size: 0.78rem; line-height: 1.45; }
+  .prose th, .prose td { padding: 0.5rem 0.4rem; }
+  .prose thead th { font-size: 0.66rem; letter-spacing: 0.03em; }
+  .penulis { align-items: flex-start; }
+  .penulis img { width: 56px; height: 56px; }
+  .terkait { grid-template-columns: 1fr; gap: 0.6rem; }
+}
+.terkait__ringkas { font-size: 0.86rem; line-height: 1.55; color: var(--color-muted); }
+.terkait__subjudul { margin: 2.25rem 0 1rem; font-size: 1.1rem; }
+.sol__lanjut { margin: 0.9rem 0 0; }
+.pk__lanjut { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.75rem; margin: 1.5rem 0 0; }

@@ -66,6 +66,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--color-text);
   background: var(--color-surface);
+  overflow-wrap: break-word; /* pengaman (10 November 2026): kata yang tetap tidak muat dipatahkan, tidak keluar kotak */
 }
 
 img, svg { max-width: 100%; display: block; }

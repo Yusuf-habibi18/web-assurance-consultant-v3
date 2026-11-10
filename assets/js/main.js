@@ -2,11 +2,16 @@
    dan penanda kategori di halaman Solusi.
    Data kontak diubah di SITE di bawah, bukan di tiap halaman. */
 
+// Bahasa halaman (10 November 2026): "id" di alamat utama, "en" di folder en/. tr(teksIndonesia, teksInggris)
+// memilih teks sesuai bahasa halaman; dipakai juga oleh form.js dan kalkulator.js.
+const LANG = document.documentElement.lang === "en" ? "en" : "id";
+const tr = (id, en) => (LANG === "en" ? en : id);
+
 const SITE = {
   // Nomor WhatsApp klien (dipasang 9 November 2026; ditulis 0877-7771-0002).
   // Format internasional, tanpa + atau 0 di depan.
   whatsapp: "6287777710002",
-  waMessage: "Hello, I’d like a free consultation about insurance protection.",
+  waMessage: tr("Halo, saya ingin konsultasi gratis tentang perlindungan asuransi.", "Hello, I’d like a free consultation about insurance protection."),
 };
 
 function buildWaUrl(message) {
@@ -25,7 +30,7 @@ const nav = document.querySelector("#site-nav");
 if (navToggle && nav) {
   const setOpen = (open) => {
     navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    navToggle.setAttribute("aria-label", open ? tr("Tutup menu", "Close menu") : tr("Buka menu", "Open menu"));
     nav.classList.toggle("is-open", open);
     document.body.classList.toggle("nav-open", open); // menggelapkan halaman di belakang menu
   };
@@ -137,12 +142,58 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 // atau browser tidak mendukung IntersectionObserver; konten tetap tampil normal.
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Testimoni klien berjalan ke kanan tanpa henti seperti eskalator (11 November 2026; gayanya di pages.css).
+// Satu set kartu ditulis di HTML; di sini set itu disalin secukupnya supaya putarannya menyambung. Salinan disembunyikan
+// dari pembaca layar dan keyboard. Atas permintaan klien (11 November 2026) pita tidak berhenti saat disorot dan tidak
+// punya tombol Jeda. Bila "kurangi gerakan" aktif, pita tidak berjalan dan kartunya bisa digeser manual.
+if (!reduceMotion) {
+  document.querySelectorAll(".testi-marquee").forEach((marquee) => {
+    const track = marquee.querySelector(".testi-track");
+    const asli = track ? Array.from(track.children) : [];
+    if (!asli.length) return;
+
+    let lebarTerakhir = 0;
+    const susun = () => {
+      if (marquee.clientWidth === lebarTerakhir) return;
+      lebarTerakhir = marquee.clientWidth;
+      track.querySelectorAll("[data-salinan]").forEach((el) => el.remove());
+      const set = track.offsetWidth; // lebar satu set kartu, termasuk jarak antarkartu
+      if (!set) return;
+      const jumlah = Math.ceil(marquee.clientWidth / set) + 1;
+      for (let n = 0; n < jumlah; n++) {
+        asli.forEach((kartu) => {
+          const salinan = kartu.cloneNode(true);
+          salinan.setAttribute("data-salinan", "");
+          salinan.setAttribute("aria-hidden", "true");
+          salinan.inert = true;
+          track.append(salinan);
+        });
+      }
+      track.style.setProperty("--testi-set", set + "px");
+      track.style.setProperty("--testi-durasi", Math.round(set / 60) + "s"); // sekitar 60 px per detik (dipercepat 11 November 2026)
+    };
+    susun();
+    marquee.classList.add("is-jalan");
+    let tunda;
+    window.addEventListener("resize", () => {
+      clearTimeout(tunda);
+      tunda = setTimeout(susun, 200);
+    });
+
+    // Hemat baterai: animasi ditahan saat pita di luar layar (tidak terlihat oleh pengunjung).
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => marquee.classList.toggle("is-luar", !entry.isIntersecting)).observe(marquee);
+    }
+  });
+}
+
 if (!reduceMotion && "IntersectionObserver" in window) {
-  const targets = document.querySelectorAll(
+  const targets = Array.from(document.querySelectorAll(
     ".section-head, .card, .profile, .cta-band, .featured, .ethics, .accordion__item, " +
     ".pyramid__layer, .callout, .claim-band, .channel, .consult-steps li, .consult-alt, .prose > *, " +
-    ".why__item, .steps__item, .approach__item, .calc-promo, .timeline li, .journey__photo, .sol__img, .site-footer__grid > *"
-  );
+    ".why__item, .steps__item, .approach__item, .calc-promo, .timeline li, .journey__photo, .sol__img, .site-footer__grid > *, " +
+    ".testi-marquee"
+  )).filter((el) => !el.closest(".testi-track")); // kartu di pita testimoni muncul bersama pitanya, tidak satu per satu
 
   const show = (el) => {
     el.classList.add("is-visible");

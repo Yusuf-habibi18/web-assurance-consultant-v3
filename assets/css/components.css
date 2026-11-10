@@ -234,6 +234,11 @@
 .nav__link[aria-current] { color: var(--color-ink); font-weight: 600; }
 
 .site-header__actions { display: flex; align-items: center; gap: 0.6rem; }
+/* Pilihan bahasa ID | EN (10 November 2026): bahasa yang sedang dibaca ditandai, satunya tautan ke halaman yang sama */
+.lang-switch { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--color-border); border-radius: 999px; font: 700 0.72rem/1 var(--font-body); letter-spacing: 0.06em; }
+.lang-switch__item { display: inline-grid; place-items: center; min-width: 2.15rem; height: 2rem; padding: 0 0.55rem; border-radius: 999px; color: var(--color-muted); text-decoration: none; transition: color 0.2s, background-color 0.2s; }
+a.lang-switch__item:hover { color: var(--color-accent); background: var(--color-accent-soft); }
+.lang-switch__item.is-current { background: var(--color-accent-soft); color: var(--color-ink); }
 .site-header__cta { display: none; }
 
 .nav-toggle {

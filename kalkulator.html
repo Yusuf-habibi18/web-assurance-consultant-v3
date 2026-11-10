@@ -1,28 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Protection Gap Calculator | Arits Fauzi Irham</title>
-  <meta name="description" content="Estimate your family’s life and critical illness insurance protection gap. Free, calculated on your device, and no data is stored.">
+  <title>Kalkulator Kebutuhan Asuransi Jiwa | Arits Fauzi Irham</title>
+  <meta name="description" content="Hitung perkiraan kesenjangan proteksi asuransi jiwa dan penyakit kritis keluarga Anda. Gratis, dihitung di perangkat Anda, dan data tidak disimpan.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Kalkulator Protection Gap | Arits Fauzi Irham">
-  <meta property="og:description" content="Estimate your family’s life and critical illness insurance protection gap.">
+  <meta property="og:title" content="Kalkulator Kesenjangan Proteksi | Arits Fauzi Irham">
+  <meta property="og:description" content="Hitung perkiraan kesenjangan proteksi asuransi jiwa dan penyakit kritis keluarga Anda.">
+  <meta property="og:url" content="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/kalkulator.html">
+  <meta property="og:image" content="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/assets/img/og/og-id.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#07142a">
-  <link rel="icon" href="assets/img/favicon-32.png?v=20261109d" sizes="32x32">
-  <link rel="icon" href="assets/img/favicon.svg?v=20261109d" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=20261109d">
+  <!-- Dua bahasa (10 November 2026): Indonesia di alamat utama, Inggris di folder en/. Alamat lengkap di bawah
+       memakai domain GitHub Pages; ganti semuanya saat domain sendiri dipasang (README 5.12). -->
+  <link rel="canonical" href="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/kalkulator.html">
+  <link rel="alternate" hreflang="id" href="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/kalkulator.html">
+  <link rel="alternate" hreflang="en" href="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/en/kalkulator.html">
+  <link rel="alternate" hreflang="x-default" href="https://yusuf-habibi18.github.io/web-assurance-consultant-v3/kalkulator.html">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:locale:alternate" content="en_US">
+  <link rel="icon" href="assets/img/favicon-32.png?v=20261111d" sizes="32x32">
+  <link rel="icon" href="assets/img/favicon.svg?v=20261111d" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=20261111d">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,100&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- ?v=... : penanda versi supaya browser (terutama di HP) langsung memakai CSS/JS terbaru setelah website
        diperbarui. Naikkan angkanya di semua halaman setiap kali CSS atau JS diubah (README 5.10). -->
-  <link rel="stylesheet" href="assets/css/base.css?v=20261109d">
-  <link rel="stylesheet" href="assets/css/components.css?v=20261109d">
-  <link rel="stylesheet" href="assets/css/pages.css?v=20261109d">
-  <link rel="stylesheet" href="assets/css/tema-asuransi.css?v=20261109d">
-  <link rel="stylesheet" href="assets/css/tema-premium.css?v=20261109d">
+  <link rel="stylesheet" href="assets/css/base.css?v=20261111d">
+  <link rel="stylesheet" href="assets/css/components.css?v=20261111d">
+  <link rel="stylesheet" href="assets/css/pages.css?v=20261111d">
+  <link rel="stylesheet" href="assets/css/tema-asuransi.css?v=20261111d">
+  <link rel="stylesheet" href="assets/css/tema-premium.css?v=20261111d">
 </head>
 <body>
 
@@ -46,12 +59,12 @@
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
 </svg>
 
-<a class="skip-link" href="#konten">Skip to content</a>
+<a class="skip-link" href="#konten">Langsung ke konten</a>
 
 <!-- Bilah info atas (semua halaman). Jam layanan dan email dari klien (8 November 2026). Nomor WhatsApp klien dipasang 9 November 2026 (0877-7771-0002). -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Service hours: </span>08:00&ndash;17:00 WIB</span></p>
+    <p class="topbar__hours"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><span class="topbar__label">Jam layanan: </span>08.00&ndash;17.00 WIB</span></p>
     <ul class="topbar__contact">
       <li><a data-wa href="https://wa.me/6287777710002"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg><span class="topbar__label">WhatsApp</span>+62 877-7771-0002</a></li>
       <li class="topbar__email"><a href="mailto:aritsfauzii@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>aritsfauzii@gmail.com</a></li>
@@ -63,22 +76,27 @@
   <div class="container site-header__inner">
     <a class="brand" href="index.html"><span class="brand__text"><span class="brand__name">Arits <span class="brand__accent">Irham</span></span></span></a>
 
-    <nav class="nav" id="site-nav" aria-label="Main navigation">
+    <nav class="nav" id="site-nav" aria-label="Navigasi utama">
       <ul class="nav__list">
-        <li><a class="nav__link" href="index.html">Home</a></li>
-        <li><a class="nav__link" href="tentang.html">About</a></li>
-        <li><a class="nav__link" href="solusi.html">Expertise</a></li>
-        <li><a class="nav__link" href="perjalanan.html">Journey</a></li>
-        <li><a class="nav__link" href="kalkulator.html" aria-current="page">Calculator</a></li>
-        <li><a class="nav__link" href="edukasi/index.html">Insight</a></li>
-        <li><a class="nav__link" href="kontak.html">Contact</a></li>
+        <li><a class="nav__link" href="index.html">Beranda</a></li>
+        <li><a class="nav__link" href="tentang.html">Tentang</a></li>
+        <li><a class="nav__link" href="solusi.html">Solusi</a></li>
+        <li><a class="nav__link" href="perjalanan.html">Perjalanan</a></li>
+        <li><a class="nav__link" href="kalkulator.html" aria-current="page">Kalkulator</a></li>
+        <li><a class="nav__link" href="edukasi/index.html">Edukasi</a></li>
+        <li><a class="nav__link" href="kontak.html">Kontak</a></li>
       </ul>
-      <a class="btn btn--primary nav__cta" data-wa href="https://wa.me/6287777710002">Free Consultation</a>
+      <a class="btn btn--primary nav__cta" data-wa href="https://wa.me/6287777710002">Konsultasi Gratis</a>
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn--primary btn--sm site-header__cta" data-wa href="https://wa.me/6287777710002">Free Consultation</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <!-- Pilihan bahasa: menuju halaman yang sama di bahasa lain -->
+      <div class="lang-switch" role="group" aria-label="Bahasa / Language">
+        <span class="lang-switch__item is-current" lang="id" aria-current="true">ID</span>
+        <a class="lang-switch__item" href="en/kalkulator.html" lang="en" hreflang="en" aria-label="English version">EN</a>
+      </div>
+      <a class="btn btn--primary btn--sm site-header__cta" data-wa href="https://wa.me/6287777710002">Konsultasi Gratis</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Buka menu">
         <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
         <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
       </button>
@@ -92,12 +110,12 @@
     <div class="container">
       <span class="badge">
         <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
-        Free &bull; Calculated on your device
+        Gratis &bull; Dihitung di perangkat Anda
       </span>
-      <h1><span class="text-gradient">Protection Gap</span> Calculator</h1>
-      <p>Estimate your family’s life and critical illness protection gap compared with the coverage you already have.</p>
+      <h1>Kalkulator <span class="text-gradient">Kesenjangan Proteksi</span></h1>
+      <p>Hitung perkiraan kesenjangan proteksi jiwa dan penyakit kritis keluarga Anda dibandingkan dengan perlindungan yang sudah dimiliki.</p>
       <!-- Foto asli pengganti ilustrasi (permintaan klien, 8 November 2026; sumber di README bagian 9) -->
-      <img class="edu-hero__art edu-hero__photo" src="assets/img/foto/hero-kalkulator.webp" alt="" width="960" height="640">
+      <img class="edu-hero__art edu-hero__photo" src="assets/img/foto/hero-kalkulator.webp" alt="Seseorang memeriksa grafik di laptop, ilustrasi menghitung kebutuhan asuransi jiwa dan penyakit kritis" width="960" height="640">
     </div>
   </section>
 
@@ -106,132 +124,132 @@
 
       <!-- Formulir: hasil dihitung langsung di browser, tidak ada data yang dikirim -->
       <form class="card calc__form" data-calc novalidate>
-        <h2 class="calc__title">Enter Your Details</h2>
-        <p class="calc__disclaimer">A simple educational simulation, not a recommendation or a determination of the sum assured.</p>
+        <h2 class="calc__title">Isi <span class="text-gradient">Data Anda</span></h2>
+        <p class="calc__disclaimer">Simulasi edukasi sederhana, bukan rekomendasi atau penetapan uang pertang&shy;gungan.</p>
 
         <div class="calc__fields">
           <div class="field">
-            <label for="k-penghasilan">Monthly income</label>
+            <label for="k-penghasilan">Penghasilan per bulan</label>
             <div class="field__money"><span aria-hidden="true">Rp</span>
               <input id="k-penghasilan" name="penghasilan" type="text" inputmode="numeric" autocomplete="off" placeholder="10.000.000" data-money aria-describedby="k-penghasilan-hint"></div>
-            <p class="field__hint" id="k-penghasilan-hint">Used to estimate critical illness protection.</p>
+            <p class="field__hint" id="k-penghasilan-hint">Dipakai untuk memper&shy;kirakan perlindungan penyakit kritis.</p>
           </div>
           <div class="field">
-            <label for="k-pengeluaran">Monthly family expenses</label>
+            <label for="k-pengeluaran">Pengeluaran keluarga per bulan</label>
             <div class="field__money"><span aria-hidden="true">Rp</span>
               <input id="k-pengeluaran" name="pengeluaran" type="text" inputmode="numeric" autocomplete="off" placeholder="5.000.000" data-money aria-describedby="k-pengeluaran-hint"></div>
-            <p class="field__hint" id="k-pengeluaran-hint">Your family’s regular needs: food, housing, transportation, school, and so on.</p>
+            <p class="field__hint" id="k-pengeluaran-hint">Kebutuhan rutin keluarga: makan, tempat tinggal, transportasi, sekolah, dan lainnya.</p>
           </div>
           <div class="field">
-            <label for="k-upjiwa">Existing life coverage</label>
+            <label for="k-upjiwa">Perlindungan jiwa yang sudah dimiliki</label>
             <div class="field__money"><span aria-hidden="true">Rp</span>
               <input id="k-upjiwa" name="upJiwa" type="text" inputmode="numeric" autocomplete="off" placeholder="0" data-money aria-describedby="k-upjiwa-hint"></div>
-            <p class="field__hint" id="k-upjiwa-hint">Total sum assured from personal policies and employer insurance.</p>
+            <p class="field__hint" id="k-upjiwa-hint">Total uang pertang&shy;gungan dari polis pribadi dan asuransi kantor.</p>
           </div>
           <div class="field">
-            <label for="k-periode">Family support period</label>
+            <label for="k-periode">Lama dukungan untuk keluarga</label>
             <div class="field__unit">
               <input id="k-periode" name="periode" type="text" inputmode="numeric" autocomplete="off" maxlength="2" value="10" aria-describedby="k-periode-hint k-periode-error">
-              <span aria-hidden="true">years</span></div>
-            <p class="field__hint" id="k-periode-hint">How many years your family would need support (1–40), for example until your youngest child is independent.</p>
+              <span aria-hidden="true">tahun</span></div>
+            <p class="field__hint" id="k-periode-hint">Berapa tahun keluarga perlu didukung (1–40), misalnya sampai anak bungsu mandiri.</p>
             <p class="field__error" id="k-periode-error" hidden></p>
           </div>
         </div>
 
         <details class="calc__more">
           <summary>
-            <span>Additional details <span class="optional">(optional)</span></span>
+            <span>Data tambahan <span class="optional">(opsional)</span></span>
             <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg>
           </summary>
-          <p class="calc__more-intro">Fill these in for an estimate closer to your situation.</p>
+          <p class="calc__more-intro">Isi bagian ini agar perkiraannya lebih sesuai dengan kondisi Anda.</p>
           <div class="calc__fields">
             <div class="field">
-              <label for="k-utang">Outstanding debt</label>
+              <label for="k-utang">Sisa utang</label>
               <div class="field__money"><span aria-hidden="true">Rp</span>
                 <input id="k-utang" name="utang" type="text" inputmode="numeric" autocomplete="off" data-money aria-describedby="k-utang-hint"></div>
-              <p class="field__hint" id="k-utang-hint">Mortgage, vehicle installments, credit cards, and other loans.</p>
+              <p class="field__hint" id="k-utang-hint">KPR, cicilan kendaraan, kartu kredit, dan pinjaman lainnya.</p>
             </div>
             <div class="field">
-              <label for="k-pendidikan">Children’s education fund</label>
+              <label for="k-pendidikan">Dana pendidikan anak</label>
               <div class="field__money"><span aria-hidden="true">Rp</span>
                 <input id="k-pendidikan" name="pendidikan" type="text" inputmode="numeric" autocomplete="off" data-money aria-describedby="k-pendidikan-hint"></div>
-              <p class="field__hint" id="k-pendidikan-hint">The total estimated education costs you want to keep secured.</p>
+              <p class="field__hint" id="k-pendidikan-hint">Total perkiraan biaya pendidikan yang ingin Anda amankan.</p>
             </div>
             <div class="field">
-              <label for="k-darurat">Emergency fund &amp; other costs</label>
+              <label for="k-darurat">Dana darurat &amp; biaya lain</label>
               <div class="field__money"><span aria-hidden="true">Rp</span>
                 <input id="k-darurat" name="darurat" type="text" inputmode="numeric" autocomplete="off" data-money aria-describedby="k-darurat-hint"></div>
-              <p class="field__hint" id="k-darurat-hint">For example, a family emergency fund and funeral costs.</p>
+              <p class="field__hint" id="k-darurat-hint">Misalnya dana darurat keluarga dan biaya pemakaman.</p>
             </div>
             <div class="field">
-              <label for="k-tabungan">Savings &amp; investments</label>
+              <label for="k-tabungan">Tabungan &amp; investasi</label>
               <div class="field__money"><span aria-hidden="true">Rp</span>
                 <input id="k-tabungan" name="tabungan" type="text" inputmode="numeric" autocomplete="off" data-money aria-describedby="k-tabungan-hint"></div>
-              <p class="field__hint" id="k-tabungan-hint">Assets your family could use, such as savings, time deposits, and mutual funds. The home you live in is not counted.</p>
+              <p class="field__hint" id="k-tabungan-hint">Aset yang bisa dipakai keluarga, seperti tabungan, deposito, dan reksa dana. Rumah yang Anda tempati tidak dihitung.</p>
             </div>
             <div class="field">
-              <label for="k-upkritis">Existing critical illness benefit</label>
+              <label for="k-upkritis">Manfaat penyakit kritis yang sudah dimiliki</label>
               <div class="field__money"><span aria-hidden="true">Rp</span>
                 <input id="k-upkritis" name="upKritis" type="text" inputmode="numeric" autocomplete="off" data-money aria-describedby="k-upkritis-hint"></div>
-              <p class="field__hint" id="k-upkritis-hint">From existing policies, including riders.</p>
+              <p class="field__hint" id="k-upkritis-hint">Dari polis yang sudah ada, termasuk rider.</p>
             </div>
             <div class="field">
-              <label for="k-pemulihan">If critically ill, replace income for</label>
+              <label for="k-pemulihan">Bila sakit kritis, ganti penghasilan selama</label>
               <select id="k-pemulihan" name="pemulihan" aria-describedby="k-pemulihan-hint">
-                <option value="3">3 years</option>
-                <option value="4">4 years</option>
-                <option value="5">5 years</option>
+                <option value="3">3 tahun</option>
+                <option value="4">4 tahun</option>
+                <option value="5">5 tahun</option>
               </select>
-              <p class="field__hint" id="k-pemulihan-hint">A general guide of 3–5 years, to cover treatment and recovery.</p>
+              <p class="field__hint" id="k-pemulihan-hint">Patokan umum 3–5 tahun, untuk menutup biaya pengobatan dan masa pemulihan.</p>
             </div>
           </div>
         </details>
 
         <p class="form__note">
           <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
-          <span>Calculations happen on your device. The numbers are not sent or stored unless you choose to send the summary via WhatsApp.</span>
+          <span>Perhitungan dilakukan di perangkat Anda. Angkanya tidak dikirim atau disimpan, kecuali Anda memilih mengirim ringkasannya lewat WhatsApp.</span>
         </p>
       </form>
 
       <!-- Hasil: diisi oleh kalkulator.js setiap isian berubah -->
       <aside class="card calc__result" id="hasil" aria-labelledby="judul-hasil">
-        <h2 class="calc__title" id="judul-hasil">Simulation Results</h2>
+        <h2 class="calc__title" id="judul-hasil">Hasil <span class="text-gradient">Simulasi</span></h2>
         <p class="visually-hidden" role="status" data-calc-status></p>
 
         <div class="calc__empty" data-calc-empty>
           <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-calc"/></svg></span>
-          <p>Enter your monthly family expenses or income. The results appear here instantly.</p>
+          <p>Isi pengeluaran keluarga per bulan atau penghasilan Anda. Hasilnya langsung muncul di sini.</p>
         </div>
 
         <div data-calc-output hidden>
           <div class="calc__block tone-blue" data-calc-block="jiwa" hidden>
-            <p class="calc__label"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Life insurance</p>
+            <p class="calc__label"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Asuransi jiwa</p>
             <dl class="calc__rows">
-              <div><dt>Estimated family needs</dt><dd data-out="butuh"></dd></div>
-              <div><dt>Existing coverage</dt><dd data-out="punya"></dd></div>
+              <div><dt>Perkiraan kebutuhan keluarga</dt><dd data-out="butuh"></dd></div>
+              <div><dt>Perlindungan yang sudah ada</dt><dd data-out="punya"></dd></div>
             </dl>
-            <p class="calc__sub">Estimated protection gap</p>
+            <p class="calc__sub">Perkiraan kesenjangan proteksi</p>
             <p class="calc__value" data-out="gap"></p>
             <div class="meter" aria-hidden="true"><div class="meter__fill" data-out="meter"></div></div>
             <p class="calc__caption" data-out="caption"></p>
           </div>
 
           <div class="calc__block tone-rose" data-calc-block="kritis" hidden>
-            <p class="calc__label"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Critical illness</p>
+            <p class="calc__label"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Penyakit kritis</p>
             <dl class="calc__rows">
-              <div><dt>Estimated needs (<span data-out="tahun">3</span> years of income)</dt><dd data-out="butuh"></dd></div>
-              <div><dt>Existing benefit</dt><dd data-out="punya"></dd></div>
+              <div><dt>Perkiraan kebutuhan (<span data-out="tahun">3</span> tahun penghasilan)</dt><dd data-out="butuh"></dd></div>
+              <div><dt>Manfaat yang sudah ada</dt><dd data-out="punya"></dd></div>
             </dl>
-            <p class="calc__sub">Estimated protection gap</p>
+            <p class="calc__sub">Perkiraan kesenjangan proteksi</p>
             <p class="calc__value" data-out="gap"></p>
             <div class="meter" aria-hidden="true"><div class="meter__fill" data-out="meter"></div></div>
             <p class="calc__caption" data-out="caption"></p>
           </div>
 
-          <p class="calc__note">A simple educational simulation, not a recommendation or a determination of the sum assured. It does not account for inflation or investment returns. Your actual needs may differ and can be discussed during a consultation.</p>
+          <p class="calc__note">Simulasi edukasi sederhana, bukan rekomendasi atau penetapan uang pertang&shy;gungan. Belum memper&shy;hitungkan inflasi atau hasil investasi. Kebutuhan Anda yang sebenarnya bisa berbeda dan dapat didiskusikan saat konsultasi.</p>
           <a class="btn btn--wa" data-calc-wa href="https://wa.me/6287777710002" target="_blank" rel="noopener noreferrer">
             <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
-            Discuss the Results via WhatsApp
+            Diskusikan Hasilnya via WhatsApp
           </a>
         </div>
       </aside>
@@ -242,20 +260,20 @@
   <section class="section" aria-labelledby="judul-rumus">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Calculation transparency</span>
-        <h2 id="judul-rumus">How the Calculator Works</h2>
-        <p>The protection gap is the difference between your estimated needs and the coverage you already have.</p>
+        <span class="eyebrow">Transparansi perhitungan</span>
+        <h2 id="judul-rumus">Cara Kerja <span class="text-gradient">Kalkulator</span></h2>
+        <p>Kesenjangan proteksi adalah selisih antara perkiraan kebutuhan dan perlindungan yang sudah Anda miliki.</p>
       </div>
       <div class="compare">
         <div class="compare__item">
-          <h3>Life Insurance</h3>
-          <p><span class="compare__label">Needs</span><br>Monthly family expenses &times; 12 &times; support period. If provided, plus outstanding debt, children’s education fund, and emergency fund &amp; other costs.</p>
-          <p><span class="compare__label">Minus</span><br>Existing life coverage, plus savings &amp; investments if provided.</p>
+          <h3>Asuransi Jiwa</h3>
+          <p><span class="compare__label">Kebutuhan</span><br>Pengeluaran keluarga per bulan &times; 12 &times; lama dukungan. Bila diisi, ditambah sisa utang, dana pendidikan anak, serta dana darurat &amp; biaya lain.</p>
+          <p><span class="compare__label">Dikurangi</span><br>Perlindungan jiwa yang sudah dimiliki, ditambah tabungan &amp; investasi bila diisi.</p>
         </div>
         <div class="compare__item">
-          <h3>Critical Illness</h3>
-          <p><span class="compare__label">Needs</span><br>Monthly income &times; 12 &times; 3, 4, or 5 years (chosen in the additional details, 3 years by default), to cover treatment costs and replace income during recovery.</p>
-          <p><span class="compare__label">Minus</span><br>Existing critical illness benefit, if provided.</p>
+          <h3>Penyakit Kritis</h3>
+          <p><span class="compare__label">Kebutuhan</span><br>Penghasilan per bulan &times; 12 &times; 3, 4, atau 5 tahun (dipilih di data tambahan, bawaan 3 tahun), untuk menutup biaya pengobatan dan mengganti penghasilan selama pemulihan.</p>
+          <p><span class="compare__label">Dikurangi</span><br>Manfaat penyakit kritis yang sudah dimiliki, bila diisi.</p>
         </div>
       </div>
     </div>
@@ -264,56 +282,55 @@
 </main>
 
 <footer class="site-footer">
-  <p class="site-footer__wordmark" aria-hidden="true">Protection</p>
+  <p class="site-footer__wordmark" aria-hidden="true">Perlindungan</p>
   <div class="container">
     <div class="site-footer__grid">
       <div>
         <p class="brand"><span class="brand__text"><span class="brand__name">Arits Fauzi <span class="brand__accent">Irham</span></span></span></p>
         <!-- Deskripsi singkat dari klien (9 November 2026) -->
-        <p>Your trusted partner in understanding financial protection. Helping you navigate insurance solutions with personalized guidance, transparency, and a commitment to protecting your future.</p>
+        <p>Mitra tepercaya Anda dalam memahami perlindungan finansial. Membantu Anda menentukan solusi asuransi lewat pendampingan yang personal, transparan, dan berkomitmen melindungi masa depan Anda.</p>
       </div>
-      <nav aria-label="Footer navigation">
-        <h3>Pages</h3>
+      <nav aria-label="Navigasi footer">
+        <h3>Halaman</h3>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="tentang.html">About Me</a></li>
-          <li><a href="solusi.html">Area of Expertise</a></li>
-          <li><a href="perjalanan.html">Professional Journey</a></li>
-          <li><a href="kalkulator.html">Protection Gap Calculator</a></li>
-          <li><a href="edukasi/index.html">Financial Insight</a></li>
-          <li><a href="kontak.html">Contact Me</a></li>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang Saya</a></li>
+          <li><a href="solusi.html">Bidang Konsultasi</a></li>
+          <li><a href="perjalanan.html">Perjalanan Profesional</a></li>
+          <li><a href="kalkulator.html">Kalkulator Kesenjangan Proteksi</a></li>
+          <li><a href="edukasi/index.html">Edukasi Finansial</a></li>
+          <li><a href="kontak.html">Hubungi Saya</a></li>
         </ul>
       </nav>
       <div>
-        <h3>Contact</h3>
+        <h3>Kontak</h3>
         <ul class="contact-list">
           <li><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg><a data-wa href="https://wa.me/6287777710002">WhatsApp: +62 877-7771-0002</a></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:aritsfauzii@gmail.com">aritsfauzii@gmail.com</a></li>
           <!-- LinkedIn klien (9 November 2026) -->
-          <li><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg><a href="https://www.linkedin.com/in/arits-fauzi-574259428/" target="_blank" rel="noopener">LinkedIn profile<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg><a href="https://www.linkedin.com/in/arits-fauzi-574259428/" target="_blank" rel="noopener">Profil LinkedIn<span class="visually-hidden"> (terbuka di tab baru)</span></a></li>
           <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Jl. Jenderal Sudirman No. 45&ndash;46, Karet Semanggi, Setiabudi, Jakarta Selatan 12930</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>08:00&ndash;17:00 WIB</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>08.00&ndash;17.00 WIB</span></li>
         </ul>
       </div>
     </div>
     <div class="site-footer__bottom">
       <div class="site-footer__legal">
-        <p>&copy; <span data-year>2025</span> Arits Fauzi Irham. The information on this website is general in nature and is not an offer or a guarantee of benefits. Full terms and conditions follow the insurer’s official policy.</p>
+        <p>&copy; <span data-year>2025</span> Arits Fauzi Irham. Informasi di website ini bersifat umum dan bukan merupakan penawaran atau jaminan manfaat. Syarat dan ketentuan lengkap mengikuti polis resmi dari perusahaan asuransi.</p>
         <!-- Disclaimer afiliasi: wajib menurut pedoman Manulife Agency, jangan dihapus (lihat README bagian 8).
-             Versi Inggris untuk pengunjung; teks asli bahasa Indonesia sesuai contoh pedoman tetap dicantumkan. -->
-        <p>This website is managed personally by Arits Fauzi Irham, an insurance agent (Tenaga Pemasar) of Manulife Indonesia, and is not an official Manulife website. Its content reflects personal views and does not represent Manulife. Manulife is not responsible for any content on this website.</p>
+             Versi Indonesia: teks asli bahasa Indonesia sesuai contoh pedoman (versi Inggrisnya ada di halaman en/). -->
         <p lang="id">Website ini dikelola secara pribadi oleh Arits Fauzi Irham, Tenaga Pemasar Manulife Indonesia, dan bukan website resmi Manulife. Isi website ini merupakan pandangan pribadi dan tidak mewakili Manulife. Manulife tidak bertanggung jawab atas konten apa pun di website ini.</p>
       </div>
       <ul>
-        <li><a href="kebijakan-privasi.html">Privacy Policy</a></li>
-        <li><a href="kontak.html">Contact</a></li>
-        <li><a class="to-top" href="#">Back to top<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="kebijakan-privasi.html">Kebijakan Privasi</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a class="to-top" href="#">Kembali ke atas<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
     </div>
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=20261109d"></script>
-<script src="assets/js/kalkulator.js?v=20261109d"></script>
+<script src="assets/js/main.js?v=20261111d" defer></script>
+<script src="assets/js/kalkulator.js?v=20261111d" defer></script>
 </body>
 </html>

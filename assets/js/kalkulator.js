@@ -52,21 +52,21 @@ function renderBlock(block, r) {
   block.querySelector("[data-out=punya]").textContent = formatRp(r.punya);
   block.querySelector("[data-out=meter]").style.width = persen + "%";
   block.querySelector("[data-out=caption]").textContent = covered
-    ? "Your existing coverage already meets this estimated need."
-    : "Your existing coverage meets only " + persen + "% of the estimated need.";
+    ? tr("Perlindungan yang sudah Anda miliki sudah memenuhi perkiraan kebutuhan ini.", "Your existing coverage already meets this estimated need.")
+    : tr("Perlindungan yang sudah Anda miliki baru memenuhi " + persen + "% dari perkiraan kebutuhan.", "Your existing coverage meets only " + persen + "% of the estimated need.");
 }
 
 function buildCalcMessage(hasil, pemulihan) {
-  const lines = ["Hello, I tried the protection gap calculator on your website and would like to discuss the results."];
+  const lines = [tr("Halo, saya sudah mencoba kalkulator kesenjangan proteksi di website Anda dan ingin mendiskusikan hasilnya.", "Hello, I tried the protection gap calculator on your website and would like to discuss the results.")];
   const bagian = (judul, r) => lines.push(
     "",
     judul,
-    "- Estimated needs: " + formatRp(r.butuh),
-    "- Existing coverage: " + formatRp(r.punya),
-    "- Gap: " + formatRp(r.gap)
+    tr("- Perkiraan kebutuhan: ", "- Estimated needs: ") + formatRp(r.butuh),
+    tr("- Perlindungan yang sudah ada: ", "- Existing coverage: ") + formatRp(r.punya),
+    tr("- Kesenjangan: ", "- Gap: ") + formatRp(r.gap)
   );
-  if (hasil.jiwa) bagian("Life insurance", hasil.jiwa);
-  if (hasil.kritis) bagian("Critical illness (" + pemulihan + " years of income)", hasil.kritis);
+  if (hasil.jiwa) bagian(tr("Asuransi jiwa", "Life insurance"), hasil.jiwa);
+  if (hasil.kritis) bagian(tr("Penyakit kritis (" + pemulihan + " tahun penghasilan)", "Critical illness (" + pemulihan + " years of income)"), hasil.kritis);
   return lines.join("\n");
 }
 
@@ -83,7 +83,7 @@ document.querySelectorAll("[data-calc]").forEach((form) => {
   const checkPeriode = () => {
     const ok = periodeValid(Number(periode.value));
     periode.setAttribute("aria-invalid", ok ? "false" : "true");
-    periodeError.textContent = ok ? "" : "Enter a number from 1 to 40 years.";
+    periodeError.textContent = ok ? "" : tr("Masukkan angka 1 sampai 40 tahun.", "Enter a number from 1 to 40 years.");
     periodeError.hidden = ok;
   };
   periode.addEventListener("input", () => {
@@ -109,8 +109,8 @@ document.querySelectorAll("[data-calc]").forEach((form) => {
     clearTimeout(announceTimer);
     announceTimer = setTimeout(() => {
       const teks = [];
-      if (hasil.jiwa) teks.push("Life insurance gap " + formatRp(hasil.jiwa.gap) + ".");
-      if (hasil.kritis) teks.push("Critical illness gap " + formatRp(hasil.kritis.gap) + ".");
+      if (hasil.jiwa) teks.push(tr("Kesenjangan asuransi jiwa ", "Life insurance gap ") + formatRp(hasil.jiwa.gap) + ".");
+      if (hasil.kritis) teks.push(tr("Kesenjangan penyakit kritis ", "Critical illness gap ") + formatRp(hasil.kritis.gap) + ".");
       status.textContent = teks.join(" ");
     }, 1000);
   };
