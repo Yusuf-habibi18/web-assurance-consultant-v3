@@ -964,28 +964,23 @@ main > section[id],
   .journey { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
-/* ---------- Testimoni (Beranda) ---------- */
+/* ---------- Kartu klien (Beranda dan Journey) ----------
+   Sejak 13 November 2026 kartu hanya berisi foto dan keterangan; kutipan (review) klien dihapus atas permintaan klien.
+   Foto berbingkai 3:2, lalu jabatan atau "Klien" dan jenis pertemuan. Tinggi kartu mengikuti isinya, dan kartu dalam
+   satu pita tetap sama tinggi. Swafoto (16:9) digeser ke kiri supaya wajah di tepi tetap utuh; foto potret (4:5) ke atas. */
 .testi { display: flex; flex-direction: column; margin: 0; }
-.testi blockquote { flex: 1; margin: 0 0 1.25rem; }
-.testi blockquote p { margin: 0; font-size: 1rem; line-height: 1.7; color: var(--color-text); }
-.testi__who { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
-.testi__who strong { display: block; font-size: 0.95rem; color: var(--color-ink); }
-.testi__who small { display: block; font-size: 0.82rem; color: var(--color-muted); }
-.testi .avatar { flex: none; background: var(--color-accent-soft); color: var(--color-accent); }
-/* Foto klien di atas kutipan (10 November 2026). Bingkai 3:2 untuk semua foto supaya kartu sejajar. Swafoto (16:9)
-   digeser ke kiri supaya wajah orang di tepi kiri dan kanan tetap utuh; foto potret (4:5, orang berdiri) digeser ke atas.
-   Keterangan di bawah kutipan setinggi dua baris supaya garisnya sejajar walaupun sebagian label hanya satu baris. */
-.testi .testi__foto { aspect-ratio: 3 / 2; margin-bottom: 1.1rem; }
+.testi .testi__foto { aspect-ratio: 3 / 2; margin-bottom: 0.9rem; }
 .testi .testi__foto--kiri { object-position: 35% 50%; }
 .testi .testi__foto--atas { object-position: 50% 18%; }
-.testi .avatar .icon { width: 18px; height: 18px; }
-.testi .testi__who { min-height: 5.7rem; }
+.testi__who { display: block; padding: 0 0.2rem; }
+.testi__who strong { display: block; font-size: 0.95rem; line-height: 1.35; color: var(--color-ink); }
+.testi__who small { display: block; margin-top: 0.2rem; font-size: 0.82rem; color: var(--color-muted); }
 /* Pita testimoni yang berjalan ke kanan tanpa henti seperti eskalator (11 November 2026). main.js menyalin kartunya,
    mengisi --testi-set (lebar satu set kartu) dan --testi-durasi, lalu memberi kelas is-jalan. Jarak antarkartu memakai
    margin, bukan gap, supaya satu putaran tepat selebar satu set dan sambungannya tidak terlihat.
    Tanpa JavaScript atau dengan "kurangi gerakan", pita diam dan bisa digeser manual. */
 .testi-marquee {
-  --testi-w: clamp(210px, 36vw, 300px); /* HP 210 px, tablet 768 px sekitar 276 px, laptop 300 px */
+  --testi-w: clamp(230px, 40vw, 340px); /* HP 230 px, tablet 768 px sekitar 307 px, laptop 340 px (13 November 2026) */
   --testi-jarak: 1.25rem;
   margin-inline: calc(-1 * var(--gutter));
   padding: 0.5rem var(--gutter) 1.5rem; /* ruang untuk bayangan kartu */
@@ -994,7 +989,7 @@ main > section[id],
 }
 .testi-marquee::-webkit-scrollbar { display: none; }
 .testi-track { display: flex; width: max-content; }
-.testi-track > .testi { flex: none; width: var(--testi-w); margin: 0 var(--testi-jarak) 0 0; }
+.testi-track > .testi { flex: none; width: var(--testi-w); margin: 0 var(--testi-jarak) 0 0; padding: 0.8rem 0.8rem 1.1rem; }
 .testi-marquee.is-jalan {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
@@ -1010,17 +1005,10 @@ main > section[id],
 }
 @media (max-width: 599px) {
   .testi-marquee { --testi-jarak: 0.65rem; }
-  .testi-track > .card { padding: 1rem 0.95rem; }
-  .testi blockquote p { font-size: 0.8rem; line-height: 1.55; }
-  .testi .testi__foto { margin-bottom: 0.7rem; }
-  .testi blockquote { margin-bottom: 0.8rem; }
-  /* Kartu di HP sempit: ikon kutip di keterangan disembunyikan supaya label cukup dua baris */
-  .testi .testi__who .avatar { display: none; }
-  .testi .testi__who { min-height: 4.5rem; }
-  .testi__who { gap: 0.5rem; padding-top: 0.7rem; }
-  .testi__who strong { font-size: 0.8rem; }
-  .testi__who small { font-size: 0.7rem; }
-  .testi .avatar .icon { width: 14px; height: 14px; }
+  .testi-track > .testi { padding: 0.6rem 0.6rem 0.85rem; }
+  .testi .testi__foto { margin-bottom: 0.65rem; }
+  .testi__who strong { font-size: 0.82rem; }
+  .testi__who small { font-size: 0.72rem; }
 }
 
 /* ---------- Mobile: tampilan "laptop mini" ----------
