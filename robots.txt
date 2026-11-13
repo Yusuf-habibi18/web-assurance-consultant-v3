@@ -1,0 +1,5 @@
+# Semua halaman boleh dibaca mesin pencari. 404.html sudah ditandai noindex di halamannya sendiri.
+User-agent: *
+Allow: /
+
+Sitemap: https://yusuf-habibi18.github.io/web-assurance-consultant-v3/sitemap.xml

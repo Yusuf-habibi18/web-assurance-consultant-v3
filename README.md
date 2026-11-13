@@ -29,12 +29,12 @@ Per 1 November 2026:
 | Edukasi: 7 rangkuman sumber dalam 3 kategori (Dasar asuransi, Panduan polis, Tips klaim) | Terisi (4 November 2026). Formatnya kutip singkat + tautan ke artikel asli (lihat [5.9](#59-artikel)). |
 | 5 halaman topik (`asuransi-kesehatan.html`, `asuransi-penyakit-kritis.html`, `asuransi-jiwa.html`, `asuransi-syariah.html`, `asuransi-unit-link.html`) dan 7 artikel sendiri di `edukasi/`, hanya bahasa Indonesia | Dibuat 10 November 2026 untuk SEO (lihat [5.9](#59-artikel)). **Isinya ditulis dari riset umum dan perlu dibaca serta disetujui Arits sebelum dipromosikan**, terutama angka dan aturan yang dikutip. |
 | Halaman 404 (`404.html`) | Dibuat 10 November 2026. Tampil otomatis di GitHub Pages dan Netlify saat alamat tidak ditemukan. |
-| `robots.txt` dan `sitemap.xml` | **Kosong.** Diisi setelah domain ada (contoh isinya di [bagian 6](#6-deployment)). |
+| `robots.txt` dan `sitemap.xml` | Terisi sejak 11 November 2026 (28 alamat), dibuat oleh `docs/generator-halaman/buat_sitemap.py`. Saat domain sendiri aktif, `ganti_domain.py` memindahkan semua alamat sekaligus (lihat [bagian 6](#robotstxt-sitemapxml-dan-pindah-ke-domain-sendiri)). |
 | `docs/checklist-qa.md` | Terisi: checklist dan hasil pengujian per 31 Oktober 2026 |
 | `docs/konten-dari-klien.md` | Berisi brief awal klien dan salinan dokumen kebutuhan "Isi Website" (PDF dari klien, 7 November 2026), dengan catatan tempat tiap teks dipakai dan hal yang perlu dikonfirmasi. Folder `docs/` tidak ikut ke repository. |
 | Konten asli dari klien (nama, foto, kontak, profil) | Nama dan foto konsultan sudah terpasang (foto: 4 November 2026, foto formal berjas: 7 November 2026), begitu juga tujuh foto kegiatan di Professional Journey (empat pada 7 November, tiga pada 8 November 2026). Teks "Why Work With Me" dari klien (7 November 2026). Sertifikasi dan nomor lisensi AAJI dari kartu lisensi klien (8 November 2026). Sisanya masih ditandai `[...]`. |
 | Ilustrasi | 17 ilustrasi SVG terpasang di hero, halaman Solusi, dan gambar artikel (1 November 2026, ditambah ilustrasi Kendaraan, Properti & Usaha, keluarga, dan konsultan pada 2 November 2026). Hero Beranda dan Solusi dulu memakai ilustrasi manusia (keluarga dan konsultan) yang bergerak pelan; sekarang keduanya memakai foto asli (Beranda sejak 7 November, Solusi sejak 8 November 2026). **Sejak 8 November 2026 tidak ada ilustrasi yang tampil lagi:** atas permintaan klien, semua gambar diganti foto asli (foto stok CC0, lihat [bagian 9](#9-teknologi-dan-lisensi)). Yang diganti: kotak ikon topik di kartu, empat gambar kategori Solusi, tiga gambar artikel (Beranda dan Edukasi), dan hero halaman Kalkulator, Kontak, Edukasi, dan Kebijakan Privasi. File SVG-nya masih disimpan di `assets/img/ilustrasi/`. |
-| Kepatuhan pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)) | Isi website sudah diaudit: tidak ada logo atau nama Manulife selain di disclaimer afiliasi, dan tidak ada klaim berlebihan. Disclaimer afiliasi terpasang di footer semua halaman. **Kalimat disclaimer perlu dikonfirmasi klien.** |
+| Kepatuhan pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)) | Isi website sudah diaudit: tidak ada logo Manulife dan tidak ada klaim berlebihan. Sejak 12 November 2026 nama Manulife tidak disebut sama sekali (permintaan klien); disclaimer afiliasi di footer semua halaman kini menyebut "sebuah perusahaan asuransi jiwa". **Disclaimer tanpa nama perusahaan perlu dikonfirmasi klien ke BDM atau TH-nya, karena contoh di pedoman menyebut nama Manulife.** |
 
 **Sudah diuji:**
 - Validasi formulir: 15 kasus uji lolos (nomor valid dan tidak valid, field wajib, batas panjang pesan).
@@ -125,7 +125,14 @@ Per 1 November 2026:
   - Dengan "kurangi gerakan": tidak ada salinan, tidak ada tombol, dan kartu bisa digeser manual.
   - Penanda versi `?v=20261111`.
 - **Eskalator dipercepat dan tanpa jeda** (11 November 2026, permintaan klien): kecepatan naik dari 28 menjadi 60 px per detik; berhenti saat disorot dan tombol Jeda dihapus. Galeri "Momen dari Pekerjaan Saya" di Journey ditambah foto pelatihan (`kegiatan-pelatihan.webp`, versi bersih yang juga dipakai di hero halaman itu), sehingga berisi tiga foto sebaris di bawah judul (rapat, rekan, pelatihan). Diuji lewat DevTools Protocol di 320, 390, 768, dan 1366 px untuk Beranda dan Journey di kedua bahasa: pita tetap bergerak sekitar 60 px per detik saat disorot, tidak ada tombol Jeda, tidak ada halaman yang melebar, tidak ada error JavaScript, dan semua elemen tampil setelah animasi muncul. Galeri tiga foto setinggi 305 px di 1366 px dan 188 px di 768 px; di HP tetap slider. Penanda versi `?v=20261111c`.
+- **SEO bagian A diperiksa ulang dan bagian B dimulai** (11 November 2026):
+  - Judul dan deskripsi Google halaman Edukasi diperbarui: sebelumnya hanya menyebut rangkuman sumber, padahal sudah ada 7 artikel.
+  - `robots.txt` dan `sitemap.xml` (28 alamat, XML valid) dibuat oleh `buat_sitemap.py`.
+  - `ganti_domain.py` diuji di salinan folder: 225 alamat diganti tanpa sisa, `CNAME` dan `<base>` 404 ikut berubah, dan nama domain berisi "Manulife" ditolak.
+  - Langkah Search Console dan Bing ada di [bagian 6](#google-search-console-dan-bing-webmaster-tools).
 - **Judul dua warna** (11 November 2026, permintaan klien, mengikuti logo "Arits Irham"): 187 judul `h2` di 29 file diberi kata kunci emas (`text-gradient`); semua `h1` sudah punya sebelumnya. Pembagiannya otomatis (`docs/generator-halaman/judul_emas.py`: 1 kata emas untuk judul sampai 3 kata, 2 untuk 4–6 kata, 3 untuk yang lebih panjang, tanpa diawali kata sambung), dengan 24 judul diatur manual supaya enak dibaca. Sebelumnya sempat dicoba gradasi putih-ke-emas di seluruh huruf judul, lalu dibatalkan karena yang dimaksud klien adalah dua warna. Diperiksa lewat DevTools Protocol di 390 dan 1366 px: 216 judul tampil dua warna di 29 halaman, kontras putih dan emas terhadap latar semuanya minimal 4,5:1, tidak ada halaman yang melebar, dan tidak ada error JavaScript. Penanda versi `?v=20261111d`.
+- **Nama Manulife dihapus dari website** (12 November 2026, permintaan klien "biar aman"): disclaimer footer di 29 halaman dan paragraf pembuka Kebijakan Privasi (Indonesia dan Inggris) kini menyebut "sebuah perusahaan asuransi jiwa" / "perusahaan", dan komentar HTML yang menyebut nama itu diganti. Dicek: kata "Manulife" tidak ada lagi di file HTML, CSS, JS, `sitemap.xml`, dan `robots.txt`. Perlu konfirmasi klien ke BDM atau TH (lihat [bagian 8](#8-ketentuan-konten-asuransi)).
+- **Testimoni kelima** (12 November 2026, permintaan klien): foto ruang rapat (`kegiatan-rapat.webp`) dipasang sebagai kartu kelima di Beranda dan Journey, kedua bahasa, dengan kutipan dari Arits ("Pertemuan dan konsultasi yang sangat bermanfaat…"; terjemahan Inggris dibuat pengembang). Foto itu tetap ada di galeri "Momen dari Pekerjaan Saya".
 
 **Belum diuji:** tampilan di HP asli, Firefox dan Safari, dan skor Lighthouse resmi (PageSpeed Insights, bisa dicek setelah domain aktif).
 
@@ -190,10 +197,10 @@ Web Assurance/
 │   ├── checklist-qa.md      Checklist dan hasil pengujian
 │   ├── qa-check.js          Skrip pemeriksa tautan dan struktur HTML
 │   ├── seo-kata-kunci.md    Inventaris kata kunci dan rencana SEO
-│   ├── generator-halaman/   Skrip pembuat halaman topik dan artikel (lihat 5.9) dan templat gambar pratinjau
+│   ├── generator-halaman/   Skrip pembuat halaman topik dan artikel (5.9), judul dua warna (5.4), sitemap dan pindah domain (6), templat gambar pratinjau
 │   └── konten-dari-klien.md Bahan dari klien: brief awal dan dokumen "Isi Website"
-├── robots.txt               Aturan untuk mesin pencari (diisi saat deploy)
-├── sitemap.xml              Daftar halaman untuk Google (diisi saat deploy)
+├── robots.txt               Aturan untuk mesin pencari (dibuat buat_sitemap.py)
+├── sitemap.xml              Daftar 28 halaman untuk Google (dibuat buat_sitemap.py)
 └── README.md                Dokumen ini
 ```
 
@@ -295,7 +302,7 @@ Pada 7 November 2026 Beranda disusun mengikuti urutan sembilan bagian dari klien
 | Urutan | Bagian | `id` | Halaman lengkapnya |
 |---|---|---|---|
 | 1 | Home (hero: judul tentang risiko dan foto; identitas singkat dipindah ke About Me sejak 8 November 2026) | `#home` | – |
-| 2 | About Me (kartu profil), lalu Client Testimonials (empat foto bersama klien, `#testimonials`), lalu Why Work With Me (empat alasan, `#why`) | `#about` | Tentang Saya, Journey |
+| 2 | About Me (kartu profil), lalu Client Testimonials (lima foto bersama klien, `#testimonials`), lalu Why Work With Me (empat alasan, `#why`) | `#about` | Tentang Saya, Journey |
 | 3 | Area of Expertise (lima bidang dari klien + banner kalkulator) | `#expertise` | Solusi, Kalkulator |
 | 4 | My Approach (empat langkah dari klien) | `#approach` | – |
 | 5 | Financial Insight (kartu artikel) | `#insight` | Edukasi |
@@ -314,7 +321,7 @@ Pada 7 November 2026 Beranda disusun mengikuti urutan sembilan bagian dari klien
 - **Jabatan di logo.** Di bawah nama "Arits Fauzi Irham" di header dan footer semua halaman ada tagline "Insurance & Financial Protection Consultant" (permintaan klien lewat chat: "taruh di paling atas"), dalam dua baris (dipisah `<br>`). Di layar yang sangat sempit tagline boleh turun baris lagi (`white-space: normal` pada `.brand__tagline`). Dicek di 320, 360, 390, 1200, dan 1366 px: tidak ada yang keluar dari header, dan menu laptop tetap satu baris. Label di hero memakai "Personal Insurance Consultant" sesuai dokumen klien, jadi saat ini ada dua sebutan jabatan; klien perlu memilih bila ingin seragam. Nama di header, footer, About Me, dan disclaimer masih "Arits Fauzi Irham"; hanya hero yang memakai nama lengkap.
 - **Client Testimonials** (10 November 2026). Pagi harinya bagian ini dihapus karena belum ada testimoni dan foto bersama klien. Hari itu juga klien meminta bagian ini dipasang lagi dengan empat foto bersama klien.
   - **Letak:** di Beranda, blok `about-testi` di bawah kartu profil; di halaman Professional Journey, section `#testimonials` di atas band ajakan. Keduanya di kedua bahasa, dengan isi yang sama: kalau satu diubah, samakan yang lain.
-  - **Isi:** label "Testimoni Klien" / "Client Testimonials", judul "Apa Kata Klien Saya" / "What My Clients Say", satu kalimat pembuka, lalu empat kartu (`figure.card.testi`): foto (`card__photo testi__foto`, bingkai 3:2), kutipan (`blockquote`), dan keterangan (`testi__who`: "Klien" + jenis pertemuan).
+  - **Isi:** label "Testimoni Klien" / "Client Testimonials", judul "Apa Kata Klien Saya" / "What My Clients Say", satu kalimat pembuka, lalu lima kartu (`figure.card.testi`): foto (`card__photo testi__foto`, bingkai 3:2), kutipan (`blockquote`), dan keterangan (`testi__who`: "Klien" atau jabatan klien, lalu jenis pertemuan). Kartu kelima (foto ruang rapat `kegiatan-rapat.webp`, 12 November 2026) memakai foto yang juga tetap ada di galeri Journey. Sejak 12 November 2026 tiga kartu menyebut jabatan klien (diisi pengembang, sama di keempat halaman): restoran "Manager of Sociolla Indonesia", kunjungan kantor "EVP PLN PUSAT", ruang rapat "Direktur RS Dinda Tangerang" (Inggris: "Director of RS Dinda Tangerang"). Dua kartu lainnya tetap "Klien" / "Client" karena jabatannya tidak diberikan; jangan diisi tebakan. Jabatan dan perusahaan klien hanya boleh ditulis dengan izin orang tersebut ([bagian 8](#8-ketentuan-konten-asuransi)).
   - **Berjalan seperti eskalator** (sejak 11 November 2026, permintaan klien). Kartu ada di dalam `testi-marquee` > `testi-track` dan berjalan ke kanan tanpa henti, sekitar 60 px per detik (satu putaran sekitar 21 detik di laptop dan 15 detik di HP).
     - **Cara kerjanya:** `main.js` menyalin kartu secukupnya supaya putarannya menyambung (salinan diberi `aria-hidden` dan `inert`), lalu mengatur `--testi-set` dan `--testi-durasi`. Di HTML cukup tulis satu set kartu.
     - **Tidak pernah berhenti** di depan pengunjung: atas permintaan klien (11 November 2026) pita tidak berhenti saat disorot atau disentuh, dan tidak ada tombol Jeda. Animasinya hanya ditahan saat bagian ini di luar layar (hemat baterai, tidak terlihat). Catatan aksesibilitas: pedoman WCAG 2.2.2 meminta cara menghentikan konten yang bergerak lebih dari 5 detik; tanpa tombol, pengunjung yang terganggu gerakan hanya terbantu lewat pengaturan "kurangi gerakan" di perangkatnya. Kode tombol Jeda yang lama ada di riwayat git bila suatu saat diminta lagi.
@@ -376,7 +383,7 @@ Semua teks yang menunggu data klien ditulis dalam kurung siku, misalnya `[Nama U
 | ~~`[Lama pengalaman]`~~, ~~`[Bidang pengalaman]`~~ | – | Tidak ada lagi (9 November 2026). Kotak Experience di hero Tentang Saya dan baris lama pengalaman di kartu About Me Beranda dihapus atas permintaan, karena konsultan baru merintis. Pasang lagi **hanya jika datanya benar dan terverifikasi** (markup lamanya ada di riwayat git, commit `6643187`). Sertifikasi dan nomor lisensi sudah diisi dari kartu lisensi AAJI klien (8 November 2026): agen asuransi jiwa dengan sertifikasi khusus produk unit link, lisensi no. 16429501, berlaku sampai 1 Juli 2028. Perbarui di Beranda dan Tentang Saya bila nomornya berubah saat perpanjangan. Gambar kartu lisensinya tidak dipasang karena memuat nama dan kode agen perusahaan serta logo AAJI. |
 | ~~`[Ringkasan singkat profil ...]`~~, ~~`[Pendekatan pelayanan ...]`~~ | – | Tidak ada lagi (9 November 2026). Dua paragraf isian di kartu About Me Beranda dihapus atas permintaan, karena datanya belum ada. Tambahkan lagi **hanya** bila teksnya dari klien dan terverifikasi (markup lamanya ada di riwayat git, commit `6643187`). |
 | ~~`[Judul cerita perjalanan konsultan]`~~, ~~`[Paragraf ...]`~~, ~~`[Prinsip pelayanan ...]`~~, ~~`[Tahun] – [Tonggak ...]`~~ | – | Tidak ada lagi (8–9 November 2026). Tonggak karier dihapus dari Professional Journey, lalu seluruh bagian "Journey & Perspective" di Tentang Saya (judul cerita, tiga paragraf, kutipan prinsip pelayanan, dan kotak Career Milestones) dihapus atas permintaan, karena isinya belum ada. Markupnya masih ada di riwayat git (commit `6643187`). |
-| ~~`[Testimoni klien ...]`, `[Nama klien]`, `[Pekerjaan / kota]`, `[A]`~~ | Dihapus (10 November 2026). Bagian testimoni kini berisi foto klien dan kutipan dari Arits, tanpa nama klien. | Kutipan asli dan, bila diizinkan, nama dan pekerjaan klien. |
+| ~~`[Testimoni klien ...]`, `[Nama klien]`, `[Pekerjaan / kota]`, `[A]`~~ | Dihapus (10 November 2026). Bagian testimoni kini berisi foto klien dan kutipan dari Arits, tanpa nama klien (tiga kartu menyebut jabatan klien sejak 12 November 2026). | Kutipan asli dan, bila diizinkan, nama dan pekerjaan klien. |
 | `[Jawaban dikonfirmasi klien.]` | Tanya jawab di halaman Solusi | Jawaban dari klien |
 | ~~`[tanggal]`, `[nama penyedia]`~~ | Kebijakan Privasi. Sudah diisi (10 November 2026): 10 November 2026 dan GitHub Pages (GitHub, Inc.) | Ganti nama penyedia bila hosting pindah, misalnya ke Netlify |
 
@@ -623,13 +630,13 @@ Sejak 10 November 2026 setiap halaman punya dua versi:
 - **Tanda bahasa untuk Google:** di `<head>` setiap halaman ada `canonical`, `hreflang` (id, en, dan x-default ke versi Indonesia), dan `og:locale`.
 - **Halaman baru** di menu utama harus dibuat dua-duanya, dengan tombol bahasa dan `hreflang` yang saling menunjuk. Pengecualiannya halaman topik dan artikel di [5.9](#59-artikel), yang sengaja hanya berbahasa Indonesia.
 
-**Saat domain sendiri dipasang**, alamat `https://yusuf-habibi18.github.io/web-assurance-consultant-v3/` harus diganti dengan domain baru. Cari dengan `Ctrl+Shift+H` di seluruh proyek lalu *Replace All*. Alamat itu ada di:
+**Saat domain sendiri dipasang**, alamat `https://yusuf-habibi18.github.io/web-assurance-consultant-v3/` harus diganti dengan domain baru. Sejak 11 November 2026 cukup jalankan `ganti_domain.py` ([bagian 6](#robotstxt-sitemapxml-dan-pindah-ke-domain-sendiri)). Alamat itu ada di:
 
 - `canonical`, `hreflang`, `og:url`, dan `og:image` di semua halaman;
 - blok data terstruktur JSON-LD ([5.8](#58-judul-halaman-dan-deskripsi-untuk-google));
 - `<base href>` di `404.html`. Halaman 404 ditampilkan di alamat apa saja yang salah, termasuk di dalam folder, jadi jalur CSS dan gambarnya berpatokan pada `<base>`. Kalau `<base>` salah, halaman 404 tampil tanpa gaya. Di domain sendiri isinya menjadi `https://domainbaru.com/`.
 
-Lakukan bersamaan dengan mengisi `robots.txt` dan `sitemap.xml` ([bagian 6](#6-deployment)).
+Skrip yang sama membuat ulang `robots.txt` dan `sitemap.xml`.
 
 ### 5.13 Kecepatan halaman
 
@@ -675,51 +682,52 @@ Website ini bisa dihosting di layanan hosting statis mana pun. Netlify paling mu
 | Cloudflare Pages | Cepat dan mendukung unggah folder langsung |
 | GitHub Pages | Perlu akun GitHub. Di akun gratis, repository harus publik, sehingga semua file termasuk `docs/` bisa dilihat orang lain. |
 
-### Setelah domain ada: isi `robots.txt` dan `sitemap.xml`
+### `robots.txt`, `sitemap.xml`, dan pindah ke domain sendiri
 
-Ganti `https://domainanda.com` dengan domain asli.
+Sejak 11 November 2026 kedua file terisi dan dibuat oleh skrip, bukan ditulis tangan (SEO bagian B):
 
-`robots.txt`:
+- **`sitemap.xml`** memuat 28 alamat: 8 halaman utama, 5 halaman topik, 7 artikel, dan 8 halaman `en/`. Alamat diambil dari `canonical` tiap halaman, dan halaman `noindex` (`404.html`) dilewati.
+- **`robots.txt`** mengizinkan semua halaman dan menunjuk ke sitemap. Selama website masih di alamat GitHub (`.../web-assurance-consultant-v3/`), mesin pencari tidak membaca file ini, karena robots hanya dibaca di akar domain. Begitu domain sendiri dipasang, file ini otomatis berlaku.
+
+**Setiap kali menambah atau menghapus halaman**, buat ulang sitemap:
 
 ```
-User-agent: *
-Allow: /
-
-Sitemap: https://domainanda.com/sitemap.xml
+python docs/generator-halaman/buat_sitemap.py .
 ```
 
-`sitemap.xml`:
+**Saat domain sendiri aktif**, satu perintah memindahkan semua alamat:
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://domainanda.com/</loc></url>
-  <url><loc>https://domainanda.com/tentang.html</loc></url>
-  <url><loc>https://domainanda.com/solusi.html</loc></url>
-  <url><loc>https://domainanda.com/perjalanan.html</loc></url>
-  <url><loc>https://domainanda.com/kalkulator.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/</loc></url>
-  <url><loc>https://domainanda.com/kontak.html</loc></url>
-  <url><loc>https://domainanda.com/kebijakan-privasi.html</loc></url>
-  <!-- Versi Inggris: ulangi kedelapan alamat di atas dengan /en/ (https://domainanda.com/en/, .../en/tentang.html, ...) -->
-  <url><loc>https://domainanda.com/asuransi-kesehatan.html</loc></url>
-  <url><loc>https://domainanda.com/asuransi-penyakit-kritis.html</loc></url>
-  <url><loc>https://domainanda.com/asuransi-jiwa.html</loc></url>
-  <url><loc>https://domainanda.com/asuransi-syariah.html</loc></url>
-  <url><loc>https://domainanda.com/asuransi-unit-link.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/cara-klaim-asuransi-kesehatan.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/masa-tunggu-asuransi.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/unit-link-vs-asuransi-tradisional.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/asuransi-syariah-vs-konvensional.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/uang-pertanggungan-ideal.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/asuransi-jiwa-untuk-pebisnis.html</loc></url>
-  <url><loc>https://domainanda.com/edukasi/dana-pensiun.html</loc></url>
-</urlset>
+```
+python docs/generator-halaman/ganti_domain.py . https://domainbaru.com/
 ```
 
-`404.html` tidak dimasukkan ke sitemap.
+Yang dilakukan skrip ini:
 
-Opsional: daftarkan domain di [Google Search Console](https://search.google.com/search-console) (gratis) dan kirim alamat sitemap agar Google lebih cepat menemukan website.
+- mengganti alamat GitHub di semua halaman: `canonical`, `hreflang`, `og:url`, `og:image`, data terstruktur JSON-LD, dan `<base>` di `404.html` (pada uji coba, 225 alamat);
+- mengganti alamat dasar di skrip generator;
+- menulis file `CNAME` (nama domain untuk GitHub Pages);
+- membuat ulang `sitemap.xml` dan `robots.txt`.
+
+Domain yang memuat kata "Manulife" ditolak ([bagian 8](#8-ketentuan-konten-asuransi)). Jalankan tanpa alamat untuk melihat alamat yang sedang dipakai. Setelah itu naikkan penanda versi ([5.10](#510-penanda-versi-css-dan-js)), jalankan `node docs/qa-check.js`, commit, dan push. Di GitHub Pages, buka **Settings → Pages → Custom domain** dan centang **Enforce HTTPS** setelah sertifikatnya siap. Alamat GitHub yang lama otomatis dialihkan ke domain baru.
+
+### Google Search Console dan Bing Webmaster Tools
+
+Keduanya gratis. Fungsinya:
+
+- menunjukkan kata yang dipakai orang untuk menemukan website;
+- menunjukkan halaman yang sudah masuk Google;
+- melaporkan masalah teknis;
+- menampilkan backlink yang masuk.
+
+Langkahnya:
+
+1. Buka [search.google.com/search-console](https://search.google.com/search-console) dengan akun Google, **sebaiknya milik klien** supaya bisa diserahkan. Pilih **Awalan URL** (*URL prefix*), lalu masukkan alamat website persis seperti di `canonical` Beranda.
+2. Pilih verifikasi **Tag HTML**. Google memberi satu baris `<meta name="google-site-verification" content="...">`. Pasang di `<head>` `index.html`, push, lalu klik **Verifikasi**.
+3. Di menu **Peta situs** (*Sitemaps*), kirim `sitemap.xml`.
+4. Di [Bing Webmaster Tools](https://www.bing.com/webmasters), pilih **Import from Google Search Console**. Situs dan sitemap ikut terdaftar tanpa verifikasi ulang.
+5. Kalau domain baru dipasang setelah ini, tambahkan properti baru untuk domain itu (verifikasi DNS atau tag HTML lagi), lalu kirim ulang sitemap-nya.
+
+Search Console tidak memasang pelacak apa pun di website, jadi Kebijakan Privasi tidak perlu diubah. Lain halnya dengan Google Analytics atau alat statistik pengunjung lain: Kebijakan Privasi harus diubah dulu, karena isinya sekarang menyatakan website tidak memakai alat pelacak.
 
 ### Daftar akun untuk diserahkan
 
@@ -744,9 +752,10 @@ Checklist pengujian yang lebih rinci, beserta hasilnya, ada di `docs/checklist-q
 - [ ] Diuji di HP asli (Android, dan iPhone bila ada), serta di Chrome dan minimal satu browser lain.
 - [ ] Skor Lighthouse sudah dicek (Chrome: `F12` → tab Lighthouse) untuk Performance, Accessibility, Best Practices, dan SEO.
 - [ ] Kebijakan Privasi: tanggal dan nama hosting terisi, dan kalimat yang menunggu konfirmasi klien sudah diputuskan.
-- [ ] `robots.txt` dan `sitemap.xml` terisi dengan domain asli.
+- [ ] Domain asli sudah dipasang lewat `ganti_domain.py`, sehingga `robots.txt`, `sitemap.xml`, `canonical`, dan data terstruktur memakai domain itu.
+- [ ] Website terdaftar di Google Search Console dan Bing Webmaster Tools, dan sitemap sudah dikirim.
 - [ ] Klien sudah menyetujui seluruh teks, terutama kedua versi bahasa (Indonesia dan Inggris), tanya jawab di Solusi, dan penjelasan produk.
-- [ ] Website sudah dicek terhadap pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)): tidak ada logo Manulife (termasuk di foto), nama Manulife hanya muncul di disclaimer afiliasi, disclaimer ada di footer semua halaman, dan tidak ada klaim berlebihan. Hal yang meragukan sudah dikonfirmasi klien ke BDM atau TH-nya.
+- [ ] Website sudah dicek terhadap pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)): tidak ada logo Manulife (termasuk di foto), nama Manulife tidak muncul di halaman mana pun (sejak 12 November 2026), disclaimer ada di footer semua halaman, dan tidak ada klaim berlebihan. Hal yang meragukan sudah dikonfirmasi klien ke BDM atau TH-nya.
 - [ ] Akun hosting dan domain atas nama klien, dan source code sudah diserahkan.
 
 ---
@@ -758,14 +767,16 @@ Berlaku untuk siapa pun yang mengubah isi website. Klien adalah Tenaga Pemasar M
 ### Logo dan nama Manulife
 
 - **Logo Manulife dilarang dalam bentuk apa pun.** Logo tidak boleh dipasang, dimodifikasi, dibuat ulang, atau ditempatkan seolah-olah website ini materi resmi perusahaan. Larangan ini juga berlaku untuk logo yang terlihat di foto (misalnya latar acara, banner kantor, atau seragam berlogo), gambar artikel, favicon, dan gambar pratinjau tautan.
-- **Nama "Manulife" hanya dipakai untuk menyebut afiliasi** di disclaimer. Jangan memakainya sebagai nama usaha, nama domain, nama akun media sosial, atau di judul halaman. Kalau klien ingin menyebut Manulife di bagian lain, tanyakan dulu ke BDM atau TH-nya.
+- **Nama "Manulife" tidak dipakai di website.** Sampai 11 November 2026 nama itu hanya muncul di disclaimer afiliasi dan paragraf pembuka Kebijakan Privasi. Sejak 12 November 2026, atas permintaan klien, keduanya menyebut "sebuah perusahaan asuransi jiwa" / "perusahaan", dan komentar HTML yang menyebut nama itu juga diganti. Jangan memakainya sebagai nama usaha, nama domain, nama akun media sosial, atau di judul halaman. Kalau klien ingin menyebut Manulife lagi, tanyakan dulu ke BDM atau TH-nya.
 - Jangan membuat tampilan website menyerupai website resmi Manulife.
-- **Disclaimer afiliasi di footer semua halaman wajib ada dan tidak boleh dihapus.** Isinya mengikuti contoh disclaimer di pedoman: website dikelola pribadi oleh Tenaga Pemasar, bukan website resmi Manulife, isinya pandangan pribadi, dan Manulife tidak bertanggung jawab atas isinya. Halaman baru, termasuk halaman artikel, harus memakai footer yang sama.
+- **Disclaimer afiliasi di footer semua halaman wajib ada dan tidak boleh dihapus.** Isinya mengikuti empat poin contoh disclaimer di pedoman: website dikelola pribadi oleh Tenaga Pemasar, bukan website resmi perusahaan, isinya pandangan pribadi, dan perusahaan tidak bertanggung jawab atas isinya. Halaman baru, termasuk halaman artikel, harus memakai footer yang sama.
+  - Contoh di pedoman menyebut nama Manulife. Teks yang dipasang sejak 12 November 2026 (permintaan klien): "Website ini dikelola secara pribadi oleh Arits Fauzi Irham, Tenaga Pemasar sebuah perusahaan asuransi jiwa, dan bukan website resmi perusahaan tersebut. Isi website ini merupakan pandangan pribadi dan tidak mewakili perusahaan. Perusahaan tidak bertanggung jawab atas konten apa pun di website ini."
+  - Bila BDM atau TH meminta teks persis seperti contoh pedoman, kembalikan nama Manulife di 29 halaman dan di Kebijakan Privasi bagian 1 (teks lamanya ada di riwayat git, commit `4dadc4c`).
 
 ### Bahasa
 
 - Sejak 10 November 2026 website berbahasa Indonesia di alamat utama, dengan versi bahasa Inggris di `en/`. Ini sejalan dengan ketentuan bahwa informasi produk atau jasa yang beredar di Indonesia memakai bahasa Indonesia dan boleh dilengkapi bahasa asing (UU Nomor 24 Tahun 2009, Pasal 37), dan OJK juga mengatur bahasa informasi untuk konsumen jasa keuangan. Kedua versi harus memuat isi yang sama. Kalau satu versi diubah, ubah juga versi lainnya.
-- Disclaimer afiliasi Manulife: versi Indonesia memakai teks asli bahasa Indonesia sesuai contoh pedoman. Versi Inggris memuat terjemahan Inggrisnya dan tetap mencantumkan teks asli bahasa Indonesia di bawahnya.
+- Disclaimer afiliasi: halaman Inggris memuat terjemahan Inggrisnya dan tetap mencantumkan teks bahasa Indonesia di bawahnya.
 
 ### Isi dan klaim
 
