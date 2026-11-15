@@ -141,6 +141,7 @@ Per 1 November 2026:
   - Dua animasi yang tidak bisa dijalankan GPU dan membuat prosesor bekerja setiap frame selama halaman terbuka: "napas" foto hero Beranda dan Tentang (bentrok dengan zoom masuk pada properti yang sama; zoom masuk kini memakai `transform`), dan denyut ikon di label hero (ikon SVG; kini span pembungkusnya yang berdenyut).
   - Animasi pembuka (kata judul hero, teks, tombol, foto, banner kalkulator) memakai fill-mode `backwards`, bukan `both`, sehingga setelah selesai lapisan GPU-nya dilepas (judul hero saja 8 lapisan).
   - Diukur lewat DevTools Protocol (Edge dengan GPU, scroll 1.800 px per detik, Beranda 1366 px): frame thread utama saat scroll naik dari 34–40 menjadi 50–62 per detik dan beban GPU turun dari sekitar 50% ke 45%. Saat halaman diam (denyut sirkuit dijeda) browser hanya membuat sekitar 13 frame per detik di semua jenis halaman, sebelumnya sekitar 140. Lama dan baru difoto pada detik animasi yang sama: kilau, cincin, garis header, garis progres, dan denyut ikon identik. Dicek di 320, 390, dan 1366 px di 11 halaman (kedua bahasa): tidak ada error JavaScript, tidak ada halaman yang melebar, menu HP dan lapisan gelapnya tetap tampil. Penanda versi `?v=20261115`.
+- **Domain aritsirham.com dipasang** (15 November 2026): domain diisi di GitHub Pages (file `CNAME`), lalu `ganti_domain.py` memindahkan 225 alamat (canonical, hreflang, og:url, og:image, JSON-LD, `<base>` 404) ke `https://aritsirham.com/`, membuat ulang `sitemap.xml` (28 alamat) dan `robots.txt`. Penanda versi `?v=20261115b`. Saat dicek hari itu, registri .com belum mengenal domain ini (DNS: "Non-existent domain"), sehingga website belum bisa dibuka: alamat GitHub lama sudah dialihkan ke domain yang belum aktif. Yang masih perlu: pastikan pembelian domain aktif, isi DNS di tempat beli domain (A `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` ke `yusuf-habibi18.github.io`), lalu centang **Enforce HTTPS** dan daftarkan domain di Search Console ([bagian 6](#google-search-console-dan-bing-webmaster-tools)).
 
 **Belum diuji:** tampilan di HP asli, Firefox dan Safari, dan skor Lighthouse resmi (PageSpeed Insights, bisa dicek setelah domain aktif).
 
@@ -608,7 +609,7 @@ Ketentuan isi (lihat juga [bagian 8](#8-ketentuan-konten-asuransi)):
 
 Sejak 9 November 2026 setiap halaman memuat CSS, JS, dan ikon tab (favicon) dengan penanda versi, misalnya `assets/css/tema-premium.css?v=20261109`. Favicon paling lama tersimpan: browser menyimpannya terpisah dan bisa tetap memakai ikon lama berhari-hari, bahkan setelah halaman dimuat ulang. GitHub Pages mengizinkan browser menyimpan file itu sampai 10 menit, dan browser HP sering lebih lama, sehingga setelah website diperbarui tampilan lama (misalnya tombol yang warnanya sudah diganti) masih bisa terlihat. Dengan penanda versi, browser langsung mengambil file baru begitu halamannya dimuat ulang.
 
-**Setiap kali mengubah file CSS, JS, atau ikon**, naikkan angkanya di semua file HTML (29 file, termasuk folder `en/`, artikel di `edukasi/`, dan `404.html`): tekan `Ctrl+Shift+H`, cari penanda yang sedang dipakai (sekarang `?v=20261115`), ganti dengan tanggal baru (misalnya `?v=20261116`, atau `?v=20261115b` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
+**Setiap kali mengubah file CSS, JS, atau ikon**, naikkan angkanya di semua file HTML (29 file, termasuk folder `en/`, artikel di `edukasi/`, dan `404.html`): tekan `Ctrl+Shift+H`, cari penanda yang sedang dipakai (sekarang `?v=20261115b`), ganti dengan tanggal baru (misalnya `?v=20261116`, atau `?v=20261115c` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
 
 ### 5.11 Media sosial (LinkedIn)
 
@@ -638,7 +639,7 @@ Sejak 10 November 2026 setiap halaman punya dua versi:
 - **Tanda bahasa untuk Google:** di `<head>` setiap halaman ada `canonical`, `hreflang` (id, en, dan x-default ke versi Indonesia), dan `og:locale`.
 - **Halaman baru** di menu utama harus dibuat dua-duanya, dengan tombol bahasa dan `hreflang` yang saling menunjuk. Pengecualiannya halaman topik dan artikel di [5.9](#59-artikel), yang sengaja hanya berbahasa Indonesia.
 
-**Saat domain sendiri dipasang**, alamat `https://yusuf-habibi18.github.io/web-assurance-consultant-v3/` harus diganti dengan domain baru. Sejak 11 November 2026 cukup jalankan `ganti_domain.py` ([bagian 6](#robotstxt-sitemapxml-dan-pindah-ke-domain-sendiri)). Alamat itu ada di:
+**Saat domain sendiri dipasang**, alamat `https://yusuf-habibi18.github.io/web-assurance-consultant-v3/` harus diganti dengan domain baru (sudah dilakukan 15 November 2026: `https://aritsirham.com/`). Sejak 11 November 2026 cukup jalankan `ganti_domain.py` ([bagian 6](#robotstxt-sitemapxml-dan-pindah-ke-domain-sendiri)). Alamat itu ada di:
 
 - `canonical`, `hreflang`, `og:url`, dan `og:image` di semua halaman;
 - blok data terstruktur JSON-LD ([5.8](#58-judul-halaman-dan-deskripsi-untuk-google));
@@ -762,7 +763,7 @@ Checklist pengujian yang lebih rinci, beserta hasilnya, ada di `docs/checklist-q
 - [ ] Diuji di HP asli (Android, dan iPhone bila ada), serta di Chrome dan minimal satu browser lain.
 - [ ] Skor Lighthouse sudah dicek (Chrome: `F12` → tab Lighthouse) untuk Performance, Accessibility, Best Practices, dan SEO.
 - [ ] Kebijakan Privasi: tanggal dan nama hosting terisi, dan kalimat yang menunggu konfirmasi klien sudah diputuskan.
-- [ ] Domain asli sudah dipasang lewat `ganti_domain.py`, sehingga `robots.txt`, `sitemap.xml`, `canonical`, dan data terstruktur memakai domain itu.
+- [x] Domain asli sudah dipasang lewat `ganti_domain.py` (aritsirham.com, 15 November 2026), sehingga `robots.txt`, `sitemap.xml`, `canonical`, dan data terstruktur memakai domain itu.
 - [ ] Website terdaftar di Google Search Console dan Bing Webmaster Tools, dan sitemap sudah dikirim.
 - [ ] Klien sudah menyetujui seluruh teks, terutama kedua versi bahasa (Indonesia dan Inggris), tanya jawab di Solusi, dan penjelasan produk.
 - [ ] Website sudah dicek terhadap pedoman Manulife Agency ([bagian 8](#8-ketentuan-konten-asuransi)): tidak ada logo Manulife (termasuk di foto), nama Manulife tidak muncul di halaman mana pun (sejak 12 November 2026), disclaimer ada di footer semua halaman, dan tidak ada klaim berlebihan. Hal yang meragukan sudah dikonfirmasi klien ke BDM atau TH-nya.
