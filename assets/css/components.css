@@ -657,7 +657,7 @@ body.nav-open::after {
   .wa-float span { display: none; }
   .wa-float { padding: 0.95rem; }
 }
-.wa-float { animation: rise 0.6s var(--ease) 1.2s both; transition: translate 0.25s var(--ease), scale 0.25s var(--ease), background-color 0.2s; }
+.wa-float { animation: rise 0.6s var(--ease) 1.2s backwards; transition: translate 0.25s var(--ease), scale 0.25s var(--ease), background-color 0.2s; }
 /* translate/scale terpisah dari transform, karena transform dipegang animasi masuk */
 .wa-float:hover { translate: 0 -2px; scale: 1.03; }
 /* Denyut lembut dua kali setelah tombol muncul, lalu diam */
@@ -681,10 +681,14 @@ body.nav-open::after {
 /* Melayang pelan naik-turun. Memakai properti translate (bukan transform), jadi bisa digabung dengan animasi masuk. */
 @keyframes float-soft { 50% { translate: 0 -7px; } }
 
-/* Hero: isi tampil bertahap saat halaman dibuka */
+/* Hero: isi tampil bertahap saat halaman dibuka.
+   Animasi pembuka di semua file CSS memakai fill-mode "backwards", bukan "both" (15 November 2026): keadaan akhirnya
+   sama dengan tampilan normal elemen, jadi tampilannya tidak berubah, tetapi setelah selesai animasinya dilepas.
+   Dengan "both" animasi tetap aktif selamanya dan setiap elemen memegang lapisan GPU sendiri (judul hero saja
+   8 lapisan, satu per kata), yang ikut dihitung di setiap frame saat halaman di-scroll. */
 .hero__grid > div:first-child > *,
 .about-hero__grid > div:first-child > *,
-.edu-hero .container > * { animation: rise 0.9s var(--ease) both; }
+.edu-hero .container > * { animation: rise 0.9s var(--ease) backwards; }
 .hero__grid > div:first-child > :nth-child(2),
 .about-hero__grid > div:first-child > :nth-child(2),
 .edu-hero .container > :nth-child(2) { animation-delay: 0.1s; }
@@ -695,7 +699,7 @@ body.nav-open::after {
 .about-hero__grid > div:first-child > :nth-child(4) { animation-delay: 0.3s; }
 .hero__grid > div:first-child > :nth-child(n+5),
 .about-hero__grid > div:first-child > :nth-child(n+5) { animation-delay: 0.4s; }
-.hero__media { animation: fade-scale 1.1s var(--ease) 0.25s both; }
+.hero__media { animation: fade-scale 1.1s var(--ease) 0.25s backwards; }
 
 /* Konten di bawah layar: muncul saat di-scroll (kelas dipasang oleh main.js) */
 .reveal {

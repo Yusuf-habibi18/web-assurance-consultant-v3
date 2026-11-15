@@ -57,17 +57,53 @@ document.querySelectorAll("[data-year]").forEach((el) => {
 });
 
 // Header berubah (blur + bayangan) setelah halaman di-scroll, dan garis progres scroll ikut diperbarui.
+// Dibuat ringan (15 November 2026, keluhan "scroll nge-lag"): sebelumnya setiap event scroll membaca posisi scroll dan
+// tinggi halaman, yang memaksa browser menghitung ulang gaya dan tata letak di tengah frame (sekitar 11% waktu
+// prosesor selama scroll di laptop). Sekarang posisi scroll tidak dibaca sama sekali:
+// - kelas is-scrolled: penanda tak terlihat setinggi 9 px di puncak halaman diamati IntersectionObserver; begitu
+//   penanda itu keluar layar (halaman di-scroll lebih dari 8 px), header berubah;
+// - garis progres: di browser yang mendukung animasi berbasis scroll (Chrome, Edge, Safari baru) digerakkan CSS
+//   langsung di GPU (tema-premium.css). Hanya di browser lain posisi scroll dibaca, sekali per frame.
 const header = document.querySelector(".site-header");
 if (header) {
-  const onScroll = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
-    // Garis tipis di tepi atas header memanjang sesuai posisi scroll
-    // (biru di tema-asuransi.css, emas di tema-gabungan.css dan tema.css).
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    header.style.setProperty("--scroll", max > 0 ? Math.min(1, window.scrollY / max).toFixed(3) : "0");
-  };
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  const progresCss = !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    window.CSS && CSS.supports("animation-timeline: scroll()");
+  const pakaiIO = "IntersectionObserver" in window;
+  if (pakaiIO) {
+    const penanda = document.createElement("div");
+    penanda.setAttribute("aria-hidden", "true");
+    penanda.style.cssText = "position:absolute;top:0;left:0;width:1px;height:9px;visibility:hidden;pointer-events:none";
+    document.body.append(penanda);
+    new IntersectionObserver(([e]) => header.classList.toggle("is-scrolled", !e.isIntersecting)).observe(penanda);
+  }
+  if (!progresCss || !pakaiIO) {
+    let maks = 0;
+    let terakhir = "";
+    let antre = 0;
+    const ukur = () => {
+      maks = document.documentElement.scrollHeight - window.innerHeight;
+    };
+    const perbarui = () => {
+      antre = 0;
+      const y = window.scrollY;
+      if (!pakaiIO) header.classList.toggle("is-scrolled", y > 8);
+      if (progresCss) return;
+      // Garis tipis di tepi atas header memanjang sesuai posisi scroll.
+      const nilai = maks > 0 ? Math.min(1, y / maks).toFixed(3) : "0";
+      if (nilai !== terakhir) {
+        terakhir = nilai;
+        header.style.setProperty("--scroll", nilai);
+      }
+    };
+    ukur();
+    perbarui();
+    window.addEventListener("scroll", () => {
+      if (!antre) antre = requestAnimationFrame(perbarui);
+    }, { passive: true });
+    window.addEventListener("resize", ukur);
+    // Tinggi halaman juga berubah tanpa resize (gambar selesai dimuat, FAQ dibuka): diukur ulang hanya saat itu.
+    if ("ResizeObserver" in window) new ResizeObserver(ukur).observe(document.body);
+  }
 }
 
 // Tandai ikon panah agar bisa bergeser saat tombol disorot.
@@ -207,14 +243,18 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+    // Ukuran dibaca dulu untuk semua elemen, baru kelasnya dipasang (15 November 2026): bila dibaca bergantian dengan
+    // memasang kelas, browser terpaksa menghitung ulang gaya dan tata letak sekali per elemen selama scroll.
+    const muncul = entries.filter((entry) => entry.isIntersecting).map((entry) => {
       const parent = entry.target.parentElement;
+      return [entry.target, parent, parent.scrollWidth > parent.clientWidth];
+    });
+    muncul.forEach(([el, parent, slider]) => {
       // Di slider mobile, kartu yang masih tersembunyi di samping ikut dimunculkan.
-      if (parent.scrollWidth > parent.clientWidth) {
+      if (slider) {
         parent.querySelectorAll(":scope > .reveal:not(.is-visible)").forEach(show);
       } else {
-        show(entry.target);
+        show(el);
       }
     });
   }, { rootMargin: "0px 0px -8% 0px", threshold: 0.1 });
@@ -298,6 +338,81 @@ if (catNav && "IntersectionObserver" in window) {
   links.forEach((a) => {
     const section = document.getElementById(a.hash.slice(1));
     if (section) spy.observe(section);
+  });
+}
+
+// Latar sirkuit AI/cyber (9 November 2026), versi ringan (15 November 2026; gayanya di tema-premium.css, bagian
+// "Nuansa AI/cyber"). Dulu hanya gambar latar body::after (assets/img/latar-sirkuit.svg). Denyut cahayanya digambar
+// ulang prosesor setiap frame, juga selama scroll, dan gambar latar tidak bisa dijeda dari luar. Sekarang SVG yang sama
+// dipasang langsung di halaman, dan denyutnya dijeda selama halaman di-scroll (kelas sedang-scroll di <html>), lalu
+// lanjut lagi 0,2 detik setelah scroll berhenti. Denyutnya pelan (8 sampai 13 detik per putaran), jadi jeda sebentar
+// tidak terlihat. Gambar latar tetap dipakai bila JavaScript mati atau "kurangi gerakan" aktif.
+// Hanya dipasang bila tema yang aktif memakai latar sirkuit. Jalur, warna, dan waktunya sama dengan file SVG itu:
+// bila salah satu diubah, ubah juga yang lain.
+if (!reduceMotion && getComputedStyle(document.body, "::after").backgroundImage.includes("latar-sirkuit")) {
+  const JALUR = {
+    a: "M0 118 H62 V206 H128 V292", b: "M0 262 H38 V418 H104 V470 H152", c: "M0 606 H74 V540 H138",
+    d: "M0 758 H54 V858 H118 V942", e: "M92 0 V58 H162 V96", // kiri
+    f: "M1000 176 H930 V278 H862 V332", g: "M1000 402 H956 V520 H880", h: "M1000 688 H922 V760 H852 V820 H818",
+    i: "M912 1000 V930 H850 V880", k: "M1000 878 H962 V818", // kanan
+  };
+  // Denyut: [jalur, mulai (detik, negatif = sudah berjalan sejak awal), lama satu putaran (detik)]
+  const DENYUT = [["a", 0, 8], ["c", -4.6, 11], ["d", -7.4, 13], ["f", -2.2, 11], ["h", -1.3, 8], ["g", -5.4, 13]];
+  const garis = (d, kelas, gaya) => `<path class="${kelas}" pathLength="100" d="${d}"${gaya ? ` style="${gaya}"` : ""}/>`;
+  let isi = Object.values(JALUR).map((d) => garis(d, "sirkuit-jalur")).join("");
+  DENYUT.forEach(([j, mulai, lama]) => {
+    const gaya = `animation-delay:${mulai}s;animation-duration:${lama}s`;
+    // garis lebar redup (cahaya) + garis tipis terang, berjalan bersama
+    isi += garis(JALUR[j], "sirkuit-denyut sirkuit-cahaya", gaya) + garis(JALUR[j], "sirkuit-denyut sirkuit-inti", gaya);
+  });
+  document.body.insertAdjacentHTML("beforeend",
+    `<svg class="latar-sirkuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 1000" preserveAspectRatio="none">${isi}</svg>`);
+  const html = document.documentElement;
+  html.classList.add("sirkuit-js");
+  let jeda = 0;
+  window.addEventListener("scroll", () => {
+    if (!jeda) html.classList.add("sedang-scroll");
+    clearTimeout(jeda);
+    jeda = setTimeout(() => {
+      jeda = 0;
+      html.classList.remove("sedang-scroll");
+    }, 200);
+  }, { passive: true });
+}
+
+// Kilau emas dan cincin tombol versi ringan (15 November 2026; gayanya di tema-premium.css, bagian "Animasi ringan").
+// Dulu kilau menggeser gambar latar tombol dan cincin memperbesar bayangan (box-shadow). Keduanya harus digambar
+// ulang prosesor setiap frame, terus-menerus, termasuk saat scroll. Sekarang keduanya hanya digeser/diperbesar
+// (transform), yang dikerjakan GPU tanpa menggambar ulang. Tampilannya sama.
+if (!reduceMotion) {
+  // Kilau: wadah tipis di dalam tombol yang memotong pita cahaya, supaya pita bisa digeser tanpa keluar dari tombol.
+  document.querySelectorAll(".site-header__cta, :is(.hero, .edu-hero, .about-hero) :is(.btn--wa, .btn--primary), .cta-band .btn--wa")
+    .forEach((btn) => {
+      const wadah = document.createElement("span");
+      wadah.className = "kilau-wadah";
+      wadah.setAttribute("aria-hidden", "true");
+      btn.append(wadah);
+    });
+  // Cincin: ukuran tombol (lebar dan tinggi, px) dicatat untuk CSS, supaya cincin mulai tepat di tepi tombol dan
+  // melebar sama tebal di keempat sisinya. Diukur ulang otomatis bila ukuran tombol berubah (font dimuat, layar diputar).
+  const bercincin = document.querySelectorAll(".hero__actions > .btn:first-child, .calc-promo .btn--light, .wa-float");
+  const catatUkuran = (el) => {
+    el.style.setProperty("--lebar", el.offsetWidth);
+    el.style.setProperty("--tinggi", el.offsetHeight);
+  };
+  if ("ResizeObserver" in window) {
+    const pengamat = new ResizeObserver((entries) => entries.forEach((e) => catatUkuran(e.target)));
+    bercincin.forEach((el) => pengamat.observe(el));
+  } else {
+    bercincin.forEach(catatUkuran);
+  }
+  // Denyut ikon di label hero (.badge): ikonnya SVG, dan Chrome tidak bisa menjalankan animasi elemen SVG di GPU,
+  // jadi ikon dibungkus span dan span itu yang berdenyut (tema-asuransi.css, .badge__ikon).
+  document.querySelectorAll(".badge > .icon").forEach((ikon) => {
+    const bungkus = document.createElement("span");
+    bungkus.className = "badge__ikon";
+    ikon.replaceWith(bungkus);
+    bungkus.append(ikon);
   });
 }
 

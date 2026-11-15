@@ -465,6 +465,28 @@ body::after {
 @media (max-width: 599px) {
   html::after { background-size: 40px 40px; }
 }
+/* Versi ringan (15 November 2026): bila JavaScript jalan, sirkuit yang sama dipasang main.js sebagai SVG di halaman
+   (.latar-sirkuit) dan gambar latar body::after dimatikan. Denyutnya dijeda selama halaman di-scroll (kelas
+   sedang-scroll dari main.js), karena denyut ini satu-satunya hiasan latar yang digambar ulang prosesor setiap frame.
+   Warna, tebal, dan waktunya sama dengan assets/img/latar-sirkuit.svg. Hanya background-image yang dimatikan,
+   supaya lapisan gelap di belakang menu HP (body.nav-open::after, warna latar) tetap tampil. */
+html.sirkuit-js body::after { background-image: none; }
+.latar-sirkuit {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+}
+.latar-sirkuit path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.sirkuit-jalur { stroke: rgba(124, 182, 255, 0.17); stroke-width: 1; }
+.sirkuit-denyut { stroke-dasharray: 5 200; stroke-dashoffset: 5; animation: sirkuit-alir 9s linear infinite; }
+.sirkuit-cahaya { stroke: rgba(110, 190, 255, 0.22); stroke-width: 5; }
+.sirkuit-inti { stroke: rgba(168, 222, 255, 0.85); stroke-width: 1.6; }
+@keyframes sirkuit-alir { 0% { stroke-dashoffset: 5; } 55%, 100% { stroke-dashoffset: -100; } }
+html.sedang-scroll .sirkuit-denyut { animation-play-state: paused; }
 /* Panel sedikit tembus pandang, supaya cahaya aurora yang bergerak ikut terlihat */
 .section--tint { background: rgba(15, 33, 71, 0.78); }
 /* Bagian paling atas setiap halaman (bilah info, header, hero) dibuat jauh lebih tembus pandang, supaya latar
@@ -532,28 +554,72 @@ main::before {
   70% { transform: translateX(130vw) rotate(14deg); opacity: 0; } /* 70% dari 5 detik = sapuan 3,5 detik */
   100% { transform: translateX(130vw) rotate(14deg); opacity: 0; } /* jeda 1,5 detik sebelum sapuan berikutnya */
 }
-.site-header__cta,
-:is(.hero, .edu-hero, .about-hero) :is(.btn--wa, .btn--primary),
-.cta-band .btn--wa {
-  background-image: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
-  background-size: 260% 100%;
-  background-repeat: no-repeat;
-  background-position: 100% 0; /* kilatan di luar tombol, sebelah kiri */
+/* Animasi ringan (15 November 2026, keluhan "scroll nge-lag"): kilau dan cincin tombol dulu menggeser gambar latar
+   (background-position) dan memperbesar bayangan (box-shadow). Keduanya harus digambar ulang prosesor setiap frame,
+   terus-menerus, termasuk saat halaman di-scroll. Sekarang hanya digeser/diperbesar (transform, scale, opacity) yang
+   dikerjakan GPU. Ukuran, warna, dan waktunya sama dengan versi lama.
+   Kilau: pita cahaya ada di dalam .kilau-wadah (dibuat main.js untuk tombol header, tombol di hero, dan tombol band
+   ajakan). Pitanya 260% selebar tombol seperti dulu, digeser dari -61,54% (= -160/260, di luar tombol sebelah kiri)
+   ke 0 (di luar tombol sebelah kanan). */
+.kilau-wadah {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* di atas warna tombol, di bawah tulisan (tombol memakai isolation: isolate) */
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.kilau-wadah::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260%;
+  height: 100%;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
+  transform: translateX(-61.54%); /* kilatan di luar tombol, sebelah kiri */
   animation: kilau-emas 7s ease-in-out 1.5s infinite;
 }
 @keyframes kilau-emas {
-  0%, 72% { background-position: 100% 0; }
-  92%, 100% { background-position: 0% 0; } /* melintas dari kiri ke kanan, lalu keluar */
+  0%, 72% { transform: translateX(-61.54%); }
+  92%, 100% { transform: translateX(0); } /* melintas dari kiri ke kanan, lalu keluar */
 }
+/* Cincin: bayangan cincin dibuat sekali dengan tebal penuh (12 px), lalu yang dianimasikan hanya ukuran dan
+   transparansinya. Saat mulai, cincin diperkecil sampai tepi luarnya tepat di tepi tombol (skalanya dihitung dari
+   --lebar dan --tinggi tombol, diisi main.js), lalu kembali ke ukuran asli sambil memudar, sehingga terlihat melebar
+   0 -> 12 px seperti dulu. Bagian cincin yang sempat berada di atas tombol tidak terlihat: warnanya sama dengan warna
+   tombol (juga saat disorot) dan letaknya di bawah tulisan dan kilau (z-index -2). */
+.hero__actions > .btn:first-child::after,
+.calc-promo.is-popped .btn--light::after {
+  z-index: -2;
+  box-shadow: 0 0 0 12px rgba(233, 201, 139, 0.45);
+  opacity: 0;
+  --cincin-awal: calc((var(--lebar, 200) + 2) / (var(--lebar, 200) + 26)) calc((var(--tinggi, 50) + 2) / (var(--tinggi, 50) + 26));
+}
+.hero__actions > .btn:first-child:hover::after,
+.calc-promo.is-popped .btn--light:hover::after { box-shadow: 0 0 0 12px rgba(244, 220, 170, 0.45); }
 .hero__actions > .btn:first-child::after { animation-name: cincin-emas; }
 .calc-promo.is-popped .btn--light::after { animation-name: promo-cincin-emas; }
 @keyframes cincin-emas {
-  0% { box-shadow: 0 0 0 0 rgba(233, 201, 139, 0.45); }
-  35%, 100% { box-shadow: 0 0 0 12px rgba(233, 201, 139, 0); }
+  0% { scale: var(--cincin-awal); opacity: 1; }
+  35%, 100% { scale: 1; opacity: 0; }
 }
 @keyframes promo-cincin-emas {
-  0%, 48% { box-shadow: 0 0 0 0 rgba(233, 201, 139, 0.45); }
-  62%, 100% { box-shadow: 0 0 0 12px rgba(233, 201, 139, 0); }
+  0%, 47.9% { scale: var(--cincin-awal); opacity: 0; }
+  48% { scale: var(--cincin-awal); opacity: 1; }
+  62%, 100% { scale: 1; opacity: 0; }
+}
+/* Denyut tombol WhatsApp mengambang (tema-asuransi.css: tiap 5 detik), cara yang sama dengan cincin di atas; tebal 16 px */
+.wa-float::before {
+  z-index: -1; /* di atas warna tombol, di bawah ikon */
+  box-shadow: 0 0 0 16px rgba(26, 127, 69, 0.5);
+  opacity: 0;
+  animation-name: wa-denyut-ringan;
+}
+.wa-float:hover::before { box-shadow: 0 0 0 16px rgba(20, 108, 58, 0.5); }
+@keyframes wa-denyut-ringan {
+  0% { scale: calc(var(--lebar, 56) / (var(--lebar, 56) + 32)) calc(var(--tinggi, 56) / (var(--tinggi, 56) + 32)); opacity: 1; }
+  30%, 100% { scale: 1; opacity: 0; }
 }
 
 /* ---------- Tombol lebih interaktif dan animasi scroll lebih dinamis (8 November 2026) ----------
@@ -703,9 +769,15 @@ main::before {
   background: linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.3), transparent);
 }
 
-/* Header: kedalaman dan garis emas berkilau di bawahnya */
+/* Header: kedalaman dan garis emas berkilau di bawahnya.
+   Versi ringan (15 November 2026): garis emas diamnya kini lapisan latar header (lapisan pertama di bawah), dan
+   ::after hanya berisi kilatan yang digeser dengan transform (dulu background-position, yang membuat header digambar
+   ulang setiap frame). Posisi kilatan sama: lebar 30% header, dari -28% sampai 98% lebar header (-93,33% dan 326,67%
+   dari lebarnya sendiri). Bagian kilatan yang keluar dari header dipotong overflow-x: clip, supaya halaman tidak bisa
+   digeser ke samping; browser lama yang tidak mengenal clip tidak menjalankan kilatannya. */
 .site-header {
   background:
+    linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.55) 50%, transparent) 0 100% / 100% 1px no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 70%),
     rgba(11, 27, 58, 0.55);
   border-bottom: 0;
@@ -713,28 +785,51 @@ main::before {
 }
 .site-header.is-scrolled {
   background:
+    linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.55) 50%, transparent) 0 100% / 100% 1px no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 70%),
     rgba(11, 27, 58, 0.8);
 }
 .site-header::after {
   content: "";
   position: absolute;
-  inset: auto 0 0;
+  left: 0;
+  bottom: 0;
+  width: 30%;
   height: 1px;
   pointer-events: none;
-  background:
-    linear-gradient(90deg, transparent, rgba(255, 240, 210, 0.95), transparent) -40% 0 / 30% 100% no-repeat,
-    linear-gradient(90deg, transparent, rgba(233, 201, 139, 0.55) 50%, transparent);
-  animation: garis-kilau 6s ease-in-out 1.5s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 240, 210, 0.95), transparent);
+  transform: translateX(-93.33%);
+}
+@supports (overflow: clip) {
+  .site-header { overflow-x: clip; }
+  .site-header::after { animation: garis-kilau 6s ease-in-out 1.5s infinite; }
 }
 @keyframes garis-kilau {
-  0%, 55% { background-position: -40% 0, 0 0; }
-  100% { background-position: 140% 0, 0 0; } /* kilatan berjalan dari kiri ke kanan di sepanjang garis */
+  0%, 55% { transform: translateX(-93.33%); }
+  100% { transform: translateX(326.67%); } /* kilatan berjalan dari kiri ke kanan di sepanjang garis */
 }
-/* Garis progres scroll di tepi atas: gradasi emas dengan sedikit cahaya */
+/* Garis progres scroll di tepi atas: gradasi emas dengan sedikit cahaya.
+   Versi ringan (15 November 2026): panjangnya diatur dengan transform scaleX, bukan width, supaya tidak menghitung
+   ulang tata letak. Di browser yang mendukung animasi berbasis scroll, garis ini mengikuti posisi scroll langsung di
+   GPU tanpa JavaScript; di browser lain nilai --scroll diisi main.js. */
 .site-header::before {
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--scroll, 0));
   background: linear-gradient(90deg, #b98f4c, #f4dcaa);
   box-shadow: 0 0 10px rgba(233, 201, 139, 0.55);
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::before {
+      animation: progres-scroll linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+@keyframes progres-scroll {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* Lambang (lencana emas berperisai di header dan footer) dihapus atas permintaan klien (8 November 2026):

@@ -440,7 +440,7 @@ main > section.pk[id] { scroll-margin-top: calc(var(--header-h, 84px) + 5.5rem);
 /* Halaman Professional Journey memakai foto bersama tim (melebar, 4:3) sebagai pengganti ilustrasi hero.
    Lebih lebar dari ilustrasi supaya wajah di foto rombongan tetap terlihat. */
 .edu-hero__photo { width: min(440px, 100%); aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); box-shadow: 0 18px 40px -26px rgba(10, 26, 47, 0.5); }
-.edu-hero .container > .edu-hero__art { animation: rise 0.9s var(--ease) 0.3s both, float-soft 6s ease-in-out 1.5s infinite; }
+.edu-hero .container > .edu-hero__art { animation: rise 0.9s var(--ease) 0.3s backwards, float-soft 6s ease-in-out 1.5s infinite; }
 @media (min-width: 900px) {
   .edu-hero .container { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 3rem; align-items: center; }
   .edu-hero .container > * { grid-column: 1; }
@@ -784,11 +784,11 @@ main > section.pk[id] { scroll-margin-top: calc(var(--header-h, 84px) + 5.5rem);
 .calc-promo.is-armed:not(.is-popped) .meter__fill { width: 0 !important; } /* menimpa lebar inline 15% */
 .calc-promo.is-popped .calc-promo__preview {
   animation:
-    promo-pop 0.9s var(--ease) 0.2s both,
+    promo-pop 0.9s var(--ease) 0.2s backwards,
     float-soft 5s ease-in-out 1.6s infinite;
 }
 .calc-promo.is-popped .meter__fill { transition: width 1.2s var(--ease) 0.75s; }
-.calc-promo.is-popped .calc-promo__text .card__icon { animation: icon-pop 0.7s var(--ease) both; }
+.calc-promo.is-popped .calc-promo__text .card__icon { animation: icon-pop 0.7s var(--ease) backwards; }
 @keyframes promo-pop {
   0% { opacity: 0; transform: translateY(40px) scale(0.8); }
   55% { opacity: 1; transform: translateY(-8px) scale(1.04); }
