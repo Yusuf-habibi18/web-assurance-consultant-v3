@@ -148,7 +148,11 @@ Per 1 November 2026:
   - Pengecekan DNS di GitHub sempat merah beberapa jam, karena GitHub masih menyimpan alamat lama (TTL 4 jam). Setelah itu sertifikat HTTPS terbit (diperpanjang otomatis) dan **Enforce HTTPS** dinyalakan. `http://` dan `www` dialihkan ke `https://aritsirham.com/`.
 - **Judul tab versi Inggris dirapikan** (16 November 2026): enam halaman `en/` kini memuat kata kunci seperti versi Indonesia. Contohnya "Insurance Consultant in Jakarta", "AAJI-Licensed Insurance Agent", dan "Life Insurance Needs Calculator". Judul untuk berbagi (`og:title`) tidak diubah.
 - **Instagram @ariitsfauzi dipasang** (16 November 2026): di footer semua halaman, di baris "Media sosial" Kontak, dan di `sameAs` data terstruktur Beranda (ID dan EN). Rinciannya di [5.11](#511-media-sosial-linkedin).
-- **Komentar HTML dihapus dari website asli** (16 November 2026, permintaan pengembang supaya catatan internal tidak terlihat lewat Inspect): 379 komentar di 29 halaman dihapus di cabang `produksi` dengan `docs/generator-halaman/bersihkan_komentar.py`. Pratinjau v3 tetap menyimpan komentar. Alurnya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
+- **Website asli dan repo `aritsirham.com` dibersihkan** (16 November 2026, permintaan pengembang supaya catatan internal tidak terlihat lewat Inspect maupun di GitHub):
+  - `docs/generator-halaman/tayangkan.py` membuat versi bersih: menghapus komentar HTML/SVG (396), CSS (445), dan JS (84), serta membuang 36 aset yang tidak dipakai (3 tema alternatif, 7 foto lama, 26 ilustrasi).
+  - Riwayat lama repo `aritsirham.com` diganti dengan satu commit bersih.
+  - Diuji di 11 halaman dan 3 lebar layar: hasilnya sama persis dengan versi pratinjau, dan kode JS identik selain komentar.
+  - Pratinjau v3 tetap menyimpan komentar. Alurnya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
 - **README tidak ditayangkan lagi** (16 November 2026): `_config.yml` mengecualikan `README.md` dari website. Sebelumnya file ini bisa dibuka di `https://aritsirham.com/README.md`, padahal isinya catatan internal yang menyebut nama Manulife. File ini tetap terlihat di repository GitHub yang publik.
 
 **Belum diuji:** tampilan di HP asli, Firefox dan Safari, dan skor Lighthouse resmi (PageSpeed Insights, bisa dicek setelah domain aktif).
@@ -695,20 +699,25 @@ Sejak 16 November 2026 website asli tayang di **https://aritsirham.com** lewat G
 **Alur setiap perubahan:**
 1. Commit di cabang `versi-3`.
 2. Push ke pratinjau: `git push v3 versi-3:main`.
-3. Setelah disetujui, gabungkan, bersihkan komentar, lalu tayangkan:
+3. Setelah disetujui, buat versi bersih lalu tayangkan:
    ```
-   git checkout produksi
-   git merge -X theirs --no-edit versi-3
-   python docs/generator-halaman/bersihkan_komentar.py .
-   git commit -am "Bersihkan komentar HTML untuk website asli"
+   python docs/generator-halaman/tayangkan.py
    git push produksi produksi:main
-   git checkout versi-3
    ```
-   Sebelum push, pastikan file `CNAME` masih ada dan berisi `aritsirham.com`. Langkah `git commit` boleh dilewati kalau skripnya menulis "dihapus 0 komentar".
+   Skrip ini tidak berpindah cabang dan tidak mengubah file di folder proyek. Yang dipakai adalah isi commit terakhir `versi-3`, jadi commit dulu sebelum menjalankannya.
 
-**Komentar HTML hanya ada di pratinjau.** Sejak 16 November 2026 website asli tidak memuat komentar `<!-- ... -->`, sehingga catatan pengembang tidak terlihat lewat Inspect. Komentar tetap ditulis seperti biasa di cabang `versi-3`. Skrip `bersihkan_komentar.py` menghapusnya di cabang `produksi` setiap kali website ditayangkan. Opsi `-X theirs` membuat Git mengikuti versi `versi-3` kalau ada bentrok di baris yang komentarnya sudah dihapus, lalu skrip menghapus komentarnya lagi. Komentar di file CSS dan JS tidak dihapus.
+**Repo `aritsirham.com` hanya berisi versi bersih** (sejak 16 November 2026). Repo ini publik, karena GitHub Pages gratis memang butuh repo publik. Supaya catatan pengembang tidak terbaca lewat Inspect maupun di GitHub, `tayangkan.py` melakukan langkah berikut setiap kali website ditayangkan:
+1. Mengambil isi commit terakhir `versi-3` ke folder sementara (`%TEMP%\aritsirham-build`, di luar OneDrive).
+2. Membuang `README.md`, `_config.yml`, `.gitignore`, dan file `.gitkeep`.
+3. Menghapus semua komentar HTML, SVG, CSS, dan JS. Untuk JS, skrip membaca string, *template literal*, dan regex, sehingga kodenya tidak berubah.
+4. Membuang aset yang tidak dipakai halaman mana pun, misalnya foto lama, ilustrasi lama, dan tema alternatif.
+5. Menambahkan `CNAME` (`aritsirham.com`) dan `.nojekyll`.
+6. Memeriksa hasilnya: tidak ada kata "Manulife", nomor pribadi pengembang, komentar, atau kata "README"; JS valid (`node --check`); JSON-LD valid; dan `qa-check.js` lolos.
+7. Menyimpan hasilnya sebagai satu commit di cabang `produksi`.
 
-**Hanya cabang `produksi` yang memiliki file `CNAME`** (isinya `aritsirham.com`). Jangan push `versi-3` langsung ke repo `aritsirham.com`, karena domainnya akan terlepas. Satu domain hanya bisa dipasang di satu repository GitHub.
+Riwayat cabang `produksi` hanya berisi versi bersih dan tidak tersambung dengan riwayat `versi-3`. Jadi jangan pernah me-*merge* atau mem-push `versi-3` ke repo `aritsirham.com`: domainnya akan terlepas dan semua catatan ikut terbuka. Satu domain hanya bisa dipasang di satu repository GitHub.
+
+Riwayat lengkap beserta catatan pengembang tetap ada di cabang `versi-3` dan repo pratinjau v3, yang juga publik. Kalau catatan itu juga harus tertutup, jadikan v3 privat. Konsekuensinya, link pratinjau github.io ikut mati, kecuali memakai GitHub Pro.
 
 **DNS** diatur di portal Rumah Hosting (Domain → aritsirham.com → DNS Management):
 - A `@`: 185.199.108.153, 185.199.109.153, 185.199.110.153, dan 185.199.111.153.
@@ -716,7 +725,7 @@ Sejak 16 November 2026 website asli tayang di **https://aritsirham.com** lewat G
 
 Di **Settings → Pages** repo `aritsirham.com`, Custom domain berisi `aritsirham.com`, dan **Enforce HTTPS** menyala.
 
-**Yang ikut tayang:** semua file di repository, kecuali file yang diawali titik dan file yang dikecualikan di `_config.yml` (saat ini `README.md`). Folder `docs/` dan PDF proposal tidak pernah di-push. Karena repository-nya publik, isi README tetap bisa dibaca di github.com. Kalau ingin repository-nya privat, butuh GitHub Pro, atau pindah ke Netlify atau Cloudflare Pages (keduanya bisa menayangkan dari repository privat secara gratis).
+**Yang ikut tayang:** hanya isi repo `aritsirham.com`, yaitu hasil `tayangkan.py`. Folder `docs/` dan PDF proposal tidak pernah di-push ke repo mana pun. Di pratinjau v3, `_config.yml` mencegah `README.md` dibuka lewat browser, tapi isinya tetap bisa dibaca di github.com karena repo v3 publik. Kalau semua repository ingin privat, butuh GitHub Pro, atau pindah ke Netlify atau Cloudflare Pages (keduanya bisa menayangkan dari repository privat secara gratis).
 
 ### Alternatif: Netlify (gratis)
 
