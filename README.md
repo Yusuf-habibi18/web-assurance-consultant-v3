@@ -141,7 +141,15 @@ Per 1 November 2026:
   - Dua animasi yang tidak bisa dijalankan GPU dan membuat prosesor bekerja setiap frame selama halaman terbuka: "napas" foto hero Beranda dan Tentang (bentrok dengan zoom masuk pada properti yang sama; zoom masuk kini memakai `transform`), dan denyut ikon di label hero (ikon SVG; kini span pembungkusnya yang berdenyut).
   - Animasi pembuka (kata judul hero, teks, tombol, foto, banner kalkulator) memakai fill-mode `backwards`, bukan `both`, sehingga setelah selesai lapisan GPU-nya dilepas (judul hero saja 8 lapisan).
   - Diukur lewat DevTools Protocol (Edge dengan GPU, scroll 1.800 px per detik, Beranda 1366 px): frame thread utama saat scroll naik dari 34–40 menjadi 50–62 per detik dan beban GPU turun dari sekitar 50% ke 45%. Saat halaman diam (denyut sirkuit dijeda) browser hanya membuat sekitar 13 frame per detik di semua jenis halaman, sebelumnya sekitar 140. Lama dan baru difoto pada detik animasi yang sama: kilau, cincin, garis header, garis progres, dan denyut ikon identik. Dicek di 320, 390, dan 1366 px di 11 halaman (kedua bahasa): tidak ada error JavaScript, tidak ada halaman yang melebar, menu HP dan lapisan gelapnya tetap tampil. Penanda versi `?v=20261115`.
-- **Domain aritsirham.com dipasang** (15 November 2026): domain diisi di GitHub Pages (file `CNAME`), lalu `ganti_domain.py` memindahkan 225 alamat (canonical, hreflang, og:url, og:image, JSON-LD, `<base>` 404) ke `https://aritsirham.com/`, membuat ulang `sitemap.xml` (28 alamat) dan `robots.txt`. Penanda versi `?v=20261115b`. Saat dicek hari itu, registri .com belum mengenal domain ini (DNS: "Non-existent domain"), sehingga website belum bisa dibuka: alamat GitHub lama sudah dialihkan ke domain yang belum aktif. Yang masih perlu: pastikan pembelian domain aktif, isi DNS di tempat beli domain (A `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` ke `yusuf-habibi18.github.io`), lalu centang **Enforce HTTPS** dan daftarkan domain di Search Console ([bagian 6](#google-search-console-dan-bing-webmaster-tools)).
+- **Domain aritsirham.com dipasang** (15 November 2026): domain diisi di GitHub Pages (file `CNAME`), lalu `ganti_domain.py` memindahkan 225 alamat (canonical, hreflang, og:url, og:image, JSON-LD, `<base>` 404) ke `https://aritsirham.com/`, membuat ulang `sitemap.xml` (28 alamat) dan `robots.txt`. Penanda versi `?v=20261115b`. Saat dicek hari itu, registri .com belum mengenal domain ini (DNS: "Non-existent domain"), sehingga website belum bisa dibuka: alamat GitHub lama sudah dialihkan ke domain yang belum aktif. Yang masih perlu: pastikan pembelian domain aktif, isi DNS di tempat beli domain (A `@` ke 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` ke `yusuf-habibi18.github.io`), lalu centang **Enforce HTTPS** dan daftarkan domain di Search Console ([bagian 6](#google-search-console-dan-bing-webmaster-tools)). **Status 16 November 2026:** domain aktif dan website tayang di https://aritsirham.com (lihat entri berikut).
+- **Website tayang di https://aritsirham.com** (16 November 2026):
+  - Domain dibeli di Rumah Hosting (domain saja, tanpa paket hosting). DNS diatur di portal Rumah Hosting → Domain → DNS Management: empat A record `@` ke IP GitHub dan CNAME `www` ke `yusuf-habibi18.github.io`.
+  - Atas permintaan pengembang, website asli dipisah dari repo pratinjau v3 dan sekarang tayang dari repo **`aritsirham.com`**. Cara kerjanya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
+  - Pengecekan DNS di GitHub sempat merah beberapa jam, karena GitHub masih menyimpan alamat lama (TTL 4 jam). Setelah itu sertifikat HTTPS terbit (diperpanjang otomatis) dan **Enforce HTTPS** dinyalakan. `http://` dan `www` dialihkan ke `https://aritsirham.com/`.
+- **Judul tab versi Inggris dirapikan** (16 November 2026): enam halaman `en/` kini memuat kata kunci seperti versi Indonesia. Contohnya "Insurance Consultant in Jakarta", "AAJI-Licensed Insurance Agent", dan "Life Insurance Needs Calculator". Judul untuk berbagi (`og:title`) tidak diubah.
+- **Instagram @ariitsfauzi dipasang** (16 November 2026): di footer semua halaman, di baris "Media sosial" Kontak, dan di `sameAs` data terstruktur Beranda (ID dan EN). Rinciannya di [5.11](#511-media-sosial-linkedin).
+- **Komentar HTML dihapus dari website asli** (16 November 2026, permintaan pengembang supaya catatan internal tidak terlihat lewat Inspect): 379 komentar di 29 halaman dihapus di cabang `produksi` dengan `docs/generator-halaman/bersihkan_komentar.py`. Pratinjau v3 tetap menyimpan komentar. Alurnya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
+- **README tidak ditayangkan lagi** (16 November 2026): `_config.yml` mengecualikan `README.md` dari website. Sebelumnya file ini bisa dibuka di `https://aritsirham.com/README.md`, padahal isinya catatan internal yang menyebut nama Manulife. File ini tetap terlihat di repository GitHub yang publik.
 
 **Belum diuji:** tampilan di HP asli, Firefox dan Safari, dan skor Lighthouse resmi (PageSpeed Insights, bisa dicek setelah domain aktif).
 
@@ -621,7 +629,14 @@ Profil LinkedIn klien (`https://www.linkedin.com/in/arits-fauzi-574259428/`) ada
 
 Kalau alamatnya berubah, cari `linkedin.com/in/` dengan `Ctrl+Shift+H` dan ganti semuanya. Pakai alamat profil tanpa bagian `?utm_...` di belakangnya; bagian itu hanya penanda pelacak dari tombol bagikan di aplikasi.
 
-Kalau klien memberi akun lain (misalnya Instagram), tambahkan tautan serupa di baris "Social media" Kontak dan, bila perlu, di footer. Ikonnya dimasukkan ke sprite di bagian atas setiap halaman, seperti `i-linkedin`. Nama akun tidak boleh memakai kata "Manulife" (lihat [bagian 8](#8-ketentuan-konten-asuransi)).
+**Instagram** (`https://www.instagram.com/ariitsfauzi/`, sejak 16 November 2026) ada di tiga tempat:
+- footer semua halaman, di bawah LinkedIn ("Instagram @ariitsfauzi");
+- baris "Media sosial" di halaman Kontak;
+- `sameAs` di data terstruktur Beranda (ID dan EN).
+
+Ikonnya `i-instagram` (gaya garis, seperti ikon lain di sprite). Kalau nama akunnya berubah, cari `ariitsfauzi` dan ganti semuanya, termasuk di `docs/generator-halaman/pasang-schema-og.py`.
+
+Kalau klien memberi akun lain, tambahkan tautan serupa di baris "Media sosial" Kontak dan, bila perlu, di footer. Ikonnya dimasukkan ke sprite di bagian atas setiap halaman, seperti `i-linkedin`. Nama akun tidak boleh memakai kata "Manulife" (lihat [bagian 8](#8-ketentuan-konten-asuransi)).
 
 ### 5.12 Dua bahasa (Indonesia dan Inggris)
 
@@ -668,7 +683,42 @@ Setelah domain aktif, cek skor resminya di [PageSpeed Insights](https://pagespee
 
 ## 6. Deployment
 
-### Rekomendasi: Netlify (gratis)
+### Hosting yang dipakai sekarang: GitHub Pages
+
+Sejak 16 November 2026 website asli tayang di **https://aritsirham.com** lewat GitHub Pages (gratis). Ada dua repository:
+
+| Repository | Fungsi | Alamat | Cabang lokal |
+|---|---|---|---|
+| `Yusuf-habibi18/web-assurance-consultant-v3` (remote `v3`) | Pratinjau untuk dicek sebelum tayang | `yusuf-habibi18.github.io/web-assurance-consultant-v3/` | `versi-3` |
+| `Yusuf-habibi18/aritsirham.com` (remote `produksi`) | Website asli | `https://aritsirham.com` | `produksi` |
+
+**Alur setiap perubahan:**
+1. Commit di cabang `versi-3`.
+2. Push ke pratinjau: `git push v3 versi-3:main`.
+3. Setelah disetujui, gabungkan, bersihkan komentar, lalu tayangkan:
+   ```
+   git checkout produksi
+   git merge -X theirs --no-edit versi-3
+   python docs/generator-halaman/bersihkan_komentar.py .
+   git commit -am "Bersihkan komentar HTML untuk website asli"
+   git push produksi produksi:main
+   git checkout versi-3
+   ```
+   Sebelum push, pastikan file `CNAME` masih ada dan berisi `aritsirham.com`. Langkah `git commit` boleh dilewati kalau skripnya menulis "dihapus 0 komentar".
+
+**Komentar HTML hanya ada di pratinjau.** Sejak 16 November 2026 website asli tidak memuat komentar `<!-- ... -->`, sehingga catatan pengembang tidak terlihat lewat Inspect. Komentar tetap ditulis seperti biasa di cabang `versi-3`. Skrip `bersihkan_komentar.py` menghapusnya di cabang `produksi` setiap kali website ditayangkan. Opsi `-X theirs` membuat Git mengikuti versi `versi-3` kalau ada bentrok di baris yang komentarnya sudah dihapus, lalu skrip menghapus komentarnya lagi. Komentar di file CSS dan JS tidak dihapus.
+
+**Hanya cabang `produksi` yang memiliki file `CNAME`** (isinya `aritsirham.com`). Jangan push `versi-3` langsung ke repo `aritsirham.com`, karena domainnya akan terlepas. Satu domain hanya bisa dipasang di satu repository GitHub.
+
+**DNS** diatur di portal Rumah Hosting (Domain → aritsirham.com → DNS Management):
+- A `@`: 185.199.108.153, 185.199.109.153, 185.199.110.153, dan 185.199.111.153.
+- CNAME `www`: `yusuf-habibi18.github.io.` (titik di akhir ikut diketik).
+
+Di **Settings → Pages** repo `aritsirham.com`, Custom domain berisi `aritsirham.com`, dan **Enforce HTTPS** menyala.
+
+**Yang ikut tayang:** semua file di repository, kecuali file yang diawali titik dan file yang dikecualikan di `_config.yml` (saat ini `README.md`). Folder `docs/` dan PDF proposal tidak pernah di-push. Karena repository-nya publik, isi README tetap bisa dibaca di github.com. Kalau ingin repository-nya privat, butuh GitHub Pro, atau pindah ke Netlify atau Cloudflare Pages (keduanya bisa menayangkan dari repository privat secara gratis).
+
+### Alternatif: Netlify (gratis)
 
 Website ini bisa dihosting di layanan hosting statis mana pun. Netlify paling mudah karena cukup seret dan lepas (*drag and drop*) folder.
 
@@ -732,8 +782,8 @@ Keduanya gratis. Fungsinya:
 
 Langkahnya:
 
-1. Buka [search.google.com/search-console](https://search.google.com/search-console) dengan akun Google, **sebaiknya milik klien** supaya bisa diserahkan. Pilih **Awalan URL** (*URL prefix*), lalu masukkan alamat website persis seperti di `canonical` Beranda.
-2. Pilih verifikasi **Tag HTML**. Google memberi satu baris `<meta name="google-site-verification" content="...">`. Pasang di `<head>` `index.html`, push, lalu klik **Verifikasi**.
+1. Buka [search.google.com/search-console](https://search.google.com/search-console) dengan akun Google, **sebaiknya milik klien** supaya bisa diserahkan. Pilih **Domain**, lalu ketik `aritsirham.com`. Properti Domain mencakup `http`, `https`, dan `www` sekaligus.
+2. Google memberi satu baris teks `google-site-verification=...`. Tambahkan sebagai record **TXT** di portal Rumah Hosting (Domain → DNS Management → Tambah Record; Nama `aritsirham.com.` atau `@`, Tipe TXT, Nilai teks dari Google). Setelah itu klik **Verifikasi**. Kalau gagal, tunggu sebentar lalu coba lagi, karena perubahan DNS butuh waktu. Kode website tidak perlu diubah. Cara lain, properti **Awalan URL** dengan **Tag HTML**: pasang `<meta name="google-site-verification" ...>` di `<head>` `index.html`, lalu push ke kedua repository.
 3. Di menu **Peta situs** (*Sitemaps*), kirim `sitemap.xml`.
 4. Di [Bing Webmaster Tools](https://www.bing.com/webmasters), pilih **Import from Google Search Console**. Situs dan sitemap ikut terdaftar tanpa verifikasi ulang.
 5. Kalau domain baru dipasang setelah ini, tambahkan properti baru untuk domain itu (verifikasi DNS atau tag HTML lagi), lalu kirim ulang sitemap-nya.
@@ -744,8 +794,8 @@ Search Console tidak memasang pelacak apa pun di website, jadi Kebijakan Privasi
 
 | Akun | Dipakai untuk | Email pemilik akun |
 |---|---|---|
-| Hosting (Netlify atau lainnya) | Menyimpan dan menayangkan website | [email] |
-| Registrar domain | Domain website | [email] |
+| Hosting: GitHub (repo `aritsirham.com`, akun `Yusuf-habibi18`) | Menyimpan dan menayangkan website | [email] |
+| Registrar domain: Rumah Hosting (portal.rumahhosting.com) | Domain `aritsirham.com` dan DNS-nya. Aktif sampai 16 November 2027, perpanjang sebelum tanggal itu. | [email] |
 
 > **Jangan menulis password di README atau di file mana pun dalam proyek.** Serahkan password langsung kepada klien, lalu minta klien menggantinya.
 

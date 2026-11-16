@@ -1,0 +1,5 @@
+# Pengaturan GitHub Pages (Jekyll).
+# File di daftar exclude tetap ada di repository, tetapi tidak ditayangkan di website.
+# README.md berisi catatan internal (termasuk nama perusahaan asuransi), jadi jangan sampai bisa dibuka lewat domain.
+exclude:
+  - README.md
