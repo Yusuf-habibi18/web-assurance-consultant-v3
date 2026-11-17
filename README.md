@@ -147,6 +147,7 @@ Per 1 November 2026:
   - Atas permintaan pengembang, website asli dipisah dari repo pratinjau v3 dan sekarang tayang dari repo **`aritsirham.com`**. Cara kerjanya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
   - Pengecekan DNS di GitHub sempat merah beberapa jam, karena GitHub masih menyimpan alamat lama (TTL 4 jam). Setelah itu sertifikat HTTPS terbit (diperpanjang otomatis) dan **Enforce HTTPS** dinyalakan. `http://` dan `www` dialihkan ke `https://aritsirham.com/`.
 - **Judul tab versi Inggris dirapikan** (16 November 2026): enam halaman `en/` kini memuat kata kunci seperti versi Indonesia. Contohnya "Insurance Consultant in Jakarta", "AAJI-Licensed Insurance Agent", dan "Life Insurance Needs Calculator". Judul untuk berbagi (`og:title`) tidak diubah.
+- **Ikon tab (favicon) diganti dari "AI" menjadi "A"** (16 November 2026): "AI" bisa dikira singkatan *artificial intelligence*. Gayanya tetap sama (emas di atas navy). `favicon.svg`, `favicon-32.png`, dan `apple-touch-icon.png` dibuat ulang, dan penanda versi naik ke `?v=20261116` supaya browser mengambil ikon baru. Rinciannya di [5.5](#55-logo-dan-favicon).
 - **Instagram @ariitsfauzi dipasang** (16 November 2026): di footer semua halaman, di baris "Media sosial" Kontak, dan di `sameAs` data terstruktur Beranda (ID dan EN). Rinciannya di [5.11](#511-media-sosial-linkedin).
 - **Website asli dan repo `aritsirham.com` dibersihkan** (16 November 2026, permintaan pengembang supaya catatan internal tidak terlihat lewat Inspect maupun di GitHub):
   - `docs/generator-halaman/tayangkan.py` membuat versi bersih: menghapus komentar HTML/SVG (396), CSS (445), dan JS (84), serta membuang 36 aset yang tidak dipakai (3 tema alternatif, 7 foto lama, 26 ilustrasi).
@@ -154,6 +155,12 @@ Per 1 November 2026:
   - Diuji di 11 halaman dan 3 lebar layar: hasilnya sama persis dengan versi pratinjau, dan kode JS identik selain komentar.
   - Pratinjau v3 tetap menyimpan komentar. Alurnya ada di [bagian 6](#hosting-yang-dipakai-sekarang-github-pages).
 - **README tidak ditayangkan lagi** (16 November 2026): `_config.yml` mengecualikan `README.md` dari website. Sebelumnya file ini bisa dibuka di `https://aritsirham.com/README.md`, padahal isinya catatan internal yang menyebut nama Manulife. File ini tetap terlihat di repository GitHub yang publik.
+- **Wilayah layanan: berbasis di Jakarta, melayani seluruh Indonesia** (18 November 2026, permintaan): tulisan "konsultan asuransi di Jakarta" dikhawatirkan membuat calon klien di luar kota mengira Arits hanya melayani Jakarta.
+  - Judul tab Beranda: "Konsultan Asuransi Indonesia, Berbasis di Jakarta" (EN "Insurance Consultant in Indonesia, Based in Jakarta"). Kata "Jakarta" tetap ada di judul supaya pencarian "konsultan asuransi jakarta" masih cocok. Judul Kontak menjadi "Hubungi Konsultan Asuransi".
+  - Deskripsi Google Beranda dan Kontak, data terstruktur (`areaServed` sekarang negara Indonesia, alamat kantor tetap Jakarta Selatan), alt foto Beranda, deskripsi Panduan Asuransi Kesehatan, bio penulis di 7 artikel, dan kartu Beranda di halaman 404 ikut diganti. Sumbernya di `konten_baru.py`, `buat_halaman.py`, dan `pasang-schema-og.py` juga sudah disesuaikan.
+  - Label kecil di atas judul Beranda: "Konsultan Asuransi untuk Seluruh Indonesia" (EN "Insurance Consultant Serving All of Indonesia"). Di HP label ini ada di baris paling atas selebar layar dengan huruf lebih kecil supaya muat satu baris (`pages.css`, bagian hero profil).
+  - Footer semua halaman: baris baru dengan ikon globe (`i-globe`), "Berbasis di Jakarta, melayani klien di seluruh Indonesia".
+  - Kontak: kartu Tatap Muka menjadi "Saya berbasis di Jakarta. Pertemuan tatap muka bisa diatur dengan janji temu.", dan pengantar pilihan konsultasi menambahkan "dari mana pun Anda berada di Indonesia".
 
 **Belum diuji:** tampilan di HP asli, Firefox dan Safari, dan skor Lighthouse resmi (PageSpeed Insights, bisa dicek setelah domain aktif).
 
@@ -492,7 +499,7 @@ File tema menimpa token di atas. Di `tema-asuransi.css`: satu keluarga huruf **P
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
    ```
 
-Markup footer (tulisan besar samar dan tombol "Kembali ke atas") tidak perlu diubah: tulisan besar hanya ditampilkan tema gabungan dan tema navy-emas. Favicon saat ini inisial "AI" emas di atas navy, sesuai tema premium (lihat 5.5). Untuk kembali ke tema terang, favicon biru lama ada di riwayat git (commit `6643187` dan sebelumnya). Ilustrasi hero Beranda dan Solusi (keluarga dan konsultan) dipakai di semua tema.
+Markup footer (tulisan besar samar dan tombol "Kembali ke atas") tidak perlu diubah: tulisan besar hanya ditampilkan tema gabungan dan tema navy-emas. Favicon saat ini inisial "A" emas di atas navy, sesuai tema premium (lihat 5.5). Untuk kembali ke tema terang, favicon biru lama ada di riwayat git (commit `6643187` dan sebelumnya). Ilustrasi hero Beranda dan Solusi (keluarga dan konsultan) dipakai di semua tema.
 
 ### 5.5 Logo dan favicon
 
@@ -512,7 +519,7 @@ Header semua halaman memakai **logo teks** "Arits Irham" (sejak 9 November 2026,
 
 Gayanya ada di `components.css`, bagian Header. Tagline sedang dikosongkan di semua halaman. Span `brand__tagline` yang kosong tidak memakan tempat (aturan `.brand__tagline:empty` di `components.css`), jadi nama tetap di tengah lambang. Isi span itu, misalnya dengan contoh di atas, bila tagline ingin ditampilkan. Logo ini ditulis di header dan footer kedelapan halaman, jadi perubahan nama atau tagline harus dilakukan di semua tempat itu (cari `brand__name`; header dan footer sekarang berbeda isinya). Nama yang sama juga tertulis di baris hak cipta footer. Footer memakai logo teks yang sama. Di tema asuransi, bagian `brand__accent` di footer navy tampil biru muda polos supaya terbaca. Kapsul header di laptop disiapkan untuk logo teks selebar sekitar 210 px. Kalau nama atau tagline jauh lebih panjang, cek lagi di lebar 1200 px.
 
-Ikon kecil di tab browser (favicon) sudah terpasang di setiap halaman, memakai lambang perisai sementara yang sama dengan header (bukan logo Manulife): kotak biru dengan perisai putih. Filenya ada di `assets/img/`:
+Ikon kecil di tab browser (favicon) terpasang di setiap halaman. Bentuknya **inisial "A" (Arits)** emas dalam huruf Fraunces lembut, di atas kotak navy dengan bingkai emas tipis. Sampai 16 November 2026 isinya inisial "AI" (Arits Irham), lalu diganti karena bisa dikira singkatan *artificial intelligence*. Huruf "A" diambil dari favicon lama, jadi tidak perlu mengunduh font lagi. Versi PNG digambar dari SVG lewat Edge headless (512 px), lalu diperkecil. Versi iPhone memakai latar penuh tanpa sudut transparan, karena iOS membulatkan sudutnya sendiri. Filenya ada di `assets/img/`:
 
 | File | Dipakai untuk |
 |---|---|
@@ -555,7 +562,7 @@ Setiap halaman punya `<title>` dan `<meta name="description">` di `<head>`. Kedu
 
 **Data terstruktur (schema.org).** Di `<head>` ada blok `<script type="application/ld+json">` yang menjelaskan isi halaman ke Google:
 
-- `index.html` dan `en/index.html`: `InsuranceAgency` (nama, alamat kantor, telepon, email, wilayah Jakarta, LinkedIn), `Person` (Arits, jabatan, lisensi AAJI 16429501), dan `WebSite`.
+- `index.html` dan `en/index.html`: `InsuranceAgency` (nama, alamat kantor di Jakarta Selatan, telepon, email, wilayah layanan Indonesia sejak 18 November 2026, LinkedIn dan Instagram), `Person` (Arits, jabatan, lisensi AAJI 16429501), dan `WebSite`.
 - Halaman topik: `WebPage` + `BreadcrumbList`. Artikel: `Article` (penulis Arits, tanggal terbit) + `BreadcrumbList`.
 
 Kalau nomor, email, alamat, atau LinkedIn berubah, ubah juga di blok ini. Setelah domain aktif, cek hasilnya di [Rich Results Test](https://search.google.com/test/rich-results). Jangan menambahkan `AggregateRating` atau `Review` sebelum ada ulasan asli dari klien (lihat [bagian 8](#8-ketentuan-konten-asuransi)).
@@ -621,7 +628,7 @@ Ketentuan isi (lihat juga [bagian 8](#8-ketentuan-konten-asuransi)):
 
 Sejak 9 November 2026 setiap halaman memuat CSS, JS, dan ikon tab (favicon) dengan penanda versi, misalnya `assets/css/tema-premium.css?v=20261109`. Favicon paling lama tersimpan: browser menyimpannya terpisah dan bisa tetap memakai ikon lama berhari-hari, bahkan setelah halaman dimuat ulang. GitHub Pages mengizinkan browser menyimpan file itu sampai 10 menit, dan browser HP sering lebih lama, sehingga setelah website diperbarui tampilan lama (misalnya tombol yang warnanya sudah diganti) masih bisa terlihat. Dengan penanda versi, browser langsung mengambil file baru begitu halamannya dimuat ulang.
 
-**Setiap kali mengubah file CSS, JS, atau ikon**, naikkan angkanya di semua file HTML (29 file, termasuk folder `en/`, artikel di `edukasi/`, dan `404.html`): tekan `Ctrl+Shift+H`, cari penanda yang sedang dipakai (sekarang `?v=20261115b`), ganti dengan tanggal baru (misalnya `?v=20261116`, atau `?v=20261115c` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
+**Setiap kali mengubah file CSS, JS, atau ikon**, naikkan angkanya di semua file HTML (29 file, termasuk folder `en/`, artikel di `edukasi/`, dan `404.html`): tekan `Ctrl+Shift+H`, cari penanda yang sedang dipakai (sekarang `?v=20261116`), ganti dengan tanggal baru (misalnya `?v=20261117`, atau `?v=20261116b` bila di hari yang sama), lalu pilih *Replace All*. `qa-check.js` mengabaikan penanda ini saat memeriksa tautan.
 
 ### 5.11 Media sosial (LinkedIn)
 

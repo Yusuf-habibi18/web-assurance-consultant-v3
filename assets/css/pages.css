@@ -1102,14 +1102,18 @@ main > section[id],
   /* Hero profil Beranda (sejak 8 November 2026 tanpa blok identitas): judul utama di kiri, foto konsultan di kanan,
      lalu subjudul, paragraf, dan tombol selebar layar */
   .hero--profile .hero__grid { grid-template-columns: minmax(0, 1fr) 40%; column-gap: 0.9rem; }
-  .hero--profile .hero__grid > .hero__media { grid-column: 2; grid-row: 1; align-self: stretch; }
+  .hero--profile .hero__grid > .hero__media { grid-column: 2; grid-row: 2; align-self: stretch; }
   .hero__portrait { height: 100%; min-height: 190px; max-width: none; aspect-ratio: auto; }
   /* Hero Solusi: foto potret tetap 4:5 di samping judul (tidak direntangkan seperti hero profil Beranda) */
   .hero:not(.hero--profile) .hero__portrait { height: auto; min-height: 0; aspect-ratio: 4 / 5; }
-  .hero--profile .hero__grid h1 { grid-column: 1; grid-row: 1; align-self: center; margin: 0; font-size: 1.55rem; }
+  /* Label wilayah layanan (18 November 2026) di baris paling atas selebar layar, lalu judul + foto, subjudul, paragraf, tombol.
+     Huruf dan spasi hurufnya dikecilkan supaya muat satu baris di HP. */
+  .hero--profile .hero__grid .eyebrow { grid-column: 1 / -1; grid-row: 1; justify-self: start; margin-bottom: 0.9rem; font-size: 0.6rem; letter-spacing: 0.1em; }
+  .hero--profile .hero__grid h1 { grid-column: 1; grid-row: 2; align-self: center; margin: 0; font-size: 1.55rem; }
   .hero__sub { grid-row: 2; margin: 1.1rem 0 0.45rem; font-size: 0.98rem; }
-  .hero--profile .hero__lead { grid-row: 3; }
-  .hero--profile .hero__actions { grid-row: 4; }
+  .hero--profile .hero__sub { grid-row: 3; }
+  .hero--profile .hero__lead { grid-row: 4; }
+  .hero--profile .hero__actions { grid-row: 5; }
 
   /* --- Hero Tentang Saya: nama dan judul di kiri, foto di kanan, dua kotak data berjajar (Experience dihapus 9 November 2026) --- */
   .about-hero { padding-block: 2rem 2.25rem; }
